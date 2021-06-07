@@ -1,9 +1,27 @@
 class Race {
-  
   final String index;
   final String name;
   final String description;
   final int baseSpeed;
+  final String abilityBonusDescription;
+  final List<AbilityBonus> abilityBonuses;
+  final String age;
 
-  Race(this.index, this.name, this.description, this.baseSpeed);
+  Race(this.index, this.name, this.description, this.baseSpeed,
+      this.abilityBonusDescription, this.abilityBonuses,
+      this.age);
+}
+
+class AbilityBonus {
+  final AbilityScore abilityScore;
+  final int bonus;
+
+  AbilityBonus(this.abilityScore, this.bonus);
+}
+
+class AbilityScore {
+  final String index;
+  final String name;
+
+  AbilityScore(this.index, this.name);
 }
