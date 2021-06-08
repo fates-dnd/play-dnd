@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/characters/character_list.dart';
+import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,6 +8,8 @@ void main() {
     statusBarColor: Colors.transparent, // transparent status bar
     statusBarIconBrightness: Brightness.light // dark text for status bar
   ));
+
+  registerDependencies();
 
   runApp(MyApp());
 }
@@ -25,6 +28,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Color(0xFF1A1E21),
         scaffoldBackgroundColor: Color(0xFF1A1E21),
         appBarTheme: AppBarTheme(
+          brightness: Brightness.dark,
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.white
           )

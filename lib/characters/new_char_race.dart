@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/bloc/races/races_bloc.dart';
 import 'package:dnd_player_flutter/characters/race_details.dart';
+import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ class NewCharRace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RacesBloc(RacesRepository())..add(LoadRaces()),
+      create: (context) => RacesBloc(getIt.get<RacesRepository>())..add(LoadRaces()),
       child: Scaffold(
         body: SafeArea(
           child: Padding(

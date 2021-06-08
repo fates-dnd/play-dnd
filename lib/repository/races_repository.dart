@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:dnd_player_flutter/dto/race.dart';
-import 'package:flutter/services.dart';
 
 class RacesRepository {
+
+  final Future<String> Function() jsonReader;
+
+  RacesRepository(this.jsonReader);
   
-  Future<List<Race>> readRaces() async {
-    final response = await rootBundle.loadString("assets/races.json");
+  Future<List<Race>> getRaces() async {
+    final response = await jsonReader();
     final List<dynamic> racesJson = json.decode(response);
     return racesJson.map((raceJson) => _fromJson(raceJson)).toList();
   }

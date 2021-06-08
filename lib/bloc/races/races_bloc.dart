@@ -19,7 +19,7 @@ class RacesBloc extends Bloc<RacesEvent, RacesState> {
     RacesEvent event,
   ) async* {
     if (event is LoadRaces) {
-      final races = await racesRepository.readRaces();
+      final races = await racesRepository.getRaces();
       yield RacesLoaded(races);
     }
   }
