@@ -1,5 +1,7 @@
 # dnd_player_flutter
 
+![tests](https://github.com/ariedov/dnd_player_flutter/actions/workflows/main.yml/badge.svg)
+
 There are a bunch of dnd player apps, but all in english. Time to change that!
 
 ## Design
