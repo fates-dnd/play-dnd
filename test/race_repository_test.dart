@@ -3,14 +3,10 @@ import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:test/test.dart';
 
 void main() {
-  RacesRepository racesRepository = RacesRepository(() async {
-    return racesJson;
-  });
+  RacesRepository racesRepository = _createRepository();
 
   setUp(() {
-    racesRepository = RacesRepository(() async {
-      return racesJson;
-    });
+    racesRepository = _createRepository();
   });
 
   test('load races', () async {
@@ -23,6 +19,12 @@ void main() {
     expect(races[0].size, Size.MEDIUM);
     expect(races[0].sizeDescription, "Рост дварфов находится между 4 и 5 футами, и весят они около 150 фунтов. Ваш размер — Средний.");
     expect(races[0].languagesDescription, "Вы разговариваете, читаете и пишете на Общем и Дварфийском языках. Дварфийский язык состоит из твёрдых согласных и гортанных звуков,и этот акцент будет присутствовать в любомязыке, на котором дварф будет говорить.");
+  });
+}
+
+RacesRepository _createRepository() {
+  return RacesRepository(() async {
+    return racesJson;
   });
 }
 
