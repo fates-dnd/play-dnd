@@ -6,10 +6,23 @@ class Race {
   final String abilityBonusDescription;
   final List<AbilityBonus> abilityBonuses;
   final String age;
+  final String alignment;
+  final Size size;
+  final String sizeDescription;
+  final String languagesDescription;
 
-  Race(this.index, this.name, this.description, this.baseSpeed,
-      this.abilityBonusDescription, this.abilityBonuses,
-      this.age);
+  Race(
+      this.index,
+      this.name,
+      this.description,
+      this.baseSpeed,
+      this.abilityBonusDescription,
+      this.abilityBonuses,
+      this.age,
+      this.alignment,
+      this.size,
+      this.sizeDescription,
+      this.languagesDescription);
 }
 
 class AbilityBonus {
@@ -25,3 +38,5 @@ class AbilityScore {
 
   AbilityScore(this.index, this.name);
 }
+
+enum Size { SMALL, MEDIUM, LARGE }

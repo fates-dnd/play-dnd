@@ -23,6 +23,10 @@ class RacesRepository {
       json["ability_bonus_description"],
       _abilityBonusesFromJson(json["ability_bonuses"]),
       json["age"] as String,
+      json["alignment"] as String,
+      _parseSize(json["size"] as String),
+      json["size_description"] as String,
+      json["language_desc"] as String
     );
   }
 
@@ -39,5 +43,14 @@ class RacesRepository {
         bonus,
       );
     }).toList();
+  }
+
+  Size _parseSize(String json) {
+    switch (json.toLowerCase()) {
+      case "medium": return Size.MEDIUM;
+      case "small": return Size.SMALL;
+      case "large": return Size.LARGE;
+      default: return Size.MEDIUM;
+    }
   }
 }

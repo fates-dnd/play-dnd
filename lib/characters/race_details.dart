@@ -22,12 +22,28 @@ class RaceDetails extends StatelessWidget {
           SizedBox(
             height: 25,
           ),
-          _rowItem(context, 'Увеличение характеристик.', race.description),
+          _rowItem(context, 'Увеличение характеристик. ', race.description),
           SizedBox(
             height: 25,
           ),
-          _rowItem(context, 'Возраст.', race.age)
-        ]));
+          _rowItem(context, 'Возраст. ', race.age),
+          SizedBox(
+            height: 25,
+          ),
+          _rowItem(context, "Мировозрение. ", race.alignment),
+          SizedBox(
+            height: 25,
+          ),
+          _rowItem(context, "Размер. ", race.sizeDescription),
+          SizedBox(
+            height: 25,
+          ),
+          _rowItem(context, "Скорость. ", "Ваша базовая скорость - ${race.baseSpeed} футов."),
+          SizedBox(
+            height: 25,
+          ),
+          _rowItem(context, "Языки. ", race.languagesDescription),
+      ]));
   }
 
   Widget _rowItem(BuildContext context, String title, String body) {
