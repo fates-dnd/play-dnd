@@ -7,7 +7,7 @@ class RacesEmpty extends RacesState {}
 
 class RacesLoaded extends RacesState {
 
-  final List<Race> races;
+  final Map<Race, List<Trait>> racesWithTraits;
 
-  RacesLoaded(this.races);
+  RacesLoaded(this.racesWithTraits);
 }

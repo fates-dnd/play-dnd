@@ -2,7 +2,9 @@ import 'package:dnd_player_flutter/bloc/races/races_bloc.dart';
 import 'package:dnd_player_flutter/characters/race_details.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
+import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
+import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +12,10 @@ class NewCharRace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RacesBloc(getIt.get<RacesRepository>())..add(LoadRaces()),
+      create: (context) => RacesBloc(
+        getIt.get<RacesRepository>(),
+        getIt.get<TraitsRepository>(),
+      )..add(LoadRaces()),
       child: Scaffold(
         body: SafeArea(
           child: Padding(
@@ -30,14 +35,18 @@ class NewCharRace extends StatelessWidget {
                         Expanded(
                           child: PageView.builder(
                               controller: PageController(viewportFraction: 0.9),
-                              itemCount: (state as RacesLoaded).races.length,
+                              itemCount: (state as RacesLoaded).racesWithTraits.length,
                               itemBuilder: (context, index) {
-                                return RaceCard(
-                                    race: state.races[index]);
+                                final entry = state.racesWithTraits.entries.toList()[index];
+                                return RaceCard(race: entry.key, traits: entry.value,);
                               }),
                         ),
-                        SizedBox(height: 23,),
-                        Center(child: TextButton(onPressed: () {}, child: Text("Выбрать")))
+                        SizedBox(
+                          height: 23,
+                        ),
+                        Center(
+                            child: TextButton(
+                                onPressed: () {}, child: Text("Выбрать")))
                       ],
                     ),
             ),
@@ -50,8 +59,9 @@ class NewCharRace extends StatelessWidget {
 
 class RaceCard extends StatelessWidget {
   final Race race;
+  final List<Trait> traits;
 
-  const RaceCard({Key? key, required this.race}) : super(key: key);
+  const RaceCard({Key? key, required this.race, required this.traits}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +87,13 @@ class RaceCard extends StatelessWidget {
                 ),
               ),
             ),
-            
-            Center(child: OutlinedButton(onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => RaceDetails(race: race)));
-            }, child: Text("Подробнее")))
+            Center(
+                child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RaceDetails(race: race, traits: traits,)));
+                    },
+                    child: Text("Подробнее")))
           ],
         ),
       ),

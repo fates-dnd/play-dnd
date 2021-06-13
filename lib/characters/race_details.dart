@@ -1,34 +1,28 @@
-import 'package:dnd_player_flutter/bloc/traits/traits_bloc.dart';
-import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
-import 'package:dnd_player_flutter/repository/traits_repository.dart';
+import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RaceDetails extends StatelessWidget {
   final Race race;
+  final List<Trait> traits;
 
-  const RaceDetails({Key? key, required this.race}) : super(key: key);
+  const RaceDetails({Key? key, required this.race, required this.traits})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TraitsBloc>(
-      create: (BuildContext context) =>
-          TraitsBloc(getIt.get<TraitsRepository>())..add(LoadTraitsForRace(race.index)),
-      child: Scaffold(
-          appBar: AppBar(
-            title: Text(race.name),
-            elevation: 0,
-          ),
-          body: BlocBuilder<TraitsBloc, TraitsState>(
-            builder: (context, state) => ListView(
-                padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                children: _getItems(context, state)),
-          )),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(race.name),
+          elevation: 0,
+        ),
+        body: ListView(
+              padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+              children: _getItems(context)),
     );
   }
 
-  List<Widget> _getItems(BuildContext context, TraitsState traitsState) {
+  List<Widget> _getItems(BuildContext context) {
     final items = [
       Text(
         race.description,
@@ -61,12 +55,11 @@ class RaceDetails extends StatelessWidget {
       _rowItem(context, "Языки. ", race.languagesDescription),
     ];
 
-    if (traitsState is TraitsLoaded) {
-      traitsState.traits.forEach((trait) {
-        items.add(SizedBox(height: 25));
-        items.add(_rowItem(context, trait.name + "\n", trait.description.join("\n")));
-      });
-    }
+    traits.forEach((trait) {
+      items.add(SizedBox(height: 25));
+      items.add(
+          _rowItem(context, trait.name + "\n", trait.description.join("\n")));
+    });
 
     return items;
   }
