@@ -7,3 +7,7 @@ Future<String> readRacesJson() async {
 Future<String> readTraitsJson() async {
   return rootBundle.loadString("assets/traits.json");
 }
+
+Future<String> readClassesJson() async {
+  return rootBundle.loadString("assets/classes.json");
+}

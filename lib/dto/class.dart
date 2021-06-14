@@ -3,13 +3,13 @@ class Class {
   final String index;
   final String name;
 
-  String? get imageAsset => _indexToImageAsset();
+  String get imageAsset => _indexToImageAsset();
 
   Class(this.index, this.name);
 }
 
 extension OnClass on Class {
-  String? _indexToImageAsset() {
+  String _indexToImageAsset() {
     switch (index) {
       case "barbarian": 
         return "";
@@ -35,7 +35,7 @@ extension OnClass on Class {
         return "";
       case "wizard":
         return "";
-      default: return null;
+      default: return "";
     }
   }
 }
