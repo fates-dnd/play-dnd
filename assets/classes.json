@@ -166,7 +166,7 @@
     },
     {
         "index": "bard",
-        "name": "Bard",
+        "name": "Бард",
         "hit_die": 8,
         "proficiency_choices": [
             {
