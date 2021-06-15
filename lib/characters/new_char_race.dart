@@ -18,6 +18,10 @@ class NewCharRace extends StatelessWidget {
         getIt.get<TraitsRepository>(),
       )..add(LoadRaces()),
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Раса"),
+          elevation: 0,
+        ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
@@ -28,11 +32,6 @@ class NewCharRace extends StatelessWidget {
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Раса",
-                          style: Theme.of(context).textTheme.headline1,
-                        ),
-                        SizedBox(height: 24),
                         Expanded(
                           child: PageView.builder(
                               controller: PageController(viewportFraction: 0.9),

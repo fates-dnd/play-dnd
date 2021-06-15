@@ -47,14 +47,36 @@ flutter:
   uses-material-design: true
 
   assets:
+    # jsons
     - assets/races.json
     - assets/traits.json
     - assets/classes.json
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
+    # class icons
+    - assets/icons/fighter.png
+    - assets/icons/barbarian.png
+    - assets/icons/bard.png
+    - assets/icons/cleric.png
+    - assets/icons/paladin.png
+    - assets/icons/ranger.png
+    - assets/icons/rogue.png
+    - assets/icons/sorcerer.png
+    - assets/icons/warlock.png
+    - assets/icons/wizard.png
+    - assets/icons/druid.png
+    - assets/icons/monk.png
+    - assets/icons/2.0x/fighter.png
+    - assets/icons/2.0x/barbarian.png
+    - assets/icons/2.0x/bard.png
+    - assets/icons/2.0x/cleric.png
+    - assets/icons/2.0x/paladin.png
+    - assets/icons/2.0x/ranger.png
+    - assets/icons/2.0x/rogue.png
+    - assets/icons/2.0x/sorcerer.png
+    - assets/icons/2.0x/warlock.png
+    - assets/icons/2.0x/wizard.png
+    - assets/icons/2.0x/druid.png
+    - assets/icons/2.0x/monk.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

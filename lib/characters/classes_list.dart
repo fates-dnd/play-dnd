@@ -12,16 +12,31 @@ class ClassesList extends StatelessWidget {
       create: (context) =>
           ClassesBloc(getIt.get<ClassesRepository>())..add(LoadClasses()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: Text("Клас"),
+          elevation: 0,
+        ),
         body: BlocBuilder<ClassesBloc, ClassesState>(builder: (context, state) {
           if (!(state is ClassessLoaded)) {
             return SizedBox();
           }
 
-          return GridView.count(
-            crossAxisCount: 2,
-            children:
-                state.classes.map((e) => ClassCard(classItem: e)).toList(),
+          return Column(
+            children: [
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  children: state.classes
+                      .map((e) => ClassCard(classItem: e))
+                      .toList(),
+                ),
+              ),
+              TextButton(
+                  onPressed: () {
+                  },
+                  child: Text("Выбрать")),
+            ],
           );
         }),
       ),
@@ -39,9 +54,21 @@ class ClassCard extends StatelessWidget {
     return Card(
       color: Theme.of(context).primaryColorLight,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(classItem.imageAsset),
-          Text(classItem.name),
+          Image.asset(
+            classItem.imageAsset,
+            width: 116,
+            height: 116,
+          ),
+          SizedBox(
+            height: 5,
+          ),
+          Text(
+            classItem.name,
+            style: Theme.of(context).textTheme.headline5,
+          ),
         ],
       ),
     );

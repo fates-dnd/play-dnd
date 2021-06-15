@@ -12,29 +12,29 @@ extension OnClass on Class {
   String _indexToImageAsset() {
     switch (index) {
       case "barbarian": 
-        return "";
+        return "assets/icons/barbarian.png";
       case "bard":
-        return "";
+        return "assets/icons/bard.png";
       case "cleric":
-        return "";
+        return "assets/icons/cleric.png";
       case "druid":
-        return "";
+        return "assets/icons/druid.png";
       case "fighter":
-        return "";
+        return "assets/icons/fighter.png";
       case "monk":
-        return "";
+        return "assets/icons/monk.png";
       case "paladin":
-        return "";
+        return "assets/icons/paladin.png";
       case "ranger":
-        return "";
+        return "assets/icons/ranger.png";
       case "rogue":
-        return "";
+        return "assets/icons/rogue.png";
       case "sorcerer":
-        return "";
+        return "assets/icons/sorcerer.png";
       case "warlock":
-        return "";
+        return "assets/icons/warlock.png";
       case "wizard":
-        return "";
+        return "assets/icons/wizard.png";
       default: return "";
     }
   }
