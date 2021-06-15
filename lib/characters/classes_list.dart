@@ -17,7 +17,7 @@ class ClassesList extends StatelessWidget {
           elevation: 0,
         ),
         body: BlocBuilder<ClassesBloc, ClassesState>(builder: (context, state) {
-          if (!(state is ClassessLoaded)) {
+          if (!(state is Classes)) {
             return SizedBox();
           }
 
@@ -28,14 +28,17 @@ class ClassesList extends StatelessWidget {
                   crossAxisCount: 2,
                   padding: EdgeInsets.symmetric(horizontal: 16),
                   children: state.classes
-                      .map((e) => ClassCard(classItem: e))
-                      .toList(),
+                          ?.map((e) => ClassCard(classItem: e))
+                          .toList() ??
+                      [],
                 ),
               ),
-              TextButton(
-                  onPressed: () {
-                  },
-                  child: Text("Выбрать")),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextButton(
+                    onPressed: state.selectedClass == null ? null : () {},
+                    child: Text("Выбрать")),
+              ),
             ],
           );
         }),
@@ -51,26 +54,41 @@ class ClassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).primaryColorLight,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            classItem.imageAsset,
-            width: 116,
-            height: 116,
+    return BlocBuilder<ClassesBloc, ClassesState>(builder: (context, state) {
+      if (!(state is Classes)) {
+        return SizedBox();
+      }
+
+      final currentClassSelected =
+          state.selectedClass?.index == classItem.index;
+      return Card(
+        color: currentClassSelected
+            ? Color(0xFF5B5E60)
+            : Theme.of(context).primaryColorLight,
+        child: InkWell(
+          onTap: () {
+            BlocProvider.of<ClassesBloc>(context).add(SelectClass(classItem));
+          },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                classItem.imageAsset,
+                width: 116,
+                height: 116,
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                classItem.name,
+                style: Theme.of(context).textTheme.headline5,
+              ),
+            ],
           ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            classItem.name,
-            style: Theme.of(context).textTheme.headline5,
-          ),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 }

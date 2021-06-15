@@ -12,6 +12,9 @@ class ClassesBloc extends Bloc<ClassesEvent, ClassesState> {
 
   final ClassesRepository classesRepository;
 
+  Class? clazz;
+  List<Class>? classes;
+
   ClassesBloc(this.classesRepository) : super(ClassesInitial());
 
   @override
@@ -19,8 +22,11 @@ class ClassesBloc extends Bloc<ClassesEvent, ClassesState> {
     ClassesEvent event,
   ) async* {
     if (event is LoadClasses) {
-      final classes = await classesRepository.getClasses();
-      yield ClassessLoaded(classes);
+      classes = await classesRepository.getClasses();
+      yield Classes(clazz, classes);
+    } else if (event is SelectClass) {
+      clazz = event.clazz;
+      yield Classes(clazz, classes);
     }
   }
 }

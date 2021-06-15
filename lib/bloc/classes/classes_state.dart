@@ -5,9 +5,10 @@ abstract class ClassesState {}
 
 class ClassesInitial extends ClassesState {}
 
-class ClassessLoaded extends ClassesState {
+class Classes extends ClassesState {
   
-  final List<Class> classes;
+  final Class? selectedClass;
+  final List<Class>? classes;
 
-  ClassessLoaded(this.classes);
+  Classes(this.selectedClass, this.classes);
 }

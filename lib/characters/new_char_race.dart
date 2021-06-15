@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/races/races_bloc.dart';
 import 'package:dnd_player_flutter/characters/classes_list.dart';
 import 'package:dnd_player_flutter/characters/race_details.dart';
@@ -12,6 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NewCharRace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final pageController = PageController(viewportFraction: 0.9);
+
     return BlocProvider(
       create: (context) => RacesBloc(
         getIt.get<RacesRepository>(),
@@ -34,7 +37,7 @@ class NewCharRace extends StatelessWidget {
                       children: [
                         Expanded(
                           child: PageView.builder(
-                              controller: PageController(viewportFraction: 0.9),
+                              controller: pageController,
                               itemCount:
                                   (state as RacesLoaded).racesWithTraits.length,
                               itemBuilder: (context, index) {
@@ -52,6 +55,7 @@ class NewCharRace extends StatelessWidget {
                         Center(
                             child: TextButton(
                                 onPressed: () {
+                                  _submitRace(context, pageController, state);
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => ClassesList()));
                                 },
@@ -63,6 +67,16 @@ class NewCharRace extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _submitRace(
+      BuildContext context, PageController controller, RacesLoaded state) {
+    final index = controller.page?.toInt() ?? 0;
+    final raceWithTraits = state.racesWithTraits.entries.toList()[index];
+    BlocProvider.of<CharacterCreatorBloc>(context).add(SubmitRace(
+      raceWithTraits.key,
+      raceWithTraits.value,
+    ));
   }
 }
 
