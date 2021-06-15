@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/classes/classes_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
@@ -36,7 +37,11 @@ class ClassesList extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: TextButton(
-                    onPressed: state.selectedClass == null ? null : () {},
+                    onPressed: state.selectedClass == null
+                        ? null
+                        : () {
+                            _submitClass(context, state);
+                          },
                     child: Text("Выбрать")),
               ),
             ],
@@ -44,6 +49,16 @@ class ClassesList extends StatelessWidget {
         }),
       ),
     );
+  }
+
+  _submitClass(BuildContext context, Classes classes) {
+    final selectedClass = classes.selectedClass;
+    if (selectedClass == null) {
+      return;
+    }
+
+    BlocProvider.of<CharacterCreatorBloc>(context)
+        .add(SubmitClass(selectedClass));
   }
 }
 
