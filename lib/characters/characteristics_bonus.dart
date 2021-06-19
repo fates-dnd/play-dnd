@@ -57,18 +57,27 @@ class CharacteristicsBonus extends StatelessWidget {
       underline: Container(height: 2, color: theme.accentColor),
       dropdownColor: theme.primaryColorLight,
       icon: Icon(Icons.arrow_drop_down),
-      items: <Characteristic>[
-        Characteristic.STRENGTH,
-        Characteristic.DEXTERITY,
-        Characteristic.CONSTITUTION,
-        Characteristic.INTELLECT,
-        Characteristic.WISDOM,
-        Characteristic.CHARISMA
-      ]
-          .map((e) =>
-              DropdownMenuItem<Characteristic>(value: e, child: Text(e.getName())))
+      items: race.abilityBonusOptions?.abilityBonuses
+          .map((e) {
+            final characteristic = _fromIndex(e.abilityScore.index);
+            return DropdownMenuItem<Characteristic>(value: characteristic, child: Text(characteristic.getName()));
+          })
           .toList(),
       onChanged: (value) => onChanged(value),
     );
   }
+
+  Characteristic _fromIndex(String index) {
+    switch (index) {
+      case "str": return Characteristic.STRENGTH;
+      case "dex": return Characteristic.DEXTERITY;
+      case "con": return Characteristic.CONSTITUTION;
+      case "int": return Characteristic.INTELLECT;
+      case "wis": return Characteristic.WISDOM;
+      case "cha": return Characteristic.CHARISMA;
+    }
+
+    throw ArgumentError("No such characteristic: $index");
+  }
 }
+

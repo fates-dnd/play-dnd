@@ -25,7 +25,5 @@ extension Name on Characteristic {
       case Characteristic.CHARISMA:
         return "Харизма";
     }
-
-    return "";
   }
 }
