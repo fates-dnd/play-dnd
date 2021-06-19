@@ -1,41 +1,31 @@
-abstract class Characteristic {
+enum Characteristic {
 
-  String get name;
+  STRENGTH,
+  DEXTERITY,
+  CONSTITUTION,
+  INTELLECT,
+  WISDOM,
+  CHARISMA
 }
 
-class Strength extends Characteristic {
+extension Name on Characteristic {
+  String getName() {
+    switch (this) {
+      
+      case Characteristic.STRENGTH:
+        return "Сила";
+      case Characteristic.DEXTERITY:
+        return "Ловкость";
+      case Characteristic.CONSTITUTION:
+        return "Телосложение";
+      case Characteristic.INTELLECT:
+        return "Интеллект";
+      case Characteristic.WISDOM:
+        return "Мудрость";
+      case Characteristic.CHARISMA:
+        return "Харизма";
+    }
 
-  @override
-  String get name => "Сила";
-}
-
-class Dexterity extends Characteristic {
-
-  @override
-  String get name => "Ловкость";
-
-}
-
-class Constitution extends Characteristic {
-
-  @override
-  String get name => "Телосложение";
-}
-
-class Intellect extends Characteristic {
-
-  @override
-  String get name => "Интеллект";
-}
-
-class Wisdom extends Characteristic {
-
-  @override
-  String get name => "Мудрость";
-}
-
-class Charisma extends Characteristic {
-
-  @override
-  String get name => "Харизма";
+    return "";
+  }
 }

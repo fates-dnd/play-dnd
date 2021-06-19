@@ -58,15 +58,15 @@ class CharacteristicsBonus extends StatelessWidget {
       dropdownColor: theme.primaryColorLight,
       icon: Icon(Icons.arrow_drop_down),
       items: <Characteristic>[
-        Strength(),
-        Dexterity(),
-        Constitution(),
-        Intellect(),
-        Wisdom(),
-        Charisma()
+        Characteristic.STRENGTH,
+        Characteristic.DEXTERITY,
+        Characteristic.CONSTITUTION,
+        Characteristic.INTELLECT,
+        Characteristic.WISDOM,
+        Characteristic.CHARISMA
       ]
           .map((e) =>
-              DropdownMenuItem<Characteristic>(value: e, child: Text(e.name)))
+              DropdownMenuItem<Characteristic>(value: e, child: Text(e.getName())))
           .toList(),
       onChanged: (value) => onChanged(value),
     );
