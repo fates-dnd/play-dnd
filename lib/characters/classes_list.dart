@@ -56,9 +56,9 @@ class ClassesList extends StatelessWidget {
 
   _navigateNext(BuildContext context) {
     final selectedRace = BlocProvider.of<CharacterCreatorBloc>(context).race;
-    if (selectedRace?.abilityBonusOptions != null) {
+    if (selectedRace != null && selectedRace.abilityBonusOptions != null) {
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CharacteristicsBonus()));
+          MaterialPageRoute(builder: (context) => CharacteristicsBonus(race: selectedRace)));
     } else {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => SetCharacteristics()));
