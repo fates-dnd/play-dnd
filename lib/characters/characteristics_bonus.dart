@@ -37,7 +37,10 @@ class CharacteristicsBonus extends StatelessWidget {
     final options = <Widget>[];
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
       options.add(_createCharacteristicsSelect(
-          context, "Характеристика $i", characteristics.length >= i ? characteristics[i] : null, (value) {
+          context, "Характеристика $i", 
+          characteristics.length >= i ? characteristics[i] : null, 
+          characteristics.values.toList(),
+          (value) {
             BlocProvider.of<CharacteristicsBonusBloc>(context).add(SelectBonusCharacteristic(i, value));
           }));
       options.add(SizedBox(height: 12));
@@ -46,8 +49,19 @@ class CharacteristicsBonus extends StatelessWidget {
   }
 
   DropdownButton _createCharacteristicsSelect(
-      BuildContext context, String hint, Characteristic? characteristic, ValueChanged<Characteristic> onChanged) {
+      BuildContext context, 
+      String hint, 
+      Characteristic? characteristic,
+      List<Characteristic?> selectedCharacteristics,
+      ValueChanged<Characteristic> onChanged) {
     final theme = Theme.of(context);
+    final providedOptions = race.abilityBonusOptions?.abilityBonuses.map(
+      (e) => _fromIndex(e.abilityScore.index)
+    ).toList();
+    providedOptions?.removeWhere((provided) => 
+      selectedCharacteristics.any((selected) => selected?.index == provided.index) 
+        && provided.index != characteristic?.index);
+    
     return DropdownButton(
       hint: Text(
         hint,
@@ -57,10 +71,9 @@ class CharacteristicsBonus extends StatelessWidget {
       underline: Container(height: 2, color: theme.accentColor),
       dropdownColor: theme.primaryColorLight,
       icon: Icon(Icons.arrow_drop_down),
-      items: race.abilityBonusOptions?.abilityBonuses
-          .map((e) {
-            final characteristic = _fromIndex(e.abilityScore.index);
-            return DropdownMenuItem<Characteristic>(value: characteristic, child: Text(characteristic.getName()));
+      items: providedOptions
+          ?.map((e) {
+            return DropdownMenuItem<Characteristic>(value: e, child: Text(e.getName()));
           })
           .toList(),
       onChanged: (value) => onChanged(value),
