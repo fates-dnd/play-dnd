@@ -17,3 +17,10 @@ class SubmitClass extends CharacterCreatorEvent {
 
   SubmitClass(this.clazz);
 }
+
+class SubmitBonusCharacteristics extends CharacterCreatorEvent {
+
+  final List<Characteristic>? bonusCharacteristics;
+
+  SubmitBonusCharacteristics(this.bonusCharacteristics);
+}

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
@@ -14,6 +15,7 @@ class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorS
   Race? race;
   List<Trait>? traits;
   Class? clazz;
+  List<Characteristic>? bonusCharacteristics;
 
   CharacterCreatorBloc() : super(CharacterCreatorState());
 
@@ -30,6 +32,10 @@ class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorS
       clazz = event.clazz;
 
       yield createState();
+    } else if (event is SubmitBonusCharacteristics) {
+      bonusCharacteristics = event.bonusCharacteristics;
+
+      yield createState();
     }
   }
 
@@ -38,6 +44,7 @@ class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorS
         race: race, 
         traits: traits, 
         clazz: clazz,
+        bonusCharacteristic: bonusCharacteristics,
       );
   }
 }
