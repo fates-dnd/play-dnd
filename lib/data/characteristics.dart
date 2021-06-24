@@ -1,11 +1,18 @@
 enum Characteristic {
-
   STRENGTH,
   DEXTERITY,
   CONSTITUTION,
   INTELLECT,
   WISDOM,
   CHARISMA
+}
+
+class CharacteristicBonus {
+  
+  final Characteristic characteristic;
+  final int bonus;
+
+  CharacteristicBonus(this.characteristic, this.bonus);
 }
 
 extension Name on Characteristic {

@@ -20,7 +20,7 @@ class SubmitClass extends CharacterCreatorEvent {
 
 class SubmitBonusCharacteristics extends CharacterCreatorEvent {
 
-  final List<Characteristic>? bonusCharacteristics;
+  final List<CharacteristicBonus>? bonusCharacteristics;
 
   SubmitBonusCharacteristics(this.bonusCharacteristics);
 }

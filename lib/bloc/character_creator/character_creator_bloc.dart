@@ -15,7 +15,7 @@ class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorS
   Race? race;
   List<Trait>? traits;
   Class? clazz;
-  List<Characteristic>? bonusCharacteristics;
+  List<CharacteristicBonus>? bonusCharacteristics;
 
   CharacterCreatorBloc() : super(CharacterCreatorState());
 

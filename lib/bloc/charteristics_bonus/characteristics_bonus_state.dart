@@ -2,7 +2,7 @@ part of 'characteristics_bonus_bloc.dart';
 
 class CharacteristicsBonusState {
 
-  final Map<int, Characteristic?> characteristics;
+  final Map<int, CharacteristicBonus?> characteristicBonuses;
 
-  CharacteristicsBonusState(this.characteristics);
+  CharacteristicsBonusState(this.characteristicBonuses);
 }

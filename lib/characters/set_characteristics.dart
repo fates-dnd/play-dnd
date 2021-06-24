@@ -1,5 +1,8 @@
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetCharacteristics extends StatelessWidget {
   @override
@@ -12,6 +15,7 @@ class SetCharacteristics extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -21,7 +25,9 @@ class SetCharacteristics extends StatelessWidget {
                 SizedBox(width: 48),
                 _levelField(context)
               ],
-            )
+            ),
+            SizedBox(height: 24),
+            _characteristicsDescription(context),
           ],
         ),
       ),
@@ -75,6 +81,30 @@ class SetCharacteristics extends StatelessWidget {
           }).toList(),
           onChanged: (value) => {},
         ),
+      ],
+    );
+  }
+
+  Widget _characteristicsDescription(BuildContext context) {
+    final theme = Theme.of(context);
+    final race = BlocProvider.of<CharacterCreatorBloc>(context).race;
+    final bonusDescription = race?.abilityBonusDescription;
+    if (bonusDescription == null) {
+      return SizedBox();
+    }
+    return Text(
+      bonusDescription,
+      style: theme.textTheme.bodyText1,
+    );
+  }
+
+  Widget _characteristicsRow(BuildContext context, Characteristic characteristic) {
+    final characterCreator = BlocProvider.of<CharacterCreatorBloc>(context);
+    final race = characterCreator.race;
+    final abilityBonus = characterCreator.bonusCharacteristics;
+    return Row(
+      children: [
+        
       ],
     );
   }

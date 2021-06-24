@@ -31,15 +31,15 @@ class CharacteristicsBonus extends StatelessWidget {
                 Expanded(
                   child: Column(
                     children: createCharacteristicsOptions(
-                        context, state.characteristics),
+                        context, state.characteristicBonuses),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TextButton(onPressed: _areOptionsSelected(state) 
                     ? () {
-                      final selectedOptions = <Characteristic>[];
-                      state.characteristics.values.toList().forEach((element) {
+                      final selectedOptions = <CharacteristicBonus>[];
+                      state.characteristicBonuses.values.toList().forEach((element) {
                         if (element != null) {
                           selectedOptions.add(element);
                         }
@@ -60,13 +60,13 @@ class CharacteristicsBonus extends StatelessWidget {
   bool _areOptionsSelected(CharacteristicsBonusState state) {
     bool optionsSelected = true;
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
-      optionsSelected = optionsSelected && state.characteristics[i] != null;
+      optionsSelected = optionsSelected && state.characteristicBonuses[i] != null;
     }
     return optionsSelected;
   }
 
   List<Widget> createCharacteristicsOptions(
-      BuildContext context, Map<int, Characteristic?> characteristics) {
+      BuildContext context, Map<int, CharacteristicBonus?> characteristics) {
     final options = <Widget>[];
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
       options.add(_createCharacteristicsSelect(
@@ -85,32 +85,38 @@ class CharacteristicsBonus extends StatelessWidget {
   DropdownButton _createCharacteristicsSelect(
       BuildContext context,
       String hint,
-      Characteristic? characteristic,
-      List<Characteristic?> selectedCharacteristics,
-      ValueChanged<Characteristic> onChanged) {
+      CharacteristicBonus? characteristicBonus,
+      List<CharacteristicBonus?> selectedCharacteristics,
+      ValueChanged<CharacteristicBonus> onChanged) {
     final theme = Theme.of(context);
     final providedOptions = race.abilityBonusOptions?.abilityBonuses
-        .map((e) => _fromIndex(e.abilityScore.index))
+        .map((e) => CharacteristicBonus(_fromIndex(e.abilityScore.index), e.bonus))
         .toList();
     providedOptions?.removeWhere((provided) =>
         selectedCharacteristics
-            .any((selected) => selected?.index == provided.index) &&
-        provided.index != characteristic?.index);
+            .any((selected) => selected?.characteristic.index == provided.characteristic.index) &&
+        provided.characteristic.index != characteristicBonus?.characteristic.index);
 
     return DropdownButton(
       hint: Text(
         hint,
         style: TextStyle(color: Color(0xffa4a4a4)),
       ),
-      value: characteristic,
+      value: characteristicBonus?.characteristic,
       underline: Container(height: 2, color: theme.accentColor),
       dropdownColor: theme.primaryColorLight,
       icon: Icon(Icons.arrow_drop_down),
       items: providedOptions?.map((e) {
         return DropdownMenuItem<Characteristic>(
-            value: e, child: Text(e.getName()));
+            value: e.characteristic, child: Text(e.characteristic.getName()));
       }).toList(),
-      onChanged: (value) => onChanged(value),
+      onChanged: (value) { 
+        final selectedCharacteristicBonus 
+          = providedOptions?.toList().firstWhere((element) => element.characteristic == value);
+        if (selectedCharacteristicBonus != null) {
+          onChanged(selectedCharacteristicBonus); 
+        }
+      },
     );
   }
 

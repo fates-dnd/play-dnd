@@ -5,7 +5,7 @@ abstract class CharacteristicsBonusEvent {}
 
 class SelectBonusCharacteristic extends CharacteristicsBonusEvent {
   final int position;
-  final Characteristic characteristic;
+  final CharacteristicBonus characteristicBonus;
 
-  SelectBonusCharacteristic(this.position, this.characteristic);
+  SelectBonusCharacteristic(this.position, this.characteristicBonus);
 }

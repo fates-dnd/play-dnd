@@ -12,7 +12,7 @@ class CharacteristicsBonusBloc extends Bloc<CharacteristicsBonusEvent, Character
 
   final Race race;
 
-  Map<int, Characteristic?> selectedCharacteristics = {};
+  Map<int, CharacteristicBonus?> selectedCharacteristics = {};
 
   CharacteristicsBonusBloc(this.race) : super(CharacteristicsBonusState({})) {
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
@@ -25,7 +25,7 @@ class CharacteristicsBonusBloc extends Bloc<CharacteristicsBonusEvent, Character
     CharacteristicsBonusEvent event,
   ) async* {
     if (event is SelectBonusCharacteristic) {
-      selectedCharacteristics[event.position] = event.characteristic;
+      selectedCharacteristics[event.position] = event.characteristicBonus;
       yield CharacteristicsBonusState(selectedCharacteristics);
     }
   }
