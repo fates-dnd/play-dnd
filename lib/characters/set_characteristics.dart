@@ -28,6 +28,8 @@ class SetCharacteristics extends StatelessWidget {
             ),
             SizedBox(height: 24),
             _characteristicsDescription(context),
+            SizedBox(height: 24),
+            _characteristics(context),
           ],
         ),
       ),
@@ -43,11 +45,9 @@ class SetCharacteristics extends StatelessWidget {
           hintText: "Имя",
           hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 18),
           focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: theme.accentColor, width: 2)
-          ),
+              borderSide: BorderSide(color: theme.accentColor, width: 2)),
           enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: theme.accentColor, width: 2)
-          ),
+              borderSide: BorderSide(color: theme.accentColor, width: 2)),
           border: UnderlineInputBorder()),
       style: theme.textTheme.headline5,
     );
@@ -57,7 +57,10 @@ class SetCharacteristics extends StatelessWidget {
     final theme = Theme.of(context);
     return Column(
       children: [
-        Text("Уровень", style: theme.textTheme.subtitle2,),
+        Text(
+          "Уровень",
+          style: theme.textTheme.subtitle2,
+        ),
         DropdownButton(
           itemHeight: 52,
           hint: Text(
@@ -98,14 +101,35 @@ class SetCharacteristics extends StatelessWidget {
     );
   }
 
-  Widget _characteristicsRow(BuildContext context, Characteristic characteristic) {
-    final characterCreator = BlocProvider.of<CharacterCreatorBloc>(context);
-    final race = characterCreator.race;
-    final abilityBonus = characterCreator.bonusCharacteristics;
-    return Row(
+  Widget _characteristics(BuildContext context) {
+    return Column(
       children: [
-        
-      ],
+        Characteristic.STRENGTH,
+        Characteristic.DEXTERITY,
+        Characteristic.CONSTITUTION,
+        Characteristic.INTELLECT,
+        Characteristic.WISDOM,
+        Characteristic.CHARISMA
+      ].map((characteristic) {
+        return _characteristicsRow(context, CharacteristicBonus(characteristic, 0));
+      }).toList(),
+    );
+  }
+
+  Widget _characteristicsRow(
+      BuildContext context, CharacteristicBonus characteristicBonus) {
+    final theme = Theme.of(context);
+    return Container(
+      height: 48,
+      child: Row(
+        children: [
+          Text(characteristicBonus.characteristic.getName(), 
+            style: theme.textTheme.headline5,),
+          SizedBox(width: 18),
+          if (characteristicBonus.bonus != 0)
+            Text("(+ ${characteristicBonus.bonus})", style: theme.textTheme.subtitle1)
+        ],
+      ),
     );
   }
 }
