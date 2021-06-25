@@ -193,6 +193,10 @@ AlertDialog _createCharacteristicDialog(
           children: [
             Expanded(
                 child: TextField(
+              cursorColor: theme.accentColor,
+              cursorHeight: 24,
+              style: TextStyle(color: Colors.white),
+              autofocus: true,
               controller: textController,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
