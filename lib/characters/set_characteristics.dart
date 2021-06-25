@@ -15,8 +15,7 @@ class SetCharacteristics extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Row(
               children: [
@@ -150,7 +149,22 @@ class SetCharacteristics extends StatelessWidget {
             ),
           ),
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(context: context, builder: (context) => AlertDialog(
+                title: Text(characteristicBonus.characteristic.getName()),
+                content: Row(
+                  children: [
+                    Expanded(child: 
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: characteristicBonus.characteristic.getName()
+                        ),
+                      )
+                    )
+                  ],
+                ),
+              ));
+            },
             child: Text("0"),
             style: OutlinedButton.styleFrom(
               primary: Colors.white,

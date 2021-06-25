@@ -87,7 +87,11 @@ class MyApp extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 8),
               backgroundColor: Color(0xFFFF5251)
             )
-          )
+          ),
+          dialogTheme: DialogTheme(
+            backgroundColor: Color(0xFF272E32),
+            titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)
+          ),
         ),
         home: CharacterList(),
       ),
