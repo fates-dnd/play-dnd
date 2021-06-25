@@ -90,7 +90,7 @@ class CharacteristicsBonus extends StatelessWidget {
       ValueChanged<CharacteristicBonus> onChanged) {
     final theme = Theme.of(context);
     final providedOptions = race.abilityBonusOptions?.abilityBonuses
-        .map((e) => CharacteristicBonus(_fromIndex(e.abilityScore.index), e.bonus))
+        .map((e) => CharacteristicBonus(requireFromIndex(e.abilityScore.index), e.bonus))
         .toList();
     providedOptions?.removeWhere((provided) =>
         selectedCharacteristics
@@ -118,24 +118,5 @@ class CharacteristicsBonus extends StatelessWidget {
         }
       },
     );
-  }
-
-  Characteristic _fromIndex(String index) {
-    switch (index) {
-      case "str":
-        return Characteristic.STRENGTH;
-      case "dex":
-        return Characteristic.DEXTERITY;
-      case "con":
-        return Characteristic.CONSTITUTION;
-      case "int":
-        return Characteristic.INTELLECT;
-      case "wis":
-        return Characteristic.WISDOM;
-      case "cha":
-        return Characteristic.CHARISMA;
-    }
-
-    throw ArgumentError("No such characteristic: $index");
   }
 }

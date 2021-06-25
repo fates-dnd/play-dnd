@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../utils.dart';
 
 class SetCharacteristics extends StatelessWidget {
   @override
@@ -97,11 +98,14 @@ class SetCharacteristics extends StatelessWidget {
     }
     return Text(
       bonusDescription,
-      style: theme.textTheme.bodyText1,
+      style: theme.textTheme.subtitle1,
     );
   }
 
   Widget _characteristics(BuildContext context) {
+    final characterState = BlocProvider.of<CharacterCreatorBloc>(context).state;
+    final raceBonuses = characterState.race?.abilityBonuses;
+
     return Column(
       children: [
         Characteristic.STRENGTH,
@@ -111,7 +115,15 @@ class SetCharacteristics extends StatelessWidget {
         Characteristic.WISDOM,
         Characteristic.CHARISMA
       ].map((characteristic) {
-        return _characteristicsRow(context, CharacteristicBonus(characteristic, 0));
+        final raceBonus = raceBonuses?.firstWhereOrNull((element) =>
+            fromIndex(element.abilityScore.index) == characteristic);
+        final selectedBonus = characterState.bonusCharacteristic
+            ?.firstWhereOrNull(
+                (element) => element.characteristic == characteristic);
+
+        final bonusPoints = (raceBonus?.bonus ?? selectedBonus?.bonus) ?? 0;
+        return _characteristicsRow(
+            context, CharacteristicBonus(characteristic, bonusPoints));
       }).toList(),
     );
   }
@@ -123,11 +135,28 @@ class SetCharacteristics extends StatelessWidget {
       height: 48,
       child: Row(
         children: [
-          Text(characteristicBonus.characteristic.getName(), 
-            style: theme.textTheme.headline5,),
-          SizedBox(width: 18),
-          if (characteristicBonus.bonus != 0)
-            Text("(+ ${characteristicBonus.bonus})", style: theme.textTheme.subtitle1)
+          Expanded(
+            child: Row(
+              children: [
+                Text(
+                  characteristicBonus.characteristic.getName(),
+                  style: theme.textTheme.headline5,
+                ),
+                SizedBox(width: 4),
+                if (characteristicBonus.bonus != 0)
+                  Text("(+${characteristicBonus.bonus})",
+                      style: theme.textTheme.subtitle1),
+              ],
+            ),
+          ),
+          OutlinedButton(
+            onPressed: () {},
+            child: Text("0"),
+            style: OutlinedButton.styleFrom(
+              primary: Colors.white,
+              side: BorderSide(color: Color(0xFF272E32), width: 3),
+            ),
+          )
         ],
       ),
     );
