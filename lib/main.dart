@@ -71,6 +71,14 @@ class MyApp extends StatelessWidget {
               color: Color(0xFFDCDAD9),
             ),
           ),
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 18),
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
+            enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
+            border: UnderlineInputBorder()
+          ),
           outlinedButtonTheme: OutlinedButtonThemeData(
             style: OutlinedButton.styleFrom(
               primary: Color(0xFFFF5251),
