@@ -60,28 +60,32 @@ class SetCharacteristics extends StatelessWidget {
           "Уровень",
           style: theme.textTheme.subtitle2,
         ),
-        DropdownButton(
-          itemHeight: 52,
-          hint: Text(
-            "Уровень",
-            style: TextStyle(color: Color(0xffa4a4a4)),
+        BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+          builder: (context, state) => DropdownButton(
+            itemHeight: 52,
+            hint: Text(
+              "Уровень",
+              style: TextStyle(color: Color(0xffa4a4a4)),
+            ),
+            value: state.level,
+            underline: Container(height: 2, color: theme.accentColor),
+            dropdownColor: theme.primaryColorLight,
+            icon: Icon(Icons.arrow_drop_down),
+            items: List.generate(20, (index) => index + 1).map((e) {
+              return DropdownMenuItem<int>(
+                  value: e,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      e.toString(),
+                      style: theme.textTheme.headline5,
+                    ),
+                  ));
+            }).toList(),
+            onChanged: (value) => {
+              BlocProvider.of<SetCharacteristicsBloc>(context).add(SubmitLevel(value as int))
+            },
           ),
-          value: 1,
-          underline: Container(height: 2, color: theme.accentColor),
-          dropdownColor: theme.primaryColorLight,
-          icon: Icon(Icons.arrow_drop_down),
-          items: List.generate(20, (index) => index + 1).map((e) {
-            return DropdownMenuItem<int>(
-                value: e,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    e.toString(),
-                    style: theme.textTheme.headline5,
-                  ),
-                ));
-          }).toList(),
-          onChanged: (value) => {},
         ),
       ],
     );

@@ -7,9 +7,9 @@ import 'package:meta/meta.dart';
 part 'set_characteristics_event.dart';
 part 'set_characteristics_state.dart';
 
-class SetCharacteristicsBloc extends Bloc<SetCharacteristicsEvent, SetCharacteristicsState> {
-
-  int? level;
+class SetCharacteristicsBloc
+    extends Bloc<SetCharacteristicsEvent, SetCharacteristicsState> {
+  int level = 1;
   int? strenghBase;
   int? dexterityBase;
   int? constitutionBase;
@@ -17,7 +17,7 @@ class SetCharacteristicsBloc extends Bloc<SetCharacteristicsEvent, SetCharacteri
   int? wisdomBase;
   int? charismaBase;
 
-  SetCharacteristicsBloc() : super(SetCharacteristicsState());
+  SetCharacteristicsBloc() : super(SetCharacteristicsState(level: 1));
 
   @override
   Stream<SetCharacteristicsState> mapEventToState(
@@ -27,37 +27,36 @@ class SetCharacteristicsBloc extends Bloc<SetCharacteristicsEvent, SetCharacteri
       level = event.level;
     } else if (event is SubmitCharacteristicsScore) {
       _saveCharacteristicsScore(event.characteristic, event.score);
-      yield SetCharacteristicsState(
-        level: level, 
+    }
+    yield SetCharacteristicsState(
+        level: level,
         strength: strenghBase,
         dexterity: dexterityBase,
         constitution: constitutionBase,
         intelligence: intelligenceBase,
         wisdom: wisdomBase,
-        charisma: charismaBase
-      );
-    }
+        charisma: charismaBase);
   }
 
   _saveCharacteristicsScore(Characteristic characteristic, int? score) {
     switch (characteristic) {
       case Characteristic.STRENGTH:
-      strenghBase = score;
+        strenghBase = score;
         break;
       case Characteristic.DEXTERITY:
-      dexterityBase = score;
+        dexterityBase = score;
         break;
       case Characteristic.CONSTITUTION:
-      constitutionBase = score;  
+        constitutionBase = score;
         break;
       case Characteristic.INTELLECT:
-      intelligenceBase = score;
+        intelligenceBase = score;
         break;
       case Characteristic.WISDOM:
-      wisdomBase = score;
+        wisdomBase = score;
         break;
       case Characteristic.CHARISMA:
-      charismaBase = score;
+        charismaBase = score;
         break;
     }
   }
