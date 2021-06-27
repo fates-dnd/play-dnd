@@ -18,21 +18,28 @@ class SetCharacteristics extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: ListView(
+          child: Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: _nameField(context),
-                  ),
-                  SizedBox(width: 48),
-                  _levelField(context)
-                ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _nameField(context),
+                        ),
+                        SizedBox(width: 48),
+                        _levelField(context)
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    _characteristicsDescription(context),
+                    SizedBox(height: 24),
+                    _characteristics(context),
+                  ]),
+                ),
               ),
-              SizedBox(height: 24),
-              _characteristicsDescription(context),
-              SizedBox(height: 24),
-              _characteristics(context),
+              _submitButton(),
             ],
           ),
         ),
@@ -42,13 +49,18 @@ class SetCharacteristics extends StatelessWidget {
 
   Widget _nameField(BuildContext context) {
     final theme = Theme.of(context);
-    return TextField(
-      cursorColor: theme.accentColor,
-      cursorHeight: 24,
-      decoration: InputDecoration(
-        hintText: "Имя",
+    return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+      builder: (context, state) => TextField(
+        cursorColor: theme.accentColor,
+        cursorHeight: 24,
+        decoration: InputDecoration(
+          hintText: "Имя",
+        ),
+        onChanged: (text) {
+          BlocProvider.of<SetCharacteristicsBloc>(context).add(SubmitName(text));
+        },
+        style: theme.textTheme.headline5,
       ),
-      style: theme.textTheme.headline5,
     );
   }
 
@@ -83,7 +95,8 @@ class SetCharacteristics extends StatelessWidget {
                   ));
             }).toList(),
             onChanged: (value) => {
-              BlocProvider.of<SetCharacteristicsBloc>(context).add(SubmitLevel(value as int))
+              BlocProvider.of<SetCharacteristicsBloc>(context)
+                  .add(SubmitLevel(value as int))
             },
           ),
         ),
@@ -158,7 +171,8 @@ class SetCharacteristics extends StatelessWidget {
   }
 }
 
-Widget _characteristicButton(BuildContext context, CharacteristicBonus characteristicBonus) {
+Widget _characteristicButton(
+    BuildContext context, CharacteristicBonus characteristicBonus) {
   return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
     builder: (context, state) => OutlinedButton(
       onPressed: () {
@@ -167,14 +181,26 @@ Widget _characteristicButton(BuildContext context, CharacteristicBonus character
             builder: (dialogContext) =>
                 _createCharacteristicDialog(context, characteristicBonus));
       },
-      child: Text((state.getScoreForCharacteristic(
-                  characteristicBonus.characteristic) ??
-              0)
+      child: Text(((state.getScoreForCharacteristic(
+                      characteristicBonus.characteristic) ??
+                  0) +
+              characteristicBonus.bonus)
           .toString()),
       style: OutlinedButton.styleFrom(
         primary: Colors.white,
         side: BorderSide(color: Color(0xFF272E32), width: 3),
       ),
+    ),
+  );
+}
+
+Widget _submitButton() {
+  return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+    builder: (contetxt, state) => Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: TextButton(onPressed: state.isFilled ? () {
+
+      } : null, child: Text("Сохранить")),
     ),
   );
 }
@@ -210,12 +236,14 @@ AlertDialog _createCharacteristicDialog(
         SizedBox(
           height: 12,
         ),
-        OutlinedButton(onPressed: () {
-          BlocProvider.of<SetCharacteristicsBloc>(context).add(
-            SubmitCharacteristicsScore(characteristicBonus.characteristic, int.tryParse(textController.value.text))
-          );
-          Navigator.of(context).pop();
-        }, child: Text("Сохранить")),
+        OutlinedButton(
+            onPressed: () {
+              BlocProvider.of<SetCharacteristicsBloc>(context).add(
+                  SubmitCharacteristicsScore(characteristicBonus.characteristic,
+                      int.tryParse(textController.value.text)));
+              Navigator.of(context).pop();
+            },
+            child: Text("Сохранить")),
       ],
     ),
   );

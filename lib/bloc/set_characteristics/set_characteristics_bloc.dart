@@ -9,6 +9,7 @@ part 'set_characteristics_state.dart';
 
 class SetCharacteristicsBloc
     extends Bloc<SetCharacteristicsEvent, SetCharacteristicsState> {
+  String? name;
   int level = 1;
   int? strenghBase;
   int? dexterityBase;
@@ -23,12 +24,15 @@ class SetCharacteristicsBloc
   Stream<SetCharacteristicsState> mapEventToState(
     SetCharacteristicsEvent event,
   ) async* {
-    if (event is SubmitLevel) {
+    if (event is SubmitName) {
+      name = event.name;
+    } else if (event is SubmitLevel) {
       level = event.level;
     } else if (event is SubmitCharacteristicsScore) {
       _saveCharacteristicsScore(event.characteristic, event.score);
     }
     yield SetCharacteristicsState(
+        name: name,
         level: level,
         strength: strenghBase,
         dexterity: dexterityBase,
