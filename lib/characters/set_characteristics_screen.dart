@@ -6,7 +6,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../utils.dart';
 
-class SetCharacteristics extends StatelessWidget {
+class SetCharacteristicsScreen extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return SetCharacteristicsScreenState();
+  }
+}
+
+class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
+  late FocusNode nameFocusNode;
+
+  @override
+  void initState() {
+    nameFocusNode = FocusNode();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -39,7 +60,7 @@ class SetCharacteristics extends StatelessWidget {
                   ]),
                 ),
               ),
-              _submitButton(),
+              _submitButton(context),
             ],
           ),
         ),
@@ -51,13 +72,15 @@ class SetCharacteristics extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
       builder: (context, state) => TextField(
+        focusNode: nameFocusNode,
         cursorColor: theme.accentColor,
         cursorHeight: 24,
         decoration: InputDecoration(
           hintText: "Имя",
         ),
         onChanged: (text) {
-          BlocProvider.of<SetCharacteristicsBloc>(context).add(SubmitName(text));
+          BlocProvider.of<SetCharacteristicsBloc>(context)
+              .add(SubmitName(text));
         },
         style: theme.textTheme.headline5,
       ),
@@ -106,7 +129,7 @@ class SetCharacteristics extends StatelessWidget {
 
   Widget _characteristicsDescription(BuildContext context) {
     final theme = Theme.of(context);
-    final race = BlocProvider.of<CharacterCreatorBloc>(context).race;
+    final race = BlocProvider.of<CharacterCreatorBloc>(context).state.race;
     final bonusDescription = race?.abilityBonusDescription;
     if (bonusDescription == null) {
       return SizedBox();
@@ -117,8 +140,8 @@ class SetCharacteristics extends StatelessWidget {
     );
   }
 
-  Widget _characteristics(BuildContext context) {
-    final characterState = BlocProvider.of<CharacterCreatorBloc>(context).state;
+  Widget _characteristics(BuildContext inputContext) {
+    final characterState = BlocProvider.of<CharacterCreatorBloc>(inputContext).state;
     final raceBonuses = characterState.race?.abilityBonuses;
 
     return Column(
@@ -169,82 +192,100 @@ class SetCharacteristics extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _characteristicButton(
-    BuildContext context, CharacteristicBonus characteristicBonus) {
-  return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-    builder: (context, state) => OutlinedButton(
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (dialogContext) =>
-                _createCharacteristicDialog(context, characteristicBonus));
-      },
-      child: Text(((state.getScoreForCharacteristic(
-                      characteristicBonus.characteristic) ??
-                  0) +
-              characteristicBonus.bonus)
-          .toString()),
-      style: OutlinedButton.styleFrom(
-        primary: Colors.white,
-        side: BorderSide(color: Color(0xFF272E32), width: 3),
+  Widget _characteristicButton(
+      BuildContext inputContext, CharacteristicBonus characteristicBonus) {
+    return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+      builder: (context, state) => OutlinedButton(
+        onPressed: () {
+          nameFocusNode.unfocus();
+          showDialog(
+              context: context,
+              builder: (dialogContext) => _createCharacteristicDialog(
+                  context, characteristicBonus));
+        },
+        child: Text(((state.getScoreForCharacteristic(
+                        characteristicBonus.characteristic) ??
+                    0) +
+                characteristicBonus.bonus)
+            .toString()),
+        style: OutlinedButton.styleFrom(
+          primary: Colors.white,
+          side: BorderSide(color: Color(0xFF272E32), width: 3),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _submitButton() {
-  return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-    builder: (contetxt, state) => Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: TextButton(onPressed: state.isFilled ? () {
+  Widget _submitButton(BuildContext inputContext) {
+    return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+      builder: (contetxt, state) => Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: TextButton(
+            onPressed: state.isFilled
+                ? () {
+                    BlocProvider.of<CharacterCreatorBloc>(inputContext)
+                        .add(SubmitCharacteristics(
+                      state.name,
+                      state.level,
+                      state.strength,
+                      state.dexterity,
+                      state.constitution,
+                      state.intelligence,
+                      state.wisdom,
+                      state.charisma,
+                    ));
 
-      } : null, child: Text("Сохранить")),
-    ),
-  );
-}
-
-AlertDialog _createCharacteristicDialog(
-    BuildContext context, CharacteristicBonus characteristicBonus) {
-  final theme = Theme.of(context);
-  final textController = TextEditingController();
-
-  return AlertDialog(
-    title: Text(characteristicBonus.characteristic.getName()),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(
-          children: [
-            Expanded(
-                child: TextField(
-              cursorColor: theme.accentColor,
-              cursorHeight: 24,
-              style: TextStyle(color: Colors.white),
-              autofocus: true,
-              controller: textController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                  hintText: characteristicBonus.characteristic.getName()),
-            )),
-            SizedBox(width: 24),
-            Text("(+${characteristicBonus.bonus})",
-                style: theme.textTheme.subtitle1)
-          ],
-        ),
-        SizedBox(
-          height: 12,
-        ),
-        OutlinedButton(
-            onPressed: () {
-              BlocProvider.of<SetCharacteristicsBloc>(context).add(
-                  SubmitCharacteristicsScore(characteristicBonus.characteristic,
-                      int.tryParse(textController.value.text)));
-              Navigator.of(context).pop();
-            },
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
+                : null,
             child: Text("Сохранить")),
-      ],
-    ),
-  );
+      ),
+    );
+  }
+
+  AlertDialog _createCharacteristicDialog(
+      BuildContext inputContext, CharacteristicBonus characteristicBonus) {
+    final theme = Theme.of(inputContext);
+    final textController = TextEditingController();
+
+    return AlertDialog(
+      title: Text(characteristicBonus.characteristic.getName()),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                  child: TextField(
+                cursorColor: theme.accentColor,
+                cursorHeight: 24,
+                style: TextStyle(color: Colors.white),
+                autofocus: true,
+                controller: textController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                    hintText: characteristicBonus.characteristic.getName()),
+              )),
+              SizedBox(width: 24),
+              Text("(+${characteristicBonus.bonus})",
+                  style: theme.textTheme.subtitle1)
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          ),
+          OutlinedButton(
+              onPressed: () {
+                BlocProvider.of<SetCharacteristicsBloc>(inputContext).add(
+                    SubmitCharacteristicsScore(
+                        characteristicBonus.characteristic,
+                        int.tryParse(textController.value.text)));
+                Navigator.of(context).pop();
+              },
+              child: Text("Сохранить")),
+        ],
+      ),
+    );
+  }
 }

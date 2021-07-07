@@ -1,7 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/classes/classes_bloc.dart';
 import 'package:dnd_player_flutter/characters/characteristics_bonus.dart';
-import 'package:dnd_player_flutter/characters/set_characteristics.dart';
+import 'package:dnd_player_flutter/characters/set_characteristics_screen.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
@@ -55,13 +55,13 @@ class ClassesList extends StatelessWidget {
   }
 
   _navigateNext(BuildContext context) {
-    final selectedRace = BlocProvider.of<CharacterCreatorBloc>(context).race;
+    final selectedRace = BlocProvider.of<CharacterCreatorBloc>(context).state.race;
     if (selectedRace != null && selectedRace.abilityBonusOptions != null) {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => CharacteristicsBonus(race: selectedRace)));
     } else {
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SetCharacteristics()));
+          .push(MaterialPageRoute(builder: (context) => SetCharacteristicsScreen()));
     }
   }
 

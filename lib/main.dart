@@ -1,28 +1,38 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/characters/character_list.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
+import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+import 'hive_utils.dart';
+
+void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // transparent status bar
     statusBarIconBrightness: Brightness.light // dark text for status bar
   ));
 
+  setupTypeAdapters();
+  await Hive.initFlutter();
+  await Hive.openBox('characters');
+
   registerDependencies();
 
-  runApp(MyApp());
+  runApp(DndApp());
 }
 
-class MyApp extends StatelessWidget {
+class DndApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => CharacterCreatorBloc())
+        BlocProvider(create: (context) => CharacterCreatorBloc(
+          getIt.get<CharacterRepository>()
+        ))
       ],
       child: MaterialApp(
         title: 'DnD',

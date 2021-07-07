@@ -1,6 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/charteristics_bonus/characteristics_bonus_bloc.dart';
-import 'package:dnd_player_flutter/characters/set_characteristics.dart';
+import 'package:dnd_player_flutter/characters/set_characteristics_screen.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +45,7 @@ class CharacteristicsBonus extends StatelessWidget {
                         }
                       });
                       BlocProvider.of<CharacterCreatorBloc>(context).add(SubmitBonusCharacteristics(selectedOptions));
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SetCharacteristics()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SetCharacteristicsScreen()));
                     }
                     : null, child: Text("Выбрать")),
                 ),
