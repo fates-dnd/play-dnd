@@ -236,7 +236,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                       state.charisma,
                     ));
 
-                    Navigator.of(context, rootNavigator: true).pop();
+                    Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
                   }
                 : null,
             child: Text("Сохранить")),

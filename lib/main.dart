@@ -111,7 +111,10 @@ class DndApp extends StatelessWidget {
             titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)
           ),
         ),
-        home: CharacterList(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => CharacterList()
+        },
       ),
     );
   }
