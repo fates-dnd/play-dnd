@@ -9,14 +9,12 @@ class CharacterTypeAdapter extends TypeAdapter<Character> {
   @override
   Character read(BinaryReader reader) {
     return Character(
-      reader.read(RACE_TYPE_ADAPTER),
-      reader.read(CLASS_TYPE_ADAPTER),
+      reader.readString(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Character obj) {
-    writer.write(obj.race);
-    writer.write(obj.clazz);
+    writer.writeString(obj.name);
   }
 }

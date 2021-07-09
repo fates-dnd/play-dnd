@@ -62,8 +62,7 @@ class CharacterCreatorState {
 
   Character? toCharacter() {
     return Character(
-      race!,
-      clazz!,
+      name!,
     );
   }
 }
