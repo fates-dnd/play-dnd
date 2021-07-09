@@ -19,7 +19,7 @@ class CharacterRepository {
   }
 
   List<Character> getCharacters() {
-    final characters = box.get('character_list') as List<Character>?;
-    return characters ?? [];
+    final characters = box.get('character_list') as List?;
+    return characters?.map((e) => e as Character).toList() ?? [];
   }
 }

@@ -1,27 +1,59 @@
+import 'package:dnd_player_flutter/bloc/character_list/character_list_bloc.dart';
 import 'package:dnd_player_flutter/characters/new_char_race.dart';
+import 'package:dnd_player_flutter/dependencies.dart';
+import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: noCharacters(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => NewCharRace()));
-        },
+    return BlocProvider(
+      create: (context) => CharacterListBloc(getIt.get<CharacterRepository>())
+        ..add(LoadCharacterList()),
+      child: Scaffold(
+        body: BlocBuilder<CharacterListBloc, CharacterListState>(
+          builder: (context, state) {
+            if (state.characters.isEmpty) {
+              return noCharacters();
+            }
+
+            return characterList(state.characters);
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => NewCharRace()));
+          },
+        ),
       ),
     );
   }
 
-  Widget characterList() {
-    return ListView.builder(itemBuilder: (context, index) {
-      return SizedBox();
-    });
+  Widget characterList(List<Character> characters) {
+    return ListView.builder(
+        itemCount: characters.length,
+        itemBuilder: (context, index) {
+          return CharacterItem(character: characters[index]);
+        });
   }
 
   Widget noCharacters() {
     return SizedBox();
+  }
+}
+
+class CharacterItem extends StatelessWidget {
+  final Character character;
+
+  const CharacterItem({Key? key, required this.character}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [Text(character.name)],
+    );
   }
 }
