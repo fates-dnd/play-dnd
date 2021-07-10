@@ -64,6 +64,7 @@ class CharacterCreatorState {
     return Character(
       name!,
       race!,
+      clazz!,
     );
   }
 }
