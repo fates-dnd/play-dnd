@@ -1,10 +1,10 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/classes/classes_bloc.dart';
-import 'package:dnd_player_flutter/characters/characteristics_bonus.dart';
-import 'package:dnd_player_flutter/characters/set_characteristics_screen.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
+import 'package:dnd_player_flutter/ui/character_creator/characteristics_bonus.dart';
+import 'package:dnd_player_flutter/ui/character_creator/set_characteristics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

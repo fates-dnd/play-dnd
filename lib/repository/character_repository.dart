@@ -2,7 +2,6 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:hive/hive.dart';
 
 class CharacterRepository {
-
   late Box box;
 
   CharacterRepository() {
@@ -10,7 +9,9 @@ class CharacterRepository {
   }
 
   void insertCharacter(Character character) {
-    var currentList = box.get('character_list') as List<Character>?;
+    var currentList = (box.get('character_list') as List?)
+        ?.map((e) => e as Character)
+        .toList();
     if (currentList == null) {
       currentList = <Character>[];
     }

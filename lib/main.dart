@@ -1,7 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
-import 'package:dnd_player_flutter/characters/character_list.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
+import 'package:dnd_player_flutter/ui/character_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -4,7 +4,7 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../utils.dart';
+import '../../utils.dart';
 
 class SetCharacteristicsScreen extends StatefulWidget {
   @override

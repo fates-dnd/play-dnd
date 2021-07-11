@@ -1,7 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/races/races_bloc.dart';
-import 'package:dnd_player_flutter/characters/classes_list.dart';
-import 'package:dnd_player_flutter/characters/race_details.dart';
+import 'package:dnd_player_flutter/ui/character_creator/classes_list.dart';
+import 'package:dnd_player_flutter/ui/character_creator/race_details.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
