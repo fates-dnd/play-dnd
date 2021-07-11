@@ -13,7 +13,15 @@ class CharacterTypeAdapter extends TypeAdapter<Character> {
   @override
   Character read(BinaryReader reader) {
     return Character(
-      reader.readString(),
+      reader.readString(), // name
+      reader.readInt(), // level
+      reader.readInt(), // base strength
+      reader.readInt(), // base dexterity
+      reader.readInt(), // base constitution
+      reader.readInt(), // base intelligence
+      reader.readInt(), // base wisdom
+      reader.readInt(), // base charisma
+
       reader.readRace(),
       reader.readClass(),
     );
@@ -22,6 +30,14 @@ class CharacterTypeAdapter extends TypeAdapter<Character> {
   @override
   void write(BinaryWriter writer, Character obj) {
     writer.writeString(obj.name);
+    writer.writeInt(obj.level);
+    writer.writeInt(obj.baseStrength);
+    writer.writeInt(obj.baseDexterity);
+    writer.writeInt(obj.baseConstitution);
+    writer.writeInt(obj.baseIntelligence);
+    writer.writeInt(obj.baseWisdom);
+    writer.writeInt(obj.baseCharisma);
+
     writer.writeRace(obj.race);
     writer.writeClass(obj.clazz);
   }

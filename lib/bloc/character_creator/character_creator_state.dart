@@ -63,6 +63,14 @@ class CharacterCreatorState {
   Character? toCharacter() {
     return Character(
       name!,
+      level!,
+      strength!,
+      dexterity!,
+      constitution!,
+      intelligence!,
+      wisdom!,
+      charisma!,
+
       race!,
       clazz!,
     );
