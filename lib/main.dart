@@ -113,7 +113,7 @@ class DndApp extends StatelessWidget {
         ),
         initialRoute: '/',
         routes: {
-          '/': (context) => CharacterList()
+          '/': (context) => CharacterList(),
         },
       ),
     );
