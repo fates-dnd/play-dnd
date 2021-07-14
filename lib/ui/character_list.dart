@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/new_char_race.dart';
+import 'package:dnd_player_flutter/ui/characters/character_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,8 +30,7 @@ class CharacterList extends StatelessWidget {
           child: Text(
             "+",
             style: TextStyle(
-              fontSize: 32, 
-              color: Theme.of(context).primaryColorLight),
+                fontSize: 32, color: Theme.of(context).primaryColorLight),
           ),
           onPressed: () {
             Navigator.push(context,
@@ -66,7 +66,10 @@ class CharacterItem extends StatelessWidget {
     return Card(
       color: theme.primaryColorLight,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CharacterScreen(character: character)));
+        },
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(

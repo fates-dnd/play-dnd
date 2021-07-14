@@ -55,6 +55,16 @@ flutter:
     - assets/traits.json
     - assets/classes.json
 
+    # background
+    - assets/background.png
+    
+    # stats
+    - assets/stats/heart.png
+    - assets/stats/sword.png
+    - assets/stats/tent.png
+    - assets/stats/shield.png
+    - assets/stats/hammer.png
+
     # class icons
     - assets/icons/fighter.png
     - assets/icons/barbarian.png
