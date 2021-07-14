@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CharacterScreen extends StatelessWidget {
   final Character character;
@@ -9,21 +10,24 @@ class CharacterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Image.asset("assets/background.png"),
-          SafeArea(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  CharacterScreenHeader(character: character),
-                ],
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Image.asset("assets/background.png"),
+            SafeArea(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    CharacterScreenHeader(character: character),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
