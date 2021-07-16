@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/dto/character.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
+import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,6 +23,12 @@ class CharacterScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     CharacterScreenHeader(character: character),
+                    SizedBox(height: 18,),
+                    Expanded(child: PagerWithIndicators(children: [
+                      BaseCharateristicsPage(), 
+                      SizedBox(), 
+                      SizedBox()
+                    ],)),
                   ],
                 ),
               ),
