@@ -65,6 +65,9 @@ flutter:
     - assets/stats/shield.png
     - assets/stats/hammer.png
 
+    # dice
+    - assets/dice/d20.png
+
     # class icons
     - assets/icons/fighter.png
     - assets/icons/barbarian.png

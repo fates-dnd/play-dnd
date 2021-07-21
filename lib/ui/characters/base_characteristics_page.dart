@@ -15,31 +15,37 @@ class BaseCharateristicsPage extends StatelessWidget {
             name: "Сила",
             bonus: state.strengthBonus,
             score: state.strength,
+            accent: Color(0xFFFF5251),
           ),
           CharacteristicItem(
             name: "Ловкость",
             bonus: state.dexterityBonus,
             score: state.dexterity,
+            accent: Color(0xFF3AFFBD),
           ),
           CharacteristicItem(
             name: "Телосложение",
             bonus: state.constitutionBonus,
             score: state.constitution,
+            accent: Color(0xFFFB9538),
           ),
           CharacteristicItem(
             name: "Интеллект",
             bonus: state.intelligenceBonus,
             score: state.intelligence,
+            accent: Color(0xFFE5E1DE),
           ),
           CharacteristicItem(
             name: "Мудрость",
             bonus: state.wisdomBonus,
             score: state.wisdom,
+            accent: Color(0xFF4847FB),
           ),
           CharacteristicItem(
             name: "Харизма",
             bonus: state.charismaBonus,
             score: state.charisma,
+            accent: Color(0xFFC01DFC),
           ),
         ],
       ),
@@ -51,10 +57,15 @@ class CharacteristicItem extends StatelessWidget {
   final String name;
   final int bonus;
   final int score;
+  final Color accent;
 
-  const CharacteristicItem(
-      {Key? key, required this.name, required this.bonus, required this.score})
-      : super(key: key);
+  const CharacteristicItem({
+    Key? key,
+    required this.name,
+    required this.bonus,
+    required this.score,
+    required this.accent,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +78,7 @@ class CharacteristicItem extends StatelessWidget {
           padding: EdgeInsets.all(4),
           decoration: BoxDecoration(
               color: theme.primaryColorLight,
-              borderRadius: BorderRadius.circular(8),
+              borderRadius: BorderRadius.circular(16),
               border: Border.all(
                 color: theme.primaryColor,
                 width: 5,
@@ -83,19 +94,50 @@ class CharacteristicItem extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 14,
+                height: 10,
               ),
               Text(
                 bonus >= 0 ? "+${bonus.toString()}" : bonus.toString(),
                 style: TextStyle(
-                  color: Color(0xFFDCDAD9),
-                  fontSize: 38,
-                  fontWeight: FontWeight.bold
-                ),
+                    color: Color(0xFFDCDAD9),
+                    fontSize: 38,
+                    fontWeight: FontWeight.bold),
               ),
             ],
           ),
-        )
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          child: Container(
+            width: 60,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: theme.primaryColor,
+                width: 5,
+              ),
+              color: theme.primaryColorLight,
+            ),
+            alignment: Alignment.center,
+            child: Text(score.toString()),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.all(2),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: accent,
+                border: Border.all(
+                  color: theme.primaryColor,
+                  width: 5,
+                )),
+            child: Image.asset("assets/dice/d20.png"),
+          ),
+        ),
       ],
     );
   }
