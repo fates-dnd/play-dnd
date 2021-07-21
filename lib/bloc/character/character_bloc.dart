@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dnd_player_flutter/bloc/character/proficiency_bonus_table.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:meta/meta.dart';
 
@@ -21,6 +22,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       character = event.character;
 
       yield CharacterState(
+        level: character.level,
         strength: character.baseStrength,
         dexterity: character.baseDexterity,
         constitution: character.baseConstitution,

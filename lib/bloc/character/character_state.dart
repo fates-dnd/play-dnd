@@ -2,6 +2,7 @@ part of 'character_bloc.dart';
 
 class CharacterState {
 
+  final int level;
   final int strength;
   final int dexterity;
   final int constitution;
@@ -10,12 +11,13 @@ class CharacterState {
   final int charisma;
 
   CharacterState({
-    this.strength = 0,
-    this.dexterity = 0,
-    this.constitution = 0,
-    this.intelligence = 0,
-    this.wisdom = 0,
-    this.charisma = 0,
+    this.level = 1,
+    this.strength = 10,
+    this.dexterity = 10,
+    this.constitution = 10,
+    this.intelligence = 10,
+    this.wisdom = 10,
+    this.charisma = 10,
   });
 
   int get strengthBonus => (strength - 10) ~/ 2;
@@ -24,4 +26,8 @@ class CharacterState {
   int get intelligenceBonus => (intelligence - 10) ~/ 2;
   int get wisdomBonus => (wisdom - 10) ~/ 2;
   int get charismaBonus => (charisma - 10) ~/ 2;
+
+  int get initiative => dexterityBonus;
+
+  int get proficiencyBonus => calculateProficiencyBonus(level);
 }

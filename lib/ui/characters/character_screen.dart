@@ -94,10 +94,7 @@ class CharacterScreenHeader extends StatelessWidget {
                   value: "12",
                   color: Color(0xFFADADAD)),
               SizedBox(width: 12),
-              NotActionInfo(
-                  assetUrl: "assets/stats/hammer.png",
-                  value: "+2",
-                  color: Color(0xCCFB9538)),
+              ProficiencyBonusInfo(),
             ],
           )
         ],
@@ -155,11 +152,13 @@ class InitiativeIcon extends StatelessWidget {
           children: [
             Image.asset("assets/stats/sword.png"),
             SizedBox(width: 8),
-            Text(
-              "+3",
-              style: TextStyle(
-                fontSize: 18,
-                color: Color(0xFFDCDAD9),
+            BlocBuilder<CharacterBloc, CharacterState>(
+              builder: (context, state) => Text(
+                state.initiative >= 0 ? "+${state.initiative}" : state.initiative.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFFDCDAD9),
+                ),
               ),
             ),
           ],
@@ -180,6 +179,19 @@ class RestIcon extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Image.asset("assets/stats/tent.png"),
       ),
+    );
+  }
+}
+
+class ProficiencyBonusInfo extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => NotActionInfo(
+          assetUrl: "assets/stats/hammer.png",
+          value: "+${state.proficiencyBonus}",
+          color: Color(0xCCFB9538)),
     );
   }
 }
