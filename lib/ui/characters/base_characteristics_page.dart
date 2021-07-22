@@ -5,47 +5,71 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BaseCharateristicsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) => GridView.count(
-        crossAxisCount: 3,
-        mainAxisSpacing: 24,
-        crossAxisSpacing: 24,
+      builder: (context, state) => ListView(
         children: [
-          CharacteristicItem(
-            name: "Сила",
-            bonus: state.strengthBonus,
-            score: state.strength,
-            accent: Color(0xFFFF5251),
+          GridView.count(
+            shrinkWrap: true,
+            crossAxisCount: 3,
+            mainAxisSpacing: 24,
+            crossAxisSpacing: 24,
+            children: [
+              CharacteristicItem(
+                name: "Сила",
+                bonus: state.strengthBonus,
+                score: state.strength,
+                accent: Color(0xFFFF5251),
+              ),
+              CharacteristicItem(
+                name: "Ловкость",
+                bonus: state.dexterityBonus,
+                score: state.dexterity,
+                accent: Color(0xFF3AFFBD),
+              ),
+              CharacteristicItem(
+                name: "Телосложение",
+                bonus: state.constitutionBonus,
+                score: state.constitution,
+                accent: Color(0xFFFB9538),
+              ),
+              CharacteristicItem(
+                name: "Интеллект",
+                bonus: state.intelligenceBonus,
+                score: state.intelligence,
+                accent: Color(0xFFE5E1DE),
+              ),
+              CharacteristicItem(
+                name: "Мудрость",
+                bonus: state.wisdomBonus,
+                score: state.wisdom,
+                accent: Color(0xFF4847FB),
+              ),
+              CharacteristicItem(
+                name: "Харизма",
+                bonus: state.charismaBonus,
+                score: state.charisma,
+                accent: Color(0xFFC01DFC),
+              ),
+            ],
           ),
-          CharacteristicItem(
-            name: "Ловкость",
-            bonus: state.dexterityBonus,
-            score: state.dexterity,
-            accent: Color(0xFF3AFFBD),
-          ),
-          CharacteristicItem(
-            name: "Телосложение",
-            bonus: state.constitutionBonus,
-            score: state.constitution,
-            accent: Color(0xFFFB9538),
-          ),
-          CharacteristicItem(
-            name: "Интеллект",
-            bonus: state.intelligenceBonus,
-            score: state.intelligence,
-            accent: Color(0xFFE5E1DE),
-          ),
-          CharacteristicItem(
-            name: "Мудрость",
-            bonus: state.wisdomBonus,
-            score: state.wisdom,
-            accent: Color(0xFF4847FB),
-          ),
-          CharacteristicItem(
-            name: "Харизма",
-            bonus: state.charismaBonus,
-            score: state.charisma,
-            accent: Color(0xFFC01DFC),
+          SizedBox(height: 28),
+          Text("Спас броски", style: theme.textTheme.headline2),
+          SizedBox(height: 12),
+          GridView.count(
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 4 / 1,
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            children: [
+              SavingThrowItem(name: "Сила", bonus: 0),
+              SavingThrowItem(name: "Сила", bonus: 0),
+              SavingThrowItem(name: "Сила", bonus: 0),
+              SavingThrowItem(name: "Сила", bonus: 0),
+              SavingThrowItem(name: "Сила", bonus: 0),
+              SavingThrowItem(name: "Сила", bonus: 0),
+            ],
           ),
         ],
       ),
@@ -139,6 +163,34 @@ class CharacteristicItem extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class SavingThrowItem extends StatelessWidget {
+  final String name;
+  final int bonus;
+
+  const SavingThrowItem({Key? key, required this.name, required this.bonus})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Color(0xFF272E32)
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(name),
+          ),
+          Text(
+            bonus >= 0 ? "+$bonus" : bonus.toString()
+          )
+        ],
+      ),
     );
   }
 }
