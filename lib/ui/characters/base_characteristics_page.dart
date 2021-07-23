@@ -1,4 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,12 +65,47 @@ class BaseCharateristicsPage extends StatelessWidget {
             crossAxisCount: 2,
             shrinkWrap: true,
             children: [
-              SavingThrowItem(name: "Сила", bonus: 0),
-              SavingThrowItem(name: "Ловкость", bonus: 0),
-              SavingThrowItem(name: "Телосложение", bonus: 0),
-              SavingThrowItem(name: "Интеллект", bonus: 0),
-              SavingThrowItem(name: "Мудрость", bonus: 0),
-              SavingThrowItem(name: "Харизма", bonus: 0),
+              SavingThrowItem(
+                  name: "Сила",
+                  bonus: state.strengthSavingThrow,
+                  proficient: state.clazz?.savingThrows
+                          .contains(Characteristic.STRENGTH) ??
+                      false),
+              SavingThrowItem(
+                name: "Ловкость",
+                bonus: state.dexteritySavingThrow,
+                proficient: state.clazz?.savingThrows
+                        .contains(Characteristic.DEXTERITY) ??
+                    false,
+              ),
+              SavingThrowItem(
+                name: "Телосложение",
+                bonus: state.constitutionSavingThrow,
+                proficient: state.clazz?.savingThrows
+                        .contains(Characteristic.CONSTITUTION) ??
+                    false,
+              ),
+              SavingThrowItem(
+                name: "Интеллект",
+                bonus: state.intelligenceSavingThrow,
+                proficient: state.clazz?.savingThrows
+                        .contains(Characteristic.INTELLECT) ??
+                    false,
+              ),
+              SavingThrowItem(
+                name: "Мудрость",
+                bonus: state.wisdomSavingThrow,
+                proficient:
+                    state.clazz?.savingThrows.contains(Characteristic.WISDOM) ??
+                        false,
+              ),
+              SavingThrowItem(
+                name: "Харизма",
+                bonus: state.charismaSavingThrow,
+                proficient: state.clazz?.savingThrows
+                        .contains(Characteristic.CHARISMA) ??
+                    false,
+              ),
             ],
           ),
         ],
@@ -170,27 +207,54 @@ class CharacteristicItem extends StatelessWidget {
 class SavingThrowItem extends StatelessWidget {
   final String name;
   final int bonus;
+  final bool proficient;
 
-  const SavingThrowItem({Key? key, required this.name, required this.bonus})
-      : super(key: key);
+  const SavingThrowItem({
+    Key? key,
+    required this.name,
+    required this.bonus,
+    required this.proficient,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Color(0xFF272E32)
-      ),
+      decoration: BoxDecoration(color: Color(0xFF272E32)),
       child: Row(
         children: [
+          ProficiencyRing(filled: proficient),
+          SizedBox(width: 8),
           Expanded(
-            child: Text(name),
+            child: Text(name, style: theme.textTheme.bodyText2,),
           ),
-          Text(
-            bonus >= 0 ? "+$bonus" : bonus.toString()
-          )
+          Text(bonus >= 0 ? "+$bonus" : bonus.toString(), style: theme.textTheme.bodyText2?.copyWith(fontSize: 14))
         ],
       ),
     );
+  }
+}
+
+class ProficiencyRing extends StatelessWidget {
+  final bool filled;
+
+  const ProficiencyRing({Key? key, required this.filled}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final color = Color(0xFFDCDAD9);
+    return DottedBorder(
+        borderType: BorderType.Circle,
+        color: color,
+        child: filled ? Container(
+          width: 14,
+          height: 14,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle, color: color),
+        ) : SizedBox(
+          width: 14,
+          height: 14,
+        ));
   }
 }

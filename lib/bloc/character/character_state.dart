@@ -1,7 +1,6 @@
 part of 'character_bloc.dart';
 
 class CharacterState {
-
   final int level;
   final int strength;
   final int dexterity;
@@ -9,6 +8,9 @@ class CharacterState {
   final int intelligence;
   final int wisdom;
   final int charisma;
+
+  final Race? race;
+  final Class? clazz;
 
   CharacterState({
     this.level = 1,
@@ -18,6 +20,8 @@ class CharacterState {
     this.intelligence = 10,
     this.wisdom = 10,
     this.charisma = 10,
+    this.race,
+    this.clazz,
   });
 
   int get strengthBonus => (strength - 10) ~/ 2;
@@ -26,6 +30,42 @@ class CharacterState {
   int get intelligenceBonus => (intelligence - 10) ~/ 2;
   int get wisdomBonus => (wisdom - 10) ~/ 2;
   int get charismaBonus => (charisma - 10) ~/ 2;
+
+  int get strengthSavingThrow =>
+      strengthBonus +
+      ((clazz?.savingThrows.contains(Characteristic.STRENGTH) ?? false)
+          ? proficiencyBonus
+          : 0);
+
+  int get dexteritySavingThrow =>
+      dexterityBonus +
+      ((clazz?.savingThrows.contains(Characteristic.DEXTERITY) ?? false)
+          ? proficiencyBonus
+          : 0);
+
+  int get constitutionSavingThrow =>
+      constitutionBonus +
+      ((clazz?.savingThrows.contains(Characteristic.CONSTITUTION) ?? false)
+          ? proficiencyBonus
+          : 0);
+
+  int get intelligenceSavingThrow =>
+      intelligenceBonus +
+      ((clazz?.savingThrows.contains(Characteristic.INTELLECT) ?? false)
+          ? proficiencyBonus
+          : 0);
+
+  int get wisdomSavingThrow =>
+      dexterityBonus +
+      ((clazz?.savingThrows.contains(Characteristic.WISDOM) ?? false)
+          ? proficiencyBonus
+          : 0);
+
+  int get charismaSavingThrow =>
+      charismaBonus +
+      ((clazz?.savingThrows.contains(Characteristic.CHARISMA) ?? false)
+          ? proficiencyBonus
+          : 0);
 
   int get initiative => dexterityBonus;
 

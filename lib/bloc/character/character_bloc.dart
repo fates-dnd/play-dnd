@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/bloc/character/proficiency_bonus_table.dart';
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
@@ -29,6 +32,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         intelligence: character.baseIntelligence,
         wisdom: character.baseWisdom,
         charisma: character.baseCharisma,
+        race: character.race,
+        clazz: character.clazz,
       );
     }
   }
