@@ -23,11 +23,11 @@ extension CharacterReader on BinaryReader {
     final result = <AbilityBonus>[];
     for (var i = 0; i < count; ++i) {
       result.add(AbilityBonus(
-        AbilityScore(
-          readString(),
-          readString(),
-        ), readInt()
-      ));
+          AbilityScore(
+            readString(),
+            readString(),
+          ),
+          readInt()));
     }
     return result;
   }
@@ -52,6 +52,12 @@ extension CharacterReader on BinaryReader {
     return Class(
       readString(),
       readString(),
+      readSavingThrows(),
     );
+  }
+
+  List<Characteristic> readSavingThrows() {
+    final size = readInt();
+    return [for (var i = 0; i < size; ++i) Characteristic.values[readInt()]];
   }
 }

@@ -43,5 +43,13 @@ extension CharacterWriter on BinaryWriter {
   writeClass(Class clazz) {
     writeString(clazz.index);
     writeString(clazz.name);
+    writeSavingThrows(clazz.savingThrows);
+  }
+
+  writeSavingThrows(List<Characteristic> savingThrows) {
+    writeInt(savingThrows.length);
+    savingThrows.forEach((element) {
+      writeInt(element.index);
+    });
   }
 }

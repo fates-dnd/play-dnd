@@ -1,17 +1,23 @@
-class Class {
+import 'package:dnd_player_flutter/data/characteristics.dart';
 
+class Class {
   final String index;
   final String name;
+  final List<Characteristic> savingThrows;
 
   String get imageAsset => _indexToImageAsset();
 
-  Class(this.index, this.name);
+  Class(
+    this.index,
+    this.name,
+    this.savingThrows,
+  );
 }
 
 extension OnClass on Class {
   String _indexToImageAsset() {
     switch (index) {
-      case "barbarian": 
+      case "barbarian":
         return "assets/icons/barbarian.png";
       case "bard":
         return "assets/icons/bard.png";
@@ -35,7 +41,8 @@ extension OnClass on Class {
         return "assets/icons/warlock.png";
       case "wizard":
         return "assets/icons/wizard.png";
-      default: return "";
+      default:
+        return "";
     }
   }
 }

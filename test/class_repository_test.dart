@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
@@ -16,6 +17,9 @@ void main() {
     expect(classes.length, 1);
     expect(classes[0].index, "bard");
     expect(classes[0].name, "Бард");
+    expect(classes[0].savingThrows.length, 2);
+    expect(classes[0].savingThrows[0], Characteristic.DEXTERITY);
+    expect(classes[0].savingThrows[1], Characteristic.CHARISMA);
   });
 }
 
