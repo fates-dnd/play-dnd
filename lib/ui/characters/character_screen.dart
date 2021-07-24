@@ -1,5 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +16,9 @@ class CharacterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CharacterBloc()..add(SetCharacter(character)),
+      create: (context) => CharacterBloc(
+        getIt<SkillsRepository>(),
+      )..add(SetCharacter(character)),
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,
         child: Scaffold(
@@ -154,7 +158,9 @@ class InitiativeIcon extends StatelessWidget {
             SizedBox(width: 8),
             BlocBuilder<CharacterBloc, CharacterState>(
               builder: (context, state) => Text(
-                state.initiative >= 0 ? "+${state.initiative}" : state.initiative.toString(),
+                state.initiative >= 0
+                    ? "+${state.initiative}"
+                    : state.initiative.toString(),
                 style: TextStyle(
                   fontSize: 18,
                   color: Color(0xFFDCDAD9),
@@ -184,7 +190,6 @@ class RestIcon extends StatelessWidget {
 }
 
 class ProficiencyBonusInfo extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(

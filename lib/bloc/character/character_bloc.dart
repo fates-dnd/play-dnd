@@ -6,6 +6,7 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
@@ -13,9 +14,11 @@ part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
+  final SkillsRepository skillsRepository;
+
   late Character character;
 
-  CharacterBloc() : super(CharacterState());
+  CharacterBloc(this.skillsRepository) : super(CharacterState());
 
   @override
   Stream<CharacterState> mapEventToState(
