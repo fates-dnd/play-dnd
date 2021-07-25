@@ -59,6 +59,7 @@ flutter:
     - assets/races.json
     - assets/traits.json
     - assets/classes.json
+    - assets/skills.json
 
     # background
     - assets/background.png

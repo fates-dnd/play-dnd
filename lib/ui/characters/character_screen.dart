@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class CharacterScreen extends StatelessWidget {
                           child: PagerWithIndicators(
                         children: [
                           BaseCharateristicsPage(),
-                          SizedBox(),
+                          AbilitiesPage(),
                           SizedBox()
                         ],
                       )),

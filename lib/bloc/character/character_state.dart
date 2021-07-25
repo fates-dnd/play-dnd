@@ -12,6 +12,8 @@ class CharacterState {
   final Race? race;
   final Class? clazz;
 
+  final List<Skill>? skills;
+
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -22,6 +24,7 @@ class CharacterState {
     this.charisma = 10,
     this.race,
     this.clazz,
+    this.skills,
   });
 
   int get strengthBonus => (strength - 10) ~/ 2;
@@ -70,4 +73,12 @@ class CharacterState {
   int get initiative => dexterityBonus;
 
   int get proficiencyBonus => calculateProficiencyBonus(level);
+
+  List<SkillBonus> get skillBonuses => skills
+      ?.map((skill) => SkillBonus(
+            skill,
+            1,
+            true,
+          ))
+      .toList() ?? [];
 }
