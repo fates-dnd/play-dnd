@@ -77,8 +77,25 @@ class CharacterState {
   List<SkillBonus> get skillBonuses => skills
       ?.map((skill) => SkillBonus(
             skill,
-            1,
-            true,
+            getSkillBonus(skill),
+            false,
           ))
       .toList() ?? [];
+
+  int getSkillBonus(Skill skill) {
+    switch (skill.characteristic) {
+      case Characteristic.STRENGTH:
+        return strengthBonus;
+      case Characteristic.DEXTERITY:
+        return dexterityBonus;
+      case Characteristic.CONSTITUTION:
+        return constitutionBonus;
+      case Characteristic.INTELLECT:
+        return intelligenceBonus;
+      case Characteristic.WISDOM:
+        return wisdomBonus;
+      case Characteristic.CHARISMA:
+        return charismaBonus;
+    }
+  }
 }
