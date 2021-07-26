@@ -4,6 +4,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'characteristics_colors_map.dart';
+
 class BaseCharateristicsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -21,37 +23,37 @@ class BaseCharateristicsPage extends StatelessWidget {
                 name: "Сила",
                 bonus: state.strengthBonus,
                 score: state.strength,
-                accent: Color(0xFFFF5251),
+                accent: characteristicToColor[Characteristic.STRENGTH],
               ),
               CharacteristicItem(
                 name: "Ловкость",
                 bonus: state.dexterityBonus,
                 score: state.dexterity,
-                accent: Color(0xFF3AFFBD),
+                accent: characteristicToColor[Characteristic.DEXTERITY],
               ),
               CharacteristicItem(
                 name: "Телосложение",
                 bonus: state.constitutionBonus,
                 score: state.constitution,
-                accent: Color(0xFFFB9538),
+                accent: characteristicToColor[Characteristic.CONSTITUTION],
               ),
               CharacteristicItem(
                 name: "Интеллект",
                 bonus: state.intelligenceBonus,
                 score: state.intelligence,
-                accent: Color(0xFFE5E1DE),
+                accent: characteristicToColor[Characteristic.INTELLECT],
               ),
               CharacteristicItem(
                 name: "Мудрость",
                 bonus: state.wisdomBonus,
                 score: state.wisdom,
-                accent: Color(0xFF4847FB),
+                accent: characteristicToColor[Characteristic.WISDOM],
               ),
               CharacteristicItem(
                 name: "Харизма",
                 bonus: state.charismaBonus,
                 score: state.charisma,
-                accent: Color(0xFFC01DFC),
+                accent: characteristicToColor[Characteristic.CHARISMA],
               ),
             ],
           ),
@@ -118,7 +120,7 @@ class CharacteristicItem extends StatelessWidget {
   final String name;
   final int bonus;
   final int score;
-  final Color accent;
+  final Color? accent;
 
   const CharacteristicItem({
     Key? key,
