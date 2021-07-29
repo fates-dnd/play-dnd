@@ -74,6 +74,13 @@ flutter:
     # dice
     - assets/dice/d20.png
 
+    # money
+    - assets/money/platinum.png
+    - assets/money/gold.png
+    - assets/money/electrum.png
+    - assets/money/silver.png
+    - assets/money/bronze.png
+
     # class icons
     - assets/icons/fighter.png
     - assets/icons/barbarian.png
