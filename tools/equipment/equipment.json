@@ -1,0 +1,3696 @@
+[
+    {
+        "index": "club",
+        "name": "Дубинка",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "url": "/api/equipment/club"
+    },
+    {
+        "index": "dagger",
+        "name": "Кинжал",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 1,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            },
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "url": "/api/equipment/dagger"
+    },
+    {
+        "index": "greatclub",
+        "name": "Палица",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 10,
+        "properties": [
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/greatclub"
+    },
+    {
+        "index": "handaxe",
+        "name": "Ручной топор",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "url": "/api/equipment/handaxe"
+    },
+    {
+        "index": "javelin",
+        "name": "Метательное копьё",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "throw_range": {
+            "normal": 30,
+            "long": 120
+        },
+        "url": "/api/equipment/javelin"
+    },
+    {
+        "index": "light-hammer",
+        "name": "Лёгкий молот",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "url": "/api/equipment/light-hammer"
+    },
+    {
+        "index": "mace",
+        "name": "Булава",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 4,
+        "properties": [
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "url": "/api/equipment/mace"
+    },
+    {
+        "index": "quarterstaff",
+        "name": "Боевой посох",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 4,
+        "properties": [
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "two_handed_damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "url": "/api/equipment/quarterstaff"
+    },
+    {
+        "index": "sickle",
+        "name": "Серп",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "url": "/api/equipment/sickle"
+    },
+    {
+        "index": "spear",
+        "name": "Копьё",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Melee",
+        "category_range": "Simple Melee",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "two_handed_damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "url": "/api/equipment/spear"
+    },
+    {
+        "index": "crossbow-light",
+        "name": "Арбалет, легкий",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Ranged",
+        "category_range": "Simple Ranged",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 80,
+            "long": 320
+        },
+        "weight": 5,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "loading",
+                "name": "Loading",
+                "url": "/api/weapon-properties/loading"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/crossbow-light"
+    },
+    {
+        "index": "dart",
+        "name": "Дротик",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Ranged",
+        "category_range": "Simple Ranged",
+        "cost": {
+            "quantity": 5,
+            "unit": "cp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 20,
+            "long": 60
+        },
+        "weight": 0.25,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            },
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "url": "/api/equipment/dart"
+    },
+    {
+        "index": "shortbow",
+        "name": "Короткий лук",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Ranged",
+        "category_range": "Simple Ranged",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 80,
+            "long": 320
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/shortbow"
+    },
+    {
+        "index": "sling",
+        "name": "Праща",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Simple",
+        "weapon_range": "Ranged",
+        "category_range": "Simple Ranged",
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 30,
+            "long": 120
+        },
+        "weight": 0,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            }
+        ],
+        "url": "/api/equipment/sling"
+    },
+    {
+        "index": "battleaxe",
+        "name": "Боевой топор",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 4,
+        "properties": [
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            }
+        ],
+        "two_handed_damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "url": "/api/equipment/battleaxe"
+    },
+    {
+        "index": "flail",
+        "name": "Цеп",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [],
+        "url": "/api/equipment/flail"
+    },
+    {
+        "index": "glaive",
+        "name": "Глефа",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 20,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 6,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "reach",
+                "name": "Reach",
+                "url": "/api/weapon-properties/reach"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/glaive"
+    },
+    {
+        "index": "greataxe",
+        "name": "Секира",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 30,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d12",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 7,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/greataxe"
+    },
+    {
+        "index": "greatsword",
+        "name": "Двуручный меч",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "2d6",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 6,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/greatsword"
+    },
+    {
+        "index": "halberd",
+        "name": "Алебарда",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 20,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 6,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "reach",
+                "name": "Reach",
+                "url": "/api/weapon-properties/reach"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/halberd"
+    },
+    {
+        "index": "lance",
+        "name": "Длинное копьё",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d12",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 6,
+        "properties": [
+            {
+                "index": "reach",
+                "name": "Reach",
+                "url": "/api/weapon-properties/reach"
+            },
+            {
+                "index": "special",
+                "name": "Special",
+                "url": "/api/weapon-properties/special"
+            }
+        ],
+        "special": [
+            "You have disadvantage when you use a lance to attack a target within 5 feet of you. Also, a lance requires two hands to wield when you aren't mounted."
+        ],
+        "url": "/api/equipment/lance"
+    },
+    {
+        "index": "longsword",
+        "name": "Длинный меч",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            }
+        ],
+        "two_handed_damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "url": "/api/equipment/longsword"
+    },
+    {
+        "index": "maul",
+        "name": "Молот",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "2d6",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 10,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/maul"
+    },
+    {
+        "index": "morningstar",
+        "name": "Моргенштерн",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 4,
+        "properties": [],
+        "url": "/api/equipment/morningstar"
+    },
+    {
+        "index": "pike",
+        "name": "Пика",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 18,
+        "properties": [
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "reach",
+                "name": "Reach",
+                "url": "/api/weapon-properties/reach"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/pike"
+    },
+    {
+        "index": "rapier",
+        "name": "Рапира",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            }
+        ],
+        "url": "/api/equipment/rapier"
+    },
+    {
+        "index": "scimitar",
+        "name": "Скимитар",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            },
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            }
+        ],
+        "url": "/api/equipment/scimitar"
+    },
+    {
+        "index": "shortsword",
+        "name": "Короткий меч",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            },
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "monk",
+                "name": "Monk",
+                "url": "/api/weapon-properties/monk"
+            }
+        ],
+        "url": "/api/equipment/shortsword"
+    },
+    {
+        "index": "trident",
+        "name": "Трезубец",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 4,
+        "properties": [
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            }
+        ],
+        "throw_range": {
+            "normal": 20,
+            "long": 60
+        },
+        "two_handed_damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "url": "/api/equipment/trident"
+    },
+    {
+        "index": "war-pick",
+        "name": "Боевая кирка",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [],
+        "url": "/api/equipment/war-pick"
+    },
+    {
+        "index": "warhammer",
+        "name": "Боевой молот",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "versatile",
+                "name": "Versatile",
+                "url": "/api/weapon-properties/versatile"
+            }
+        ],
+        "two_handed_damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "bludgeoning",
+                "name": "Bludgeoning",
+                "url": "/api/damage-types/bludgeoning"
+            }
+        },
+        "url": "/api/equipment/warhammer"
+    },
+    {
+        "index": "whip",
+        "name": "Кнут",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Melee",
+        "category_range": "Martial Melee",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d4",
+            "damage_type": {
+                "index": "slashing",
+                "name": "Slashing",
+                "url": "/api/damage-types/slashing"
+            }
+        },
+        "range": {
+            "normal": 5,
+            "long": null
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "finesse",
+                "name": "Finesse",
+                "url": "/api/weapon-properties/finesse"
+            },
+            {
+                "index": "reach",
+                "name": "Reach",
+                "url": "/api/weapon-properties/reach"
+            }
+        ],
+        "url": "/api/equipment/whip"
+    },
+    {
+        "index": "blowgun",
+        "name": "Духовая трубка",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Ranged",
+        "category_range": "Martial Ranged",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d1",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 25,
+            "long": 100
+        },
+        "weight": 1,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "loading",
+                "name": "Loading",
+                "url": "/api/weapon-properties/loading"
+            }
+        ],
+        "url": "/api/equipment/blowgun"
+    },
+    {
+        "index": "crossbow-hand",
+        "name": "Арбалет, ручной",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Ranged",
+        "category_range": "Martial Ranged",
+        "cost": {
+            "quantity": 75,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d6",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 30,
+            "long": 120
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "loading",
+                "name": "Loading",
+                "url": "/api/weapon-properties/loading"
+            }
+        ],
+        "url": "/api/equipment/crossbow-hand"
+    },
+    {
+        "index": "crossbow-heavy",
+        "name": "Арбалет, тяжёлый",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Ranged",
+        "category_range": "Martial Ranged",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d10",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 100,
+            "long": 400
+        },
+        "weight": 18,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "light",
+                "name": "Light",
+                "url": "/api/weapon-properties/light"
+            },
+            {
+                "index": "loading",
+                "name": "Loading",
+                "url": "/api/weapon-properties/loading"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/crossbow-heavy"
+    },
+    {
+        "index": "longbow",
+        "name": "Длинный лук",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Ranged",
+        "category_range": "Martial Ranged",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "damage": {
+            "damage_dice": "1d8",
+            "damage_type": {
+                "index": "piercing",
+                "name": "Piercing",
+                "url": "/api/damage-types/piercing"
+            }
+        },
+        "range": {
+            "normal": 150,
+            "long": 600
+        },
+        "weight": 2,
+        "properties": [
+            {
+                "index": "ammunition",
+                "name": "Ammunition",
+                "url": "/api/weapon-properties/ammunition"
+            },
+            {
+                "index": "heavy",
+                "name": "Heavy",
+                "url": "/api/weapon-properties/heavy"
+            },
+            {
+                "index": "two-handed",
+                "name": "Two-Handed",
+                "url": "/api/weapon-properties/two-handed"
+            }
+        ],
+        "url": "/api/equipment/longbow"
+    },
+    {
+        "index": "net",
+        "name": "Сеть",
+        "equipment_category": {
+            "index": "weapon",
+            "name": "Weapon",
+            "url": "/api/equipment-categories/weapon"
+        },
+        "weapon_category": "Martial",
+        "weapon_range": "Ranged",
+        "category_range": "Martial Ranged",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "range": {
+            "normal": 5,
+            "long": 15
+        },
+        "weight": 3,
+        "properties": [
+            {
+                "index": "thrown",
+                "name": "Thrown",
+                "url": "/api/weapon-properties/thrown"
+            },
+            {
+                "index": "special",
+                "name": "Special",
+                "url": "/api/weapon-properties/special"
+            }
+        ],
+        "special": [
+            "A Large or smaller creature hit by a net is restrained until it is freed. A net has no effect on creatures that are formless, or creatures that are Huge or larger. A creature can use its action to make a DC 10 Strength check, freeing itself or another creature within its reach on a success. Dealing 5 slashing damage to the net (AC 10) also frees the creature without harming it, ending the effect and destroying the net. When you use an action, bonus action, or reaction to attack with a net, you can make only one attack regardless of the number of attacks you can normally make."
+        ],
+        "throw_range": {
+            "normal": 5,
+            "long": 15
+        },
+        "url": "/api/equipment/net"
+    },
+    {
+        "index": "padded",
+        "name": "Стеганная броня",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Light",
+        "armor_class": {
+            "base": 11,
+            "dex_bonus": true,
+            "max_bonus": null
+        },
+        "str_minimum": 0,
+        "stealth_disadvantage": true,
+        "weight": 8,
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/padded"
+    },
+    {
+        "index": "leather",
+        "name": "Кожанная броня",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Light",
+        "armor_class": {
+            "base": 11,
+            "dex_bonus": true,
+            "max_bonus": null
+        },
+        "str_minimum": 0,
+        "stealth_disadvantage": false,
+        "weight": 10,
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/leather"
+    },
+    {
+        "index": "hide",
+        "name": "Броня из шкур",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Medium",
+        "armor_class": {
+            "base": 12,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "str_minimum": 0,
+        "stealth_disadvantage": false,
+        "weight": 12,
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/hide"
+    },
+    {
+        "index": "breastplate",
+        "name": "Кираса",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Medium",
+        "armor_class": {
+            "base": 14,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "str_minimum": 0,
+        "stealth_disadvantage": false,
+        "weight": 20,
+        "cost": {
+            "quantity": 400,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/breastplate"
+    },
+    {
+        "index": "splint",
+        "name": "Наборная броня",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Heavy",
+        "armor_class": {
+            "base": 17,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 15,
+        "stealth_disadvantage": true,
+        "weight": 60,
+        "cost": {
+            "quantity": 200,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/splint"
+    },
+    {
+        "index": "plate",
+        "name": "Латы",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Heavy",
+        "armor_class": {
+            "base": 18,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 15,
+        "stealth_disadvantage": true,
+        "weight": 65,
+        "cost": {
+            "quantity": 1500,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/plate"
+    },
+    {
+        "index": "shield",
+        "name": "Щит",
+        "equipment_category": {
+            "index": "armor",
+            "name": "Armor",
+            "url": "/api/equipment-categories/armor"
+        },
+        "armor_category": "Shield",
+        "armor_class": {
+            "base": 2,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 0,
+        "stealth_disadvantage": false,
+        "weight": 6,
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "url": "/api/equipment/shield"
+    },
+    {
+        "index": "abacus",
+        "name": "Счеты",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "url": "/api/equipment/abacus"
+    },
+    {
+        "index": "acid-vial",
+        "name": "Кислота (Флакон)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon.",
+            "On a hit, the target takes 2d6 acid damage."
+        ],
+        "url": "/api/equipment/acid-vial"
+    },
+    {
+        "index": "alchemists-fire-flask",
+        "name": "Алхимический огонь (фляжка)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "desc": [
+            "This sticky, adhesive fluid ignites when exposed to air.",
+            "As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon.",
+            "On a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames."
+        ],
+        "weight": 1,
+        "url": "/api/equipment/alchemists-fire-flask"
+    },
+    {
+        "index": "amulet",
+        "name": "Амулет",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "holy-symbols",
+            "name": "Holy Symbols",
+            "url": "/api/equipment-categories/holy-symbols"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.",
+            "Appendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield."
+        ],
+        "url": "/api/equipment/amulet"
+    },
+    {
+        "index": "antitoxin-vial",
+        "name": "Противоядие (флакон)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefit to undead or constructs."
+        ],
+        "url": "/api/equipment/antitoxin-vial"
+    },
+    {
+        "index": "crystal",
+        "name": "Кристалл",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "arcane-foci",
+            "name": "Arcane Foci",
+            "url": "/api/equipment-categories/arcane-foci"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+        ],
+        "url": "/api/equipment/crystal"
+    },
+    {
+        "index": "orb",
+        "name": "Сфера",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "arcane-foci",
+            "name": "Arcane Foci",
+            "url": "/api/equipment-categories/arcane-foci"
+        },
+        "cost": {
+            "quantity": 20,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "desc": [
+            "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+        ],
+        "url": "/api/equipment/orb"
+    },
+    {
+        "index": "rod",
+        "name": "Жезл",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "arcane-foci",
+            "name": "Arcane Foci",
+            "url": "/api/equipment-categories/arcane-foci"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "desc": [
+            "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+        ],
+        "url": "/api/equipment/rod"
+    },
+    {
+        "index": "staff",
+        "name": "Посох",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "arcane-foci",
+            "name": "Arcane Foci",
+            "url": "/api/equipment-categories/arcane-foci"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "desc": [
+            "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+        ],
+        "url": "/api/equipment/staff"
+    },
+    {
+        "index": "wand",
+        "name": "Волшебная палочка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "arcane-foci",
+            "name": "Arcane Foci",
+            "url": "/api/equipment-categories/arcane-foci"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "An arcane focus is a special item--an orb, a crystal, a rod, a specially constructed staff, a wand-like length of wood, or some similar item--designed to channel the power of arcane spells. A sorcerer, warlock, or wizard can use such an item as a spellcasting focus."
+        ],
+        "url": "/api/equipment/wand"
+    },
+    {
+        "index": "backpack",
+        "name": "Рюкзак",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "url": "/api/equipment/backpack"
+    },
+    {
+        "index": "basket",
+        "name": "Корзина",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 4,
+            "unit": "sp"
+        },
+        "weight": 2,
+        "url": "/api/equipment/basket"
+    },
+    {
+        "index": "bedroll",
+        "name": "Спальник",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 7,
+        "url": "/api/equipment/bedroll"
+    },
+    {
+        "index": "bell",
+        "name": "Колокольчик",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/bell"
+    },
+    {
+        "index": "blanket",
+        "name": "Одеяло",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 3,
+        "url": "/api/equipment/blanket"
+    },
+    {
+        "index": "block-and-tackle",
+        "name": "Блок и лебедка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "desc": [
+            "A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift."
+        ],
+        "url": "/api/equipment/block-and-tackle"
+    },
+    {
+        "index": "book",
+        "name": "Книга",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "desc": [
+            "A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented using text or pictures. A book of spells is a spellbook (described later in this section)."
+        ],
+        "url": "/api/equipment/book"
+    },
+    {
+        "index": "bottle-glass",
+        "name": "Бутылка, стеклянная",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "url": "/api/equipment/bottle-glass"
+    },
+    {
+        "index": "bucket",
+        "name": "Ведро",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "cp"
+        },
+        "weight": 2,
+        "url": "/api/equipment/bucket"
+    },
+    {
+        "index": "candle",
+        "name": "Свеча",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 0,
+        "desc": [
+            "For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for an additional 5 feet."
+        ],
+        "url": "/api/equipment/candle"
+    },
+    {
+        "index": "case-crossbow-bolt",
+        "name": "Футляр для болтов",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "This wooden case can hold up to twenty crossbow bolts."
+        ],
+        "url": "/api/equipment/case-crossbow-bolt"
+    },
+    {
+        "index": "case-map-or-scroll",
+        "name": "Футляр для документов",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "This cylindrical leather case can hold up to ten rolled-up sheets of paper or five rolled-up sheets of parchment."
+        ],
+        "url": "/api/equipment/case-map-or-scroll"
+    },
+    {
+        "index": "chain-10-feet",
+        "name": "Цепь (10 футов)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "desc": [
+            "A chain has 10 hit points. It can be burst with a successful DC 20 Strength check."
+        ],
+        "url": "/api/equipment/chain-10-feet"
+    },
+    {
+        "index": "chalk-1-piece",
+        "name": "Мел (1 кусок)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/chalk-1-piece"
+    },
+    {
+        "index": "chest",
+        "name": "Сундук",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 25,
+        "url": "/api/equipment/chest"
+    },
+    {
+        "index": "clothes-common",
+        "name": "Одежда, обычная",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 3,
+        "url": "/api/equipment/clothes-common"
+    },
+    {
+        "index": "clothes-costume",
+        "name": "Одежда, костюм",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "url": "/api/equipment/clothes-costume"
+    },
+    {
+        "index": "clothes-fine",
+        "name": "Одежда, отличная",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "url": "/api/equipment/clothes-fine"
+    },
+    {
+        "index": "clothes-travelers",
+        "name": "Одежда, дорожная",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "url": "/api/equipment/clothes-travelers"
+    },
+    {
+        "index": "component-pouch",
+        "name": "Мешочек с компонентами",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "desc": [
+            " A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description)."
+        ],
+        "url": "/api/equipment/component-pouch"
+    },
+    {
+        "index": "crowbar",
+        "name": "Ломик",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "desc": [
+            "Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied."
+        ],
+        "url": "/api/equipment/crowbar"
+    },
+    {
+        "index": "sprig-of-mistletoe",
+        "name": "Веточка омелы",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "druidic-foci",
+            "name": "Druidic Foci",
+            "url": "/api/equipment-categories/druidic-foci"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus."
+        ],
+        "url": "/api/equipment/sprig-of-mistletoe"
+    },
+    {
+        "index": "totem",
+        "name": "Тотем",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "druidic-foci",
+            "name": "Druidic Foci",
+            "url": "/api/equipment-categories/druidic-foci"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus."
+        ],
+        "url": "/api/equipment/totem"
+    },
+    {
+        "index": "wooden-staff",
+        "name": "Деревянный посох",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "druidic-foci",
+            "name": "Druidic Foci",
+            "url": "/api/equipment-categories/druidic-foci"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "desc": [
+            "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus."
+        ],
+        "url": "/api/equipment/wooden-staff"
+    },
+    {
+        "index": "yew-wand",
+        "name": "Тисовая палочка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "druidic-foci",
+            "name": "Druidic Foci",
+            "url": "/api/equipment-categories/druidic-foci"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "A druidic focus might be a sprig of mistletoe or holly, a wand or scepter made of yew or another special wood, a staff drawn whole out of a living tree, or a totem object incorporating feathers, fur, bones, and teeth from sacred animals. A druid can use such an object as a spellcasting focus."
+        ],
+        "url": "/api/equipment/yew-wand"
+    },
+    {
+        "index": "emblem",
+        "name": "Эмблема",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "holy-symbols",
+            "name": "Holy Symbols",
+            "url": "/api/equipment-categories/holy-symbols"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.",
+            "Appendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield."
+        ],
+        "url": "/api/equipment/emblem"
+    },
+    {
+        "index": "fishing-tackle",
+        "name": "Комплект для рыбалки",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "desc": [
+            "This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting."
+        ],
+        "url": "/api/equipment/fishing-tackle"
+    },
+    {
+        "index": "flask-or-tankard",
+        "name": "Фляга или большая кружка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "cp"
+        },
+        "weight": 1,
+        "url": "/api/equipment/flask-or-tankard"
+    },
+    {
+        "index": "grappling-hook",
+        "name": "Крюк-кошка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "url": "/api/equipment/grappling-hook"
+    },
+    {
+        "index": "hammer",
+        "name": "Молоток",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "url": "/api/equipment/hammer"
+    },
+    {
+        "index": "hammer-sledge",
+        "name": "Молот кузнечный",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "url": "/api/equipment/hammer-sledge"
+    },
+    {
+        "index": "holy-water-flask",
+        "name": "Святая вода (фляга)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon.",
+            "If the target is a fiend or undead, it takes 2d6 radiant damage.",
+            "A cleric or paladin may create holy water by performing a special ritual.",
+            "The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot."
+        ],
+        "url": "/api/equipment/holy-water-flask"
+    },
+    {
+        "index": "hourglass",
+        "name": "Песочные часы",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "url": "/api/equipment/hourglass"
+    },
+    {
+        "index": "hunting-trap",
+        "name": "Охотничий капкан",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "desc": [
+            "When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground.",
+            "A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet long).",
+            "A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature."
+        ],
+        "weight": 25,
+        "url": "/api/equipment/hunting-trap"
+    },
+    {
+        "index": "ink-1-ounce-bottle",
+        "name": "Чернила (бутылочка 30 грамм)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/ink-1-ounce-bottle"
+    },
+    {
+        "index": "ink-pen",
+        "name": "Писчее перо",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "cp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/ink-pen"
+    },
+    {
+        "index": "jug-or-pitcher",
+        "name": "Кувшин или графин",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "cp"
+        },
+        "weight": 4,
+        "url": "/api/equipment/jug-or-pitcher"
+    },
+    {
+        "index": "ladder-10-foot",
+        "name": "Лестница (10 футов)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "weight": 25,
+        "url": "/api/equipment/ladder-10-foot"
+    },
+    {
+        "index": "lamp",
+        "name": "Лампа",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 1,
+        "desc": [
+            "A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."
+        ],
+        "url": "/api/equipment/lamp"
+    },
+    {
+        "index": "lantern-bullseye",
+        "name": "Фонарь, направленный",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "desc": [
+            "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil."
+        ],
+        "url": "/api/equipment/lantern-bullseye"
+    },
+    {
+        "index": "lantern-hooded",
+        "name": "Фонарь, закрытый",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "desc": [
+            "A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius."
+        ],
+        "url": "/api/equipment/lantern-hooded"
+    },
+    {
+        "index": "lock",
+        "name": "Замóк",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your GM may decide that better locks are available for higher prices."
+        ],
+        "url": "/api/equipment/lock"
+    },
+    {
+        "index": "magnifying-glass",
+        "name": "Увеличительное стекло",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 100,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "This lens allows a closer look at small objects. It is also useful as a substitute for flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite.",
+            "A magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed."
+        ],
+        "url": "/api/equipment/magnifying-glass"
+    },
+    {
+        "index": "manacles",
+        "name": "Кандалы",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "desc": [
+            "These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check.",
+            "Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points."
+        ],
+        "url": "/api/equipment/manacles"
+    },
+    {
+        "index": "mirror-steel",
+        "name": "Зеркало, стальное",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 0.5,
+        "url": "/api/equipment/mirror-steel"
+    },
+    {
+        "index": "oil-flask",
+        "name": "Масло (фляга)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "weight": 1,
+        "desc": [
+            "Oil usually comes in a clay flask that holds 1 pint.",
+            "As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon.",
+            "On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil.",
+            "You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level.",
+            "If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn."
+        ],
+        "url": "/api/equipment/oil-flask"
+    },
+    {
+        "index": "paper-one-sheet",
+        "name": "Бумага (1 лист)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/paper-one-sheet"
+    },
+    {
+        "index": "parchment-one-sheet",
+        "name": "Пергамент (1 лист)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/parchment-one-sheet"
+    },
+    {
+        "index": "perfume-vial",
+        "name": "Духи́ (флакон)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/perfume-vial"
+    },
+    {
+        "index": "piton",
+        "name": "Шлямбур",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "cp"
+        },
+        "weight": 0.25,
+        "url": "/api/equipment/piton"
+    },
+    {
+        "index": "poison-basic-vial",
+        "name": "Яд, простой (флакон)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 100,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "desc": [
+            "You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying."
+        ],
+        "url": "/api/equipment/poison-basic-vial"
+    },
+    {
+        "index": "pole-10-foot",
+        "name": "Шест (10 футов)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "cp"
+        },
+        "weight": 7,
+        "url": "/api/equipment/pole-10-foot"
+    },
+    {
+        "index": "pot-iron",
+        "name": "Горшок, железный",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "url": "/api/equipment/pot-iron"
+    },
+    {
+        "index": "potion-of-healing",
+        "name": "Зелье лечения",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 0.5,
+        "desc": [
+            "A character who drinks the magical red fluid in this vial regains 2d4 + 2 hit points. Drinking or administering a potion takes an action."
+        ],
+        "url": "/api/equipment/potion-of-healing"
+    },
+    {
+        "index": "pouch",
+        "name": "Кошель",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 1,
+        "desc": [
+            "A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch (described earlier in this section)."
+        ],
+        "url": "/api/equipment/pouch"
+    },
+    {
+        "index": "quiver",
+        "name": "Колчан",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "A quiver can hold up to 20 arrows."
+        ],
+        "url": "/api/equipment/quiver"
+    },
+    {
+        "index": "ram-portable",
+        "name": "Таран, переносной",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 4,
+            "unit": "gp"
+        },
+        "weight": 35,
+        "desc": [
+            "You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check."
+        ],
+        "url": "/api/equipment/ram-portable"
+    },
+    {
+        "index": "rations-1-day",
+        "name": "Рационы (1 день)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 2,
+        "desc": [
+            "Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts."
+        ],
+        "url": "/api/equipment/rations-1-day"
+    },
+    {
+        "index": "reliquary",
+        "name": "Реликварий",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "holy-symbols",
+            "name": "Holy Symbols",
+            "url": "/api/equipment-categories/holy-symbols"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "desc": [
+            "A holy symbol is a representation of a god or pantheon. It might be an amulet depicting a symbol representing a deity, the same symbol carefully engraved or inlaid as an emblem on a shield, or a tiny box holding a fragment of a sacred relic.",
+            "Appendix B lists the symbols commonly associated with many gods in the multiverse. A cleric or paladin can use a holy symbol as a spellcasting focus. To use the symbol in this way, the caster must hold it in hand, wear it visibly, or bear it on a shield."
+        ],
+        "url": "/api/equipment/reliquary"
+    },
+    {
+        "index": "robes",
+        "name": "Ряса",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "url": "/api/equipment/robes"
+    },
+    {
+        "index": "rope-hempen-50-feet",
+        "name": "Верёвка пеньковая (50 футов)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "desc": [
+            "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."
+        ],
+        "url": "/api/equipment/rope-hempen-50-feet"
+    },
+    {
+        "index": "rope-silk-50-feet",
+        "name": "Верёвка, шёлковая (50 футов)",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "desc": [
+            "Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check."
+        ],
+        "url": "/api/equipment/rope-silk-50-feet"
+    },
+    {
+        "index": "sack",
+        "name": "Мешок",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 0.5,
+        "url": "/api/equipment/sack"
+    },
+    {
+        "index": "scale-merchants",
+        "name": "Весы, торговые",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "desc": [
+            "A scale includes a small balance, pans, and a suitable assortment of weights up to 2 pounds. With it, you can measure the exact weight of small objects, such as raw precious metals or trade goods, to help determine their worth."
+        ],
+        "url": "/api/equipment/scale-merchants"
+    },
+    {
+        "index": "sealing-wax",
+        "name": "Сургуч",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/sealing-wax"
+    },
+    {
+        "index": "shovel",
+        "name": "Лопата",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "url": "/api/equipment/shovel"
+    },
+    {
+        "index": "signal-whistle",
+        "name": "Сигнальный свисток",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "cp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/signal-whistle"
+    },
+    {
+        "index": "signet-ring",
+        "name": "Кольцо-печатка",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/signet-ring"
+    },
+    {
+        "index": "soap",
+        "name": "Мыло",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "cp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/soap"
+    },
+    {
+        "index": "spellbook",
+        "name": "Книга заклинаний",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "desc": [
+            "Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells."
+        ],
+        "url": "/api/equipment/spellbook"
+    },
+    {
+        "index": "spyglass",
+        "name": "Подзорная труба",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1000,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "desc": [
+            "Objects viewed through a spyglass are magnified to twice their size."
+        ],
+        "url": "/api/equipment/spyglass"
+    },
+    {
+        "index": "tent-two-person",
+        "name": "Палатка, двуместная",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 20,
+        "desc": [
+            "A simple and portable canvas shelter, a tent sleeps two."
+        ],
+        "url": "/api/equipment/tent-two-person"
+    },
+    {
+        "index": "tinderbox",
+        "name": "Трутница",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 1,
+        "desc": [
+            "This small container holds flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch--or anything else with abundant, exposed fuel--takes an action.",
+            "Lighting any other fire takes 1 minute."
+        ],
+        "url": "/api/equipment/tinderbox"
+    },
+    {
+        "index": "torch",
+        "name": "Факел",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 1,
+        "desc": [
+            "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage."
+        ],
+        "url": "/api/equipment/torch"
+    },
+    {
+        "index": "vial",
+        "name": "Флакон",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 0,
+        "url": "/api/equipment/vial"
+    },
+    {
+        "index": "waterskin",
+        "name": "Бурдюк",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "weight": 5,
+        "url": "/api/equipment/waterskin"
+    },
+    {
+        "index": "whetstone",
+        "name": "Точильный камень",
+        "equipment_category": {
+            "index": "adventuring-gear",
+            "name": "Adventuring Gear",
+            "url": "/api/equipment-categories/adventuring-gear"
+        },
+        "gear_category": {
+            "index": "standard-gear",
+            "name": "Standard Gear",
+            "url": "/api/equipment-categories/standard-gear"
+        },
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 1,
+        "url": "/api/equipment/whetstone"
+    }
+]
