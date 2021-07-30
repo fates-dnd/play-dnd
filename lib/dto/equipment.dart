@@ -2,33 +2,42 @@ class Equipment {
   final String index;
   final String name;
   final EquipmentCategory equipmentCategory;
+  final int weight;
+  final Cost cost;
   final String? weaponCategory;
   final String? weaponRange;
   final String? categoryRange;
+  final Damage? damage;
   final String? armorCategory;
   final ArmorClass? armorClass;
   final int? strMinimum;
   final bool? stealthDisadvantage;
-  final int weight;
-  final Cost cost;
-  final GearCategory gearCategory;
-  final List<String> desc;
+  final GearCategory? gearCategory;
+  final List<String>? desc;
+  final Range? range;
+  final List<Property>? properties;
+  final ThrowRange? throwRange;
 
-  Equipment(
-      this.index,
-      this.name,
-      this.equipmentCategory,
-      this.weaponCategory,
-      this.weaponRange,
-      this.categoryRange,
-      this.armorCategory,
-      this.armorClass,
-      this.strMinimum,
-      this.stealthDisadvantage,
-      this.weight,
-      this.cost,
-      this.gearCategory,
-      this.desc,);
+  Equipment({
+    required this.index,
+    required this.name,
+    required this.equipmentCategory,
+    required this.weight,
+    required this.cost,
+    this.weaponCategory,
+    this.weaponRange,
+    this.damage,
+    this.categoryRange,
+    this.armorCategory,
+    this.armorClass,
+    this.strMinimum,
+    this.stealthDisadvantage,
+    this.gearCategory,
+    this.desc,
+    this.range,
+    this.properties,
+    this.throwRange,
+  });
 }
 
 class EquipmentCategory {
@@ -76,4 +85,25 @@ class GearCategory {
   final String name;
 
   GearCategory(this.index, this.name);
+}
+
+class Range {
+  final int normal;
+  final int? long;
+
+  Range(this.normal, this.long);
+}
+
+class Property {
+  final String index;
+  final String name;
+
+  Property(this.index, this.name);
+}
+
+class ThrowRange {
+  final int normal;
+  final int long;
+
+  ThrowRange(this.normal, this.long);
 }
