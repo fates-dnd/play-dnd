@@ -18,21 +18,21 @@ class EquipmentRepository {
       index: json["index"],
       name: json["name"],
       equipmentCategory: _equipmentCategoryFromJson(json["equipment_category"]),
-      weight: json["weight"],
+      weight: json["weight"].toDouble(),
       cost: _costFromJson(json["cost"]),
-      damage: _damageFromJson(json["damage"]),
-      range: _rangeFromJson(json["range"]),
-      properties: _propertiesFromJson(json["properties"]),
-      throwRange: _throwRangeFromJson(json["throw_range"]),
+      damage: _damageFromJson(json["damage"] ?? null),
+      range: _rangeFromJson(json["range"] ?? null),
+      properties: _propertiesFromJson(json["properties"] ?? null),
+      throwRange: _throwRangeFromJson(json["throw_range"] ?? null),
       weaponCategory: json["weapon_category"],
       weaponRange: json["weapon_range"],
       categoryRange: json["category_range"],
       armorCategory: json["armor_category"],
-      armorClass: _armorClassFromJson(json["armor_class"]),
+      armorClass: _armorClassFromJson(json["armor_class"] ?? {}),
       strMinimum: json["str_minimum"],
       stealthDisadvantage: json["stealth_disadvantage"],
-      desc: json["desc"],
-      gearCategory: _gearCategoryFromJson(json["gear_category"]),
+      desc: _descriptionFromJson(json["desc"]),
+      gearCategory: _gearCategoryFromJson(json["gear_category"] ?? null),
     );
   }
 
@@ -50,7 +50,11 @@ class EquipmentRepository {
     );
   }
 
-  Damage _damageFromJson(Map<String, dynamic> json) {
+  Damage? _damageFromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+
     return Damage(
       json["damage_dice"],
       _damageTypeFromJson(json["damage_type"]),
@@ -64,14 +68,22 @@ class EquipmentRepository {
     );
   }
 
-  Range _rangeFromJson(Map<String, dynamic> json) {
+  Range? _rangeFromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+
     return Range(
       json["normal"],
       json["long"],
     );
   }
 
-  List<Property> _propertiesFromJson(List<dynamic> json) {
+  List<Property>? _propertiesFromJson(List<dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+
     return json
         .map((property) => Property(
               property["index"],
@@ -80,25 +92,37 @@ class EquipmentRepository {
         .toList();
   }
 
-  ThrowRange _throwRangeFromJson(Map<String, dynamic> json) {
+  ThrowRange? _throwRangeFromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+
     return ThrowRange(
-      json["normal"],
-      json["long"],
+      json["normal"] ?? 0,
+      json["long"] ?? 0,
     );
   }
 
   ArmorClass _armorClassFromJson(Map<String, dynamic> json) {
     return ArmorClass(
-      json["base"],
+      json["base"] ?? 0,
       json["dex_bonus"],
       json["max_bonus"],
     );
   }
 
-  GearCategory _gearCategoryFromJson(Map<String, dynamic> json) {
+  GearCategory? _gearCategoryFromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return null;
+    }
+
     return GearCategory(
       json["index"],
       json["name"],
     );
+  }
+
+  List<String>? _descriptionFromJson(List<dynamic>? json) {
+    return json?.map((e) => e as String).toList();
   }
 }

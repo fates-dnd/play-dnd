@@ -2,7 +2,7 @@ class Equipment {
   final String index;
   final String name;
   final EquipmentCategory equipmentCategory;
-  final int weight;
+  final double weight;
   final Cost cost;
   final String? weaponCategory;
   final String? weaponRange;
