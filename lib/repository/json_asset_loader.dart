@@ -15,3 +15,7 @@ Future<String> readClassesJson() async {
 Future<String> readSkillsJson() async {
   return rootBundle.loadString("assets/skills.json");
 }
+
+Future<String> readEquipmentJson() async {
+  return rootBundle.loadString("assets/equipment.json");
+}
