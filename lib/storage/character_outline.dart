@@ -10,8 +10,8 @@ class CharacterOutline {
   final int baseWisdom;
   final int baseCharisma;
 
-  final String classIndex;
   final String raceIndex;
+  final String classIndex;
   final List<String> equipmentIndexes;
 
   CharacterOutline(
@@ -23,8 +23,8 @@ class CharacterOutline {
     this.baseIntelligence,
     this.baseWisdom,
     this.baseCharisma,
-    this.classIndex,
     this.raceIndex,
+    this.classIndex,
     this.equipmentIndexes,
   );
 
