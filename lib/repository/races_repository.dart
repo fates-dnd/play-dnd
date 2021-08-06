@@ -5,12 +5,24 @@ import 'package:dnd_player_flutter/dto/race.dart';
 class RacesRepository {
   final Future<String> Function() jsonReader;
 
+  List<Race>? races;
+
   RacesRepository(this.jsonReader);
 
   Future<List<Race>> getRaces() async {
+    if (races != null) {
+      return races!;
+    }
+
     final response = await jsonReader();
     final List<dynamic> racesJson = json.decode(response);
-    return racesJson.map((raceJson) => _fromJson(raceJson)).toList();
+    races = racesJson.map((raceJson) => _fromJson(raceJson)).toList();
+    return races!;
+  }
+
+  Future<Race> findByIndex(String index) async {
+    final races = await getRaces();
+    return races.firstWhere((element) => element.index == index);
   }
 
   Race _fromJson(Map<String, dynamic> json) {

@@ -7,12 +7,24 @@ class ClassesRepository {
   
   final Future<String> Function() jsonReader;
 
+  List<Class>? classes;
+
   ClassesRepository(this.jsonReader);
 
   Future<List<Class>> getClasses() async {
+    if (classes != null) {
+      return classes!;
+    }
+
     final response = await jsonReader();
     final List<dynamic> classesJson = json.decode(response);
-    return classesJson.map((classJson) => _fromJson(classJson)).toList();
+    classes = classesJson.map((classJson) => _fromJson(classJson)).toList();
+    return classes!;
+  }
+
+  Future<Class> findByIndex(String index) async {
+    final classes = await getClasses();
+    return classes.firstWhere((element) => element.index == index);
   }
 
   Class _fromJson(Map<String, dynamic> json) {

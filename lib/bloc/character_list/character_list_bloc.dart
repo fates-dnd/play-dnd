@@ -19,7 +19,7 @@ class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
     CharacterListEvent event,
   ) async* {
     if (event is LoadCharacterList) {
-      final characters = repository.getCharacters();
+      final characters = await repository.getCharacters();
       yield CharacterListState()
         ..characters = characters;
     }

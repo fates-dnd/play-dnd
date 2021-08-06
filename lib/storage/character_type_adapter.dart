@@ -1,19 +1,14 @@
-import 'package:dnd_player_flutter/data/characteristics.dart';
-import 'package:dnd_player_flutter/dto/character.dart';
-import 'package:dnd_player_flutter/dto/class.dart';
-import 'package:dnd_player_flutter/dto/race.dart';
+import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
-part 'character_reader.dart';
-part 'character_writer.dart';
 
-class CharacterTypeAdapter extends TypeAdapter<Character> {
+class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
   @override
   int get typeId => 0;
 
   @override
-  Character read(BinaryReader reader) {
-    return Character(
+  CharacterOutline read(BinaryReader reader) {
+    return CharacterOutline(
       reader.readString(), // name
       reader.readInt(), // level
       reader.readInt(), // base strength
@@ -23,13 +18,23 @@ class CharacterTypeAdapter extends TypeAdapter<Character> {
       reader.readInt(), // base wisdom
       reader.readInt(), // base charisma
 
-      reader.readRace(),
-      reader.readClass(),
+      reader.readString(), // race
+      reader.readString(), // class
+
+      readEquipmentIndexes(reader),
     );
   }
 
+  List<String> readEquipmentIndexes(BinaryReader reader) {
+    final equipment = <String>[];
+    for (var i = 0; i < reader.readInt(); ++i) {
+      equipment.add(reader.readString());
+    }
+    return equipment;
+  }
+
   @override
-  void write(BinaryWriter writer, Character obj) {
+  void write(BinaryWriter writer, CharacterOutline obj) {
     writer.writeString(obj.name);
     writer.writeInt(obj.level);
     writer.writeInt(obj.baseStrength);
@@ -39,7 +44,12 @@ class CharacterTypeAdapter extends TypeAdapter<Character> {
     writer.writeInt(obj.baseWisdom);
     writer.writeInt(obj.baseCharisma);
 
-    writer.writeRace(obj.race);
-    writer.writeClass(obj.clazz);
+    writer.writeString(obj.raceIndex);
+    writer.writeString(obj.classIndex);
+
+    writer.writeInt(obj.equipmentIndexes.length);
+    obj.equipmentIndexes.forEach((element) {
+      writer.writeString(element);
+    });
   }
 }

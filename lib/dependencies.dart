@@ -9,11 +9,16 @@ import 'package:get_it/get_it.dart';
 
 GetIt getIt = GetIt.instance;
 
-void registerDependencies() {  
+void registerDependencies() {
   getIt.registerSingleton<RacesRepository>(RacesRepository(readRacesJson));
   getIt.registerSingleton<TraitsRepository>(TraitsRepository(readTraitsJson));
-  getIt.registerSingleton<ClassesRepository>(ClassesRepository(readClassesJson));
+  getIt
+      .registerSingleton<ClassesRepository>(ClassesRepository(readClassesJson));
   getIt.registerSingleton<SkillsRepository>(SkillsRepository(readSkillsJson));
-  getIt.registerSingleton<CharacterRepository>(CharacterRepository());
-  getIt.registerSingleton<EquipmentRepository>(EquipmentRepository(readEquipmentJson));
+  getIt.registerSingleton<CharacterRepository>(CharacterRepository(
+    getIt.get<RacesRepository>(),
+    getIt.get<ClassesRepository>(),
+  ));
+  getIt.registerSingleton<EquipmentRepository>(
+      EquipmentRepository(readEquipmentJson));
 }

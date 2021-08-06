@@ -15,6 +15,7 @@ class EquipmentList extends StatelessWidget {
         appBar: AppBar(),
         body: BlocBuilder<EquipmentBloc, EquipmentState>(
           builder: (context, state) => ListView.builder(
+              padding: EdgeInsets.symmetric(horizontal: 8),
               itemCount: state.equipment.length,
               itemBuilder: (context, index) {
                 final item = state.equipment[index];
@@ -34,37 +35,36 @@ class EquipmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Padding(
-      padding: EdgeInsets.all(4),
-      child: Container(
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: theme.primaryColorLight,
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Row(
-          children: [
-            // description
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  equipment.name,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Color(0xFFE5E1DE),
+    return Card(
+      color: theme.primaryColorLight,
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: [
+              // description
+              Expanded(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    equipment.name,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFFE5E1DE),
+                    ),
                   ),
-                ),
-                EquipmentDescriptionRow(
-                  equipmentCategory: equipment.equipmentCategory,
-                ),
-              ],
-            )),
-
-            // damage
-            DamageCell(damage: equipment.damage),
-          ],
+                  EquipmentDescriptionRow(
+                    equipmentCategory: equipment.equipmentCategory,
+                  ),
+                ],
+              )),
+              
+              // damage
+              DamageCell(damage: equipment.damage),
+            ],
+          ),
         ),
       ),
     );
@@ -94,7 +94,6 @@ class EquipmentDescriptionRow extends StatelessWidget {
 }
 
 class DamageCell extends StatelessWidget {
-
   final Damage? damage;
 
   const DamageCell({Key? key, required this.damage}) : super(key: key);
@@ -104,9 +103,12 @@ class DamageCell extends StatelessWidget {
     if (damage == null) {
       return SizedBox();
     }
-    return Text("${damage?.damageDice} ${damage?.damageType.name}", style: TextStyle(
-      fontSize: 14,
-      color: Color(0xFFE5E1DE)
-    ),);
+    return Text(
+      "${damage?.damageDice} ${damage?.damageType.name}",
+      style: TextStyle(
+        fontSize: 14,
+        color: Color(0xFFE5E1DE),
+      ),
+    );
   }
 }

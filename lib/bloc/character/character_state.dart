@@ -14,6 +14,8 @@ class CharacterState {
 
   final List<Skill>? skills;
 
+  final List<Equipment>? equipment;
+
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -25,6 +27,7 @@ class CharacterState {
     this.race,
     this.clazz,
     this.skills,
+    this.equipment,
   });
 
   int get strengthBonus => (strength - 10) ~/ 2;
