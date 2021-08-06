@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/ui/equipment_list.dart';
 import 'package:flutter/material.dart';
 
 class EquipmentPage extends StatelessWidget {
@@ -13,7 +14,11 @@ class EquipmentPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-          OutlinedButton(onPressed: () {}, child: Text("Добавить")),
+          OutlinedButton(onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return EquipmentList();
+            }));
+          }, child: Text("Добавить")),
         ],),
       ],
     );
