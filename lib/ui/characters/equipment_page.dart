@@ -33,6 +33,7 @@ class EquipmentPage extends StatelessWidget {
                   child: Text("Добавить")),
             ],
           ),
+          SizedBox(height: 14),
           for (var i = 0; i < (state.equipment?.length ?? 0); ++i)
             EquipmentItem(equipment: state.equipment![i])
         ],
@@ -81,7 +82,41 @@ class EquipmentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [Text(equipment.name)],
+      children: [
+        Container(
+          width: 12,
+          height: 1,
+          color: Color(0xFFDCDAD9),
+        ),
+        SizedBox(width: 15),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                equipment.name,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFFFDCDAD9),
+                ),
+              ),
+              Text(
+                equipment.equipmentCategory.name,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Color(0xAADCDAD9),
+                ),
+              )
+            ],
+          ),
+        ),
+        IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.delete,
+              color: Color(0xFFFF5251),
+            ))
+      ],
     );
   }
 }

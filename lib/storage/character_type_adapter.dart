@@ -27,7 +27,8 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
   List<String> readEquipmentIndexes(BinaryReader reader) {
     final equipment = <String>[];
-    for (var i = 0; i < reader.readInt(); ++i) {
+    final total = reader.readInt();
+    for (var i = 0; i < total; ++i) {
       equipment.add(reader.readString());
     }
     return equipment;
