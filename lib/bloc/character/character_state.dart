@@ -30,6 +30,34 @@ class CharacterState {
     this.equipment,
   });
 
+  CharacterState copyWith({
+    int? level,
+    int? strength,
+    int? dexterity,
+    int? constitution,
+    int? intelligence,
+    int? wisdom,
+    int? charisma,
+    Race? race,
+    Class? clazz,
+    List<Skill>? skills,
+    List<Equipment>? equipment,
+  }) {
+    return CharacterState(
+      level: level ?? this.level,
+      strength: strength ?? this.strength,
+      dexterity: dexterity ?? this.dexterity,
+      constitution: constitution ?? this.constitution,
+      intelligence: intelligence ?? this.intelligence,
+      wisdom: wisdom ?? this.wisdom,
+      charisma: charisma ?? this.charisma,
+      race: race ?? this.race,
+      clazz: clazz ?? this.clazz,
+      skills: skills ?? this.skills,
+      equipment: equipment ?? this.equipment,
+    );
+  }
+
   int get strengthBonus => (strength - 10) ~/ 2;
   int get dexterityBonus => (dexterity - 10) ~/ 2;
   int get constitutionBonus => (constitution - 10) ~/ 2;

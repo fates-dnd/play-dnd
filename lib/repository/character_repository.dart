@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
@@ -18,9 +19,7 @@ class CharacterRepository {
   }
 
   void insertCharacter(Character character) {
-    var currentList = (box.get('character_list') as List?)
-        ?.map((e) => e as CharacterOutline)
-        .toList();
+    var currentList = _readCharacterOutlines();
     if (currentList == null) {
       currentList = <CharacterOutline>[];
     }
@@ -28,10 +27,26 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void addEquipmentToCharacter(
+      Character character, Equipment equipment) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
+    }
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
+
+    currentList[targetIndex] = CharacterOutline.fromCharacter(
+      character,
+      equipment: currentEquipmentList..add(equipment.index)
+    );
+
+    box.put('character_list', currentList);
+  }
+
   Future<List<Character>> getCharacters() async {
-    final characters = box.get('character_list') as List?;
-    final outlines =
-        characters?.map((e) => e as CharacterOutline).toList() ?? [];
+    final outlines = _readCharacterOutlines() ?? [];
 
     return Future.wait(outlines.map((outline) async {
       return Character(
@@ -47,5 +62,11 @@ class CharacterRepository {
         await classesRepository.findByIndex(outline.classIndex),
       );
     }).toList());
+  }
+
+  List<CharacterOutline>? _readCharacterOutlines() {
+    return (box.get('character_list') as List?)
+        ?.map((e) => e as CharacterOutline)
+        .toList();
   }
 }

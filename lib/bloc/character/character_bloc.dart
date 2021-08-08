@@ -9,6 +9,7 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -17,11 +18,12 @@ part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
+  final CharacterRepository characterRepository;
   final SkillsRepository skillsRepository;
 
   late Character character;
 
-  CharacterBloc(this.skillsRepository) : super(CharacterState());
+  CharacterBloc(this.characterRepository, this.skillsRepository,) : super(CharacterState());
 
   @override
   Stream<CharacterState> mapEventToState(
@@ -42,8 +44,12 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         clazz: character.clazz,
         skills: await skillsRepository.getSkills(),
       );
-    } else if (event is SelectEquipmentItem) {
-      
+    } else if (event is AddEquipmentItem) {
+      characterRepository.addEquipmentToCharacter(character, event.equipment);
+
+      final currentEquipment = state.equipment ?? [];
+      currentEquipment.add(event.equipment);
+      yield state.copyWith(equipment: currentEquipment);
     } else if (event is RemoveEquipmentItem) {
 
     }

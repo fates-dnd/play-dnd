@@ -9,10 +9,10 @@ class SetCharacter extends CharacterEvent {
   SetCharacter(this.character);
 }
 
-class SelectEquipmentItem extends CharacterEvent {
+class AddEquipmentItem extends CharacterEvent {
   final Equipment equipment;
 
-  SelectEquipmentItem(this.equipment);
+  AddEquipmentItem(this.equipment);
 }
 
 class RemoveEquipmentItem extends CharacterEvent {

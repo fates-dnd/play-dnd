@@ -28,7 +28,10 @@ class CharacterOutline {
     this.equipmentIndexes,
   );
 
-  static CharacterOutline fromCharacter(Character character) {
+  static CharacterOutline fromCharacter(
+    Character character, {
+    List<String> equipment = const [],
+  }) {
     return CharacterOutline(
       character.name,
       character.level,
@@ -38,11 +41,9 @@ class CharacterOutline {
       character.baseIntelligence,
       character.baseWisdom,
       character.baseCharisma,
-
       character.race.index,
       character.clazz.index,
-
-      [] // equipment
+      equipment,
     );
   }
 }

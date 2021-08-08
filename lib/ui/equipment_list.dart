@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EquipmentList extends StatelessWidget {
+  final Function(Equipment) onEquipmentSelected;
+
+  const EquipmentList({Key? key, required this.onEquipmentSelected})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -19,7 +24,10 @@ class EquipmentList extends StatelessWidget {
               itemCount: state.equipment.length,
               itemBuilder: (context, index) {
                 final item = state.equipment[index];
-                return EquipmentItem(equipment: item);
+                return EquipmentItem(
+                  onSelected: onEquipmentSelected,
+                  equipment: item,
+                );
               }),
         ),
       ),
@@ -28,9 +36,14 @@ class EquipmentList extends StatelessWidget {
 }
 
 class EquipmentItem extends StatelessWidget {
+  final Function(Equipment) onSelected;
   final Equipment equipment;
 
-  const EquipmentItem({Key? key, required this.equipment}) : super(key: key);
+  const EquipmentItem({
+    Key? key,
+    required this.onSelected,
+    required this.equipment,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +51,10 @@ class EquipmentItem extends StatelessWidget {
     return Card(
       color: theme.primaryColorLight,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          onSelected(equipment);
+          Navigator.of(context).pop();
+        },
         child: Padding(
           padding: EdgeInsets.all(10),
           child: Row(
@@ -60,7 +76,7 @@ class EquipmentItem extends StatelessWidget {
                   ),
                 ],
               )),
-              
+
               // damage
               DamageCell(damage: equipment.damage),
             ],

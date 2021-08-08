@@ -1,26 +1,42 @@
+import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EquipmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        EquippedSection(),
-        SizedBox(height: 12),
-        MoneyInfoRow(),
-        SizedBox(height: 12),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          OutlinedButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return EquipmentList();
-            }));
-          }, child: Text("Добавить")),
-        ],),
-      ],
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (rootContext, state) => ListView(
+        children: [
+          EquippedSection(),
+          SizedBox(height: 12),
+          MoneyInfoRow(),
+          SizedBox(height: 12),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
+                      return EquipmentList(
+                        onEquipmentSelected: (item) {
+                          BlocProvider.of<CharacterBloc>(rootContext)
+                              .add(AddEquipmentItem(item));
+                        },
+                      );
+                    }));
+                  },
+                  child: Text("Добавить")),
+            ],
+          ),
+          for (var i = 0; i < (state.equipment?.length ?? 0); ++i)
+            EquipmentItem(equipment: state.equipment![i])
+        ],
+      ),
     );
   }
 }
@@ -53,6 +69,19 @@ class EquippedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [],
+    );
+  }
+}
+
+class EquipmentItem extends StatelessWidget {
+  final Equipment equipment;
+
+  const EquipmentItem({Key? key, required this.equipment}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [Text(equipment.name)],
     );
   }
 }
