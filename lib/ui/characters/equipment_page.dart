@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
-import 'package:dnd_player_flutter/ui/equipment_list.dart';
+import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
+import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,7 +81,7 @@ class EquipmentItem extends StatelessWidget {
   const EquipmentItem({Key? key, required this.equipment}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext rootContext) {
     return Row(
       children: [
         Container(
@@ -111,7 +112,13 @@ class EquipmentItem extends StatelessWidget {
           ),
         ),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              showDialog(context: rootContext, builder: (context) {
+                return SureToDeleteEquipment(context, equipment, (equipment) {
+                  BlocProvider.of<CharacterBloc>(rootContext).add(RemoveEquipmentItem(equipment));
+                });
+              });
+            },
             icon: Icon(
               Icons.delete,
               color: Color(0xFFFF5251),

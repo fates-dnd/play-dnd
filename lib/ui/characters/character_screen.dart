@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
+import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
@@ -22,6 +23,7 @@ class CharacterScreen extends StatelessWidget {
       create: (context) => CharacterBloc(
         getIt<CharacterRepository>(),
         getIt<SkillsRepository>(),
+        getIt<EquipmentRepository>(),
       )..add(SetCharacter(character)),
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle.dark,

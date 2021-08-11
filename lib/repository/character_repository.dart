@@ -45,6 +45,29 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void removeEquipmentFromCharacter(
+    Character character, Equipment equipment) {
+      final currentList = _readCharacterOutlines();
+      if (currentList == null) {
+        return;
+      }
+
+      final targetIndex = currentList.indexWhere((element) => element.name == character.name);
+      final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
+
+      currentList[targetIndex] = CharacterOutline.fromCharacter(
+        character,
+        equipment: currentEquipmentList..remove(equipment.index));
+
+      box.put('character_list', currentList);
+    }
+
+  List<String> getCharacterEquipmentIndexes(Character character) {
+    final currentList = _readCharacterOutlines();
+    final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
+    return storedCharacter?.equipmentIndexes ?? [];
+  }
+
   Future<List<Character>> getCharacters() async {
     final outlines = _readCharacterOutlines() ?? [];
 
