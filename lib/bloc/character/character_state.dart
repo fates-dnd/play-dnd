@@ -16,6 +16,8 @@ class CharacterState {
 
   final List<Equipment>? equipment;
 
+  final List<Equipment>? equippedEquipment;
+
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -28,6 +30,7 @@ class CharacterState {
     this.clazz,
     this.skills,
     this.equipment,
+    this.equippedEquipment,
   });
 
   CharacterState copyWith({
@@ -128,5 +131,11 @@ class CharacterState {
       case Characteristic.CHARISMA:
         return charismaBonus;
     }
+  }
+
+  bool isEquipped(Equipment equipment) {
+    return equippedEquipment
+      ?.any((element) => element.index == equipment.index)
+      ?? false;
   }
 }

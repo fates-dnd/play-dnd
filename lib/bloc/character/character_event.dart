@@ -20,3 +20,9 @@ class RemoveEquipmentItem extends CharacterEvent {
 
   RemoveEquipmentItem(this.equipment);
 }
+
+class EquipItem extends CharacterEvent {
+  final Equipment equipment;
+
+  EquipItem(this.equipment);
+}

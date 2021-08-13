@@ -8,7 +8,7 @@ class Equipment {
   final String? weaponRange;
   final String? categoryRange;
   final Damage? damage;
-  final String? armorCategory;
+  final ArmorCategory? armorCategory;
   final ArmorClass? armorClass;
   final int? strMinimum;
   final bool? stealthDisadvantage;
@@ -38,13 +38,14 @@ class Equipment {
     this.properties,
     this.throwRange,
   });
+
+  bool get isEquippable => equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
 }
 
-class EquipmentCategory {
-  final String index;
-  final String name;
-
-  EquipmentCategory(this.index, this.name);
+enum EquipmentCategory {
+  WEAPON,
+  ARMOR,
+  ADVENTURING_GEAR,
 }
 
 class ArmorClass {
@@ -80,11 +81,11 @@ class DamageType {
   DamageType(this.index, this.name);
 }
 
-class GearCategory {
-  final String index;
-  final String name;
-
-  GearCategory(this.index, this.name);
+enum GearCategory {
+  STANDARD_GEAR,
+  HOLY_SYMBOLS,
+  ACRANE_FOCI,
+  DRUIDIC_FOCI,
 }
 
 class Range {
@@ -106,4 +107,11 @@ class ThrowRange {
   final int long;
 
   ThrowRange(this.normal, this.long);
+}
+
+enum ArmorCategory {
+  SHIELD,
+  LIGHT,
+  MEDIUM,
+  HEAVY,
 }

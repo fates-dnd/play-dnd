@@ -27,7 +27,7 @@ class EquipmentRepository {
       weaponCategory: json["weapon_category"],
       weaponRange: json["weapon_range"],
       categoryRange: json["category_range"],
-      armorCategory: json["armor_category"],
+      armorCategory: _armorCategoryFromJson(json["armor_category"]),
       armorClass: _armorClassFromJson(json["armor_class"] ?? {}),
       strMinimum: json["str_minimum"],
       stealthDisadvantage: json["stealth_disadvantage"],
@@ -37,10 +37,13 @@ class EquipmentRepository {
   }
 
   EquipmentCategory _equipmentCategoryFromJson(Map<String, dynamic> json) {
-    return EquipmentCategory(
-      json["index"],
-      json["name"],
-    );
+    final index = json["index"];
+    switch (index) {
+      case "weapon": return EquipmentCategory.WEAPON;
+      case "armor": return EquipmentCategory.ARMOR;
+      case "adventuring-gear": return EquipmentCategory.ADVENTURING_GEAR;
+      default: return EquipmentCategory.ADVENTURING_GEAR;
+    }
   }
 
   Cost _costFromJson(Map<String, dynamic> json) {
@@ -115,14 +118,27 @@ class EquipmentRepository {
     if (json == null) {
       return null;
     }
-
-    return GearCategory(
-      json["index"],
-      json["name"],
-    );
+    final index = json["index"];
+    switch (index) {
+      case "standard-gear": return GearCategory.STANDARD_GEAR;
+      case "holy-symbols": return GearCategory.HOLY_SYMBOLS;
+      case "arcane-foci": return GearCategory.ACRANE_FOCI;
+      case "druidic-foci": return GearCategory.DRUIDIC_FOCI;
+      default: return null;
+    }
   }
 
   List<String>? _descriptionFromJson(List<dynamic>? json) {
     return json?.map((e) => e as String).toList();
+  }
+
+  ArmorCategory? _armorCategoryFromJson(String? json) {
+    switch (json?.toLowerCase()) {
+      case "shield": return ArmorCategory.SHIELD;
+      case "light": return ArmorCategory.LIGHT;
+      case "medium": return ArmorCategory.MEDIUM;
+      case "heavy": return ArmorCategory.HEAVY;
+      default: return null;
+    }
   }
 }

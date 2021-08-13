@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
+import 'package:dnd_player_flutter/localization/equipment_category_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,10 +68,25 @@ class EquippedSection extends StatelessWidget {
 }
 
 class EquippedItem extends StatelessWidget {
+  
+  final Equipment equipment;
+
+  const EquippedItem({Key? key, required this.equipment}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [],
+      children: [
+        Column(
+          children: [
+            Text(equipment.name), // name
+            // weapon range
+          ],
+        ),
+
+        Text("+4"), // attack roll
+        Text("1d4+2"), // damage roll
+      ],
     );
   }
 }
@@ -84,11 +100,13 @@ class EquipmentItem extends StatelessWidget {
   Widget build(BuildContext rootContext) {
     return Row(
       children: [
-        Container(
-          width: 12,
-          height: 1,
-          color: Color(0xFFDCDAD9),
-        ),
+        equipment.isEquippable 
+          ? EquipmentSelectionButton(equipment: equipment, isEquipped: false)
+          : Container(
+            width: 12,
+            height: 1,
+            color: Color(0xFFDCDAD9),
+          ),
         SizedBox(width: 15),
         Expanded(
           child: Column(
@@ -102,7 +120,7 @@ class EquipmentItem extends StatelessWidget {
                 ),
               ),
               Text(
-                equipment.equipmentCategory.name,
+                equipment.equipmentCategory.getName(),
                 style: TextStyle(
                   fontSize: 12,
                   color: Color(0xAADCDAD9),
@@ -124,6 +142,52 @@ class EquipmentItem extends StatelessWidget {
               color: Color(0xFFFF5251),
             ))
       ],
+    );
+  }
+}
+
+class EquipmentSelectionButton extends StatelessWidget {
+
+  final Equipment equipment;
+  final bool isEquipped;
+
+  const EquipmentSelectionButton({
+    Key? key, 
+    required this.equipment,
+    required this.isEquipped,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => InkWell(
+        onTap: () {},
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              width: 28,
+              height: 28,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color(0xFFDCDAD9),
+                  width: 3
+                ),
+                borderRadius: BorderRadius.circular(8)
+              ),
+            ),
+            if (state.isEquipped(equipment))
+                Container(
+                  width: 14,
+                  height: 14,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFF5251),
+                    borderRadius: BorderRadius.circular(4)
+                  ),
+                ),
+          ],
+        ),
+      ),
     );
   }
 }
