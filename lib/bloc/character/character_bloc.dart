@@ -62,6 +62,13 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       final currentEquipment = state.equipment ?? [];
       currentEquipment.removeWhere((element) => element.index == event.equipment.index);
       yield state.copyWith(equipment: currentEquipment);
+    } else if (event is EquipItem) {
+      characterRepository.equipItem(character, event.equipment);
+
+      final currentEquippedItems = state.equippedItems ?? [];
+      yield state.copyWith(
+        equippedItems: currentEquippedItems..add(event.equipment),
+      );
     }
   }
 

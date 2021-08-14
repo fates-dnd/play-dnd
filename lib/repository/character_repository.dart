@@ -23,7 +23,11 @@ class CharacterRepository {
     if (currentList == null) {
       currentList = <CharacterOutline>[];
     }
-    currentList.add(CharacterOutline.fromCharacter(character));
+    currentList.add(CharacterOutline.fromCharacter(
+      character,
+      equipment: [],
+      equippedItems: [],
+    ));
     box.put('character_list', currentList);
   }
 
@@ -37,9 +41,8 @@ class CharacterRepository {
         currentList.indexWhere((element) => element.name == character.name);
     final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
 
-    currentList[targetIndex] = CharacterOutline.fromCharacter(
-      character,
-      equipment: currentEquipmentList..add(equipment.index)
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      equipmentIndexes: currentEquipmentList..add(equipment.index)
     );
 
     box.put('character_list', currentList);
@@ -54,13 +57,28 @@ class CharacterRepository {
 
       final targetIndex = currentList.indexWhere((element) => element.name == character.name);
       final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
+      final currentEquippedItems = currentList[targetIndex].equippedItems;
 
-      currentList[targetIndex] = CharacterOutline.fromCharacter(
-        character,
-        equipment: currentEquipmentList..remove(equipment.index));
+      currentList[targetIndex] = currentList[targetIndex].copyWith(
+        equipmentIndexes: currentEquipmentList..remove(equipment.index),
+        equippedItems: currentEquippedItems..remove(equipment.index),
+      );
 
       box.put('character_list', currentList);
     }
+
+  void equipItem(Character character, Equipment equipment) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
+    }
+
+    final targetIndex = currentList.indexWhere((element) => element.name == character.name);
+    final currentEquippedItems = currentList[targetIndex].equippedItems;
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      equippedItems: currentEquippedItems..add(equipment.index),
+    );
+  }
 
   List<String> getCharacterEquipmentIndexes(Character character) {
     final currentList = _readCharacterOutlines();

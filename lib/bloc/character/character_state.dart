@@ -16,7 +16,7 @@ class CharacterState {
 
   final List<Equipment>? equipment;
 
-  final List<Equipment>? equippedEquipment;
+  final List<Equipment>? equippedItems;
 
   CharacterState({
     this.level = 1,
@@ -30,7 +30,7 @@ class CharacterState {
     this.clazz,
     this.skills,
     this.equipment,
-    this.equippedEquipment,
+    this.equippedItems,
   });
 
   CharacterState copyWith({
@@ -45,6 +45,7 @@ class CharacterState {
     Class? clazz,
     List<Skill>? skills,
     List<Equipment>? equipment,
+    List<Equipment>? equippedItems,
   }) {
     return CharacterState(
       level: level ?? this.level,
@@ -58,6 +59,7 @@ class CharacterState {
       clazz: clazz ?? this.clazz,
       skills: skills ?? this.skills,
       equipment: equipment ?? this.equipment,
+      equippedItems: equippedItems ?? this.equippedItems,
     );
   }
 
@@ -134,7 +136,7 @@ class CharacterState {
   }
 
   bool isEquipped(Equipment equipment) {
-    return equippedEquipment
+    return equippedItems
       ?.any((element) => element.index == equipment.index)
       ?? false;
   }

@@ -26,3 +26,9 @@ class EquipItem extends CharacterEvent {
 
   EquipItem(this.equipment);
 }
+
+class UnequipItem extends CharacterEvent {
+  final Equipment equipment;
+
+  UnequipItem(this.equipment);
+}

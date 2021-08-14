@@ -13,6 +13,7 @@ class CharacterOutline {
   final String raceIndex;
   final String classIndex;
   final List<String> equipmentIndexes;
+  final List<String> equippedItems;
 
   CharacterOutline(
     this.name,
@@ -26,11 +27,13 @@ class CharacterOutline {
     this.raceIndex,
     this.classIndex,
     this.equipmentIndexes,
+    this.equippedItems,
   );
 
   static CharacterOutline fromCharacter(
     Character character, {
-    List<String> equipment = const [],
+    required List<String> equipment,
+    required List<String> equippedItems,
   }) {
     return CharacterOutline(
       character.name,
@@ -44,6 +47,39 @@ class CharacterOutline {
       character.race.index,
       character.clazz.index,
       equipment,
+      equippedItems,
+    );
+  }
+
+  CharacterOutline copyWith({
+    String? name,
+    int? level,
+    int? baseStrength,
+    int? baseDexterity,
+    int? baseConstitution,
+    int? baseIntelligence,
+    int? baseWisdom,
+    int? baseCharisma,
+
+    String? raceIndex,
+    String? classIndex,
+    List<String>? equipmentIndexes,
+    List<String>? equippedItems,
+  }) {
+    return CharacterOutline(
+      name ?? this.name,
+      level ?? this.level,
+      baseStrength ?? this.baseStrength,
+      baseDexterity ?? this.baseDexterity,
+      baseConstitution ?? this.baseConstitution,
+      baseIntelligence ?? this.baseIntelligence,
+      baseWisdom ?? this.baseWisdom,
+      baseCharisma ?? this.baseCharisma,
+
+      raceIndex ?? this.raceIndex,
+      classIndex ?? this.classIndex,
+      equipmentIndexes ?? this.equipmentIndexes,
+      equippedItems ?? this.equippedItems,
     );
   }
 }

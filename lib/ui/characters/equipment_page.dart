@@ -48,20 +48,25 @@ class EquippedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: theme.primaryColorLight,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "Екипировка",
-            style: theme.textTheme.headline2,
-          )
-        ],
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => Container(
+        padding: EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: theme.primaryColorLight,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Екипировка",
+              style: theme.textTheme.headline2,
+            ),
+
+            for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
+              EquippedItem(equipment: state.equippedItems![i])
+          ],
+        ),
       ),
     );
   }
@@ -161,7 +166,14 @@ class EquipmentSelectionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => InkWell(
-        onTap: () {},
+        onTap: () {
+          final bloc = BlocProvider.of<CharacterBloc>(context);
+          if (state.isEquipped(equipment)) {
+            // unequip items
+          } else {
+            bloc.add(EquipItem(equipment));
+          }
+        },
         child: Stack(
           alignment: Alignment.center,
           children: [

@@ -22,6 +22,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
       reader.readString(), // class
 
       readEquipmentIndexes(reader),
+      readEquippedItemsIndexes(reader),
     );
   }
 
@@ -32,6 +33,15 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
       equipment.add(reader.readString());
     }
     return equipment;
+  }
+
+  List<String> readEquippedItemsIndexes(BinaryReader reader) {
+    final equippedItems = <String>[];
+    final total = reader.readInt();
+    for (var i = 0; i < total; ++i) {
+      equippedItems.add(reader.readString());
+    }
+    return equippedItems;
   }
 
   @override
@@ -50,6 +60,11 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
     writer.writeInt(obj.equipmentIndexes.length);
     obj.equipmentIndexes.forEach((element) {
+      writer.writeString(element);
+    });
+
+    writer.writeInt(obj.equippedItems.length);
+    obj.equippedItems.forEach((element) {
       writer.writeString(element);
     });
   }
