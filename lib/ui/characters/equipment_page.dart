@@ -169,7 +169,7 @@ class EquipmentSelectionButton extends StatelessWidget {
         onTap: () {
           final bloc = BlocProvider.of<CharacterBloc>(context);
           if (state.isEquipped(equipment)) {
-            // unequip items
+            bloc.add(UnequipItem(equipment));
           } else {
             bloc.add(EquipItem(equipment));
           }

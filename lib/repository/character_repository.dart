@@ -80,6 +80,19 @@ class CharacterRepository {
     );
   }
 
+  void unequipItem(Character character, Equipment equipment) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
+    }
+
+    final targetIndex = currentList.indexWhere((element) => element.name == character.name);
+    final currentEquippedItems = currentList[targetIndex].equippedItems;
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      equippedItems: currentEquippedItems..remove(equipment.index),
+    );
+  }
+
   List<String> getCharacterEquipmentIndexes(Character character) {
     final currentList = _readCharacterOutlines();
     final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
