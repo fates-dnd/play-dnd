@@ -30,7 +30,13 @@ class CharacterScreen extends StatelessWidget {
         child: Scaffold(
           body: Stack(
             children: [
-              Image.asset("assets/background.png"),
+              Container(
+                height: 300,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Color(0xFFE5E1DE),
+                ),
+              ),
               SafeArea(
                 child: Padding(
                   padding: EdgeInsets.all(16),

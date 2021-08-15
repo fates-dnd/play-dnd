@@ -156,15 +156,21 @@ class CharacteristicItem extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                bonus >= 0 ? "+${bonus.toString()}" : bonus.toString(),
-                style: TextStyle(
-                    color: Color(0xFFDCDAD9),
-                    fontSize: 38,
-                    fontWeight: FontWeight.bold),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      bonus >= 0 ? "+${bonus.toString()}" : bonus.toString(),
+                      style: TextStyle(
+                          color: Color(0xFFDCDAD9),
+                          fontSize: 38,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    // artificially increased height
+                    SizedBox(height: 10),
+                  ],
+                ),
               ),
             ],
           ),
