@@ -62,7 +62,27 @@ class EquippedSection extends StatelessWidget {
               "Екипировка",
               style: theme.textTheme.headline2,
             ),
-
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  "Атака",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFFDCDAD9),
+                  ),
+                ),
+                SizedBox(width: 48),
+                Text(
+                  "Урон",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFFDCDAD9),
+                  ),
+                ),
+                SizedBox(width: 24),
+              ],
+            ),
             for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
               EquippedItem(equipment: state.equippedItems![i])
           ],
@@ -73,7 +93,6 @@ class EquippedSection extends StatelessWidget {
 }
 
 class EquippedItem extends StatelessWidget {
-  
   final Equipment equipment;
 
   const EquippedItem({Key? key, required this.equipment}) : super(key: key);
@@ -105,13 +124,16 @@ class EquipmentItem extends StatelessWidget {
   Widget build(BuildContext rootContext) {
     return Row(
       children: [
-        equipment.isEquippable 
-          ? EquipmentSelectionButton(equipment: equipment, isEquipped: false)
-          : Container(
-            width: 12,
-            height: 1,
-            color: Color(0xFFDCDAD9),
-          ),
+        equipment.isEquippable
+            ? EquipmentSelectionButton(equipment: equipment, isEquipped: false)
+            : Padding(
+                padding: const EdgeInsets.all(8),
+                child: Container(
+                  width: 12,
+                  height: 1,
+                  color: Color(0xFFDCDAD9),
+                ),
+              ),
         SizedBox(width: 15),
         Expanded(
           child: Column(
@@ -136,11 +158,15 @@ class EquipmentItem extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {
-              showDialog(context: rootContext, builder: (context) {
-                return SureToDeleteEquipment(context, equipment, (equipment) {
-                  BlocProvider.of<CharacterBloc>(rootContext).add(RemoveEquipmentItem(equipment));
-                });
-              });
+              showDialog(
+                  context: rootContext,
+                  builder: (context) {
+                    return SureToDeleteEquipment(context, equipment,
+                        (equipment) {
+                      BlocProvider.of<CharacterBloc>(rootContext)
+                          .add(RemoveEquipmentItem(equipment));
+                    });
+                  });
             },
             icon: Icon(
               Icons.delete,
@@ -152,12 +178,11 @@ class EquipmentItem extends StatelessWidget {
 }
 
 class EquipmentSelectionButton extends StatelessWidget {
-
   final Equipment equipment;
   final bool isEquipped;
 
   const EquipmentSelectionButton({
-    Key? key, 
+    Key? key,
     required this.equipment,
     required this.isEquipped,
   }) : super(key: key);
@@ -181,22 +206,17 @@ class EquipmentSelectionButton extends StatelessWidget {
               width: 28,
               height: 28,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xFFDCDAD9),
-                  width: 3
-                ),
-                borderRadius: BorderRadius.circular(8)
-              ),
+                  border: Border.all(color: Color(0xFFDCDAD9), width: 3),
+                  borderRadius: BorderRadius.circular(8)),
             ),
             if (state.isEquipped(equipment))
-                Container(
-                  width: 14,
-                  height: 14,
-                  decoration: BoxDecoration(
+              Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(
                     color: Color(0xFFFF5251),
-                    borderRadius: BorderRadius.circular(4)
-                  ),
-                ),
+                    borderRadius: BorderRadius.circular(4)),
+              ),
           ],
         ),
       ),
