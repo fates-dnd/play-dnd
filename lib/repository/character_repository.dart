@@ -78,6 +78,8 @@ class CharacterRepository {
     currentList[targetIndex] = currentList[targetIndex].copyWith(
       equippedItems: currentEquippedItems..add(equipment.index),
     );
+
+    box.put('character_list', currentList);
   }
 
   void unequipItem(Character character, Equipment equipment) {
@@ -91,12 +93,20 @@ class CharacterRepository {
     currentList[targetIndex] = currentList[targetIndex].copyWith(
       equippedItems: currentEquippedItems..remove(equipment.index),
     );
+
+    box.put('character_list', currentList);
   }
 
   List<String> getCharacterEquipmentIndexes(Character character) {
     final currentList = _readCharacterOutlines();
     final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
     return storedCharacter?.equipmentIndexes ?? [];
+  }
+
+  List<String> getCharacterEquippedItemsIndexes(Character character) {
+    final currentList = _readCharacterOutlines();
+    final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
+    return storedCharacter?.equippedItems ?? [];
   }
 
   Future<List<Character>> getCharacters() async {

@@ -49,6 +49,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         clazz: character.clazz,
         skills: await skillsRepository.getSkills(),
         equipment: await _getCharacterEquipment(),
+        equippedItems: await _getEquippedItems(),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -83,6 +84,14 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     final equipmentIndexes = characterRepository.getCharacterEquipmentIndexes(character);
     final allEquipment = await equipmentRepository.getEquipment();
     return equipmentIndexes.map((index) {
+      return allEquipment.firstWhere((element) => element.index == index);
+    }).toList();
+  }
+
+  Future<List<Equipment>> _getEquippedItems() async {
+    final equippedItemsIndexes = characterRepository.getCharacterEquippedItemsIndexes(character);
+    final allEquipment = await equipmentRepository.getEquipment();
+    return equippedItemsIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
     }).toList();
   }
