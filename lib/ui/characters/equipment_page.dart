@@ -2,7 +2,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
-import 'package:dnd_player_flutter/localization/equipment_category_locale.dart';
+import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,24 +63,34 @@ class EquippedSection extends StatelessWidget {
               style: theme.textTheme.headline2,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  "Атака",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFFDCDAD9),
+                Expanded(
+                  flex: 3,
+                  child: SizedBox()),
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      "Атака",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFFDCDAD9),
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(width: 48),
-                Text(
-                  "Урон",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xFFDCDAD9),
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: Text(
+                      "Урон",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Color(0xFFDCDAD9),
+                      ),
+                    ),
                   ),
                 ),
-                SizedBox(width: 24),
               ],
             ),
             for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
@@ -99,18 +109,70 @@ class EquippedItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Column(
-          children: [
-            Text(equipment.name), // name
-            // weapon range
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  equipment.name,
+                  style: TextStyle(
+                    color: Color(0xDDDCDAD9),
+                    fontSize: 18,
+                  ),
+                ), // name
+                SizedBox(height: 2,),
+                Text(
+                  equipment.weaponRangeName,
+                  style: TextStyle(
+                    color: Color(0xAADCDAD9),
+                    fontSize: 12,
+                  ),
+                ), // range
+              ],
+            ),
+          ),
 
-        Text("+4"), // attack roll
-        Text("1d4+2"), // damage roll
-      ],
+          Expanded(
+            flex: 1,
+            child: Center(child: ActionableInfo(content: "+4"))), // attack roll
+          Expanded(
+            flex: 1,
+            child: Center(child: ActionableInfo(content: "1d4+2"))), // damage roll
+        ],
+      ),
+    );
+  }
+}
+
+class ActionableInfo extends StatelessWidget {
+
+  final String content;
+
+  const ActionableInfo({Key? key, required this.content}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Color(0xFF1A1E21),
+          width: 3,
+        ),
+        borderRadius: BorderRadius.circular(3),
+      ),
+      child: Text(
+        content,
+        style: TextStyle(
+          color: Color(0xFFDCDAD9),
+          fontSize: 14,
+        ),
+      ),
     );
   }
 }

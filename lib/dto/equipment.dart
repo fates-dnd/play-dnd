@@ -1,3 +1,5 @@
+import 'package:dnd_player_flutter/localization/equipment_locale.dart';
+
 class Equipment {
   final String index;
   final String name;
@@ -5,7 +7,7 @@ class Equipment {
   final double weight;
   final Cost cost;
   final String? weaponCategory;
-  final String? weaponRange;
+  final WeaponRange? weaponRange;
   final String? categoryRange;
   final Damage? damage;
   final ArmorCategory? armorCategory;
@@ -40,6 +42,10 @@ class Equipment {
   });
 
   bool get isEquippable => equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
+
+  String get weaponRangeName => (weaponRange == WeaponRange.MELEE 
+    ? weaponRange?.getName() 
+    : "${range?.normal} / ${range?.long}") ?? "";
 }
 
 enum EquipmentCategory {
@@ -86,6 +92,11 @@ enum GearCategory {
   HOLY_SYMBOLS,
   ACRANE_FOCI,
   DRUIDIC_FOCI,
+}
+
+enum WeaponRange {
+  MELEE,
+  RANGED,
 }
 
 class Range {

@@ -25,7 +25,7 @@ class EquipmentRepository {
       properties: _propertiesFromJson(json["properties"] ?? null),
       throwRange: _throwRangeFromJson(json["throw_range"] ?? null),
       weaponCategory: json["weapon_category"],
-      weaponRange: json["weapon_range"],
+      weaponRange: _weaponRangeFromJson(json["weapon_range"]),
       categoryRange: json["category_range"],
       armorCategory: _armorCategoryFromJson(json["armor_category"]),
       armorClass: _armorClassFromJson(json["armor_class"] ?? {}),
@@ -138,6 +138,14 @@ class EquipmentRepository {
       case "light": return ArmorCategory.LIGHT;
       case "medium": return ArmorCategory.MEDIUM;
       case "heavy": return ArmorCategory.HEAVY;
+      default: return null;
+    }
+  }
+
+  WeaponRange? _weaponRangeFromJson(String? json) {
+    switch (json?.toLowerCase()) {
+      case "melee": return WeaponRange.MELEE;
+      case "ranged": return WeaponRange.RANGED;
       default: return null;
     }
   }

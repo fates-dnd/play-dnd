@@ -2,7 +2,7 @@ import 'package:dnd_player_flutter/bloc/equipment/equipment_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
-import 'package:dnd_player_flutter/localization/equipment_category_locale.dart';
+import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
