@@ -18,6 +18,8 @@ class CharacterState {
 
   final List<Equipment>? equippedItems;
 
+  final UnarmedAttack? unarmedAttack;
+
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -31,7 +33,8 @@ class CharacterState {
     this.skills,
     this.equipment,
     this.equippedItems,
-  });
+    this.unarmedAttack,
+  }); 
 
   CharacterState copyWith({
     int? level,

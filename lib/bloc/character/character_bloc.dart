@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/bloc/character/proficiency_bonus_table.dart';
+import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/data/skills.dart';
 import 'package:dnd_player_flutter/dto/character.dart';

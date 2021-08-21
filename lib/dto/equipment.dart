@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/data/dice.dart';
 import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 
 class Equipment {
@@ -74,7 +75,7 @@ class Cost {
 }
 
 class Damage {
-  final String damageDice;
+  final DamageDice damageDice;
   final DamageType damageType;
 
   Damage(this.damageDice, this.damageType);
@@ -85,6 +86,13 @@ class DamageType {
   final String name;
 
   DamageType(this.index, this.name);
+}
+
+class DamageDice {
+  final int amount;
+  final Dice dice;
+
+  DamageDice(this.amount, this.dice);
 }
 
 enum GearCategory {

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dnd_player_flutter/data/dice.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 
 class EquipmentRepository {
@@ -59,8 +60,47 @@ class EquipmentRepository {
     }
 
     return Damage(
-      json["damage_dice"],
+      _damageDiceFromString(json["damage_dice"]),
       _damageTypeFromJson(json["damage_type"]),
+    );
+  }
+
+  /// Parse damage dice from string like:
+  /// 1d20
+  /// 2d6
+  /// 1d10
+  DamageDice _damageDiceFromString(String damageDice) {
+    final regex = RegExp("^(\\d+)(d\\d{1,2})\$");
+    final match = regex.firstMatch(damageDice);
+    final amount = match?.group(1);
+    Dice? dice;
+    switch (match?.group(2)) {
+      case "d4": 
+        dice = Dice.D4;
+        break;
+      case "d6":
+        dice = Dice.D6;
+        break;
+      case "d8":
+        dice = Dice.D8;
+        break;
+      case "d10":
+        dice = Dice.D10;
+        break;
+      case "d12":
+        dice = Dice.D12;
+        break;
+      case "d20":
+        dice = Dice.D20;
+        break;
+      case "d100":
+        dice = Dice.D100;
+        break;
+    }
+
+    return DamageDice(
+      int.parse(amount ?? "0"),
+      dice ?? Dice.D4,
     );
   }
 
