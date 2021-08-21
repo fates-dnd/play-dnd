@@ -1,8 +1,10 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
 import 'package:dnd_player_flutter/localization/equipment_locale.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -94,7 +96,8 @@ class EquippedSection extends StatelessWidget {
               ],
             ),
             for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
-              EquippedItem(equipment: state.equippedItems![i])
+              EquippedItem(equipment: state.equippedItems![i]),
+            UnarmedAttackRow(unarmedAttack: state.unarmedAttack,),
           ],
         ),
       ),
@@ -143,6 +146,53 @@ class EquippedItem extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Center(child: ActionableInfo(content: "1d4+2"))), // damage roll
+        ],
+      ),
+    );
+  }
+}
+
+class UnarmedAttackRow extends StatelessWidget {
+  final UnarmedAttack unarmedAttack;
+
+  const UnarmedAttackRow({Key? key, required this.unarmedAttack}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Безоружная атака",
+                  style: TextStyle(
+                    color: Color(0xDDDCDAD9),
+                    fontSize: 18,
+                  ),
+                ), // name
+                SizedBox(height: 2,),
+                Text(
+                  "Ближний бой",
+                  style: TextStyle(
+                    color: Color(0xAADCDAD9),
+                    fontSize: 12,
+                  ),
+                ), // range
+              ],
+            ),
+          ),
+
+          Expanded(
+            flex: 1,
+            child: Center(child: ActionableInfo(content: unarmedAttack.attackBonus.toBonusString()))), // attack roll
+          Expanded(
+            flex: 1,
+            child: Center(child: ActionableInfo(content: unarmedAttack.damage?.toString() ?? "0"))), // damage roll
         ],
       ),
     );

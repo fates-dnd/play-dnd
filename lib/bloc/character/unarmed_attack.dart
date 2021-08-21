@@ -5,5 +5,9 @@ class UnarmedAttack {
   final int? damage;
   final DamageDice? damageDice;
 
-  UnarmedAttack(this.attackBonus, this.damage, this.damageDice);
+  UnarmedAttack({
+    required this.attackBonus, 
+    this.damage, 
+    this.damageDice
+  });
 }

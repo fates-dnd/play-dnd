@@ -6,3 +6,14 @@ extension FirstWhereOrNullExtension<E> on List<E> {
     return null;
   }
 }
+
+extension ToBonusNumber on int {
+
+  String toBonusString() {
+    if (this > 0) {
+      return "+$this";
+    } else {
+      return this.toString();
+    }
+  }
+}

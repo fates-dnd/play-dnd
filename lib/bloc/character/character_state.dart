@@ -18,8 +18,6 @@ class CharacterState {
 
   final List<Equipment>? equippedItems;
 
-  final UnarmedAttack? unarmedAttack;
-
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -33,7 +31,6 @@ class CharacterState {
     this.skills,
     this.equipment,
     this.equippedItems,
-    this.unarmedAttack,
   }); 
 
   CharacterState copyWith({
@@ -112,6 +109,11 @@ class CharacterState {
   int get initiative => dexterityBonus;
 
   int get proficiencyBonus => calculateProficiencyBonus(level);
+
+  UnarmedAttack get unarmedAttack => UnarmedAttack(
+    attackBonus: strengthBonus + proficiencyBonus,
+    damage: strengthBonus,
+  );
 
   List<SkillBonus> get skillBonuses => skills
       ?.map((skill) => SkillBonus(
