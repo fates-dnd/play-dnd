@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class PagerWithIndicators extends StatefulWidget {
-
   final List<Widget> children;
 
-  const PagerWithIndicators({Key? key, required this.children}) : super(key: key);
+  const PagerWithIndicators({Key? key, required this.children})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -16,6 +16,11 @@ class PagerWithIndicatorsState extends State<PagerWithIndicators> {
   int currentPage = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
@@ -23,7 +28,12 @@ class PagerWithIndicatorsState extends State<PagerWithIndicators> {
         SizedBox(height: 24),
         Expanded(
           child: PageView(
-            children: widget.children,
+            children: widget.children
+                .map((e) => Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: e,
+                    ))
+                .toList(),
             onPageChanged: (newPage) => setState(() {
               currentPage = newPage;
             }),

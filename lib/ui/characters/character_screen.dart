@@ -39,7 +39,7 @@ class CharacterScreen extends StatelessWidget {
               ),
               SafeArea(
                 child: Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(
                     children: [
                       CharacterScreenHeader(character: character),
