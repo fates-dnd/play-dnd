@@ -10,11 +10,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'hive_utils.dart';
 
 void main() async {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent, // transparent status bar
-    statusBarIconBrightness: Brightness.light // dark text for status bar
-  ));
-
   setupTypeAdapters();
   await Hive.initFlutter();
   await Hive.openBox('characters');
@@ -28,6 +23,7 @@ class DndApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = ThemeData();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => CharacterCreatorBloc(
@@ -36,18 +32,20 @@ class DndApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'DnD',
-        theme: ThemeData(
+        theme: theme.copyWith(
+          colorScheme: theme.colorScheme.copyWith(
+            secondary: Color(0xFFFF5251),
+          ),
           primaryColor: Color(0xFF1A1E21),
           primaryColorLight: Color(0xFF272E32),
-          accentColor: Color(0xFFFF5251),
-          buttonColor: Color(0xFFFF5251),
           backgroundColor: Color(0xFF1A1E21),
           scaffoldBackgroundColor: Color(0xFF1A1E21),
           appBarTheme: AppBarTheme(
-            brightness: Brightness.dark,
             systemOverlayStyle: SystemUiOverlayStyle(
-              statusBarColor: Colors.white
-            )
+              statusBarColor: Color(0xFF1A1E21),
+            ),
+            color: Color(0xFF1A1E21),
+            elevation: 0,
           ),
           textTheme: TextTheme(
             headline1: TextStyle(

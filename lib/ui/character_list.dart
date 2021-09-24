@@ -5,6 +5,7 @@ import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/new_char_race.dart';
 import 'package:dnd_player_flutter/ui/characters/character_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterList extends StatelessWidget {
@@ -16,6 +17,7 @@ class CharacterList extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Персонажи"),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: BlocBuilder<CharacterListBloc, CharacterListState>(
           builder: (context, state) {
