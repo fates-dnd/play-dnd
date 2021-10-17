@@ -4,6 +4,7 @@ class Class {
   final String index;
   final String name;
   final List<Characteristic> savingThrows;
+  final Characteristic? spellcastingAbility;
 
   String get imageAsset => _indexToImageAsset();
 
@@ -11,6 +12,7 @@ class Class {
     this.index,
     this.name,
     this.savingThrows,
+    this.spellcastingAbility,
   );
 }
 

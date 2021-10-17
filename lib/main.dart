@@ -26,9 +26,9 @@ class DndApp extends StatelessWidget {
     final ThemeData theme = ThemeData();
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => CharacterCreatorBloc(
-          getIt.get<CharacterRepository>()
-        ))
+        BlocProvider(
+            create: (context) =>
+                CharacterCreatorBloc(getIt.get<CharacterRepository>()))
       ],
       child: MaterialApp(
         title: 'DnD',
@@ -38,7 +38,6 @@ class DndApp extends StatelessWidget {
           ),
           primaryColor: Color(0xFF1A1E21),
           primaryColorLight: Color(0xFF272E32),
-          backgroundColor: Color(0xFF1A1E21),
           scaffoldBackgroundColor: Color(0xFF1A1E21),
           appBarTheme: AppBarTheme(
             systemOverlayStyle: SystemUiOverlayStyle(
@@ -62,10 +61,12 @@ class DndApp extends StatelessWidget {
                 // section titles
                 fontSize: 18,
                 color: Color(0xFFDCDAD9)),
-            subtitle1: TextStyle( // description text
+            subtitle1: TextStyle(
+                // description text
                 fontSize: 16,
                 color: Color(0xFF9D9D9D)),
-            subtitle2: TextStyle( // subtitles
+            subtitle2: TextStyle(
+                // subtitles
                 fontSize: 12,
                 color: Color(0xFF9D9D9D)),
             bodyText1: TextStyle(
@@ -80,34 +81,27 @@ class DndApp extends StatelessWidget {
             ),
           ),
           inputDecorationTheme: InputDecorationTheme(
-            hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 18),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
-            enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
-            border: UnderlineInputBorder()
-          ),
+              hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 18),
+              focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
+              enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
+              border: UnderlineInputBorder()),
           outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-              primary: Color(0xFFFF5251),
-              side: BorderSide(color: Color(0xFFFF5251), width: 3),
-            )
-          ),
+              style: OutlinedButton.styleFrom(
+            primary: Color(0xFFFF5251),
+            side: BorderSide(color: Color(0xFFFF5251), width: 3),
+          )),
           textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              primary: Color(0xFF38282D),
-              textStyle: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              ),
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 8),
-              backgroundColor: Color(0xFFFF5251)
-            )
-          ),
+              style: TextButton.styleFrom(
+                  primary: Color(0xFF38282D),
+                  textStyle:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 8),
+                  backgroundColor: Color(0xFFFF5251))),
           dialogTheme: DialogTheme(
-            backgroundColor: Color(0xFF272E32),
-            titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)
-          ),
+              backgroundColor: Color(0xFF272E32),
+              titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)),
         ),
         initialRoute: '/',
         routes: {

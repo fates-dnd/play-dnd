@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/data/skills.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/ui/characters/characteristics_colors_map.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,16 +51,24 @@ class AbilityItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(skillBonus.skill.name, style: theme.textTheme.headline5,),
-                      SizedBox(height: 2,),
-                      Text(skillBonus.skill.characteristic.getName().toUpperCase(),
-                        style: theme.textTheme.subtitle2,)
+                      Text(
+                        skillBonus.skill.name,
+                        style: theme.textTheme.headline5,
+                      ),
+                      SizedBox(
+                        height: 2,
+                      ),
+                      Text(
+                        skillBonus.skill.characteristic.getName().toUpperCase(),
+                        style: theme.textTheme.subtitle2,
+                      )
                     ],
                   ),
                 ),
-                Text(skillBonus.bonus >= 0
-                    ? "+${skillBonus.bonus}"
-                    : skillBonus.bonus.toString(), style: theme.textTheme.headline2,)
+                Text(
+                  skillBonus.bonus.toBonusString(),
+                  style: theme.textTheme.headline2,
+                )
               ],
             ),
           ),

@@ -31,7 +31,7 @@ class CharacterState {
     this.skills,
     this.equipment,
     this.equippedItems,
-  }); 
+  });
 
   CharacterState copyWith({
     int? level,
@@ -110,21 +110,34 @@ class CharacterState {
 
   int get proficiencyBonus => calculateProficiencyBonus(level);
 
+  bool get isASpellcaster => clazz?.spellcastingAbility != null;
+
   UnarmedAttack get unarmedAttack => UnarmedAttack(
-    attackBonus: strengthBonus + proficiencyBonus,
-    damage: strengthBonus,
-  );
+        attackBonus: strengthBonus + proficiencyBonus,
+        damage: strengthBonus,
+      );
 
-  List<SkillBonus> get skillBonuses => skills
-      ?.map((skill) => SkillBonus(
-            skill,
-            getSkillBonus(skill),
-            false,
-          ))
-      .toList() ?? [];
+  List<SkillBonus> get skillBonuses =>
+      skills
+          ?.map((skill) => SkillBonus(
+                skill,
+                getCharacteristicBonus(skill.characteristic),
+                false,
+              ))
+          .toList() ??
+      [];
 
-  int getSkillBonus(Skill skill) {
-    switch (skill.characteristic) {
+  int? get spellcastingModifier => clazz?.spellcastingAbility != null
+      ? getCharacteristicBonus(clazz!.spellcastingAbility!)
+      : null;
+
+  int? get spellcastingAttack => (spellcastingModifier ?? 0) + proficiencyBonus;
+
+  int? get spellSavingThrow =>
+      8 + (spellcastingModifier ?? 0) + proficiencyBonus;
+
+  int getCharacteristicBonus(Characteristic characteristic) {
+    switch (characteristic) {
       case Characteristic.STRENGTH:
         return strengthBonus;
       case Characteristic.DEXTERITY:
@@ -141,8 +154,7 @@ class CharacterState {
   }
 
   bool isEquipped(Equipment equipment) {
-    return equippedItems
-      ?.any((element) => element.index == equipment.index)
-      ?? false;
+    return equippedItems?.any((element) => element.index == equipment.index) ??
+        false;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -235,9 +236,13 @@ class SavingThrowItem extends StatelessWidget {
           ProficiencyRing(filled: proficient),
           SizedBox(width: 8),
           Expanded(
-            child: Text(name, style: theme.textTheme.bodyText2,),
+            child: Text(
+              name,
+              style: theme.textTheme.bodyText2,
+            ),
           ),
-          Text(bonus >= 0 ? "+$bonus" : bonus.toString(), style: theme.textTheme.bodyText2?.copyWith(fontSize: 14))
+          Text(bonus.toBonusString(),
+              style: theme.textTheme.bodyText2?.copyWith(fontSize: 14))
         ],
       ),
     );
@@ -255,14 +260,15 @@ class ProficiencyRing extends StatelessWidget {
     return DottedBorder(
         borderType: BorderType.Circle,
         color: color,
-        child: filled ? Container(
-          width: 14,
-          height: 14,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle, color: color),
-        ) : SizedBox(
-          width: 14,
-          height: 14,
-        ));
+        child: filled
+            ? Container(
+                width: 14,
+                height: 14,
+                decoration: BoxDecoration(shape: BoxShape.circle, color: color),
+              )
+            : SizedBox(
+                width: 14,
+                height: 14,
+              ));
   }
 }

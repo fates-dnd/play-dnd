@@ -8,6 +8,8 @@ import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
+import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +28,7 @@ class CharacterScreen extends StatelessWidget {
         getIt<EquipmentRepository>(),
       )..add(SetCharacter(character)),
       child: AnnotatedRegion(
-        value: SystemUiOverlayStyle.dark,
+        value: SystemUiOverlayStyle.light,
         child: Scaffold(
           body: Stack(
             children: [
@@ -52,6 +54,7 @@ class CharacterScreen extends StatelessWidget {
                           BaseCharateristicsPage(),
                           AbilitiesPage(),
                           EquipmentPage(),
+                          SpellsPage(),
                         ],
                       )),
                     ],
@@ -170,9 +173,7 @@ class InitiativeIcon extends StatelessWidget {
             SizedBox(width: 8),
             BlocBuilder<CharacterBloc, CharacterState>(
               builder: (context, state) => Text(
-                state.initiative >= 0
-                    ? "+${state.initiative}"
-                    : state.initiative.toString(),
+                state.initiative.toBonusString(),
                 style: TextStyle(
                   fontSize: 18,
                   color: Color(0xFFDCDAD9),
@@ -207,7 +208,7 @@ class ProficiencyBonusInfo extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => NotActionInfo(
           assetUrl: "assets/stats/hammer.png",
-          value: "+${state.proficiencyBonus}",
+          value: state.proficiencyBonus.toBonusString(),
           color: Color(0xCCFB9538)),
     );
   }

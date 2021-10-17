@@ -140,7 +140,8 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
   }
 
   Widget _characteristics(BuildContext inputContext) {
-    final characterState = BlocProvider.of<CharacterCreatorBloc>(inputContext).state;
+    final characterState =
+        BlocProvider.of<CharacterCreatorBloc>(inputContext).state;
     final raceBonuses = characterState.race?.abilityBonuses;
 
     return Column(
@@ -181,7 +182,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                 ),
                 SizedBox(width: 4),
                 if (characteristicBonus.bonus != 0)
-                  Text("(+${characteristicBonus.bonus})",
+                  Text("(${characteristicBonus.bonus.toBonusString()})",
                       style: theme.textTheme.subtitle1),
               ],
             ),
@@ -200,8 +201,8 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
           nameFocusNode.unfocus();
           showDialog(
               context: context,
-              builder: (dialogContext) => _createCharacteristicDialog(
-                  context, characteristicBonus));
+              builder: (dialogContext) =>
+                  _createCharacteristicDialog(context, characteristicBonus));
         },
         child: Text(((state.getScoreForCharacteristic(
                         characteristicBonus.characteristic) ??
@@ -235,7 +236,8 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                       state.charisma,
                     ));
 
-                    Navigator.pushNamedAndRemoveUntil(context, '/', (r) => false);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, '/', (r) => false);
                   }
                 : null,
             child: Text("Сохранить")),
@@ -267,7 +269,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                     hintText: characteristicBonus.characteristic.getName()),
               )),
               SizedBox(width: 24),
-              Text("(+${characteristicBonus.bonus})",
+              Text("(${characteristicBonus.bonus.toBonusString()})",
                   style: theme.textTheme.subtitle1)
             ],
           ),

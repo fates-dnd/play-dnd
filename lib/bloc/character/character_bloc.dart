@@ -59,10 +59,12 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       currentEquipment.add(event.equipment);
       yield state.copyWith(equipment: currentEquipment);
     } else if (event is RemoveEquipmentItem) {
-      characterRepository.removeEquipmentFromCharacter(character, event.equipment);
+      characterRepository.removeEquipmentFromCharacter(
+          character, event.equipment);
 
       final currentEquipment = state.equipment ?? [];
-      currentEquipment.removeWhere((element) => element.index == event.equipment.index);
+      currentEquipment
+          .removeWhere((element) => element.index == event.equipment.index);
       yield state.copyWith(equipment: currentEquipment);
     } else if (event is EquipItem) {
       characterRepository.equipItem(character, event.equipment);
@@ -76,13 +78,15 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
       final currentEquippedItems = state.equippedItems ?? [];
       yield state.copyWith(
-        equippedItems: currentEquippedItems..removeWhere((element) => element.index == event.equipment.index),
+        equippedItems: currentEquippedItems
+          ..removeWhere((element) => element.index == event.equipment.index),
       );
     }
   }
 
   Future<List<Equipment>> _getCharacterEquipment() async {
-    final equipmentIndexes = characterRepository.getCharacterEquipmentIndexes(character);
+    final equipmentIndexes =
+        characterRepository.getCharacterEquipmentIndexes(character);
     final allEquipment = await equipmentRepository.getEquipment();
     return equipmentIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
@@ -90,7 +94,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   }
 
   Future<List<Equipment>> _getEquippedItems() async {
-    final equippedItemsIndexes = characterRepository.getCharacterEquippedItemsIndexes(character);
+    final equippedItemsIndexes =
+        characterRepository.getCharacterEquippedItemsIndexes(character);
     final allEquipment = await equipmentRepository.getEquipment();
     return equippedItemsIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
