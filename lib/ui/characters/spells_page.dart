@@ -10,6 +10,14 @@ class SpellsPage extends StatelessWidget {
       children: [
         Padding(padding: EdgeInsets.only(top: 8)),
         SpellcastingInfoRow(),
+        OutlinedButton(
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return SizedBox();
+            }));
+          },
+          child: Text("Добавить"),
+        ),
       ],
     );
   }
@@ -31,13 +39,13 @@ class SpellcastingInfoRow extends StatelessWidget {
             children: [
               SpellcastingInfoItem(
                   modifier: state.spellcastingModifier?.toBonusString() ?? "",
-                  description: "modifier"),
+                  description: "модификатор"),
               SpellcastingInfoItem(
                   modifier: state.spellcastingAttack?.toBonusString() ?? "",
-                  description: "attack"),
+                  description: "атака"),
               SpellcastingInfoItem(
                   modifier: state.spellSavingThrow.toString(),
-                  description: "saving throw"),
+                  description: "спас бросок"),
             ],
           ),
         );

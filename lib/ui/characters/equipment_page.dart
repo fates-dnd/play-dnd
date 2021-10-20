@@ -23,18 +23,19 @@ class EquipmentPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return EquipmentList(
-                        onEquipmentSelected: (item) {
-                          BlocProvider.of<CharacterBloc>(rootContext)
-                              .add(AddEquipmentItem(item));
-                        },
-                      );
-                    }));
-                  },
-                  child: Text("Добавить")),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return EquipmentList(
+                      onEquipmentSelected: (item) {
+                        BlocProvider.of<CharacterBloc>(rootContext)
+                            .add(AddEquipmentItem(item));
+                      },
+                    );
+                  }));
+                },
+                child: Text("Добавить"),
+              ),
             ],
           ),
           SizedBox(height: 14),
@@ -66,9 +67,7 @@ class EquippedSection extends StatelessWidget {
             ),
             Row(
               children: [
-                Expanded(
-                  flex: 3,
-                  child: SizedBox()),
+                Expanded(flex: 3, child: SizedBox()),
                 Expanded(
                   flex: 1,
                   child: Center(
@@ -97,7 +96,9 @@ class EquippedSection extends StatelessWidget {
             ),
             for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
               EquippedItem(equipment: state.equippedItems![i]),
-            UnarmedAttackRow(unarmedAttack: state.unarmedAttack,),
+            UnarmedAttackRow(
+              unarmedAttack: state.unarmedAttack,
+            ),
           ],
         ),
       ),
@@ -128,7 +129,9 @@ class EquippedItem extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ), // name
-                SizedBox(height: 2,),
+                SizedBox(
+                  height: 2,
+                ),
                 Text(
                   equipment.weaponRangeName,
                   style: TextStyle(
@@ -141,11 +144,13 @@ class EquippedItem extends StatelessWidget {
           ),
 
           Expanded(
-            flex: 1,
-            child: Center(child: ActionableInfo(content: "+4"))), // attack roll
+              flex: 1,
+              child:
+                  Center(child: ActionableInfo(content: "+4"))), // attack roll
           Expanded(
-            flex: 1,
-            child: Center(child: ActionableInfo(content: "1d4+2"))), // damage roll
+              flex: 1,
+              child: Center(
+                  child: ActionableInfo(content: "1d4+2"))), // damage roll
         ],
       ),
     );
@@ -155,7 +160,8 @@ class EquippedItem extends StatelessWidget {
 class UnarmedAttackRow extends StatelessWidget {
   final UnarmedAttack unarmedAttack;
 
-  const UnarmedAttackRow({Key? key, required this.unarmedAttack}) : super(key: key);
+  const UnarmedAttackRow({Key? key, required this.unarmedAttack})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +181,9 @@ class UnarmedAttackRow extends StatelessWidget {
                     fontSize: 18,
                   ),
                 ), // name
-                SizedBox(height: 2,),
+                SizedBox(
+                  height: 2,
+                ),
                 Text(
                   "Ближний бой",
                   style: TextStyle(
@@ -188,11 +196,17 @@ class UnarmedAttackRow extends StatelessWidget {
           ),
 
           Expanded(
-            flex: 1,
-            child: Center(child: ActionableInfo(content: unarmedAttack.attackBonus.toBonusString()))), // attack roll
+              flex: 1,
+              child: Center(
+                  child: ActionableInfo(
+                      content: unarmedAttack.attackBonus
+                          .toBonusString()))), // attack roll
           Expanded(
-            flex: 1,
-            child: Center(child: ActionableInfo(content: unarmedAttack.damage?.toString() ?? "0"))), // damage roll
+              flex: 1,
+              child: Center(
+                  child: ActionableInfo(
+                      content: unarmedAttack.damage?.toString() ??
+                          "0"))), // damage roll
         ],
       ),
     );
@@ -200,7 +214,6 @@ class UnarmedAttackRow extends StatelessWidget {
 }
 
 class ActionableInfo extends StatelessWidget {
-
   final String content;
 
   const ActionableInfo({Key? key, required this.content}) : super(key: key);
