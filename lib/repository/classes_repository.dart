@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/repository/mappers.dart';
 
 class ClassesRepository {
   final Future<String> Function() jsonReader;
@@ -37,7 +38,7 @@ class ClassesRepository {
   List<Characteristic> _readSavingThrows(List<dynamic> json) {
     return json.map((e) {
       final index = e["index"];
-      return _indexAsCharacteristic(index);
+      return indexAsCharacteristic(index);
     }).toList();
   }
 
@@ -46,25 +47,6 @@ class ClassesRepository {
       return null;
     }
     final index = json["spellcasting_ability"]["index"];
-    return _indexAsCharacteristic(index);
-  }
-
-  Characteristic _indexAsCharacteristic(String index) {
-    switch (index) {
-      case "str":
-        return Characteristic.STRENGTH;
-      case "dex":
-        return Characteristic.DEXTERITY;
-      case "con":
-        return Characteristic.CONSTITUTION;
-      case "int":
-        return Characteristic.INTELLECT;
-      case "wis":
-        return Characteristic.WISDOM;
-      case "cha":
-        return Characteristic.CHARISMA;
-      default:
-        throw ArgumentError("Index $index is not a characteristic.");
-    }
+    return indexAsCharacteristic(index);
   }
 }

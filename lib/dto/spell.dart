@@ -1,15 +1,19 @@
+import 'package:dnd_player_flutter/data/characteristics.dart';
+
 class Spell {
   final String index;
   final String name;
   final List<String> description;
   final String range;
-  final List<String> components;
+  final List<Component> components;
+  final String? material;
   final bool ritual;
   final String duration;
+  final bool concentration;
   final String castingTime;
   final int level;
-  final Damage damage;
-  final Dc dc;
+  final Damage? damage;
+  final Dc? dc;
   final School school;
   final List<String> classesIds;
 
@@ -19,8 +23,10 @@ class Spell {
     this.description,
     this.range,
     this.components,
+    this.material,
     this.ritual,
     this.duration,
+    this.concentration,
     this.castingTime,
     this.level,
     this.damage,
@@ -30,13 +36,21 @@ class Spell {
   );
 }
 
+enum Component {
+  VERBAL,
+  SOMATIC,
+  MATERIAL,
+}
+
 class Damage {
   final DamageType damageType;
-  final Map<String, String> damageAtCharacterLevel;
+  final Map<String, String>? damageAtCharacterLevel;
+  final Map<String, String>? damageAtSlotLevel;
 
   Damage(
     this.damageType,
     this.damageAtCharacterLevel,
+    this.damageAtSlotLevel,
   );
 }
 
@@ -57,24 +71,15 @@ enum DamageType {
 }
 
 class Dc {
-  final DcType dcType;
+  final Characteristic dcType;
   final DcSuccess dcSuccess;
-  final String description;
+  final String? description;
 
   Dc(
     this.dcType,
     this.dcSuccess,
     this.description,
   );
-}
-
-enum DcType {
-  STR,
-  DEX,
-  CON,
-  INT,
-  WIS,
-  CHA,
 }
 
 enum DcSuccess {
@@ -92,7 +97,7 @@ enum AreaOfEffect {
 }
 
 enum School {
-  ENCHANTMEN,
+  ENCHANTMENT,
   ABJURATION,
   TRANSMUTATION,
   NECROMANCY,
