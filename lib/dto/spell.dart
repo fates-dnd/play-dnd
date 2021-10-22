@@ -12,6 +12,7 @@ class Spell {
   final bool concentration;
   final String castingTime;
   final int level;
+  final Map<String, String> healAtSlotLevel;
   final Damage? damage;
   final Dc? dc;
   final School school;
@@ -29,6 +30,7 @@ class Spell {
     this.concentration,
     this.castingTime,
     this.level,
+    this.healAtSlotLevel,
     this.damage,
     this.dc,
     this.school,

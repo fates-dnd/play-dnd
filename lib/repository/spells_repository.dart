@@ -27,6 +27,7 @@ class SpellsRepository {
       json["concentration"],
       json["casting_time"],
       json["level"],
+      json["heal_at_slot_level"],
       _parseDamage(json["damage"]),
       _parseDc(json["dc"]),
       _parseSchool(json["school"]),
