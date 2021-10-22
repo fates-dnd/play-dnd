@@ -18,20 +18,20 @@ class SpellsRepository {
     return Spell(
       json["index"],
       json["name"],
-      json["desc"],
+      json["desc"].cast<String>(),
       json["range"],
-      _parseComponents(json["components"]),
+      _parseComponents(json["components"].cast<String>()),
       json["material"],
       json["ritual"],
       json["duration"],
       json["concentration"],
       json["casting_time"],
       json["level"],
-      json["heal_at_slot_level"],
+      json["heal_at_slot_level"]?.cast<String, String>(),
       _parseDamage(json["damage"]),
       _parseDc(json["dc"]),
       _parseSchool(json["school"]),
-      _parseClassesIds(json["classes"]),
+      _parseClassesIds(json["classes"].cast<Map<String, dynamic>>()),
     );
   }
 
@@ -50,15 +50,23 @@ class SpellsRepository {
     }).toList();
   }
 
-  Damage _parseDamage(Map<String, dynamic> damage) {
+  Damage? _parseDamage(Map<String, dynamic>? damage) {
+    if (damage == null) {
+      return null;
+    }
+
     return Damage(
       _parseDamageType(damage["damage_type"]),
-      damage["damage_at_character_level"],
-      damage["damage_at_slot_level"],
+      damage["damage_at_character_level"]?.cast<String, String>(),
+      damage["damage_at_slot_level"]?.cast<String, String>(),
     );
   }
 
-  DamageType _parseDamageType(Map<String, dynamic> damageType) {
+  DamageType? _parseDamageType(Map<String, dynamic>? damageType) {
+    if (damageType == null) {
+      return null;
+    }
+
     final index = damageType["index"];
     switch (index) {
       case "acid":
@@ -88,11 +96,15 @@ class SpellsRepository {
       case "thunder":
         return DamageType.THUNDER;
       default:
-        throw ArgumentError("$index is not a damage type.");
+        return null;
     }
   }
 
-  Dc _parseDc(Map<String, dynamic> dc) {
+  Dc? _parseDc(Map<String, dynamic>? dc) {
+    if (dc == null) {
+      return null;
+    }
+
     return Dc(
       indexAsCharacteristic(dc["dc_type"]["index"]),
       _parseDcSuccess(dc["dc_success"]),

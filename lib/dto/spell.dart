@@ -12,7 +12,7 @@ class Spell {
   final bool concentration;
   final String castingTime;
   final int level;
-  final Map<String, String> healAtSlotLevel;
+  final Map<String, String>? healAtSlotLevel;
   final Damage? damage;
   final Dc? dc;
   final School school;
@@ -45,7 +45,7 @@ enum Component {
 }
 
 class Damage {
-  final DamageType damageType;
+  final DamageType? damageType;
   final Map<String, String>? damageAtCharacterLevel;
   final Map<String, String>? damageAtSlotLevel;
 

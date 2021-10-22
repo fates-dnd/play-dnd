@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:test/expect.dart';
-import 'package:test/scaffolding.dart';
+import 'package:test/test.dart';
 
 void main() {
   late ClassesRepository classesRepository;
