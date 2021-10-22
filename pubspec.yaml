@@ -61,6 +61,7 @@ flutter:
     - assets/classes.json
     - assets/skills.json
     - assets/equipment.json
+    - assets/spells.json
 
     # background
     - assets/background.png
@@ -107,6 +108,9 @@ flutter:
     - assets/icons/2.0x/wizard.png
     - assets/icons/2.0x/druid.png
     - assets/icons/2.0x/monk.png
+
+    # shape
+    - assets/shape/romb.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

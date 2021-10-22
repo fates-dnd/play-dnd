@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/ui/spells/spells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dnd_player_flutter/utils.dart';
@@ -13,7 +14,7 @@ class SpellsPage extends StatelessWidget {
         OutlinedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SizedBox();
+              return SpellsList();
             }));
           },
           child: Text("Добавить"),

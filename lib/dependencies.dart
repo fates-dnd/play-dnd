@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/json_asset_loader.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,4 +22,5 @@ void registerDependencies() {
   ));
   getIt.registerSingleton<EquipmentRepository>(
       EquipmentRepository(readEquipmentJson));
+  getIt.registerSingleton<SpellsRepository>(SpellsRepository(readSpellsJson));
 }

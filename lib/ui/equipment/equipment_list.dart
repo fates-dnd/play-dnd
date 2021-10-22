@@ -18,7 +18,9 @@ class EquipmentList extends StatelessWidget {
       create: (context) =>
           EquipmentBloc(getIt.get<EquipmentRepository>())..add(LoadEquipment()),
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text("Снаряжение"),
+        ),
         body: BlocBuilder<EquipmentBloc, EquipmentState>(
           builder: (context, state) => ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 8),

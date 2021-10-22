@@ -1,6 +1,7 @@
 part of 'spells_bloc.dart';
 
-@immutable
-abstract class SpellsState {}
+class SpellsState {
+  final List<Spell> spells;
 
-class SpellsInitial extends SpellsState {}
+  SpellsState(this.spells);
+}

@@ -44,6 +44,7 @@ class DndApp extends StatelessWidget {
               statusBarColor: Color(0xFF1A1E21),
             ),
             color: Color(0xFF1A1E21),
+            toolbarTextStyle: TextStyle(color: Colors.white),
             elevation: 0,
           ),
           textTheme: TextTheme(
