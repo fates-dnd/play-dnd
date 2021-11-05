@@ -18,8 +18,13 @@ class SpellsList extends StatelessWidget {
         body: BlocBuilder<SpellsBloc, SpellsState>(
           builder: (context, state) {
             return ListView(
-              children:
-                  state.spells.map((spell) => SpellItem(spell: spell)).toList(),
+              children: state.spells
+                  .map((spell) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 4.0, horizontal: 12),
+                        child: SpellItem(spell: spell),
+                      ))
+                  .toList(),
             );
           },
         ),
