@@ -44,19 +44,11 @@ class CharacterScreen extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 16),
                   child: Column(
                     children: [
-                      CharacterScreenHeader(character: character),
+                      _CharacterScreenHeader(character: character),
                       SizedBox(
                         height: 18,
                       ),
-                      Expanded(
-                          child: PagerWithIndicators(
-                        children: [
-                          BaseCharateristicsPage(),
-                          AbilitiesPage(),
-                          EquipmentPage(),
-                          SpellsPage(),
-                        ],
-                      )),
+                      Expanded(child: Pages()),
                     ],
                   ),
                 ),
@@ -69,10 +61,10 @@ class CharacterScreen extends StatelessWidget {
   }
 }
 
-class CharacterScreenHeader extends StatelessWidget {
+class _CharacterScreenHeader extends StatelessWidget {
   final Character character;
 
-  const CharacterScreenHeader({Key? key, required this.character})
+  const _CharacterScreenHeader({Key? key, required this.character})
       : super(key: key);
 
   @override
@@ -102,18 +94,18 @@ class CharacterScreenHeader extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    HealthButtonIcon(),
-                    InitiativeIcon(),
-                    RestIcon(),
+                    _HealthButtonIcon(),
+                    _InitiativeIcon(),
+                    _RestIcon(),
                   ],
                 ),
               ),
-              NotActionInfo(
+              _NotActionInfo(
                   assetUrl: "assets/stats/shield.png",
                   value: "12",
                   color: Color(0xFFADADAD)),
               SizedBox(width: 12),
-              ProficiencyBonusInfo(),
+              _ProficiencyBonusInfo(),
             ],
           )
         ],
@@ -122,7 +114,7 @@ class CharacterScreenHeader extends StatelessWidget {
   }
 }
 
-class HealthButtonIcon extends StatelessWidget {
+class _HealthButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -156,7 +148,7 @@ class HealthButtonIcon extends StatelessWidget {
   }
 }
 
-class InitiativeIcon extends StatelessWidget {
+class _InitiativeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -187,7 +179,7 @@ class InitiativeIcon extends StatelessWidget {
   }
 }
 
-class RestIcon extends StatelessWidget {
+class _RestIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -202,11 +194,11 @@ class RestIcon extends StatelessWidget {
   }
 }
 
-class ProficiencyBonusInfo extends StatelessWidget {
+class _ProficiencyBonusInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) => NotActionInfo(
+      builder: (context, state) => _NotActionInfo(
           assetUrl: "assets/stats/hammer.png",
           value: state.proficiencyBonus.toBonusString(),
           color: Color(0xCCFB9538)),
@@ -214,12 +206,12 @@ class ProficiencyBonusInfo extends StatelessWidget {
   }
 }
 
-class NotActionInfo extends StatelessWidget {
+class _NotActionInfo extends StatelessWidget {
   final String assetUrl;
   final String value;
   final Color color;
 
-  const NotActionInfo({
+  const _NotActionInfo({
     Key? key,
     required this.assetUrl,
     required this.value,
@@ -249,6 +241,24 @@ class NotActionInfo extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class Pages extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) {
+        return PagerWithIndicators(
+          children: [
+            BaseCharateristicsPage(),
+            AbilitiesPage(),
+            EquipmentPage(),
+            if (state.clazz?.spellcastingAbility != null) SpellsPage(),
+          ],
+        );
+      },
     );
   }
 }

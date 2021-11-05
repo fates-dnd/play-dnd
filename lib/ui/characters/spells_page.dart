@@ -10,21 +10,14 @@ class SpellsPage extends StatelessWidget {
     return ListView(
       children: [
         Padding(padding: EdgeInsets.only(top: 8)),
-        SpellcastingInfoRow(),
-        OutlinedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SpellsList();
-            }));
-          },
-          child: Text("Добавить"),
-        ),
+        _SpellcastingInfoRow(),
+        _EditSpellsButton(),
       ],
     );
   }
 }
 
-class SpellcastingInfoRow extends StatelessWidget {
+class _SpellcastingInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -38,13 +31,13 @@ class SpellcastingInfoRow extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SpellcastingInfoItem(
+              _SpellcastingInfoItem(
                   modifier: state.spellcastingModifier?.toBonusString() ?? "",
                   description: "модификатор"),
-              SpellcastingInfoItem(
+              _SpellcastingInfoItem(
                   modifier: state.spellcastingAttack?.toBonusString() ?? "",
                   description: "атака"),
-              SpellcastingInfoItem(
+              _SpellcastingInfoItem(
                   modifier: state.spellSavingThrow.toString(),
                   description: "спас бросок"),
             ],
@@ -55,11 +48,11 @@ class SpellcastingInfoRow extends StatelessWidget {
   }
 }
 
-class SpellcastingInfoItem extends StatelessWidget {
+class _SpellcastingInfoItem extends StatelessWidget {
   final String modifier;
   final String description;
 
-  const SpellcastingInfoItem(
+  const _SpellcastingInfoItem(
       {Key? key, required this.modifier, required this.description})
       : super(key: key);
 
@@ -76,6 +69,24 @@ class SpellcastingInfoItem extends StatelessWidget {
           style: TextStyle(fontSize: 12),
         ),
       ],
+    );
+  }
+}
+
+class _EditSpellsButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) {
+        return OutlinedButton(
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return SpellsList(clazz: state.clazz);
+            }));
+          },
+          child: Text("Добавить"),
+        );
+      },
     );
   }
 }

@@ -1,16 +1,21 @@
 import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
+import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpellsList extends StatelessWidget {
+  final Class? clazz;
+
+  const SpellsList({Key? key, required this.clazz}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          SpellsBloc(getIt<SpellsRepository>())..add(LoadSpells()),
+          SpellsBloc(clazz, getIt<SpellsRepository>())..add(LoadSpells()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Заклинания"),
