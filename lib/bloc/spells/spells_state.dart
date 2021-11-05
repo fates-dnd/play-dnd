@@ -1,7 +1,21 @@
 part of 'spells_bloc.dart';
 
 class SpellsState {
-  final List<Spell> spells;
+  final List<SpellDisplayItem> spellDisplayItems;
 
-  SpellsState(this.spells);
+  SpellsState(this.spellDisplayItems);
+}
+
+abstract class SpellDisplayItem {}
+
+class LevelSeparatorItem extends SpellDisplayItem {
+  final int level;
+
+  LevelSeparatorItem(this.level);
+}
+
+class ActualSpellItem extends SpellDisplayItem {
+  final Spell spell;
+
+  ActualSpellItem(this.spell);
 }

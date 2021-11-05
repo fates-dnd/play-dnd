@@ -13,7 +13,23 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
     on<SpellsEvent>((event, emit) async {
       if (event is LoadSpells) {
         final spells = await repository.getSpells();
-        emit.call(SpellsState(spells));
+        spells.sort((left, right) => left.level.compareTo(right.level));
+
+        List<SpellDisplayItem> result = [];
+
+        var currentLevel = 0;
+        result.add(LevelSeparatorItem(currentLevel));
+        for (var i = 0; i < spells.length; ++i) {
+          final spell = spells[i];
+          if (spell.level != currentLevel) {
+            currentLevel = spell.level;
+            result.add(LevelSeparatorItem(currentLevel));
+          }
+
+          result.add(ActualSpellItem(spell));
+        }
+
+        emit.call(SpellsState(result));
       }
     });
   }

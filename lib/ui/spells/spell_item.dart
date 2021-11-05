@@ -1,4 +1,6 @@
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/ui/spells/spell_description_row.dart';
+import 'package:dnd_player_flutter/ui/spells/spell_info_extended.dart';
 import 'package:flutter/material.dart';
 
 class SpellItem extends StatelessWidget {
@@ -14,28 +16,38 @@ class SpellItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: theme.primaryColorLight,
           borderRadius: BorderRadius.circular(8)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(children: [
-            Expanded(
-              child: _SpellTitle(spell: spell),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            _PrepareButton(),
-          ]),
-          SizedBox(height: 2),
-          Text(spell.school.toString(),
-              style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9))),
-          SizedBox(height: 5),
-          _DescriptionRow(name: "Время", value: spell.castingTime),
-          _DescriptionRow(name: "Дистанция", value: spell.range),
-          _DescriptionRow(
-              name: "Компоненты", value: spell.components.join(", ")),
-          _DescriptionRow(name: "Длительность", value: spell.duration),
-        ],
+      child: InkWell(
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) => Padding(
+                    padding: const EdgeInsets.all(33.0),
+                    child: SpellInfoExtended(spell: spell),
+                  ));
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(children: [
+              Expanded(
+                child: _SpellTitle(spell: spell),
+              ),
+              SizedBox(
+                width: 8,
+              ),
+              _PrepareButton(),
+            ]),
+            SizedBox(height: 2),
+            Text(spell.school.toString(),
+                style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9))),
+            SizedBox(height: 5),
+            SpellDescriptionRow(name: "Время", value: spell.castingTime),
+            SpellDescriptionRow(name: "Дистанция", value: spell.range),
+            SpellDescriptionRow(
+                name: "Компоненты", value: spell.components.join(", ")),
+            SpellDescriptionRow(name: "Длительность", value: spell.duration),
+          ],
+        ),
       ),
     );
   }
@@ -101,27 +113,5 @@ class _ConcentrationMark extends StatelessWidget {
         )
       ],
     );
-  }
-}
-
-class _DescriptionRow extends StatelessWidget {
-  final String name;
-  final String value;
-
-  const _DescriptionRow({Key? key, required this.name, required this.value})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text.rich(TextSpan(
-      children: [
-        TextSpan(
-            text: name + ": ",
-            style: TextStyle(color: Color(0xAADCDAD9), fontSize: 12)),
-        TextSpan(
-            text: value,
-            style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 12)),
-      ],
-    ));
   }
 }

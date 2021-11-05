@@ -18,11 +18,12 @@ class SpellsList extends StatelessWidget {
         body: BlocBuilder<SpellsBloc, SpellsState>(
           builder: (context, state) {
             return ListView(
-              children: state.spells
-                  .map((spell) => Padding(
+              children: state.spellDisplayItems
+                  .map((spellDisplayItem) => Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 4.0, horizontal: 12),
-                        child: SpellItem(spell: spell),
+                        child:
+                            _SpellListItem(spellDisplayItem: spellDisplayItem),
                       ))
                   .toList(),
             );
@@ -30,5 +31,27 @@ class SpellsList extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _SpellListItem extends StatelessWidget {
+  final SpellDisplayItem spellDisplayItem;
+
+  const _SpellListItem({Key? key, required this.spellDisplayItem})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (spellDisplayItem is LevelSeparatorItem) {
+      return Text(
+        "Уровень " + (spellDisplayItem as LevelSeparatorItem).level.toString(),
+        style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
+      );
+    }
+    if (spellDisplayItem is ActualSpellItem) {
+      return SpellItem(spell: (spellDisplayItem as ActualSpellItem).spell);
+    }
+
+    return SizedBox();
   }
 }
