@@ -17,14 +17,50 @@ class SpellItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _SpellTitle(spell: spell),
+          Row(children: [
+            Expanded(
+              child: _SpellTitle(spell: spell),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            _PrepareButton(),
+          ]),
+          SizedBox(height: 2),
           Text(spell.school.toString(),
               style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9))),
           SizedBox(height: 5),
           _DescriptionRow(name: "Время", value: spell.castingTime),
           _DescriptionRow(name: "Дистанция", value: spell.range),
+          _DescriptionRow(
+              name: "Компоненты", value: spell.components.join(", ")),
           _DescriptionRow(name: "Длительность", value: spell.duration),
         ],
+      ),
+    );
+  }
+}
+
+class _PrepareButton extends StatelessWidget {
+  const _PrepareButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 25,
+      child: OutlinedButton(
+        onPressed: () {},
+        child: Text(
+          "Подготовить",
+          style: TextStyle(fontSize: 12),
+        ),
+        style: ButtonStyle(
+            padding: MaterialStateProperty.all(
+                EdgeInsets.symmetric(horizontal: 8, vertical: 0)),
+            side: MaterialStateProperty.all(
+                BorderSide(color: Color(0xFFFF5251), width: 1))),
       ),
     );
   }
@@ -77,14 +113,15 @@ class _DescriptionRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Text.rich(TextSpan(
       children: [
-        Text(
-          name + ": ",
-          style: TextStyle(color: Color(0xAADCDAD9), fontSize: 12),
-        ),
-        Text(value, style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 12)),
+        TextSpan(
+            text: name + ": ",
+            style: TextStyle(color: Color(0xAADCDAD9), fontSize: 12)),
+        TextSpan(
+            text: value,
+            style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 12)),
       ],
-    );
+    ));
   }
 }
