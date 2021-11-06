@@ -10,40 +10,164 @@ class SpellInfoExtended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      padding: EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          color: theme.primaryColorLight,
-          borderRadius: BorderRadius.circular(8)),
+    return Center(
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            spell.name,
-            style: TextStyle(fontSize: 24, color: Color(0xFFDCDAD9)),
-          ),
-          Text(
-            spell.school.toString(),
-            style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9)),
-          ),
-          SizedBox(height: 12),
-          SpellDescriptionRow(name: "Время", value: spell.castingTime),
-          SpellDescriptionRow(name: "Дистанция", value: spell.range),
-          SpellDescriptionRow(
-              name: "Компоненты", value: spell.components.join(", ")),
-          SpellDescriptionRow(name: "Длительность", value: spell.duration),
-          SizedBox(height: 24),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Divider(
-              height: 1,
-              color: Color(0xFFDCDAD9),
+          Container(
+            padding: EdgeInsets.all(16),
+            constraints: BoxConstraints(maxHeight: 500),
+            decoration: BoxDecoration(
+                color: theme.primaryColorLight,
+                borderRadius: BorderRadius.circular(8)),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                Text(
+                  spell.name,
+                  style: TextStyle(fontSize: 24, color: Color(0xFFDCDAD9)),
+                ),
+                Text(
+                  spell.school.toString(),
+                  style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9)),
+                ),
+                SizedBox(height: 12),
+                SpellDescriptionRow(name: "Время", value: spell.castingTime),
+                SpellDescriptionRow(name: "Дистанция", value: spell.range),
+                SpellDescriptionRow(
+                    name: "Компоненты", value: spell.components.join(", ")),
+                SpellDescriptionRow(
+                    name: "Длительность", value: spell.duration),
+                SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Divider(
+                    height: 1,
+                    color: Color(0xFFDCDAD9),
+                  ),
+                ),
+                SizedBox(height: 24),
+                Text(
+                  spell.description.join("\n\n"),
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 24),
+                if (spell.damage?.damageAtCharacterLevel != null)
+                  _DamagePerCharacterLevel(
+                      damagePerCharacterLevel:
+                          spell.damage?.damageAtCharacterLevel),
+                if (spell.damage?.damageAtSlotLevel != null)
+                  _DamagePerSpellLevel(
+                      damageAtSpellLevel: spell.damage?.damageAtSlotLevel),
+                if (spell.healAtSlotLevel != null)
+                  _HealPerSpellLevel(healPerSpellLevel: spell.healAtSlotLevel)
+              ],
             ),
           ),
-          SizedBox(height: 24),
-          Text(spell.description.join("\n\n"))
         ],
       ),
+    );
+  }
+}
+
+class _DamagePerSpellLevel extends StatelessWidget {
+  final Map<String, String>? damageAtSpellLevel;
+
+  const _DamagePerSpellLevel({Key? key, required this.damageAtSpellLevel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Урон на кругах:",
+          style: TextStyle(fontSize: 18),
+        ),
+        SizedBox(height: 4),
+        _EffectAtLevel(
+          descString: "Круг",
+          effectAtSpellLevel: damageAtSpellLevel,
+        ),
+      ],
+    );
+  }
+}
+
+class _DamagePerCharacterLevel extends StatelessWidget {
+  final Map<String, String>? damagePerCharacterLevel;
+
+  const _DamagePerCharacterLevel(
+      {Key? key, required this.damagePerCharacterLevel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Урон на уровне:",
+          style: TextStyle(fontSize: 18),
+        ),
+        SizedBox(height: 4),
+        _EffectAtLevel(
+          descString: "Уровень",
+          effectAtSpellLevel: damagePerCharacterLevel,
+        )
+      ],
+    );
+  }
+}
+
+class _HealPerSpellLevel extends StatelessWidget {
+  final Map<String, String>? healPerSpellLevel;
+
+  const _HealPerSpellLevel({Key? key, this.healPerSpellLevel})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Лечение на кругах:",
+          style: TextStyle(fontSize: 18),
+        ),
+        SizedBox(height: 4),
+        _EffectAtLevel(
+            descString: "Круг", effectAtSpellLevel: healPerSpellLevel),
+      ],
+    );
+  }
+}
+
+class _EffectAtLevel extends StatelessWidget {
+  final String descString;
+  final Map<String, String>? effectAtSpellLevel;
+
+  const _EffectAtLevel({
+    Key? key,
+    required this.descString,
+    required this.effectAtSpellLevel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: effectAtSpellLevel?.entries
+              .map((e) => Text.rich(TextSpan(children: [
+                    TextSpan(
+                        text: "$descString ${e.key}: ",
+                        style:
+                            TextStyle(color: Color(0xAADCDAD9), fontSize: 14)),
+                    TextSpan(text: e.value, style: TextStyle(fontSize: 14)),
+                  ])))
+              .toList() ??
+          [],
     );
   }
 }

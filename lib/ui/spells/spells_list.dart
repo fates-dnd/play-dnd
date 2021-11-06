@@ -49,7 +49,7 @@ class _SpellListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     if (spellDisplayItem is LevelSeparatorItem) {
       return Text(
-        "Уровень " + (spellDisplayItem as LevelSeparatorItem).level.toString(),
+        "Круг " + (spellDisplayItem as LevelSeparatorItem).level.toString(),
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     }

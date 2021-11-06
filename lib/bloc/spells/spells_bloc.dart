@@ -27,15 +27,14 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
 
         var currentLevel = 0;
         result.add(LevelSeparatorItem(currentLevel));
-        for (var i = 0; i < filteredSpells.length; ++i) {
-          final spell = spells[i];
+        filteredSpells.forEach((spell) {
           if (spell.level != currentLevel) {
             currentLevel = spell.level;
             result.add(LevelSeparatorItem(currentLevel));
           }
 
           result.add(ActualSpellItem(spell));
-        }
+        });
 
         emit.call(SpellsState(result));
       }
