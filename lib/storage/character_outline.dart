@@ -15,6 +15,9 @@ class CharacterOutline {
   final List<String> equipmentIndexes;
   final List<String> equippedItems;
 
+  final List<String> preparedSpells;
+  final List<String> learnedSpells;
+
   CharacterOutline(
     this.name,
     this.level,
@@ -28,12 +31,16 @@ class CharacterOutline {
     this.classIndex,
     this.equipmentIndexes,
     this.equippedItems,
+    this.preparedSpells,
+    this.learnedSpells,
   );
 
   static CharacterOutline fromCharacter(
     Character character, {
     required List<String> equipment,
     required List<String> equippedItems,
+    required List<String> preparedSpells,
+    required List<String> learnedSpells,
   }) {
     return CharacterOutline(
       character.name,
@@ -48,6 +55,8 @@ class CharacterOutline {
       character.clazz.index,
       equipment,
       equippedItems,
+      preparedSpells,
+      learnedSpells,
     );
   }
 
@@ -60,11 +69,12 @@ class CharacterOutline {
     int? baseIntelligence,
     int? baseWisdom,
     int? baseCharisma,
-
     String? raceIndex,
     String? classIndex,
     List<String>? equipmentIndexes,
     List<String>? equippedItems,
+    List<String>? preparedSpells,
+    List<String>? learnedSpells,
   }) {
     return CharacterOutline(
       name ?? this.name,
@@ -75,11 +85,12 @@ class CharacterOutline {
       baseIntelligence ?? this.baseIntelligence,
       baseWisdom ?? this.baseWisdom,
       baseCharisma ?? this.baseCharisma,
-
       raceIndex ?? this.raceIndex,
       classIndex ?? this.classIndex,
       equipmentIndexes ?? this.equipmentIndexes,
       equippedItems ?? this.equippedItems,
+      preparedSpells ?? this.preparedSpells,
+      learnedSpells ?? this.learnedSpells,
     );
   }
 }

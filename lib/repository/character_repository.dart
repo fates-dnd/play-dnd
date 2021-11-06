@@ -27,12 +27,13 @@ class CharacterRepository {
       character,
       equipment: [],
       equippedItems: [],
+      preparedSpells: [],
+      learnedSpells: [],
     ));
     box.put('character_list', currentList);
   }
 
-  void addEquipmentToCharacter(
-      Character character, Equipment equipment) {
+  void addEquipmentToCharacter(Character character, Equipment equipment) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {
       return;
@@ -41,31 +42,30 @@ class CharacterRepository {
         currentList.indexWhere((element) => element.name == character.name);
     final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
 
-    currentList[targetIndex] = currentList[targetIndex].copyWith(
-      equipmentIndexes: currentEquipmentList..add(equipment.index)
-    );
+    currentList[targetIndex] = currentList[targetIndex]
+        .copyWith(equipmentIndexes: currentEquipmentList..add(equipment.index));
 
     box.put('character_list', currentList);
   }
 
-  void removeEquipmentFromCharacter(
-    Character character, Equipment equipment) {
-      final currentList = _readCharacterOutlines();
-      if (currentList == null) {
-        return;
-      }
-
-      final targetIndex = currentList.indexWhere((element) => element.name == character.name);
-      final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
-      final currentEquippedItems = currentList[targetIndex].equippedItems;
-
-      currentList[targetIndex] = currentList[targetIndex].copyWith(
-        equipmentIndexes: currentEquipmentList..remove(equipment.index),
-        equippedItems: currentEquippedItems..remove(equipment.index),
-      );
-
-      box.put('character_list', currentList);
+  void removeEquipmentFromCharacter(Character character, Equipment equipment) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
     }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    final currentEquipmentList = currentList[targetIndex].equipmentIndexes;
+    final currentEquippedItems = currentList[targetIndex].equippedItems;
+
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      equipmentIndexes: currentEquipmentList..remove(equipment.index),
+      equippedItems: currentEquippedItems..remove(equipment.index),
+    );
+
+    box.put('character_list', currentList);
+  }
 
   void equipItem(Character character, Equipment equipment) {
     final currentList = _readCharacterOutlines();
@@ -73,7 +73,8 @@ class CharacterRepository {
       return;
     }
 
-    final targetIndex = currentList.indexWhere((element) => element.name == character.name);
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
     final currentEquippedItems = currentList[targetIndex].equippedItems;
     currentList[targetIndex] = currentList[targetIndex].copyWith(
       equippedItems: currentEquippedItems..add(equipment.index),
@@ -88,7 +89,8 @@ class CharacterRepository {
       return;
     }
 
-    final targetIndex = currentList.indexWhere((element) => element.name == character.name);
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
     final currentEquippedItems = currentList[targetIndex].equippedItems;
     currentList[targetIndex] = currentList[targetIndex].copyWith(
       equippedItems: currentEquippedItems..remove(equipment.index),
@@ -99,13 +101,15 @@ class CharacterRepository {
 
   List<String> getCharacterEquipmentIndexes(Character character) {
     final currentList = _readCharacterOutlines();
-    final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
+    final storedCharacter =
+        currentList?.firstWhere((element) => element.name == character.name);
     return storedCharacter?.equipmentIndexes ?? [];
   }
 
   List<String> getCharacterEquippedItemsIndexes(Character character) {
     final currentList = _readCharacterOutlines();
-    final storedCharacter = currentList?.firstWhere((element) => element.name == character.name);
+    final storedCharacter =
+        currentList?.firstWhere((element) => element.name == character.name);
     return storedCharacter?.equippedItems ?? [];
   }
 

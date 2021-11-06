@@ -1,7 +1,6 @@
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
-
 class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
   @override
   int get typeId => 0;
@@ -21,27 +20,21 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
       reader.readString(), // race
       reader.readString(), // class
 
-      readEquipmentIndexes(reader),
-      readEquippedItemsIndexes(reader),
+      readStringList(reader), // equipment indexes
+      readStringList(reader), // equipped items indexes
+
+      readStringList(reader), // prepared spells
+      readStringList(reader), // learned spells
     );
   }
 
-  List<String> readEquipmentIndexes(BinaryReader reader) {
-    final equipment = <String>[];
+  List<String> readStringList(BinaryReader reader) {
+    final result = <String>[];
     final total = reader.readInt();
     for (var i = 0; i < total; ++i) {
-      equipment.add(reader.readString());
+      result.add(reader.readString());
     }
-    return equipment;
-  }
-
-  List<String> readEquippedItemsIndexes(BinaryReader reader) {
-    final equippedItems = <String>[];
-    final total = reader.readInt();
-    for (var i = 0; i < total; ++i) {
-      equippedItems.add(reader.readString());
-    }
-    return equippedItems;
+    return result;
   }
 
   @override
@@ -65,6 +58,16 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
     writer.writeInt(obj.equippedItems.length);
     obj.equippedItems.forEach((element) {
+      writer.writeString(element);
+    });
+
+    writer.writeInt(obj.preparedSpells.length);
+    obj.preparedSpells.forEach((element) {
+      writer.writeString(element);
+    });
+
+    writer.writeInt(obj.learnedSpells.length);
+    obj.learnedSpells.forEach((element) {
       writer.writeString(element);
     });
   }
