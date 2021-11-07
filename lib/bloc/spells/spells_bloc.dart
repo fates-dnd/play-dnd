@@ -9,35 +9,90 @@ part 'spells_state.dart';
 
 class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
   final Class? clazz;
-  final SpellsRepository repository;
+  final SpellsRepository spellsRepository;
 
-  SpellsBloc(this.clazz, this.repository) : super(SpellsState([])) {
+  final List<Spell> preparedSpells;
+  final List<Spell> learnedSpells;
+
+  List<Spell> allAvailableSpells = [];
+
+  SpellsBloc(
+    this.clazz,
+    this.spellsRepository,
+    this.preparedSpells,
+    this.learnedSpells,
+  ) : super(SpellsState([])) {
     on<SpellsEvent>((event, emit) async {
       if (event is LoadSpells) {
-        final spells = await repository.getSpells();
-        spells.sort((left, right) => left.level.compareTo(right.level));
-        final filteredSpells = spells
-            .where((element) => element.classesIds.contains(clazz?.index));
-
-        if (filteredSpells.isEmpty) {
+        final spellDisplayItems = await loadSpells();
+        emit.call(SpellsState(spellDisplayItems));
+      } else if (event is PrepareSpell) {
+        if (preparedSpells
+            .any((element) => element.index == event.spell.index)) {
           return;
         }
-
-        List<SpellDisplayItem> result = [];
-
-        var currentLevel = 0;
-        result.add(LevelSeparatorItem(currentLevel));
-        filteredSpells.forEach((spell) {
-          if (spell.level != currentLevel) {
-            currentLevel = spell.level;
-            result.add(LevelSeparatorItem(currentLevel));
-          }
-
-          result.add(ActualSpellItem(spell));
-        });
-
-        emit.call(SpellsState(result));
+        preparedSpells.add(event.spell);
+        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+      } else if (event is UnprepareSpell) {
+        preparedSpells
+            .removeWhere((element) => element.index == event.spell.index);
+        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+      } else if (event is LearnSpell) {
+        if (learnedSpells
+            .any((element) => element.index == event.spell.index)) {
+          return;
+        }
+        learnedSpells.add(event.spell);
+        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+      } else if (event is UnlearnSpell) {
+        preparedSpells
+            .removeWhere((element) => element.index == event.spell.index);
+        learnedSpells
+            .removeWhere((element) => element.index == event.spell.index);
+        emit.call(SpellsState(getCompletedSpellDisplayItem()));
       }
     });
+  }
+
+  Future<List<SpellDisplayItem>> loadSpells() async {
+    final spells = await spellsRepository.getSpells();
+    spells.sort((left, right) => left.level.compareTo(right.level));
+    allAvailableSpells = spells
+        .where((element) => element.classesIds.contains(clazz?.index))
+        .toList();
+
+    return getCompletedSpellDisplayItem();
+  }
+
+  List<SpellDisplayItem> getCompletedSpellDisplayItem() {
+    final result = <SpellDisplayItem>[];
+    if (preparedSpells.isNotEmpty) {
+      result.add(PreparedSeparatorItem());
+      preparedSpells.forEach((spell) {
+        result.add(ActualSpellItem(spell));
+      });
+    }
+
+    if (learnedSpells.isNotEmpty) {
+      result.add(LearnedSeparatorItem());
+      learnedSpells.forEach((spell) {
+        result.add(ActualSpellItem(spell));
+      });
+    }
+
+    if (allAvailableSpells.isNotEmpty) {
+      var currentLevel = 0;
+      result.add(LevelSeparatorItem(currentLevel));
+      allAvailableSpells.forEach((spell) {
+        if (spell.level != currentLevel) {
+          currentLevel = spell.level;
+          result.add(LevelSeparatorItem(currentLevel));
+        }
+
+        result.add(ActualSpellItem(spell));
+      });
+    }
+
+    return result;
   }
 }

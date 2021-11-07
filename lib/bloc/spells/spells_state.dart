@@ -8,6 +8,10 @@ class SpellsState {
 
 abstract class SpellDisplayItem {}
 
+class PreparedSeparatorItem extends SpellDisplayItem {}
+
+class LearnedSeparatorItem extends SpellDisplayItem {}
+
 class LevelSeparatorItem extends SpellDisplayItem {
   final int level;
 

@@ -18,6 +18,10 @@ class CharacterState {
 
   final List<Equipment>? equippedItems;
 
+  final List<Spell>? preparedSpells;
+
+  final List<Spell>? learnedSpells;
+
   CharacterState({
     this.level = 1,
     this.strength = 10,
@@ -31,6 +35,8 @@ class CharacterState {
     this.skills,
     this.equipment,
     this.equippedItems,
+    this.preparedSpells,
+    this.learnedSpells,
   });
 
   CharacterState copyWith({
@@ -46,6 +52,8 @@ class CharacterState {
     List<Skill>? skills,
     List<Equipment>? equipment,
     List<Equipment>? equippedItems,
+    List<Spell>? preparedSpells,
+    List<Spell>? learnedSpells,
   }) {
     return CharacterState(
       level: level ?? this.level,
@@ -60,6 +68,8 @@ class CharacterState {
       skills: skills ?? this.skills,
       equipment: equipment ?? this.equipment,
       equippedItems: equippedItems ?? this.equippedItems,
+      preparedSpells: preparedSpells ?? this.preparedSpells,
+      learnedSpells: learnedSpells ?? this.learnedSpells,
     );
   }
 

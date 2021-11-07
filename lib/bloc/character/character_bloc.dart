@@ -10,6 +10,7 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';

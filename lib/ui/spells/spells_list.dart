@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SpellsList extends StatelessWidget {
   final Class? clazz;
 
-  const SpellsList({Key? key, required this.clazz}) : super(key: key);
+  final List<Spell>? preparedSpells;
+  final List<Spell>? learnedSpells;
+
+  const SpellsList({
+    Key? key,
+    required this.clazz,
+    this.preparedSpells,
+    this.learnedSpells,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          SpellsBloc(clazz, getIt<SpellsRepository>())..add(LoadSpells()),
+      create: (context) => SpellsBloc(
+        clazz,
+        getIt<SpellsRepository>(),
+        preparedSpells ?? [],
+        learnedSpells ?? [],
+      )..add(LoadSpells()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Заклинания"),
@@ -47,13 +60,22 @@ class _SpellListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (spellDisplayItem is LevelSeparatorItem) {
+    if (spellDisplayItem is PreparedSeparatorItem) {
+      return Text(
+        "Подготовленные заклинания",
+        style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
+      );
+    } else if (spellDisplayItem is LearnedSeparatorItem) {
+      return Text(
+        "Изученные заклинания",
+        style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
+      );
+    } else if (spellDisplayItem is LevelSeparatorItem) {
       return Text(
         "Круг " + (spellDisplayItem as LevelSeparatorItem).level.toString(),
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
-    }
-    if (spellDisplayItem is ActualSpellItem) {
+    } else if (spellDisplayItem is ActualSpellItem) {
       return SpellItem(spell: (spellDisplayItem as ActualSpellItem).spell);
     }
 

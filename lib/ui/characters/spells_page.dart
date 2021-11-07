@@ -81,7 +81,11 @@ class _EditSpellsButton extends StatelessWidget {
         return OutlinedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SpellsList(clazz: state.clazz);
+              return SpellsList(
+                clazz: state.clazz,
+                preparedSpells: state.preparedSpells,
+                learnedSpells: state.learnedSpells,
+              );
             }));
           },
           child: Text("Добавить"),

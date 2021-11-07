@@ -1,7 +1,9 @@
+import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_description_row.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_info_extended.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpellItem extends StatelessWidget {
   final Spell spell;
@@ -35,7 +37,7 @@ class SpellItem extends StatelessWidget {
               SizedBox(
                 width: 8,
               ),
-              _PrepareButton(),
+              _PrepareButton(spell: spell),
             ]),
             SizedBox(height: 2),
             Text(spell.school.toString(),
@@ -54,8 +56,11 @@ class SpellItem extends StatelessWidget {
 }
 
 class _PrepareButton extends StatelessWidget {
+  final Spell spell;
+
   const _PrepareButton({
     Key? key,
+    required this.spell,
   }) : super(key: key);
 
   @override
@@ -63,7 +68,9 @@ class _PrepareButton extends StatelessWidget {
     return Container(
       height: 25,
       child: OutlinedButton(
-        onPressed: () {},
+        onPressed: () {
+          BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(spell));
+        },
         child: Text(
           "Подготовить",
           style: TextStyle(fontSize: 12),
