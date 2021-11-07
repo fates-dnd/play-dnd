@@ -69,14 +69,18 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
     if (preparedSpells.isNotEmpty) {
       result.add(PreparedSeparatorItem());
       preparedSpells.forEach((spell) {
-        result.add(ActualSpellItem(spell));
+        final isLearned =
+            learnedSpells.any((element) => element.index == spell.index);
+        result.add(ActualSpellItem(spell, true, isLearned));
       });
     }
 
     if (learnedSpells.isNotEmpty) {
       result.add(LearnedSeparatorItem());
       learnedSpells.forEach((spell) {
-        result.add(ActualSpellItem(spell));
+        final isPrepared =
+            preparedSpells.any((element) => element.index == spell.index);
+        result.add(ActualSpellItem(spell, isPrepared, true));
       });
     }
 
@@ -89,7 +93,11 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
           result.add(LevelSeparatorItem(currentLevel));
         }
 
-        result.add(ActualSpellItem(spell));
+        final isPrepared =
+            preparedSpells.any((element) => element.index == spell.index);
+        final isLearned =
+            learnedSpells.any((element) => element.index == spell.index);
+        result.add(ActualSpellItem(spell, isPrepared, isLearned));
       });
     }
 

@@ -20,6 +20,12 @@ class LevelSeparatorItem extends SpellDisplayItem {
 
 class ActualSpellItem extends SpellDisplayItem {
   final Spell spell;
+  final bool isPrepared;
+  final bool? isLearned;
 
-  ActualSpellItem(this.spell);
+  ActualSpellItem(
+    this.spell,
+    this.isPrepared,
+    this.isLearned,
+  );
 }
