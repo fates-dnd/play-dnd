@@ -7,8 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpellItem extends StatelessWidget {
   final Spell spell;
+  final bool isPrepared;
 
-  const SpellItem({Key? key, required this.spell}) : super(key: key);
+  const SpellItem({Key? key, required this.spell, required this.isPrepared})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,8 @@ class SpellItem extends StatelessWidget {
               SizedBox(
                 width: 8,
               ),
-              _PrepareButton(spell: spell),
+              if (!isPrepared) _PrepareButton(spell: spell),
+              if (isPrepared) _UnprepareButton(spell: spell),
             ]),
             SizedBox(height: 2),
             Text(spell.school.toString(),
@@ -65,14 +68,49 @@ class _PrepareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _SpellActionButton(
+      title: "Подготовить",
+      onPressed: () {
+        BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(spell));
+      },
+    );
+  }
+}
+
+class _UnprepareButton extends StatelessWidget {
+  final Spell spell;
+
+  const _UnprepareButton({
+    Key? key,
+    required this.spell,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _SpellActionButton(
+      title: "Убрать",
+      onPressed: () {
+        BlocProvider.of<SpellsBloc>(context).add(UnprepareSpell(spell));
+      },
+    );
+  }
+}
+
+class _SpellActionButton extends StatelessWidget {
+  final String title;
+  final VoidCallback? onPressed;
+
+  const _SpellActionButton(
+      {Key? key, required this.title, required this.onPressed})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 25,
       child: OutlinedButton(
-        onPressed: () {
-          BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(spell));
-        },
+        onPressed: onPressed,
         child: Text(
-          "Подготовить",
+          title,
           style: TextStyle(fontSize: 12),
         ),
         style: ButtonStyle(

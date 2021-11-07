@@ -76,7 +76,11 @@ class _SpellListItem extends StatelessWidget {
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     } else if (spellDisplayItem is ActualSpellItem) {
-      return SpellItem(spell: (spellDisplayItem as ActualSpellItem).spell);
+      final actualSpellItem = (spellDisplayItem as ActualSpellItem);
+      return SpellItem(
+        spell: actualSpellItem.spell,
+        isPrepared: actualSpellItem.isPrepared,
+      );
     }
 
     return SizedBox();
