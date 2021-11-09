@@ -1,9 +1,12 @@
 part of 'spells_bloc.dart';
 
 class SpellsState {
+  final List<Spell> preparedSpells;
+  final List<Spell> learnedSpells;
+
   final List<SpellDisplayItem> spellDisplayItems;
 
-  SpellsState(this.spellDisplayItems);
+  SpellsState(this.preparedSpells, this.learnedSpells, this.spellDisplayItems);
 }
 
 abstract class SpellDisplayItem {}

@@ -14,6 +14,7 @@ import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
@@ -23,6 +24,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final CharacterRepository characterRepository;
   final SkillsRepository skillsRepository;
   final EquipmentRepository equipmentRepository;
+  final SpellsRepository spellsRepository;
 
   late Character character;
 
@@ -30,6 +32,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     this.characterRepository,
     this.skillsRepository,
     this.equipmentRepository,
+    this.spellsRepository,
   ) : super(CharacterState()) {
     on<CharacterEvent>((event, emit) async {
       emit(await processEvent(event));
@@ -41,19 +44,20 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       character = event.character;
 
       return CharacterState(
-        level: character.level,
-        strength: character.baseStrength,
-        dexterity: character.baseDexterity,
-        constitution: character.baseConstitution,
-        intelligence: character.baseIntelligence,
-        wisdom: character.baseWisdom,
-        charisma: character.baseCharisma,
-        race: character.race,
-        clazz: character.clazz,
-        skills: await skillsRepository.getSkills(),
-        equipment: await _getCharacterEquipment(),
-        equippedItems: await _getEquippedItems(),
-      );
+          level: character.level,
+          strength: character.baseStrength,
+          dexterity: character.baseDexterity,
+          constitution: character.baseConstitution,
+          intelligence: character.baseIntelligence,
+          wisdom: character.baseWisdom,
+          charisma: character.baseCharisma,
+          race: character.race,
+          clazz: character.clazz,
+          skills: await skillsRepository.getSkills(),
+          equipment: await _getCharacterEquipment(),
+          equippedItems: await _getEquippedItems(),
+          preparedSpells: await _getPreparedSpells(),
+          learnedSpells: await _getLearnedSpells());
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
 
@@ -83,6 +87,14 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         equippedItems: currentEquippedItems
           ..removeWhere((element) => element.index == event.equipment.index),
       );
+    } else if (event is UpdateSpells) {
+      characterRepository.updatePreparedSpells(character, event.preparedSpells);
+      characterRepository.updateLearnedSpells(character, event.learnedSpells);
+
+      return state.copyWith(
+        preparedSpells: event.preparedSpells,
+        learnedSpells: event.learnedSpells,
+      );
     }
 
     return state;
@@ -104,5 +116,27 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     return equippedItemsIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
     }).toList();
+  }
+
+  Future<List<Spell>> _getLearnedSpells() async {
+    final learnedSpellsIndexes =
+        characterRepository.getLearnedSpellsIndexes(character);
+    final allSpells = await spellsRepository.getSpells();
+
+    return learnedSpellsIndexes
+        .map((spellIndex) =>
+            allSpells.firstWhere((element) => element.index == spellIndex))
+        .toList();
+  }
+
+  Future<List<Spell>> _getPreparedSpells() async {
+    final preparedSpellsIndexes =
+        characterRepository.getPreparedSpellsIndexes(character);
+    final allSpells = await spellsRepository.getSpells();
+
+    return preparedSpellsIndexes
+        .map((spellIndex) =>
+            allSpells.firstWhere((element) => element.index == spellIndex))
+        .toList();
   }
 }

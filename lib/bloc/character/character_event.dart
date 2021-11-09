@@ -32,3 +32,10 @@ class UnequipItem extends CharacterEvent {
 
   UnequipItem(this.equipment);
 }
+
+class UpdateSpells extends CharacterEvent {
+  final List<Spell> preparedSpells;
+  final List<Spell> learnedSpells;
+
+  UpdateSpells(this.preparedSpells, this.learnedSpells);
+}

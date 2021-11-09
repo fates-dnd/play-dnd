@@ -10,14 +10,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SpellsList extends StatelessWidget {
   final Class? clazz;
 
-  final List<Spell>? preparedSpells;
-  final List<Spell>? learnedSpells;
+  final List<Spell> preparedSpells;
+  final List<Spell> learnedSpells;
+
+  final Function(List<Spell> preparedSpells, List<Spell> learnedSpells)
+      onSpellsUpdated;
 
   const SpellsList({
     Key? key,
     required this.clazz,
-    this.preparedSpells,
-    this.learnedSpells,
+    required this.preparedSpells,
+    required this.learnedSpells,
+    required this.onSpellsUpdated,
   }) : super(key: key);
 
   @override
@@ -26,26 +30,31 @@ class SpellsList extends StatelessWidget {
       create: (context) => SpellsBloc(
         clazz,
         getIt<SpellsRepository>(),
-        preparedSpells ?? [],
-        learnedSpells ?? [],
+        preparedSpells,
+        learnedSpells,
       )..add(LoadSpells()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Заклинания"),
         ),
-        body: BlocBuilder<SpellsBloc, SpellsState>(
-          builder: (context, state) {
-            return ListView(
-              children: state.spellDisplayItems
-                  .map((spellDisplayItem) => Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 4.0, horizontal: 12),
-                        child:
-                            _SpellListItem(spellDisplayItem: spellDisplayItem),
-                      ))
-                  .toList(),
-            );
+        body: BlocListener<SpellsBloc, SpellsState>(
+          listener: (context, state) {
+            onSpellsUpdated(state.preparedSpells, state.learnedSpells);
           },
+          child: BlocBuilder<SpellsBloc, SpellsState>(
+            builder: (context, state) {
+              return ListView(
+                children: state.spellDisplayItems
+                    .map((spellDisplayItem) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 4.0, horizontal: 12),
+                          child: _SpellListItem(
+                              spellDisplayItem: spellDisplayItem),
+                        ))
+                    .toList(),
+              );
+            },
+          ),
         ),
       ),
     );

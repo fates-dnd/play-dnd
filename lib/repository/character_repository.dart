@@ -127,6 +127,14 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  List<String> getPreparedSpellsIndexes(Character character) {
+    final currentList = _readCharacterOutlines();
+    final currentCharacterOutline =
+        currentList?.firstWhere((element) => element.name == character.name);
+
+    return currentCharacterOutline?.preparedSpells ?? [];
+  }
+
   void updateLearnedSpells(Character character, List<Spell> spells) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {
@@ -140,69 +148,12 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
-  void prepareSpell(Character character, Spell spell) {
+  List<String> getLearnedSpellsIndexes(Character character) {
     final currentList = _readCharacterOutlines();
-    if (currentList == null) {
-      return;
-    }
-    final targetIndex =
-        currentList.indexWhere((element) => element.name == character.name);
-    final currentPreparedSpells = currentList[targetIndex].preparedSpells;
+    final currentCharacterOutline =
+        currentList?.firstWhere((element) => element.name == character.name);
 
-    currentList[targetIndex] = currentList[targetIndex]
-        .copyWith(preparedSpells: currentPreparedSpells..add(spell.index));
-
-    box.put('character_list', currentList);
-  }
-
-  void unprepareSpell(Character character, Spell spell) {
-    final currentList = _readCharacterOutlines();
-    if (currentList == null) {
-      return;
-    }
-
-    final targetIndex =
-        currentList.indexWhere((element) => element.name == character.name);
-    final currentPreparedSpells = currentList[targetIndex].preparedSpells;
-    currentList[targetIndex] = currentList[targetIndex].copyWith(
-      preparedSpells: currentPreparedSpells..remove(spell.index),
-    );
-
-    box.put('character_list', currentList);
-  }
-
-  void learnSpell(Character character, Spell spell) {
-    final currentList = _readCharacterOutlines();
-    if (currentList == null) {
-      return;
-    }
-    final targetIndex =
-        currentList.indexWhere((element) => element.name == character.name);
-    final currentLearnedSpells = currentList[targetIndex].learnedSpells;
-
-    currentList[targetIndex] = currentList[targetIndex]
-        .copyWith(preparedSpells: currentLearnedSpells..add(spell.index));
-
-    box.put('character_list', currentList);
-  }
-
-  void unlearnSpell(Character character, Spell spell) {
-    final currentList = _readCharacterOutlines();
-    if (currentList == null) {
-      return;
-    }
-
-    final targetIndex =
-        currentList.indexWhere((element) => element.name == character.name);
-    final currrentLearnedSpells = currentList[targetIndex].learnedSpells;
-    final currentPreparedSpells = currentList[targetIndex].preparedSpells;
-
-    currentList[targetIndex] = currentList[targetIndex].copyWith(
-      learnedSpells: currrentLearnedSpells..remove(spell.index),
-      preparedSpells: currentPreparedSpells..remove(spell.index),
-    );
-
-    box.put('character_list', currentList);
+    return currentCharacterOutline?.learnedSpells ?? [];
   }
 
   Future<List<Character>> getCharacters() async {

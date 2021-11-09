@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
@@ -26,6 +27,7 @@ class CharacterScreen extends StatelessWidget {
         getIt<CharacterRepository>(),
         getIt<SkillsRepository>(),
         getIt<EquipmentRepository>(),
+        getIt<SpellsRepository>(),
       )..add(SetCharacter(character)),
       child: AnnotatedRegion(
         value: SystemUiOverlayStyle.light,

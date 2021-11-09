@@ -21,35 +21,40 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
     this.spellsRepository,
     this.preparedSpells,
     this.learnedSpells,
-  ) : super(SpellsState([])) {
+  ) : super(SpellsState(preparedSpells, learnedSpells, [])) {
     on<SpellsEvent>((event, emit) async {
       if (event is LoadSpells) {
         final spellDisplayItems = await loadSpells();
-        emit.call(SpellsState(spellDisplayItems));
+        emit.call(
+            SpellsState(preparedSpells, learnedSpells, spellDisplayItems));
       } else if (event is PrepareSpell) {
         if (preparedSpells
             .any((element) => element.index == event.spell.index)) {
           return;
         }
         preparedSpells.add(event.spell);
-        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(
+            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
       } else if (event is UnprepareSpell) {
         preparedSpells
             .removeWhere((element) => element.index == event.spell.index);
-        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(
+            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
       } else if (event is LearnSpell) {
         if (learnedSpells
             .any((element) => element.index == event.spell.index)) {
           return;
         }
         learnedSpells.add(event.spell);
-        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(
+            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
       } else if (event is UnlearnSpell) {
         preparedSpells
             .removeWhere((element) => element.index == event.spell.index);
         learnedSpells
             .removeWhere((element) => element.index == event.spell.index);
-        emit.call(SpellsState(getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(
+            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
       }
     });
   }

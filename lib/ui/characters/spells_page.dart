@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:dnd_player_flutter/ui/spells/spells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,12 +8,20 @@ import 'package:dnd_player_flutter/utils.dart';
 class SpellsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Padding(padding: EdgeInsets.only(top: 8)),
-        _SpellcastingInfoRow(),
-        _EditSpellsButton(),
-      ],
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) {
+        return ListView(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 8)),
+            _SpellcastingInfoRow(),
+            _EditSpellsButton(),
+          ]..addAll(state.preparedSpells?.map((spell) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: SpellItem(spell: spell, isPrepared: true),
+                  )) ??
+              []),
+        );
+      },
     );
   }
 }
@@ -80,11 +89,15 @@ class _EditSpellsButton extends StatelessWidget {
       builder: (context, state) {
         return OutlinedButton(
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
               return SpellsList(
                 clazz: state.clazz,
-                preparedSpells: state.preparedSpells,
-                learnedSpells: state.learnedSpells,
+                preparedSpells: state.preparedSpells ?? [],
+                learnedSpells: state.learnedSpells ?? [],
+                onSpellsUpdated: (newPreparedSpells, newLearnedSpells) {
+                  BlocProvider.of<CharacterBloc>(context)
+                      .add(UpdateSpells(newPreparedSpells, newLearnedSpells));
+                },
               );
             }));
           },
