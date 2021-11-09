@@ -8,8 +8,8 @@ import 'package:meta/meta.dart';
 part 'characteristics_bonus_event.dart';
 part 'characteristics_bonus_state.dart';
 
-class CharacteristicsBonusBloc extends Bloc<CharacteristicsBonusEvent, CharacteristicsBonusState> {
-
+class CharacteristicsBonusBloc
+    extends Bloc<CharacteristicsBonusEvent, CharacteristicsBonusState> {
   final Race race;
 
   Map<int, CharacteristicBonus?> selectedCharacteristics = {};
@@ -18,15 +18,20 @@ class CharacteristicsBonusBloc extends Bloc<CharacteristicsBonusEvent, Character
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
       selectedCharacteristics[i] = null;
     }
+
+    on<CharacteristicsBonusEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
   }
 
-  @override
-  Stream<CharacteristicsBonusState> mapEventToState(
+  Future<CharacteristicsBonusState> processEvent(
     CharacteristicsBonusEvent event,
-  ) async* {
+  ) async {
     if (event is SelectBonusCharacteristic) {
       selectedCharacteristics[event.position] = event.characteristicBonus;
-      yield CharacteristicsBonusState(selectedCharacteristics);
+      return CharacteristicsBonusState(selectedCharacteristics);
     }
+
+    return state;
   }
 }

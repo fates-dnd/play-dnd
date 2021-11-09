@@ -9,19 +9,22 @@ part 'character_list_event.dart';
 part 'character_list_state.dart';
 
 class CharacterListBloc extends Bloc<CharacterListEvent, CharacterListState> {
-
   final CharacterRepository repository;
 
-  CharacterListBloc(this.repository) : super(CharacterListState());
+  CharacterListBloc(this.repository) : super(CharacterListState()) {
+    on<CharacterListEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<CharacterListState> mapEventToState(
+  Future<CharacterListState> processEvent(
     CharacterListEvent event,
-  ) async* {
+  ) async {
     if (event is LoadCharacterList) {
       final characters = await repository.getCharacters();
-      yield CharacterListState()
-        ..characters = characters;
+      return CharacterListState()..characters = characters;
     }
+
+    return state;
   }
 }

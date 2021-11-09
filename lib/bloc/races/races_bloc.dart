@@ -14,12 +14,15 @@ class RacesBloc extends Bloc<RacesEvent, RacesState> {
   final RacesRepository racesRepository;
   final TraitsRepository traitsRepository;
 
-  RacesBloc(this.racesRepository, this.traitsRepository) : super(RacesEmpty());
+  RacesBloc(this.racesRepository, this.traitsRepository) : super(RacesEmpty()) {
+    on<RacesEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<RacesState> mapEventToState(
+  Future<RacesState> processEvent(
     RacesEvent event,
-  ) async* {
+  ) async {
     if (event is LoadRaces) {
       final races = await racesRepository.getRaces();
       final traits = await traitsRepository.getTraits();
@@ -29,7 +32,9 @@ class RacesBloc extends Bloc<RacesEvent, RacesState> {
               .where((trait) =>
                   trait.races.any((race) => race.index == event.index))
               .toList());
-      yield RacesLoaded(racesWithTraits);
+      return RacesLoaded(racesWithTraits);
     }
+
+    return state;
   }
 }

@@ -30,16 +30,17 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     this.characterRepository,
     this.skillsRepository,
     this.equipmentRepository,
-  ) : super(CharacterState());
+  ) : super(CharacterState()) {
+    on<CharacterEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<CharacterState> mapEventToState(
-    CharacterEvent event,
-  ) async* {
+  Future<CharacterState> processEvent(CharacterEvent event) async {
     if (event is SetCharacter) {
       character = event.character;
 
-      yield CharacterState(
+      return CharacterState(
         level: character.level,
         strength: character.baseStrength,
         dexterity: character.baseDexterity,
@@ -58,7 +59,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
       final currentEquipment = state.equipment ?? [];
       currentEquipment.add(event.equipment);
-      yield state.copyWith(equipment: currentEquipment);
+      return state.copyWith(equipment: currentEquipment);
     } else if (event is RemoveEquipmentItem) {
       characterRepository.removeEquipmentFromCharacter(
           character, event.equipment);
@@ -66,23 +67,25 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       final currentEquipment = state.equipment ?? [];
       currentEquipment
           .removeWhere((element) => element.index == event.equipment.index);
-      yield state.copyWith(equipment: currentEquipment);
+      return state.copyWith(equipment: currentEquipment);
     } else if (event is EquipItem) {
       characterRepository.equipItem(character, event.equipment);
 
       final currentEquippedItems = state.equippedItems ?? [];
-      yield state.copyWith(
+      return state.copyWith(
         equippedItems: currentEquippedItems..add(event.equipment),
       );
     } else if (event is UnequipItem) {
       characterRepository.unequipItem(character, event.equipment);
 
       final currentEquippedItems = state.equippedItems ?? [];
-      yield state.copyWith(
+      return state.copyWith(
         equippedItems: currentEquippedItems
           ..removeWhere((element) => element.index == event.equipment.index),
       );
     }
+
+    return state;
   }
 
   Future<List<Equipment>> _getCharacterEquipment() async {

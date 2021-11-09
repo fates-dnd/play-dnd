@@ -12,31 +12,29 @@ import 'package:meta/meta.dart';
 part 'character_creator_event.dart';
 part 'character_creator_state.dart';
 
-class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorState> {
-
+class CharacterCreatorBloc
+    extends Bloc<CharacterCreatorEvent, CharacterCreatorState> {
   final CharacterRepository repository;
 
-  CharacterCreatorBloc(this.repository) : super(CharacterCreatorState());
+  CharacterCreatorBloc(this.repository) : super(CharacterCreatorState()) {
+    on<CharacterCreatorEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<CharacterCreatorState> mapEventToState(
-    CharacterCreatorEvent event,
-  ) async* {
+  Future<CharacterCreatorState> processEvent(
+      CharacterCreatorEvent event) async {
     if (event is SubmitRace) {
-      yield state.copyWith(
+      return state.copyWith(
         race: event.race,
         traits: event.traits,
       );
     } else if (event is SubmitClass) {
-      yield state.copyWith(
-        clazz: event.clazz
-      );
+      return state.copyWith(clazz: event.clazz);
     } else if (event is SubmitBonusCharacteristics) {
-      yield state.copyWith(
-        bonusCharacteristic: event.bonusCharacteristics
-      );
+      return state.copyWith(bonusCharacteristic: event.bonusCharacteristics);
     } else if (event is SubmitCharacteristics) {
-      yield state.copyWith(
+      final newState = state.copyWith(
         name: event.name,
         level: event.level,
         strength: event.strength,
@@ -47,10 +45,14 @@ class CharacterCreatorBloc extends Bloc<CharacterCreatorEvent, CharacterCreatorS
         charisma: event.charisma,
       );
 
-      final characterToSave = state.toCharacter();
+      final characterToSave = newState.toCharacter();
       if (characterToSave != null) {
         repository.insertCharacter(characterToSave);
       }
+
+      return newState;
     }
+
+    return state;
   }
 }

@@ -18,12 +18,15 @@ class SetCharacteristicsBloc
   int? wisdomBase;
   int? charismaBase;
 
-  SetCharacteristicsBloc() : super(SetCharacteristicsState(level: 1));
+  SetCharacteristicsBloc() : super(SetCharacteristicsState(level: 1)) {
+    on<SetCharacteristicsEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<SetCharacteristicsState> mapEventToState(
+  Future<SetCharacteristicsState> processEvent(
     SetCharacteristicsEvent event,
-  ) async* {
+  ) async {
     if (event is SubmitName) {
       name = event.name;
     } else if (event is SubmitLevel) {
@@ -31,7 +34,7 @@ class SetCharacteristicsBloc
     } else if (event is SubmitCharacteristicsScore) {
       _saveCharacteristicsScore(event.characteristic, event.score);
     }
-    yield SetCharacteristicsState(
+    return SetCharacteristicsState(
         name: name,
         level: level,
         strength: strenghBase,

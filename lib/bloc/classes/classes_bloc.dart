@@ -9,24 +9,28 @@ part 'classes_event.dart';
 part 'classes_state.dart';
 
 class ClassesBloc extends Bloc<ClassesEvent, ClassesState> {
-
   final ClassesRepository classesRepository;
 
   Class? clazz;
   List<Class>? classes;
 
-  ClassesBloc(this.classesRepository) : super(ClassesInitial());
+  ClassesBloc(this.classesRepository) : super(ClassesInitial()) {
+    on<ClassesEvent>((event, emit) async {
+      emit(await processEvent(event));
+    });
+  }
 
-  @override
-  Stream<ClassesState> mapEventToState(
+  Future<ClassesState> processEvent(
     ClassesEvent event,
-  ) async* {
+  ) async {
     if (event is LoadClasses) {
       classes = await classesRepository.getClasses();
-      yield Classes(clazz, classes);
+      return Classes(clazz, classes);
     } else if (event is SelectClass) {
       clazz = event.clazz;
-      yield Classes(clazz, classes);
+      return Classes(clazz, classes);
     }
+
+    return state;
   }
 }
