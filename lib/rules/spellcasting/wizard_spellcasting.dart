@@ -1,4 +1,6 @@
-class WizardSpellcasting {
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+
+class WizardSpellcasting extends Spellcasting {
   // intelligence modifier + your wizard level (minimum of one spell)
   // learned spells 6 at first level, 2 every new levels
 
@@ -25,7 +27,8 @@ class WizardSpellcasting {
     20: 5,
   };
 
-  final Map<int, Map<int, int>> spellSlotsAtLevel = {
+  @override
+  final Map<int, Map<int, int>> spellSlotsPerLevel = {
     1: {1: 2},
     2: {1: 3},
     3: {1: 4, 2: 2},

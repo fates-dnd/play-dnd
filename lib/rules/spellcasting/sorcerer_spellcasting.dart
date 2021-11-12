@@ -1,4 +1,6 @@
-class SorcererSpellcasting {
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+
+class SorcererSpellcasting extends Spellcasting {
   final Map<int, int> cantripsKnownAtLevel = {
     1: 4,
     2: 4,
@@ -45,7 +47,8 @@ class SorcererSpellcasting {
     20: 15,
   };
 
-  final Map<int, Map<int, int>> spellSlotsAtLevel = {
+  @override
+  final Map<int, Map<int, int>> spellSlotsPerLevel = {
     1: {1: 2},
     2: {1: 3},
     3: {1: 4, 2: 2},

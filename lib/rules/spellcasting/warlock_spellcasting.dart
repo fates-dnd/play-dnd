@@ -1,4 +1,6 @@
-class WarlockSpellcasting {
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+
+class WarlockSpellcasting extends Spellcasting {
   final Map<int, int> cantripsKnownAtLevel = {
     1: 2,
     2: 2,
@@ -45,6 +47,7 @@ class WarlockSpellcasting {
     20: 15,
   };
 
+  @override
   final Map<int, Map<int, int>> spellSlotsPerLevel = {
     1: {1: 1},
     2: {1: 2},

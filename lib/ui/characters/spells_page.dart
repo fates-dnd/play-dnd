@@ -1,4 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character/spell_slots.dart';
+import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:dnd_player_flutter/ui/spells/spells_list.dart';
 import 'package:flutter/material.dart';
@@ -15,14 +17,37 @@ class SpellsPage extends StatelessWidget {
             Padding(padding: EdgeInsets.only(top: 8)),
             _SpellcastingInfoRow(),
             _EditSpellsButton(),
-          ]..addAll(state.preparedSpells?.map((spell) => Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4),
-                    child: SpellItem(spell: spell, isPrepared: true),
-                  )) ??
-              []),
+          ]..addAll(_unwrapSpells(state.groupedSpells, state.levelSpellSlots)),
         );
       },
     );
+  }
+
+  List<Widget> _unwrapSpells(
+    Map<int, List<Spell>>? spells,
+    Map<int, SpellSlots>? spellSlots,
+  ) {
+    final result = <Widget>[];
+    if (spells == null) {
+      return result;
+    }
+
+    spells.forEach((key, value) {
+      result.add(_SpellLevelTitleRow(
+          level: key, spellSlots: spellSlots != null ? spellSlots[key] : null));
+
+      value.forEach((spell) {
+        result.add(Padding(
+          padding: EdgeInsets.symmetric(vertical: 4),
+          child: SpellItem(
+            spell: spell,
+            isPrepared: true,
+          ),
+        ));
+      });
+    });
+
+    return result;
   }
 }
 
@@ -104,6 +129,43 @@ class _EditSpellsButton extends StatelessWidget {
           child: Text("Добавить"),
         );
       },
+    );
+  }
+}
+
+class _SpellLevelTitleRow extends StatelessWidget {
+  final int level;
+  final SpellSlots? spellSlots;
+
+  const _SpellLevelTitleRow({
+    Key? key,
+    required this.level,
+    required this.spellSlots,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            "Круг " + level.toString(),
+            style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
+          ),
+        ),
+      ]..addAll(
+          List.generate(
+            spellSlots?.totalSlots ?? 0,
+            (index) => Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Container(
+                width: 50,
+                height: 50,
+                color: Colors.red,
+              ),
+            ),
+          ),
+        ),
     );
   }
 }

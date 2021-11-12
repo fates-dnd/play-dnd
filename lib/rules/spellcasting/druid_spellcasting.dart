@@ -1,4 +1,6 @@
-class DruidSpellcasting {
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+
+class DruidSpellcasting extends Spellcasting {
   // prepared spells <WIS> + Druid Level
   final Map<int, int> cantripsKnownAtLevel = {
     1: 2,
@@ -23,7 +25,8 @@ class DruidSpellcasting {
     20: 4,
   };
 
-  final Map<int, Map<int, int>> spellsKnownAtLevel = {
+  @override
+  final Map<int, Map<int, int>> spellSlotsPerLevel = {
     1: {1: 2},
     2: {1: 3},
     3: {1: 4, 2: 2},

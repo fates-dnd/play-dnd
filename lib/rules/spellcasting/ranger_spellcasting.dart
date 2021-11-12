@@ -1,6 +1,29 @@
-class PaladinSpellcasting {
-  // prepared spells Charisma modifier + half your paladin level, rounded down
-  final Map<int, Map<int, int>> spellsKnownAtLevel = {
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+
+class RangerSpellcasting extends Spellcasting {
+  final Map<int, int> cantripsKnownAtLevel = {
+    2: 2,
+    3: 3,
+    4: 3,
+    5: 4,
+    6: 4,
+    7: 5,
+    8: 5,
+    9: 6,
+    10: 6,
+    11: 7,
+    12: 7,
+    13: 8,
+    14: 8,
+    15: 9,
+    16: 9,
+    17: 10,
+    18: 10,
+    19: 11,
+    20: 11,
+  };
+
+  final Map<int, Map<int, int>> spellSlotsPerLevel = {
     2: {1: 2},
     3: {1: 3},
     4: {1: 3},

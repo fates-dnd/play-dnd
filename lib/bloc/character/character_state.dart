@@ -19,8 +19,9 @@ class CharacterState {
   final List<Equipment>? equippedItems;
 
   final List<Spell>? preparedSpells;
-
   final List<Spell>? learnedSpells;
+
+  final Map<int, SpellSlots>? levelSpellSlots;
 
   CharacterState({
     this.level = 1,
@@ -37,6 +38,7 @@ class CharacterState {
     this.equippedItems,
     this.preparedSpells,
     this.learnedSpells,
+    this.levelSpellSlots,
   });
 
   CharacterState copyWith({
@@ -54,6 +56,7 @@ class CharacterState {
     List<Equipment>? equippedItems,
     List<Spell>? preparedSpells,
     List<Spell>? learnedSpells,
+    Map<int, SpellSlots>? levelSpellSlots,
   }) {
     return CharacterState(
       level: level ?? this.level,
@@ -69,7 +72,7 @@ class CharacterState {
       equipment: equipment ?? this.equipment,
       equippedItems: equippedItems ?? this.equippedItems,
       preparedSpells: preparedSpells ?? this.preparedSpells,
-      learnedSpells: learnedSpells ?? this.learnedSpells,
+      levelSpellSlots: levelSpellSlots ?? this.levelSpellSlots,
     );
   }
 
@@ -145,6 +148,17 @@ class CharacterState {
 
   int? get spellSavingThrow =>
       8 + (spellcastingModifier ?? 0) + proficiencyBonus;
+
+  Map<int, List<Spell>>? get groupedSpells =>
+      preparedSpells?.fold(<int, List<Spell>>{}, (previousValue, element) {
+        var list = previousValue![element.level];
+        if (list == null) {
+          list = <Spell>[];
+          previousValue[element.level] = list;
+        }
+        list.add(element);
+        return previousValue;
+      });
 
   int getCharacteristicBonus(Characteristic characteristic) {
     switch (characteristic) {

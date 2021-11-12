@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/bloc/character/proficiency_bonus_table.dart';
+import 'package:dnd_player_flutter/bloc/character/spell_slots.dart';
 import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/data/skills.dart';
@@ -15,6 +16,7 @@ import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
+import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
@@ -27,6 +29,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final SpellsRepository spellsRepository;
 
   late Character character;
+  late Spellcasting? spellcasting;
 
   CharacterBloc(
     this.characterRepository,
@@ -42,22 +45,25 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<CharacterState> processEvent(CharacterEvent event) async {
     if (event is SetCharacter) {
       character = event.character;
+      spellcasting = Spellcasting.createForClass(character.clazz);
 
       return CharacterState(
-          level: character.level,
-          strength: character.baseStrength,
-          dexterity: character.baseDexterity,
-          constitution: character.baseConstitution,
-          intelligence: character.baseIntelligence,
-          wisdom: character.baseWisdom,
-          charisma: character.baseCharisma,
-          race: character.race,
-          clazz: character.clazz,
-          skills: await skillsRepository.getSkills(),
-          equipment: await _getCharacterEquipment(),
-          equippedItems: await _getEquippedItems(),
-          preparedSpells: await _getPreparedSpells(),
-          learnedSpells: await _getLearnedSpells());
+        level: character.level,
+        strength: character.baseStrength,
+        dexterity: character.baseDexterity,
+        constitution: character.baseConstitution,
+        intelligence: character.baseIntelligence,
+        wisdom: character.baseWisdom,
+        charisma: character.baseCharisma,
+        race: character.race,
+        clazz: character.clazz,
+        skills: await skillsRepository.getSkills(),
+        equipment: await _getCharacterEquipment(),
+        equippedItems: await _getEquippedItems(),
+        preparedSpells: await _getPreparedSpells(),
+        learnedSpells: await _getLearnedSpells(),
+        levelSpellSlots: getSpellSlots(),
+      );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
 
@@ -138,5 +144,14 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         .map((spellIndex) =>
             allSpells.firstWhere((element) => element.index == spellIndex))
         .toList();
+  }
+
+  Map<int, SpellSlots>? getSpellSlots() {
+    final spellSlotsForLevel =
+        spellcasting?.getSpellSlotsForLevel(character.level);
+    return spellSlotsForLevel?.map((key, value) => MapEntry(
+          key,
+          SpellSlots(0, value),
+        ));
   }
 }
