@@ -62,7 +62,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         equippedItems: await _getEquippedItems(),
         preparedSpells: await _getPreparedSpells(),
         learnedSpells: await _getLearnedSpells(),
-        levelSpellSlots: getSpellSlots(),
+        levelSpellSlots: await getSpellSlots(),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -101,6 +101,12 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         preparedSpells: event.preparedSpells,
         learnedSpells: event.learnedSpells,
       );
+    } else if (event is UseSpellSlot) {
+      characterRepository.useSpellSlot(character, event.spellLevel);
+      return state.copyWith(levelSpellSlots: await getSpellSlots());
+    } else if (event is UnuseSpellSlot) {
+      characterRepository.unuseSpellSlot(character, event.spellLevel);
+      return state.copyWith(levelSpellSlots: await getSpellSlots());
     }
 
     return state;
@@ -146,12 +152,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         .toList();
   }
 
-  Map<int, SpellSlots>? getSpellSlots() {
+  Future<Map<int, SpellSlots>?> getSpellSlots() async {
     final spellSlotsForLevel =
         spellcasting?.getSpellSlotsForLevel(character.level);
-    return spellSlotsForLevel?.map((key, value) => MapEntry(
-          key,
-          SpellSlots(0, value),
-        ));
+    final usedSpellSlots =
+        await characterRepository.getUsedSpellSlots(character);
+    return spellSlotsForLevel?.map((key, value) {
+      return MapEntry(
+        key,
+        SpellSlots(usedSpellSlots[key] ?? 0, value),
+      );
+    });
   }
 }

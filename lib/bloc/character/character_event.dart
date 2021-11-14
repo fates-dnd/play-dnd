@@ -39,3 +39,15 @@ class UpdateSpells extends CharacterEvent {
 
   UpdateSpells(this.preparedSpells, this.learnedSpells);
 }
+
+class UseSpellSlot extends CharacterEvent {
+  final int spellLevel;
+
+  UseSpellSlot(this.spellLevel);
+}
+
+class UnuseSpellSlot extends CharacterEvent {
+  final int spellLevel;
+
+  UnuseSpellSlot(this.spellLevel);
+}

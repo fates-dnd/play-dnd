@@ -154,9 +154,9 @@ class _SpellLevelTitleRow extends StatelessWidget {
           ),
         ),
       ]..addAll(
-          List.generate(
-            spellSlots?.totalSlots ?? 0,
-            (index) => Padding(
+          List.generate(spellSlots?.totalSlots ?? 0, (index) {
+            final isUsed = index < (spellSlots?.usedSlots ?? 0);
+            return Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Container(
                 width: 32,
@@ -168,10 +168,11 @@ class _SpellLevelTitleRow extends StatelessWidget {
                       color: Color(0xFFDCDAD9),
                     )),
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () => BlocProvider.of<CharacterBloc>(context).add(
+                      isUsed ? UnuseSpellSlot(level) : UseSpellSlot(level)),
                   child: Padding(
                     padding: const EdgeInsets.all(4.0),
-                    child: index < (spellSlots?.usedSlots ?? 0)
+                    child: isUsed
                         ? Container(
                             decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
@@ -181,8 +182,8 @@ class _SpellLevelTitleRow extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-          ),
+            );
+          }),
         ),
     );
   }

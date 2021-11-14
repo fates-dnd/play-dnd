@@ -30,6 +30,7 @@ class CharacterRepository {
       equippedItems: [],
       preparedSpells: [],
       learnedSpells: [],
+      usedSpellSlots: {},
     ));
     box.put('character_list', currentList);
   }
@@ -154,6 +155,58 @@ class CharacterRepository {
         currentList?.firstWhere((element) => element.name == character.name);
 
     return currentCharacterOutline?.learnedSpells ?? [];
+  }
+
+  void useSpellSlot(Character character, int level) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
+    }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    final usedSpellSlots = currentList[targetIndex].usedSpellSlots;
+    usedSpellSlots[level] = (usedSpellSlots[level] ?? 0) + 1;
+
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      usedSpellSlots: usedSpellSlots,
+    );
+
+    box.put('character_list', currentList);
+  }
+
+  void unuseSpellSlot(Character character, int level) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return;
+    }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    final usedSpellSlots = currentList[targetIndex].usedSpellSlots;
+
+    if (!usedSpellSlots.containsKey(level)) {
+      return;
+    }
+
+    usedSpellSlots[level] = (usedSpellSlots[level] ?? 1) - 1;
+
+    currentList[targetIndex] = currentList[targetIndex].copyWith(
+      usedSpellSlots: usedSpellSlots,
+    );
+
+    box.put('character_list', currentList);
+  }
+
+  Future<Map<int, int>> getUsedSpellSlots(Character character) async {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return {};
+    }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    return currentList[targetIndex].usedSpellSlots;
   }
 
   Future<List<Character>> getCharacters() async {
