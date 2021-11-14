@@ -159,9 +159,27 @@ class _SpellLevelTitleRow extends StatelessWidget {
             (index) => Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Container(
-                width: 50,
-                height: 50,
-                color: Colors.red,
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      width: 3,
+                      color: Color(0xFFDCDAD9),
+                    )),
+                child: InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: index < (spellSlots?.usedSlots ?? 0)
+                        ? Container(
+                            decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Color(0xFFFF5251),
+                          ))
+                        : SizedBox(),
+                  ),
+                ),
               ),
             ),
           ),
