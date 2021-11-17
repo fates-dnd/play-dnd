@@ -237,14 +237,13 @@ class Pages extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
-        return PagerWithIndicators(
-          children: [
-            BaseCharateristicsPage(),
-            AbilitiesPage(),
-            EquipmentPage(),
-            if (state.clazz?.spellcastingAbility != null) SpellsPage(),
-          ],
-        );
+        return PagerWithIndicators(namedPages: {
+          "Характеристики": BaseCharateristicsPage(),
+          "Навыки": AbilitiesPage(),
+          "Снаряжение": EquipmentPage(),
+          if (state.clazz?.spellcastingAbility != null)
+            "Заклинания": SpellsPage(),
+        });
       },
     );
   }

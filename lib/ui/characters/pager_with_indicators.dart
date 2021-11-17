@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class PagerWithIndicators extends StatefulWidget {
-  final List<Widget> children;
+  final Map<String, Widget> namedPages;
 
-  const PagerWithIndicators({Key? key, required this.children})
+  const PagerWithIndicators({Key? key, required this.namedPages})
       : super(key: key);
 
   @override
@@ -13,29 +13,46 @@ class PagerWithIndicators extends StatefulWidget {
 }
 
 class PagerWithIndicatorsState extends State<PagerWithIndicators> {
-  int currentPage = 0;
+  late PageController _controller;
+  late PageController _indicatorController;
 
   @override
   void initState() {
     super.initState();
+    _controller = PageController()
+      ..addListener(
+        () => setState(() {
+          _indicatorController.jumpTo(_controller.offset * 0.3);
+        }),
+      );
+
+    _indicatorController = PageController(viewportFraction: 0.3);
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Indicators(size: widget.children.length, selectedItem: currentPage),
+        Container(
+          height: 100,
+          child: PageView(
+            controller: _indicatorController,
+            padEnds: false,
+            children: widget.namedPages.keys
+                .map((title) => IndicatorItem(title: title, opacity: 1.0))
+                .toList(),
+          ),
+        ),
         Expanded(
           child: PageView(
-            children: widget.children
+            children: widget.namedPages.values
                 .map((e) => Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: e,
                     ))
                 .toList(),
-            onPageChanged: (newPage) => setState(() {
-              currentPage = newPage;
-            }),
+            controller: _controller,
           ),
         ),
       ],
@@ -43,47 +60,21 @@ class PagerWithIndicatorsState extends State<PagerWithIndicators> {
   }
 }
 
-class Indicators extends StatelessWidget {
-  final int size;
-  final int selectedItem;
+class IndicatorItem extends StatelessWidget {
+  final String title;
+  final double opacity;
 
-  const Indicators({Key? key, required this.size, required this.selectedItem})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          for (var i = 0; i < size; ++i)
-            Indicator(
-              active: i == selectedItem,
-            )
-        ],
-      ),
-    );
-  }
-}
-
-class Indicator extends StatelessWidget {
-  final bool active;
-
-  const Indicator({Key? key, required this.active}) : super(key: key);
+  const IndicatorItem({
+    Key? key,
+    required this.title,
+    required this.opacity,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(4),
-      child: Container(
-        width: 10,
-        height: 10,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: active ? Color(0xFF1A1E21) : Color(0xFF9F9E9D)),
-      ),
+    return Text(
+      title,
+      style: TextStyle(color: Color(0xFFE5E1DE)),
     );
   }
 }
