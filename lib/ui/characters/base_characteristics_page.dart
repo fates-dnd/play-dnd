@@ -12,106 +12,111 @@ class BaseCharateristicsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) => ListView(
-        children: [
-          GridView.count(
-            shrinkWrap: true,
-            crossAxisCount: 3,
-            mainAxisSpacing: 24,
-            crossAxisSpacing: 24,
-            children: [
-              CharacteristicItem(
-                name: "Сила",
-                bonus: state.strengthBonus,
-                score: state.strength,
-                accent: characteristicToColor[Characteristic.STRENGTH],
-              ),
-              CharacteristicItem(
-                name: "Ловкость",
-                bonus: state.dexterityBonus,
-                score: state.dexterity,
-                accent: characteristicToColor[Characteristic.DEXTERITY],
-              ),
-              CharacteristicItem(
-                name: "Телосложение",
-                bonus: state.constitutionBonus,
-                score: state.constitution,
-                accent: characteristicToColor[Characteristic.CONSTITUTION],
-              ),
-              CharacteristicItem(
-                name: "Интеллект",
-                bonus: state.intelligenceBonus,
-                score: state.intelligence,
-                accent: characteristicToColor[Characteristic.INTELLECT],
-              ),
-              CharacteristicItem(
-                name: "Мудрость",
-                bonus: state.wisdomBonus,
-                score: state.wisdom,
-                accent: characteristicToColor[Characteristic.WISDOM],
-              ),
-              CharacteristicItem(
-                name: "Харизма",
-                bonus: state.charismaBonus,
-                score: state.charisma,
-                accent: characteristicToColor[Characteristic.CHARISMA],
-              ),
-            ],
-          ),
-          SizedBox(height: 28),
-          Text("Спас броски", style: theme.textTheme.headline2),
-          SizedBox(height: 12),
-          GridView.count(
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 4 / 1,
-            crossAxisCount: 2,
-            shrinkWrap: true,
-            children: [
-              SavingThrowItem(
+      builder: (context, state) => ScrollConfiguration(
+        behavior: const ScrollBehavior().copyWith(overscroll: false),
+        child: ListView(
+          children: [
+            GridView.count(
+              shrinkWrap: true,
+              crossAxisCount: 3,
+              mainAxisSpacing: 24,
+              crossAxisSpacing: 24,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                CharacteristicItem(
                   name: "Сила",
-                  bonus: state.strengthSavingThrow,
+                  bonus: state.strengthBonus,
+                  score: state.strength,
+                  accent: characteristicToColor[Characteristic.STRENGTH],
+                ),
+                CharacteristicItem(
+                  name: "Ловкость",
+                  bonus: state.dexterityBonus,
+                  score: state.dexterity,
+                  accent: characteristicToColor[Characteristic.DEXTERITY],
+                ),
+                CharacteristicItem(
+                  name: "Телосложение",
+                  bonus: state.constitutionBonus,
+                  score: state.constitution,
+                  accent: characteristicToColor[Characteristic.CONSTITUTION],
+                ),
+                CharacteristicItem(
+                  name: "Интеллект",
+                  bonus: state.intelligenceBonus,
+                  score: state.intelligence,
+                  accent: characteristicToColor[Characteristic.INTELLECT],
+                ),
+                CharacteristicItem(
+                  name: "Мудрость",
+                  bonus: state.wisdomBonus,
+                  score: state.wisdom,
+                  accent: characteristicToColor[Characteristic.WISDOM],
+                ),
+                CharacteristicItem(
+                  name: "Харизма",
+                  bonus: state.charismaBonus,
+                  score: state.charisma,
+                  accent: characteristicToColor[Characteristic.CHARISMA],
+                ),
+              ],
+            ),
+            SizedBox(height: 28),
+            Text("Спас броски", style: theme.textTheme.headline2),
+            SizedBox(height: 12),
+            GridView.count(
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 4 / 1,
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                SavingThrowItem(
+                    name: "Сила",
+                    bonus: state.strengthSavingThrow,
+                    proficient: state.clazz?.savingThrows
+                            .contains(Characteristic.STRENGTH) ??
+                        false),
+                SavingThrowItem(
+                  name: "Ловкость",
+                  bonus: state.dexteritySavingThrow,
                   proficient: state.clazz?.savingThrows
-                          .contains(Characteristic.STRENGTH) ??
-                      false),
-              SavingThrowItem(
-                name: "Ловкость",
-                bonus: state.dexteritySavingThrow,
-                proficient: state.clazz?.savingThrows
-                        .contains(Characteristic.DEXTERITY) ??
-                    false,
-              ),
-              SavingThrowItem(
-                name: "Телосложение",
-                bonus: state.constitutionSavingThrow,
-                proficient: state.clazz?.savingThrows
-                        .contains(Characteristic.CONSTITUTION) ??
-                    false,
-              ),
-              SavingThrowItem(
-                name: "Интеллект",
-                bonus: state.intelligenceSavingThrow,
-                proficient: state.clazz?.savingThrows
-                        .contains(Characteristic.INTELLECT) ??
-                    false,
-              ),
-              SavingThrowItem(
-                name: "Мудрость",
-                bonus: state.wisdomSavingThrow,
-                proficient:
-                    state.clazz?.savingThrows.contains(Characteristic.WISDOM) ??
-                        false,
-              ),
-              SavingThrowItem(
-                name: "Харизма",
-                bonus: state.charismaSavingThrow,
-                proficient: state.clazz?.savingThrows
-                        .contains(Characteristic.CHARISMA) ??
-                    false,
-              ),
-            ],
-          ),
-        ],
+                          .contains(Characteristic.DEXTERITY) ??
+                      false,
+                ),
+                SavingThrowItem(
+                  name: "Телосложение",
+                  bonus: state.constitutionSavingThrow,
+                  proficient: state.clazz?.savingThrows
+                          .contains(Characteristic.CONSTITUTION) ??
+                      false,
+                ),
+                SavingThrowItem(
+                  name: "Интеллект",
+                  bonus: state.intelligenceSavingThrow,
+                  proficient: state.clazz?.savingThrows
+                          .contains(Characteristic.INTELLECT) ??
+                      false,
+                ),
+                SavingThrowItem(
+                  name: "Мудрость",
+                  bonus: state.wisdomSavingThrow,
+                  proficient: state.clazz?.savingThrows
+                          .contains(Characteristic.WISDOM) ??
+                      false,
+                ),
+                SavingThrowItem(
+                  name: "Харизма",
+                  bonus: state.charismaSavingThrow,
+                  proficient: state.clazz?.savingThrows
+                          .contains(Characteristic.CHARISMA) ??
+                      false,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

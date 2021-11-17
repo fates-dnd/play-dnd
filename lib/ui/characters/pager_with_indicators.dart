@@ -25,7 +25,6 @@ class PagerWithIndicatorsState extends State<PagerWithIndicators> {
     return Column(
       children: [
         Indicators(size: widget.children.length, selectedItem: currentPage),
-        SizedBox(height: 24),
         Expanded(
           child: PageView(
             children: widget.children
@@ -53,15 +52,18 @@ class Indicators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        for (var i = 0; i < size; ++i)
-          Indicator(
-            active: i == selectedItem,
-          )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          for (var i = 0; i < size; ++i)
+            Indicator(
+              active: i == selectedItem,
+            )
+        ],
+      ),
     );
   }
 }

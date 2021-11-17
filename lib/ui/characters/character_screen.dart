@@ -12,7 +12,6 @@ import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterScreen extends StatelessWidget {
@@ -29,33 +28,18 @@ class CharacterScreen extends StatelessWidget {
         getIt<EquipmentRepository>(),
         getIt<SpellsRepository>(),
       )..add(SetCharacter(character)),
-      child: AnnotatedRegion(
-        value: SystemUiOverlayStyle.light,
+      child: SafeArea(
         child: Scaffold(
-          body: Stack(
-            children: [
-              Container(
-                height: 300,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Color(0xFFE5E1DE),
-                ),
-              ),
-              SafeArea(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  child: Column(
-                    children: [
-                      _CharacterScreenHeader(character: character),
-                      SizedBox(
-                        height: 18,
-                      ),
-                      Expanded(child: Pages()),
-                    ],
-                  ),
-                ),
-              ),
-            ],
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverToBoxAdapter(
+                  child: _CharacterScreenHeader(character: character),
+                )
+              ];
+            },
+            body: Pages(),
           ),
         ),
       ),
@@ -71,8 +55,9 @@ class _CharacterScreenHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16),
+    return Container(
+      color: Color(0xFFE5E1DE),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
