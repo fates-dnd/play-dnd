@@ -4,9 +4,11 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/new_char_race.dart';
 import 'package:dnd_player_flutter/ui/characters/character_screen.dart';
+import 'package:dnd_player_flutter/ui/settings/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CharacterList extends StatelessWidget {
   @override
@@ -16,8 +18,17 @@ class CharacterList extends StatelessWidget {
         ..add(LoadCharacterList()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Персонажи"),
+          title: Text(AppLocalizations.of(context)!.characters),
           systemOverlayStyle: SystemUiOverlayStyle.light,
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  );
+                },
+                icon: Icon(Icons.settings)),
+          ],
         ),
         body: BlocBuilder<CharacterListBloc, CharacterListState>(
           builder: (context, state) {
