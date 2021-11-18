@@ -1,6 +1,8 @@
 import 'package:dnd_player_flutter/data/dice.dart';
 import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 
+import 'damage_type.dart';
+
 class Equipment {
   final String index;
   final String name;
@@ -76,16 +78,9 @@ class Cost {
 
 class Damage {
   final DamageDice damageDice;
-  final DamageType damageType;
+  final DamageType? damageType;
 
   Damage(this.damageDice, this.damageType);
-}
-
-class DamageType {
-  final String index;
-  final String name;
-
-  DamageType(this.index, this.name);
 }
 
 class DamageDice {

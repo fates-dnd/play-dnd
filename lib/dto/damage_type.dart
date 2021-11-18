@@ -1,0 +1,15 @@
+enum DamageType {
+  ACID,
+  SLASHING,
+  NECROTIC,
+  RADIANT,
+  FIRE,
+  LIGHTNING,
+  POISON,
+  COLD,
+  BLUDGEONING,
+  FORCE,
+  PSYCHIC,
+  PIERCING,
+  THUNDER,
+}

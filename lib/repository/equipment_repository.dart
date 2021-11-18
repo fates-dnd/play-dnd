@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/dice.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
+import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
 
 class EquipmentRepository {
   final Future<String> Function() jsonReader;
@@ -61,7 +62,7 @@ class EquipmentRepository {
 
     return Damage(
       _damageDiceFromString(json["damage_dice"]),
-      _damageTypeFromJson(json["damage_type"]),
+      parseDamageType(json["damage_type"]),
     );
   }
 
@@ -101,13 +102,6 @@ class EquipmentRepository {
     return DamageDice(
       int.parse(amount ?? "0"),
       dice ?? Dice.D4,
-    );
-  }
-
-  DamageType _damageTypeFromJson(Map<String, dynamic> json) {
-    return DamageType(
-      json["index"],
-      json["name"],
     );
   }
 

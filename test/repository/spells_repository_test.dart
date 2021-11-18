@@ -16,7 +16,7 @@ void main() {
     final spells = await spellsRepository.getSpells();
 
     expect(spells[0].index, "acid-splash");
-    expect(spells[0].range, "60 feet");
+    expect(spells[0].range, "60 футов");
     expect(spells[0].components[0], Component.VERBAL);
     expect(spells[0].components[1], Component.SOMATIC);
   });

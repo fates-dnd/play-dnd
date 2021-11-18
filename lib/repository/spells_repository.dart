@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
+import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
 
 class SpellsRepository {
   final Future<String> Function() jsonReader;
@@ -56,48 +57,10 @@ class SpellsRepository {
     }
 
     return Damage(
-      _parseDamageType(damage["damage_type"]),
+      parseDamageType(damage["damage_type"]),
       damage["damage_at_character_level"]?.cast<String, String>(),
       damage["damage_at_slot_level"]?.cast<String, String>(),
     );
-  }
-
-  DamageType? _parseDamageType(Map<String, dynamic>? damageType) {
-    if (damageType == null) {
-      return null;
-    }
-
-    final index = damageType["index"];
-    switch (index) {
-      case "acid":
-        return DamageType.ACID;
-      case "slashing":
-        return DamageType.SLASHING;
-      case "necrotic":
-        return DamageType.NECROTIC;
-      case "radiant":
-        return DamageType.RADIANT;
-      case "fire":
-        return DamageType.FIRE;
-      case "lightning":
-        return DamageType.LIGHTNING;
-      case "poison":
-        return DamageType.POISON;
-      case "cold":
-        return DamageType.COLD;
-      case "bludgeoning":
-        return DamageType.BLUDGEONING;
-      case "force":
-        return DamageType.FORCE;
-      case "psychic":
-        return DamageType.PSYCHIC;
-      case "piercing":
-        return DamageType.PIERCING;
-      case "thunder":
-        return DamageType.THUNDER;
-      default:
-        return null;
-    }
   }
 
   Dc? _parseDc(Map<String, dynamic>? dc) {

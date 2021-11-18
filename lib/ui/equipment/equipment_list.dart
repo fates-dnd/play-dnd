@@ -123,7 +123,7 @@ class DamageCell extends StatelessWidget {
       return SizedBox();
     }
     return Text(
-      "${damage?.damageDice} ${damage?.damageType.name}",
+      "${damage?.damageDice} ${damage?.damageType}",
       style: TextStyle(
         fontSize: 14,
         color: Color(0xFFE5E1DE),

@@ -1,5 +1,7 @@
 import 'package:dnd_player_flutter/data/characteristics.dart';
 
+import 'damage_type.dart';
+
 class Spell {
   final String index;
   final String name;
@@ -54,22 +56,6 @@ class Damage {
     this.damageAtCharacterLevel,
     this.damageAtSlotLevel,
   );
-}
-
-enum DamageType {
-  ACID,
-  SLASHING,
-  NECROTIC,
-  RADIANT,
-  FIRE,
-  LIGHTNING,
-  POISON,
-  COLD,
-  BLUDGEONING,
-  FORCE,
-  PSYCHIC,
-  PIERCING,
-  THUNDER,
 }
 
 class Dc {
