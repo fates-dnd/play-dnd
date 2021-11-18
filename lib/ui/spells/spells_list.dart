@@ -88,7 +88,12 @@ class _SpellListItem extends StatelessWidget {
       final actualSpellItem = (spellDisplayItem as ActualSpellItem);
       return SpellItem(
         spell: actualSpellItem.spell,
-        isPrepared: actualSpellItem.isPrepared,
+        onPrepareClick: !actualSpellItem.isPrepared ? () {
+          BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(actualSpellItem.spell));
+        } : null,
+        onUnprepareClick: actualSpellItem.isPrepared ? () {
+          BlocProvider.of<SpellsBloc>(context).add(UnprepareSpell(actualSpellItem.spell));
+        } : null,
       );
     }
 

@@ -146,10 +146,13 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         characterRepository.getPreparedSpellsIndexes(character);
     final allSpells = await spellsRepository.getSpells();
 
-    return preparedSpellsIndexes
+    final result = preparedSpellsIndexes
         .map((spellIndex) =>
             allSpells.firstWhere((element) => element.index == spellIndex))
         .toList();
+    result.sort((left, right) => left.level.compareTo(right.level));
+
+    return result;
   }
 
   Future<Map<int, SpellSlots>?> getSpellSlots() async {

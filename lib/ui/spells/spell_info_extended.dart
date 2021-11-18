@@ -10,17 +10,18 @@ class SpellInfoExtended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final dialogHeight = MediaQuery.of(context).size.height * 0.8;
     return Center(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: EdgeInsets.all(16),
-            constraints: BoxConstraints(maxHeight: 500),
+            constraints: BoxConstraints(maxHeight: dialogHeight),
             decoration: BoxDecoration(
                 color: theme.primaryColorLight,
                 borderRadius: BorderRadius.circular(8)),
             child: ListView(
+              padding: EdgeInsets.all(16),
               shrinkWrap: true,
               children: [
                 Text(

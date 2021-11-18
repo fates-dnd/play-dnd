@@ -7,10 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpellItem extends StatelessWidget {
   final Spell spell;
-  final bool isPrepared;
+  final VoidCallback? onPrepareClick;
+  final VoidCallback? onUnprepareClick;
 
-  const SpellItem({Key? key, required this.spell, required this.isPrepared})
-      : super(key: key);
+  const SpellItem({Key? key,
+    required this.spell,
+    this.onPrepareClick,
+    this.onUnprepareClick,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +43,8 @@ class SpellItem extends StatelessWidget {
               SizedBox(
                 width: 8,
               ),
-              if (!isPrepared) _PrepareButton(spell: spell),
-              if (isPrepared) _UnprepareButton(spell: spell),
+              if (onPrepareClick != null) _PrepareButton(spell: spell, onPressed: onPrepareClick,),
+              if (onUnprepareClick != null) _UnprepareButton(spell: spell, onPressed: onUnprepareClick),
             ]),
             SizedBox(height: 2),
             Text(spell.school.toString(),
@@ -60,38 +64,38 @@ class SpellItem extends StatelessWidget {
 
 class _PrepareButton extends StatelessWidget {
   final Spell spell;
+  final VoidCallback? onPressed;
 
   const _PrepareButton({
     Key? key,
     required this.spell,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _SpellActionButton(
       title: "Подготовить",
-      onPressed: () {
-        BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(spell));
-      },
+      onPressed: onPressed,
     );
   }
 }
 
 class _UnprepareButton extends StatelessWidget {
   final Spell spell;
+  final VoidCallback? onPressed;
 
   const _UnprepareButton({
     Key? key,
     required this.spell,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return _SpellActionButton(
       title: "Убрать",
-      onPressed: () {
-        BlocProvider.of<SpellsBloc>(context).add(UnprepareSpell(spell));
-      },
+      onPressed: onPressed,
     );
   }
 }

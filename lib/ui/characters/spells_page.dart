@@ -41,7 +41,6 @@ class SpellsPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 4),
           child: SpellItem(
             spell: spell,
-            isPrepared: true,
           ),
         ));
       });
@@ -112,21 +111,29 @@ class _EditSpellsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
-        return OutlinedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-              return SpellsList(
-                clazz: state.clazz,
-                preparedSpells: state.preparedSpells ?? [],
-                learnedSpells: state.learnedSpells ?? [],
-                onSpellsUpdated: (newPreparedSpells, newLearnedSpells) {
-                  BlocProvider.of<CharacterBloc>(context)
-                      .add(UpdateSpells(newPreparedSpells, newLearnedSpells));
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 8),
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return SpellsList(
+                      clazz: state.clazz,
+                      preparedSpells: state.preparedSpells ?? [],
+                      learnedSpells: state.learnedSpells ?? [],
+                      onSpellsUpdated: (newPreparedSpells, newLearnedSpells) {
+                        BlocProvider.of<CharacterBloc>(context)
+                            .add(UpdateSpells(newPreparedSpells, newLearnedSpells));
+                      },
+                    );
+                  }));
                 },
-              );
-            }));
-          },
-          child: Text("Добавить"),
+                child: Text("Изменить"),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -145,46 +152,51 @@ class _SpellLevelTitleRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Expanded(
-          child: Text(
-            "Круг " + level.toString(),
-            style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
-          ),
-        ),
-      ]..addAll(
-          List.generate(spellSlots?.totalSlots ?? 0, (index) {
-            final isUsed = index < (spellSlots?.usedSlots ?? 0);
-            return Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      width: 3,
-                      color: Color(0xFFDCDAD9),
-                    )),
-                child: InkWell(
-                  onTap: () => BlocProvider.of<CharacterBloc>(context).add(
-                      isUsed ? UnuseSpellSlot(level) : UseSpellSlot(level)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: isUsed
-                        ? Container(
-                            decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: Color(0xFFFF5251),
-                          ))
-                        : SizedBox(),
-                  ),
-                ),
+        SizedBox(height: 12),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                "Круг " + level.toString(),
+                style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
               ),
-            );
-          }),
+            ),
+          ]..addAll(
+              List.generate(spellSlots?.totalSlots ?? 0, (index) {
+                final isUsed = index < (spellSlots?.usedSlots ?? 0);
+                return Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          width: 3,
+                          color: Color(0xFFDCDAD9),
+                        )),
+                    child: InkWell(
+                      onTap: () => BlocProvider.of<CharacterBloc>(context).add(
+                          isUsed ? UnuseSpellSlot(level) : UseSpellSlot(level)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: isUsed
+                            ? Container(
+                                decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                color: Color(0xFFFF5251),
+                              ))
+                            : SizedBox(),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
         ),
+      ],
     );
   }
 }

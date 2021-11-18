@@ -57,14 +57,14 @@ class _CharacterScreenHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFFE5E1DE),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             character.name,
             style: TextStyle(
-                color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
           ),
           Text(
             "${character.race.name} ${character.clazz.name}, ${character.level}",
@@ -122,7 +122,7 @@ class _HealthButtonIcon extends StatelessWidget {
                   Text(
                     "14",
                     style: TextStyle(
-                      color: theme.accentColor,
+                      color: Color(0xFFFF5251),
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
