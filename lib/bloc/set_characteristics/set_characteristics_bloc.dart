@@ -56,7 +56,7 @@ class SetCharacteristicsBloc
       case Characteristic.CONSTITUTION:
         constitutionBase = score;
         break;
-      case Characteristic.INTELLECT:
+      case Characteristic.INTELLIGENCE:
         intelligenceBase = score;
         break;
       case Characteristic.WISDOM:

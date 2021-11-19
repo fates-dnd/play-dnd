@@ -1,25 +1,25 @@
 import 'package:flutter/services.dart';
 
-Future<String> readRacesJson() async {
-  return rootBundle.loadString("assets/races.json");
+Future<String> readRacesJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/races.json");
 }
 
-Future<String> readTraitsJson() async {
-  return rootBundle.loadString("assets/traits.json");
+Future<String> readTraitsJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/traits.json");
 }
 
-Future<String> readClassesJson() async {
-  return rootBundle.loadString("assets/classes.json");
+Future<String> readClassesJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/classes.json");
 }
 
-Future<String> readSkillsJson() async {
-  return rootBundle.loadString("assets/skills.json");
+Future<String> readSkillsJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/skills.json");
 }
 
-Future<String> readEquipmentJson() async {
-  return rootBundle.loadString("assets/equipment.json");
+Future<String> readEquipmentJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/equipment.json");
 }
 
-Future<String> readSpellsJson() async {
-  return rootBundle.loadString("assets/spells.json");
+Future<String> readSpellsJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/spells.json");
 }

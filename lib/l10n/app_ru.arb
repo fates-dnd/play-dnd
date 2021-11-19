@@ -1,4 +1,19 @@
 {
   "characters": "Персонажи",
-  "languages": "Языки"
+  "languages": "Языки",
+  "race": "Раса",
+  "details": "Подробнее",
+  "select": "Выбрать",
+  "clazz": "Клас",
+  "characteristics": "Характеристики",
+  "name": "Имя",
+  "level": "Уровень",
+  "save": "Сохранить",
+
+  "strength": "Сила",
+  "dexterity": "Ловкость",
+  "constitution": "Телосложение",
+  "intelligence": "Интеллект",
+  "wisdom": "Мудрость",
+  "charisma": "Харизма"
 }

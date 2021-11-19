@@ -103,7 +103,7 @@ class CharacterState {
 
   int get intelligenceSavingThrow =>
       intelligenceBonus +
-      ((clazz?.savingThrows.contains(Characteristic.INTELLECT) ?? false)
+      ((clazz?.savingThrows.contains(Characteristic.INTELLIGENCE) ?? false)
           ? proficiencyBonus
           : 0);
 
@@ -168,7 +168,7 @@ class CharacterState {
         return dexterityBonus;
       case Characteristic.CONSTITUTION:
         return constitutionBonus;
-      case Characteristic.INTELLECT:
+      case Characteristic.INTELLIGENCE:
         return intelligenceBonus;
       case Characteristic.WISDOM:
         return wisdomBonus;

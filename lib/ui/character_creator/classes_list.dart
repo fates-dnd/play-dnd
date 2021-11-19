@@ -3,20 +3,24 @@ import 'package:dnd_player_flutter/bloc/classes/classes_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/characteristics_bonus.dart';
 import 'package:dnd_player_flutter/ui/character_creator/set_characteristics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ClassesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ClassesBloc>(
-      create: (context) =>
-          ClassesBloc(getIt.get<ClassesRepository>())..add(LoadClasses()),
+      create: (context) => ClassesBloc(
+        getIt.get<SettingsRepository>(),
+        getIt.get<ClassesRepository>(),
+      )..add(LoadClasses()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Клас"),
+          title: Text(AppLocalizations.of(context)!.clazz),
           elevation: 0,
         ),
         body: BlocBuilder<ClassesBloc, ClassesState>(builder: (context, state) {
@@ -45,7 +49,7 @@ class ClassesList extends StatelessWidget {
                             _navigateNext(context);
                             _submitClass(context, state);
                           },
-                    child: Text("Выбрать")),
+                    child: Text(AppLocalizations.of(context)!.select)),
               ),
             ],
           );
@@ -55,13 +59,14 @@ class ClassesList extends StatelessWidget {
   }
 
   _navigateNext(BuildContext context) {
-    final selectedRace = BlocProvider.of<CharacterCreatorBloc>(context).state.race;
+    final selectedRace =
+        BlocProvider.of<CharacterCreatorBloc>(context).state.race;
     if (selectedRace != null && selectedRace.abilityBonusOptions != null) {
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CharacteristicsBonus(race: selectedRace)));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => CharacteristicsBonus(race: selectedRace)));
     } else {
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => SetCharacteristicsScreen()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => SetCharacteristicsScreen()));
     }
   }
 

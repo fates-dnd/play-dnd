@@ -8,12 +8,12 @@ void main() {
   SpellsRepository spellsRepository;
 
   test('load spells', () async {
-    spellsRepository = SpellsRepository(() {
-      final file = File("assets/spells.json");
+    spellsRepository = SpellsRepository((language) {
+      final file = File("assets/rules/ru/spells.json");
       return file.readAsString();
     });
 
-    final spells = await spellsRepository.getSpells();
+    final spells = await spellsRepository.getSpells("ru");
 
     expect(spells[0].index, "acid-splash");
     expect(spells[0].range, "60 футов");

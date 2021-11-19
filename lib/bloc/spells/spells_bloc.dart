@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -9,6 +10,7 @@ part 'spells_state.dart';
 
 class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
   final Class? clazz;
+  final SettingsRepository settingsRepository;
   final SpellsRepository spellsRepository;
 
   final List<Spell> preparedSpells;
@@ -18,6 +20,7 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
 
   SpellsBloc(
     this.clazz,
+    this.settingsRepository,
     this.spellsRepository,
     this.preparedSpells,
     this.learnedSpells,
@@ -60,7 +63,8 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
   }
 
   Future<List<SpellDisplayItem>> loadSpells() async {
-    final spells = await spellsRepository.getSpells();
+    final language = settingsRepository.getLanguage();
+    final spells = await spellsRepository.getSpells(language);
     spells.sort((left, right) => left.level.compareTo(right.level));
     allAvailableSpells = spells
         .where((element) => element.classesIds.contains(clazz?.index))

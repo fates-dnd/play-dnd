@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/bloc/set_characteristics/set_characteristics_
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../utils.dart';
 
 class SetCharacteristicsScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
       create: (context) => SetCharacteristicsBloc(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Характеристики"),
+          title: Text(AppLocalizations.of(context)!.characteristics),
           elevation: 0,
         ),
         body: Padding(
@@ -75,7 +76,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
         cursorColor: theme.accentColor,
         cursorHeight: 24,
         decoration: InputDecoration(
-          hintText: "Имя",
+          hintText: AppLocalizations.of(context)!.level,
         ),
         onChanged: (text) {
           BlocProvider.of<SetCharacteristicsBloc>(context)
@@ -91,14 +92,14 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
     return Column(
       children: [
         Text(
-          "Уровень",
+          AppLocalizations.of(context)!.level,
           style: theme.textTheme.subtitle2,
         ),
         BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
           builder: (context, state) => DropdownButton(
             itemHeight: 52,
             hint: Text(
-              "Уровень",
+              AppLocalizations.of(context)!.level,
               style: TextStyle(color: Color(0xffa4a4a4)),
             ),
             value: state.level,
@@ -149,7 +150,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
         Characteristic.STRENGTH,
         Characteristic.DEXTERITY,
         Characteristic.CONSTITUTION,
-        Characteristic.INTELLECT,
+        Characteristic.INTELLIGENCE,
         Characteristic.WISDOM,
         Characteristic.CHARISMA
       ].map((characteristic) {
@@ -177,7 +178,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
             child: Row(
               children: [
                 Text(
-                  characteristicBonus.characteristic.getName(),
+                  characteristicBonus.characteristic.getName(context),
                   style: theme.textTheme.headline5,
                 ),
                 SizedBox(width: 4),
@@ -240,7 +241,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                         context, '/', (r) => false);
                   }
                 : null,
-            child: Text("Сохранить")),
+            child: Text(AppLocalizations.of(context)!.save)),
       ),
     );
   }
@@ -251,7 +252,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
     final textController = TextEditingController();
 
     return AlertDialog(
-      title: Text(characteristicBonus.characteristic.getName()),
+      title: Text(characteristicBonus.characteristic.getName(context)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -266,7 +267,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                 controller: textController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    hintText: characteristicBonus.characteristic.getName()),
+                    hintText: characteristicBonus.characteristic.getName(context)),
               )),
               SizedBox(width: 24),
               Text("(${characteristicBonus.bonus.toBonusString()})",
@@ -284,7 +285,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                         int.tryParse(textController.value.text)));
                 Navigator.of(context).pop();
               },
-              child: Text("Сохранить")),
+              child: Text(AppLocalizations.of(context)!.save)),
         ],
       ),
     );

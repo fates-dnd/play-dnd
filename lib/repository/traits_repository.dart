@@ -4,12 +4,12 @@ import 'package:dnd_player_flutter/dto/trait.dart';
 
 class TraitsRepository {
 
-  final Future<String> Function() jsonReader;
+  final Future<String> Function(String lang) jsonReader;
 
-  TraitsRepository(this.jsonReader);
+  TraitsRepository( this.jsonReader);
 
-  Future<List<Trait>> getTraits() async {
-    final response = await jsonReader();
+  Future<List<Trait>> getTraits(String language) async {
+    final response = await jsonReader(language);
     final List<dynamic> traitsJson = json.decode(response);
     return traitsJson.map((traitJson) => _fromJson(traitJson)).toList();
   }

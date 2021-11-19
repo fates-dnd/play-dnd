@@ -11,7 +11,7 @@ void main() {
   });
 
   test("load traits", () async {
-    final traits = await traitsRepository.getTraits();
+    final traits = await traitsRepository.getTraits("ru");
     
     expect(traits.length, 1);
     expect(traits[0].index, "stonecunning");
@@ -26,7 +26,7 @@ void main() {
 }
 
 TraitsRepository _createRepository() {
-  return TraitsRepository(() async {
+  return TraitsRepository((language) async {
     return traitsJson;
   });
 }

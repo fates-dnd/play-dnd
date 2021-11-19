@@ -9,7 +9,7 @@ Characteristic indexAsCharacteristic(String index) {
     case "con":
       return Characteristic.CONSTITUTION;
     case "int":
-      return Characteristic.INTELLECT;
+      return Characteristic.INTELLIGENCE;
     case "wis":
       return Characteristic.WISDOM;
     case "cha":

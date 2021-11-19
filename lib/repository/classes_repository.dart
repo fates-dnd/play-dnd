@@ -5,25 +5,28 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
 
 class ClassesRepository {
-  final Future<String> Function() jsonReader;
+  final Future<String> Function(String lang) jsonReader;
 
   List<Class>? classes;
+  String? language;
 
   ClassesRepository(this.jsonReader);
 
-  Future<List<Class>> getClasses() async {
-    if (classes != null) {
+  Future<List<Class>> getClasses(String language) async {
+    if (classes != null && this.language == language) {
       return classes!;
     }
 
-    final response = await jsonReader();
+    this.language = language;
+
+    final response = await jsonReader(language);
     final List<dynamic> classesJson = json.decode(response);
     classes = classesJson.map((classJson) => _fromJson(classJson)).toList();
     return classes!;
   }
 
-  Future<Class> findByIndex(String index) async {
-    final classes = await getClasses();
+  Future<Class> findByIndex(String language, String index) async {
+    final classes = await getClasses(language);
     return classes.firstWhere((element) => element.index == index);
   }
 

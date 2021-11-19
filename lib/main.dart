@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/ui/character_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +31,9 @@ class DndApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SettingsBloc()),
+          create: (context) => SettingsBloc(
+            getIt<SettingsRepository>(),
+          )),
         BlocProvider(
             create: (context) =>
                 CharacterCreatorBloc(getIt.get<CharacterRepository>()))

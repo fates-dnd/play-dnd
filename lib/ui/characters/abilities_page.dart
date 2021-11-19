@@ -59,7 +59,7 @@ class AbilityItem extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        skillBonus.skill.characteristic.getName().toUpperCase(),
+                        skillBonus.skill.characteristic.getName(context).toUpperCase(),
                         style: theme.textTheme.subtitle2,
                       )
                     ],
@@ -82,7 +82,7 @@ class AbilityItem extends StatelessWidget {
               shape: BoxShape.circle,
               color: characteristicToColor[skillBonus.skill.characteristic],
             ),
-            child: Image.asset("assets/dice/d20.png"),
+            child: Image.asset("assets/drawable/dice/d20.png"),
           ),
         ),
       ],

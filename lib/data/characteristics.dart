@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 enum Characteristic {
   STRENGTH,
   DEXTERITY,
   CONSTITUTION,
-  INTELLECT,
+  INTELLIGENCE,
   WISDOM,
   CHARISMA
 }
@@ -25,7 +28,7 @@ Characteristic? fromIndex(String index) {
     case "con":
       return Characteristic.CONSTITUTION;
     case "int":
-      return Characteristic.INTELLECT;
+      return Characteristic.INTELLIGENCE;
     case "wis":
       return Characteristic.WISDOM;
     case "cha":
@@ -43,20 +46,21 @@ class CharacteristicBonus {
 }
 
 extension Name on Characteristic {
-  String getName() {
+  String getName(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     switch (this) {
       case Characteristic.STRENGTH:
-        return "Сила";
+        return localizations.strength;
       case Characteristic.DEXTERITY:
-        return "Ловкость";
+        return localizations.dexterity;
       case Characteristic.CONSTITUTION:
-        return "Телосложение";
-      case Characteristic.INTELLECT:
-        return "Интеллект";
+        return localizations.constitution;
+      case Characteristic.INTELLIGENCE:
+        return localizations.intelligence;
       case Characteristic.WISDOM:
-        return "Мудрость";
+        return localizations.wisdom;
       case Characteristic.CHARISMA:
-        return "Харизма";
+        return localizations.charisma;
     }
   }
 }

@@ -3,5 +3,20 @@
   "@characters": {
     "description": "Title of the characters page"
   },
-  "languages": "Languages"
+  "languages": "Languages",
+  "race": "Race",
+  "details": "Details",
+  "select": "Select",
+  "clazz": "Class",
+  "characteristics": "Characteristics",
+  "name": "Name",
+  "level": "Level",
+  "save": "Save",
+
+  "strength": "Strength",
+  "dexterity": "Dexterity",
+  "constitution": "Constitution",
+  "intelligence": "Intelligence",
+  "wisdom": "Wisdom",
+  "charisma": "Charisma"
 }

@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
@@ -23,6 +24,7 @@ class CharacterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => CharacterBloc(
+        getIt<SettingsRepository>(),
         getIt<CharacterRepository>(),
         getIt<SkillsRepository>(),
         getIt<EquipmentRepository>(),
@@ -88,7 +90,7 @@ class _CharacterScreenHeader extends StatelessWidget {
                 ),
               ),
               _NotActionInfo(
-                  assetUrl: "assets/stats/shield.png",
+                  assetUrl: "assets/drawable/stats/shield.png",
                   value: "12",
                   color: Color(0xFFADADAD)),
               SizedBox(width: 12),
@@ -118,7 +120,7 @@ class _HealthButtonIcon extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/stats/heart.png"),
+                  Image.asset("assets/drawable/stats/heart.png"),
                   Text(
                     "14",
                     style: TextStyle(
@@ -148,7 +150,7 @@ class _InitiativeIcon extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Image.asset("assets/stats/sword.png"),
+            Image.asset("assets/drawable/stats/sword.png"),
             SizedBox(width: 8),
             BlocBuilder<CharacterBloc, CharacterState>(
               builder: (context, state) => Text(
@@ -175,7 +177,7 @@ class _RestIcon extends StatelessWidget {
       shape: CircleBorder(),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset("assets/stats/tent.png"),
+        child: Image.asset("assets/drawable/stats/tent.png"),
       ),
     );
   }
@@ -186,7 +188,7 @@ class _ProficiencyBonusInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => _NotActionInfo(
-          assetUrl: "assets/stats/hammer.png",
+          assetUrl: "assets/drawable/stats/hammer.png",
           value: state.proficiencyBonus.toBonusString(),
           color: Color(0xCCFB9538)),
     );

@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/races/races_bloc.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/classes_list.dart';
 import 'package:dnd_player_flutter/ui/character_creator/race_details.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
@@ -9,6 +10,7 @@ import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewCharRace extends StatelessWidget {
   @override
@@ -17,12 +19,13 @@ class NewCharRace extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => RacesBloc(
+        getIt.get<SettingsRepository>(),
         getIt.get<RacesRepository>(),
         getIt.get<TraitsRepository>(),
       )..add(LoadRaces()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Раса"),
+          title: Text(AppLocalizations.of(context)!.race),
           elevation: 0,
         ),
         body: SafeArea(
@@ -59,7 +62,7 @@ class NewCharRace extends StatelessWidget {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => ClassesList()));
                                 },
-                                child: Text("Выбрать")))
+                                child: Text(AppLocalizations.of(context)!.select)))
                       ],
                     ),
             ),
@@ -104,7 +107,7 @@ class RaceCard extends StatelessWidget {
             Expanded(
               child: Container(
                 child: Text(
-                  race.description,
+                  race.description ?? "",
                   maxLines: 18,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.subtitle1,
@@ -120,7 +123,7 @@ class RaceCard extends StatelessWidget {
                                 traits: traits,
                               )));
                     },
-                    child: Text("Подробнее")))
+                    child: Text(AppLocalizations.of(context)!.details)))
           ],
         ),
       ),

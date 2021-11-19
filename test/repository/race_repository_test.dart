@@ -8,7 +8,7 @@ void main() {
   test('load races', () async {
     racesRepository = _createRepository(racesJson);
 
-    final races = await racesRepository.getRaces();
+    final races = await racesRepository.getRaces("ru");
 
     expect(races.length, 1);
     expect(races[0].name, "Дварф");
@@ -30,7 +30,7 @@ void main() {
 
   test('race with ability bonus options', () async {
     racesRepository = _createRepository(halfElfJson);
-    final races = await racesRepository.getRaces();
+    final races = await racesRepository.getRaces("ru");
 
     expect(races.length, 1);
     expect(races[0].abilityBonusOptions?.choose, 2);
@@ -39,7 +39,7 @@ void main() {
 }
 
 RacesRepository _createRepository(String input) {
-  return RacesRepository(() async {
+  return RacesRepository((language) async {
     return input;
   });
 }

@@ -62,61 +62,65 @@ flutter:
 
   assets:
     # jsons
-    - assets/races.json
-    - assets/traits.json
-    - assets/classes.json
-    - assets/skills.json
-    - assets/equipment.json
-    - assets/spells.json
+    - assets/rules/en/races.json
+    - assets/rules/en/traits.json
+    - assets/rules/en/classes.json
+    - assets/rules/en/skills.json
+    - assets/rules/en/equipment.json
+    - assets/rules/en/spells.json
 
-    # background
-    - assets/background.png
-    
+    - assets/rules/ru/races.json
+    - assets/rules/ru/traits.json
+    - assets/rules/ru/classes.json
+    - assets/rules/ru/skills.json
+    - assets/rules/ru/equipment.json
+    - assets/rules/ru/spells.json
+
     # stats
-    - assets/stats/heart.png
-    - assets/stats/sword.png
-    - assets/stats/tent.png
-    - assets/stats/shield.png
-    - assets/stats/hammer.png
+    - assets/drawable/stats/heart.png
+    - assets/drawable/stats/sword.png
+    - assets/drawable/stats/tent.png
+    - assets/drawable/stats/shield.png
+    - assets/drawable/stats/hammer.png
 
     # dice
-    - assets/dice/d20.png
+    - assets/drawable/dice/d20.png
 
     # money
-    - assets/money/platinum.png
-    - assets/money/gold.png
-    - assets/money/electrum.png
-    - assets/money/silver.png
-    - assets/money/bronze.png
+    - assets/drawable/money/platinum.png
+    - assets/drawable/money/gold.png
+    - assets/drawable/money/electrum.png
+    - assets/drawable/money/silver.png
+    - assets/drawable/money/bronze.png
 
     # class icons
-    - assets/icons/fighter.png
-    - assets/icons/barbarian.png
-    - assets/icons/bard.png
-    - assets/icons/cleric.png
-    - assets/icons/paladin.png
-    - assets/icons/ranger.png
-    - assets/icons/rogue.png
-    - assets/icons/sorcerer.png
-    - assets/icons/warlock.png
-    - assets/icons/wizard.png
-    - assets/icons/druid.png
-    - assets/icons/monk.png
-    - assets/icons/2.0x/fighter.png
-    - assets/icons/2.0x/barbarian.png
-    - assets/icons/2.0x/bard.png
-    - assets/icons/2.0x/cleric.png
-    - assets/icons/2.0x/paladin.png
-    - assets/icons/2.0x/ranger.png
-    - assets/icons/2.0x/rogue.png
-    - assets/icons/2.0x/sorcerer.png
-    - assets/icons/2.0x/warlock.png
-    - assets/icons/2.0x/wizard.png
-    - assets/icons/2.0x/druid.png
-    - assets/icons/2.0x/monk.png
+    - assets/drawable/icons/fighter.png
+    - assets/drawable/icons/barbarian.png
+    - assets/drawable/icons/bard.png
+    - assets/drawable/icons/cleric.png
+    - assets/drawable/icons/paladin.png
+    - assets/drawable/icons/ranger.png
+    - assets/drawable/icons/rogue.png
+    - assets/drawable/icons/sorcerer.png
+    - assets/drawable/icons/warlock.png
+    - assets/drawable/icons/wizard.png
+    - assets/drawable/icons/druid.png
+    - assets/drawable/icons/monk.png
+    - assets/drawable/icons/2.0x/fighter.png
+    - assets/drawable/icons/2.0x/barbarian.png
+    - assets/drawable/icons/2.0x/bard.png
+    - assets/drawable/icons/2.0x/cleric.png
+    - assets/drawable/icons/2.0x/paladin.png
+    - assets/drawable/icons/2.0x/ranger.png
+    - assets/drawable/icons/2.0x/rogue.png
+    - assets/drawable/icons/2.0x/sorcerer.png
+    - assets/drawable/icons/2.0x/warlock.png
+    - assets/drawable/icons/2.0x/wizard.png
+    - assets/drawable/icons/2.0x/druid.png
+    - assets/drawable/icons/2.0x/monk.png
 
     # shape
-    - assets/shape/romb.png
+    - assets/drawable/shape/romb.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

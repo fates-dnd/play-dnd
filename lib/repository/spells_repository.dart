@@ -5,12 +5,12 @@ import 'package:dnd_player_flutter/repository/mappers.dart';
 import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
 
 class SpellsRepository {
-  final Future<String> Function() jsonReader;
+  final Future<String> Function(String lang) jsonReader;
 
   SpellsRepository(this.jsonReader);
 
-  Future<List<Spell>> getSpells() async {
-    final response = await jsonReader();
+  Future<List<Spell>> getSpells(String language) async {
+    final response = await jsonReader(language);
     final List<dynamic> spellsJson = json.decode(response);
     return spellsJson.map((item) => _fromJson(item)).toList();
   }

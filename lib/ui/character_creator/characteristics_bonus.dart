@@ -25,7 +25,7 @@ class CharacteristicsBonus extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                Text(race.abilityBonusDescription,
+                Text(race.abilityBonusDescription ?? "",
                     style: Theme.of(context).textTheme.subtitle1),
                 SizedBox(height: 25),
                 Expanded(
@@ -108,7 +108,7 @@ class CharacteristicsBonus extends StatelessWidget {
       icon: Icon(Icons.arrow_drop_down),
       items: providedOptions?.map((e) {
         return DropdownMenuItem<Characteristic>(
-            value: e.characteristic, child: Text(e.characteristic.getName()));
+            value: e.characteristic, child: Text(e.characteristic.getName(context)));
       }).toList(),
       onChanged: (value) { 
         final selectedCharacteristicBonus 

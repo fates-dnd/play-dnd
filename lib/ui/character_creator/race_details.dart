@@ -25,13 +25,13 @@ class RaceDetails extends StatelessWidget {
   List<Widget> _getItems(BuildContext context) {
     final items = [
       Text(
-        race.description,
+        race.description ?? "",
         style: Theme.of(context).textTheme.subtitle1,
       ),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, 'Увеличение характеристик. ', race.description),
+      _rowItem(context, 'Увеличение характеристик. ', race.description ?? ""),
       SizedBox(
         height: 25,
       ),

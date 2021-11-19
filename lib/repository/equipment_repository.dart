@@ -5,12 +5,12 @@ import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
 
 class EquipmentRepository {
-  final Future<String> Function() jsonReader;
+  final Future<String> Function(String lang) jsonReader;
 
   EquipmentRepository(this.jsonReader);
 
-  Future<List<Equipment>> getEquipment() async {
-    final response = await jsonReader();
+  Future<List<Equipment>> getEquipment(String language) async {
+    final response = await jsonReader(language);
     final List<dynamic> equipmentJson = json.decode(response);
     return equipmentJson.map((item) => _fromJson(item)).toList();
   }

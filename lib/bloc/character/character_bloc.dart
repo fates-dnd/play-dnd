@@ -14,6 +14,7 @@ import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
@@ -23,6 +24,7 @@ part 'character_event.dart';
 part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
+  final SettingsRepository settingsRepository;
   final CharacterRepository characterRepository;
   final SkillsRepository skillsRepository;
   final EquipmentRepository equipmentRepository;
@@ -32,6 +34,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   late Spellcasting? spellcasting;
 
   CharacterBloc(
+    this.settingsRepository,
     this.characterRepository,
     this.skillsRepository,
     this.equipmentRepository,
@@ -57,7 +60,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         charisma: character.baseCharisma,
         race: character.race,
         clazz: character.clazz,
-        skills: await skillsRepository.getSkills(),
+        skills: await skillsRepository.getSkills(settingsRepository.getLanguage()),
         equipment: await _getCharacterEquipment(),
         equippedItems: await _getEquippedItems(),
         preparedSpells: await _getPreparedSpells(),
@@ -115,7 +118,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<List<Equipment>> _getCharacterEquipment() async {
     final equipmentIndexes =
         characterRepository.getCharacterEquipmentIndexes(character);
-    final allEquipment = await equipmentRepository.getEquipment();
+    final language = settingsRepository.getLanguage();
+    final allEquipment = await equipmentRepository.getEquipment(language);
     return equipmentIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
     }).toList();
@@ -124,16 +128,18 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<List<Equipment>> _getEquippedItems() async {
     final equippedItemsIndexes =
         characterRepository.getCharacterEquippedItemsIndexes(character);
-    final allEquipment = await equipmentRepository.getEquipment();
+    final language = settingsRepository.getLanguage();
+    final allEquipment = await equipmentRepository.getEquipment(language);
     return equippedItemsIndexes.map((index) {
       return allEquipment.firstWhere((element) => element.index == index);
     }).toList();
   }
 
   Future<List<Spell>> _getLearnedSpells() async {
+    final language = settingsRepository.getLanguage();
     final learnedSpellsIndexes =
         characterRepository.getLearnedSpellsIndexes(character);
-    final allSpells = await spellsRepository.getSpells();
+    final allSpells = await spellsRepository.getSpells(language);
 
     return learnedSpellsIndexes
         .map((spellIndex) =>
@@ -144,7 +150,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<List<Spell>> _getPreparedSpells() async {
     final preparedSpellsIndexes =
         characterRepository.getPreparedSpellsIndexes(character);
-    final allSpells = await spellsRepository.getSpells();
+    final language = settingsRepository.getLanguage();
+    final allSpells = await spellsRepository.getSpells(language);
 
     final result = preparedSpellsIndexes
         .map((spellIndex) =>

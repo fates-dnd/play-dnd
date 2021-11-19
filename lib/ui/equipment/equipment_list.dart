@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/localization/equipment_locale.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,8 +16,10 @@ class EquipmentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          EquipmentBloc(getIt.get<EquipmentRepository>())..add(LoadEquipment()),
+      create: (context) => EquipmentBloc(
+        getIt.get<SettingsRepository>(),
+        getIt.get<EquipmentRepository>(),
+      )..add(LoadEquipment()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Снаряжение"),

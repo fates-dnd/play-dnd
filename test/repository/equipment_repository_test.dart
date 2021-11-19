@@ -6,14 +6,14 @@ import 'package:test/test.dart';
 void main() {
 
   test('load equipment', () async {
-    final equipmentFile = File("assets/equipment.json");
+    final equipmentFile = File("assets/rules/ru/equipment.json");
     final contents = await equipmentFile.readAsString();
 
-    final repository = EquipmentRepository(() async {
+    final repository = EquipmentRepository((language) async {
       return contents;
     });
 
-    final equipmentList = await repository.getEquipment();
+    final equipmentList = await repository.getEquipment("ru");
     expect(equipmentList.length, 131);
   });
 }

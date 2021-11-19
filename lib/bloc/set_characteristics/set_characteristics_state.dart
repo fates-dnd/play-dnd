@@ -37,7 +37,7 @@ class SetCharacteristicsState {
         return dexterity;
       case Characteristic.CONSTITUTION:
         return constitution;
-      case Characteristic.INTELLECT:
+      case Characteristic.INTELLIGENCE:
         return intelligence;
       case Characteristic.WISDOM:
         return wisdom;

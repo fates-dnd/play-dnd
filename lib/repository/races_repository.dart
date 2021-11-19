@@ -3,25 +3,28 @@ import 'dart:convert';
 import 'package:dnd_player_flutter/dto/race.dart';
 
 class RacesRepository {
-  final Future<String> Function() jsonReader;
+  final Future<String> Function(String lang) jsonReader;
 
   List<Race>? races;
+  String? language;
 
   RacesRepository(this.jsonReader);
 
-  Future<List<Race>> getRaces() async {
-    if (races != null) {
+  Future<List<Race>> getRaces(String language) async {
+    if (races != null && this.language == language) {
       return races!;
     }
 
-    final response = await jsonReader();
+    this.language = language;
+
+    final response = await jsonReader(language);
     final List<dynamic> racesJson = json.decode(response);
     races = racesJson.map((raceJson) => _fromJson(raceJson)).toList();
     return races!;
   }
 
-  Future<Race> findByIndex(String index) async {
-    final races = await getRaces();
+  Future<Race> findByIndex(String language, String index) async {
+    final races = await getRaces(language);
     return races.firstWhere((element) => element.index == index);
   }
 
@@ -31,9 +34,9 @@ class RacesRepository {
     return Race(
         json["index"] as String,
         json["name"] as String,
-        json["description"] as String,
+        json["description"] as String?,
         json["speed"],
-        json["ability_bonus_description"],
+        json["ability_bonus_description"] as String?,
         _abilityBonusesFromJson(json["ability_bonuses"]),
         abilityBonusOptionsJson != null ? _abilityBonusOptionsFromJson(abilityBonusOptionsJson) : null,
         json["age"] as String,

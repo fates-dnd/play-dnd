@@ -3,16 +3,19 @@ import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
 class CharacterRepository {
+  final SettingsRepository settingsRepository;
   final RacesRepository racesRepository;
   final ClassesRepository classesRepository;
 
   late Box box;
 
   CharacterRepository(
+    this.settingsRepository,
     this.racesRepository,
     this.classesRepository,
   ) {
@@ -213,6 +216,7 @@ class CharacterRepository {
     final outlines = _readCharacterOutlines() ?? [];
 
     return Future.wait(outlines.map((outline) async {
+      final language = settingsRepository.getLanguage();
       return Character(
         outline.name,
         outline.level,
@@ -222,8 +226,8 @@ class CharacterRepository {
         outline.baseIntelligence,
         outline.baseWisdom,
         outline.baseCharisma,
-        await racesRepository.findByIndex(outline.raceIndex),
-        await classesRepository.findByIndex(outline.classIndex),
+        await racesRepository.findByIndex(language, outline.raceIndex),
+        await classesRepository.findByIndex(language, outline.classIndex),
       );
     }).toList());
   }

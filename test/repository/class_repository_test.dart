@@ -9,12 +9,12 @@ void main() {
   late ClassesRepository classesRepository;
 
   test('load classes', () async {
-    final classesFile = File("assets/classes.json");
+    final classesFile = File("assets/rules/ru/classes.json");
     final contents = await classesFile.readAsString();
 
     classesRepository = _createRepository(contents);
 
-    final classes = await classesRepository.getClasses();
+    final classes = await classesRepository.getClasses("ru");
 
     expect(classes.length, 12);
     expect(classes[1].index, "bard");
@@ -27,7 +27,7 @@ void main() {
 }
 
 ClassesRepository _createRepository(String contents) {
-  return ClassesRepository(() async {
+  return ClassesRepository((language) async {
     return contents;
   });
 }

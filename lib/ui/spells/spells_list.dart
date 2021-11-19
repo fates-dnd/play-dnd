@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class SpellsList extends StatelessWidget {
     return BlocProvider(
       create: (context) => SpellsBloc(
         clazz,
+        getIt<SettingsRepository>(),
         getIt<SpellsRepository>(),
         preparedSpells,
         learnedSpells,

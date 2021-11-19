@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'characteristics_colors_map.dart';
 
@@ -11,6 +12,7 @@ class BaseCharateristicsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => ScrollConfiguration(
         behavior: const ScrollBehavior().copyWith(overscroll: false),
@@ -24,37 +26,37 @@ class BaseCharateristicsPage extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 CharacteristicItem(
-                  name: "Сила",
+                  name: localizations.strength,
                   bonus: state.strengthBonus,
                   score: state.strength,
                   accent: characteristicToColor[Characteristic.STRENGTH],
                 ),
                 CharacteristicItem(
-                  name: "Ловкость",
+                  name: localizations.dexterity,
                   bonus: state.dexterityBonus,
                   score: state.dexterity,
                   accent: characteristicToColor[Characteristic.DEXTERITY],
                 ),
                 CharacteristicItem(
-                  name: "Телосложение",
+                  name: localizations.constitution,
                   bonus: state.constitutionBonus,
                   score: state.constitution,
                   accent: characteristicToColor[Characteristic.CONSTITUTION],
                 ),
                 CharacteristicItem(
-                  name: "Интеллект",
+                  name: localizations.intelligence,
                   bonus: state.intelligenceBonus,
                   score: state.intelligence,
-                  accent: characteristicToColor[Characteristic.INTELLECT],
+                  accent: characteristicToColor[Characteristic.INTELLIGENCE],
                 ),
                 CharacteristicItem(
-                  name: "Мудрость",
+                  name: localizations.wisdom,
                   bonus: state.wisdomBonus,
                   score: state.wisdom,
                   accent: characteristicToColor[Characteristic.WISDOM],
                 ),
                 CharacteristicItem(
-                  name: "Харизма",
+                  name: localizations.charisma,
                   bonus: state.charismaBonus,
                   score: state.charisma,
                   accent: characteristicToColor[Characteristic.CHARISMA],
@@ -73,41 +75,41 @@ class BaseCharateristicsPage extends StatelessWidget {
               physics: NeverScrollableScrollPhysics(),
               children: [
                 SavingThrowItem(
-                    name: "Сила",
+                    name: localizations.strength,
                     bonus: state.strengthSavingThrow,
                     proficient: state.clazz?.savingThrows
                             .contains(Characteristic.STRENGTH) ??
                         false),
                 SavingThrowItem(
-                  name: "Ловкость",
+                  name: localizations.dexterity,
                   bonus: state.dexteritySavingThrow,
                   proficient: state.clazz?.savingThrows
                           .contains(Characteristic.DEXTERITY) ??
                       false,
                 ),
                 SavingThrowItem(
-                  name: "Телосложение",
+                  name: localizations.constitution,
                   bonus: state.constitutionSavingThrow,
                   proficient: state.clazz?.savingThrows
                           .contains(Characteristic.CONSTITUTION) ??
                       false,
                 ),
                 SavingThrowItem(
-                  name: "Интеллект",
+                  name: localizations.intelligence,
                   bonus: state.intelligenceSavingThrow,
                   proficient: state.clazz?.savingThrows
-                          .contains(Characteristic.INTELLECT) ??
+                          .contains(Characteristic.INTELLIGENCE) ??
                       false,
                 ),
                 SavingThrowItem(
-                  name: "Мудрость",
+                  name: localizations.wisdom,
                   bonus: state.wisdomSavingThrow,
                   proficient: state.clazz?.savingThrows
                           .contains(Characteristic.WISDOM) ??
                       false,
                 ),
                 SavingThrowItem(
-                  name: "Харизма",
+                  name: localizations.charisma,
                   bonus: state.charismaSavingThrow,
                   proficient: state.clazz?.savingThrows
                           .contains(Characteristic.CHARISMA) ??
@@ -210,7 +212,7 @@ class CharacteristicItem extends StatelessWidget {
                   color: theme.primaryColor,
                   width: 5,
                 )),
-            child: Image.asset("assets/dice/d20.png"),
+            child: Image.asset("assets/drawable/dice/d20.png"),
           ),
         ),
       ],
