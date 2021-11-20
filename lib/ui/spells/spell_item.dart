@@ -10,7 +10,8 @@ class SpellItem extends StatelessWidget {
   final VoidCallback? onPrepareClick;
   final VoidCallback? onUnprepareClick;
 
-  const SpellItem({Key? key,
+  const SpellItem({
+    Key? key,
     required this.spell,
     this.onPrepareClick,
     this.onUnprepareClick,
@@ -43,8 +44,13 @@ class SpellItem extends StatelessWidget {
               SizedBox(
                 width: 8,
               ),
-              if (onPrepareClick != null) _PrepareButton(spell: spell, onPressed: onPrepareClick,),
-              if (onUnprepareClick != null) _UnprepareButton(spell: spell, onPressed: onUnprepareClick),
+              if (onPrepareClick != null)
+                _PrepareButton(
+                  spell: spell,
+                  onPressed: onPrepareClick,
+                ),
+              if (onUnprepareClick != null)
+                _UnprepareButton(spell: spell, onPressed: onUnprepareClick),
             ]),
             SizedBox(height: 2),
             Text(spell.school.toString(),
@@ -152,7 +158,7 @@ class _ConcentrationMark extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Image.asset(
-          "assets/shape/romb.png",
+          "assets/drawable/shape/romb.png",
           width: 20,
           height: 20,
         ),

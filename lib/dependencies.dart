@@ -14,9 +14,14 @@ import 'package:get_it/get_it.dart';
 GetIt getIt = GetIt.instance;
 
 void registerDependencies() {
-  final defaultLocale = Platform.localeName.substring(0, 2);
+  var defaultLocale = "en";
 
-  getIt.registerSingleton<SettingsRepository>(SettingsRepository(defaultLocale));
+  try {
+    defaultLocale = Platform.localeName.substring(0, 2);
+  } catch (e) {}
+
+  getIt
+      .registerSingleton<SettingsRepository>(SettingsRepository(defaultLocale));
   getIt.registerSingleton<RacesRepository>(RacesRepository(readRacesJson));
   getIt.registerSingleton<TraitsRepository>(TraitsRepository(readTraitsJson));
   getIt
