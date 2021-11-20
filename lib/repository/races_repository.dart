@@ -34,11 +34,13 @@ class RacesRepository {
     return Race(
         json["index"] as String,
         json["name"] as String,
-        json["description"] as String?,
+        json["description"],
         json["speed"],
-        json["ability_bonus_description"] as String?,
+        json["ability_bonus_description"],
         _abilityBonusesFromJson(json["ability_bonuses"]),
-        abilityBonusOptionsJson != null ? _abilityBonusOptionsFromJson(abilityBonusOptionsJson) : null,
+        abilityBonusOptionsJson != null
+            ? _abilityBonusOptionsFromJson(abilityBonusOptionsJson)
+            : null,
         json["age"] as String,
         json["alignment"] as String,
         _parseSize(json["size"] as String),

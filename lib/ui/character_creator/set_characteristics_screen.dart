@@ -43,21 +43,23 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(children: [
-                    Row(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: _nameField(context),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: _nameField(context),
+                            ),
+                            SizedBox(width: 48),
+                            _levelField(context)
+                          ],
                         ),
-                        SizedBox(width: 48),
-                        _levelField(context)
-                      ],
-                    ),
-                    SizedBox(height: 24),
-                    _characteristicsDescription(context),
-                    SizedBox(height: 24),
-                    _characteristics(context),
-                  ]),
+                        SizedBox(height: 24),
+                        _characteristicsDescription(context),
+                        SizedBox(height: 24),
+                        _characteristics(context),
+                      ]),
                 ),
               ),
               _submitButton(context),
@@ -267,7 +269,8 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                 controller: textController,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
-                    hintText: characteristicBonus.characteristic.getName(context)),
+                    hintText:
+                        characteristicBonus.characteristic.getName(context)),
               )),
               SizedBox(width: 24),
               Text("(${characteristicBonus.bonus.toBonusString()})",

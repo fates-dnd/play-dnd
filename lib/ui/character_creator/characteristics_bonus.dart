@@ -25,7 +25,7 @@ class CharacteristicsBonus extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Column(
               children: [
-                Text(race.abilityBonusDescription ?? "",
+                Text(race.abilityBonusDescription,
                     style: Theme.of(context).textTheme.subtitle1),
                 SizedBox(height: 25),
                 Expanded(
@@ -36,18 +36,26 @@ class CharacteristicsBonus extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: TextButton(onPressed: _areOptionsSelected(state) 
-                    ? () {
-                      final selectedOptions = <CharacteristicBonus>[];
-                      state.characteristicBonuses.values.toList().forEach((element) {
-                        if (element != null) {
-                          selectedOptions.add(element);
-                        }
-                      });
-                      BlocProvider.of<CharacterCreatorBloc>(context).add(SubmitBonusCharacteristics(selectedOptions));
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SetCharacteristicsScreen()));
-                    }
-                    : null, child: Text("Выбрать")),
+                  child: TextButton(
+                      onPressed: _areOptionsSelected(state)
+                          ? () {
+                              final selectedOptions = <CharacteristicBonus>[];
+                              state.characteristicBonuses.values
+                                  .toList()
+                                  .forEach((element) {
+                                if (element != null) {
+                                  selectedOptions.add(element);
+                                }
+                              });
+                              BlocProvider.of<CharacterCreatorBloc>(context)
+                                  .add(SubmitBonusCharacteristics(
+                                      selectedOptions));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      SetCharacteristicsScreen()));
+                            }
+                          : null,
+                      child: Text("Выбрать")),
                 ),
               ],
             ),
@@ -56,11 +64,12 @@ class CharacteristicsBonus extends StatelessWidget {
       ),
     );
   }
-  
+
   bool _areOptionsSelected(CharacteristicsBonusState state) {
     bool optionsSelected = true;
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
-      optionsSelected = optionsSelected && state.characteristicBonuses[i] != null;
+      optionsSelected =
+          optionsSelected && state.characteristicBonuses[i] != null;
     }
     return optionsSelected;
   }
@@ -90,12 +99,14 @@ class CharacteristicsBonus extends StatelessWidget {
       ValueChanged<CharacteristicBonus> onChanged) {
     final theme = Theme.of(context);
     final providedOptions = race.abilityBonusOptions?.abilityBonuses
-        .map((e) => CharacteristicBonus(requireFromIndex(e.abilityScore.index), e.bonus))
+        .map((e) => CharacteristicBonus(
+            requireFromIndex(e.abilityScore.index), e.bonus))
         .toList();
     providedOptions?.removeWhere((provided) =>
-        selectedCharacteristics
-            .any((selected) => selected?.characteristic.index == provided.characteristic.index) &&
-        provided.characteristic.index != characteristicBonus?.characteristic.index);
+        selectedCharacteristics.any((selected) =>
+            selected?.characteristic.index == provided.characteristic.index) &&
+        provided.characteristic.index !=
+            characteristicBonus?.characteristic.index);
 
     return DropdownButton(
       hint: Text(
@@ -108,13 +119,15 @@ class CharacteristicsBonus extends StatelessWidget {
       icon: Icon(Icons.arrow_drop_down),
       items: providedOptions?.map((e) {
         return DropdownMenuItem<Characteristic>(
-            value: e.characteristic, child: Text(e.characteristic.getName(context)));
+            value: e.characteristic,
+            child: Text(e.characteristic.getName(context)));
       }).toList(),
-      onChanged: (value) { 
-        final selectedCharacteristicBonus 
-          = providedOptions?.toList().firstWhere((element) => element.characteristic == value);
+      onChanged: (value) {
+        final selectedCharacteristicBonus = providedOptions
+            ?.toList()
+            .firstWhere((element) => element.characteristic == value);
         if (selectedCharacteristicBonus != null) {
-          onChanged(selectedCharacteristicBonus); 
+          onChanged(selectedCharacteristicBonus);
         }
       },
     );

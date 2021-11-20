@@ -62,7 +62,8 @@ class NewCharRace extends StatelessWidget {
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => ClassesList()));
                                 },
-                                child: Text(AppLocalizations.of(context)!.select)))
+                                child:
+                                    Text(AppLocalizations.of(context)!.select)))
                       ],
                     ),
             ),
@@ -107,7 +108,7 @@ class RaceCard extends StatelessWidget {
             Expanded(
               child: Container(
                 child: Text(
-                  race.description ?? "",
+                  race.description,
                   maxLines: 18,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.subtitle1,

@@ -12,26 +12,26 @@ class RaceDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(race.name),
-          elevation: 0,
-        ),
-        body: ListView(
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-              children: _getItems(context)),
+      appBar: AppBar(
+        title: Text(race.name),
+        elevation: 0,
+      ),
+      body: ListView(
+          padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
+          children: _getItems(context)),
     );
   }
 
   List<Widget> _getItems(BuildContext context) {
     final items = [
       Text(
-        race.description ?? "",
+        race.description,
         style: Theme.of(context).textTheme.subtitle1,
       ),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, 'Увеличение характеристик. ', race.description ?? ""),
+      _rowItem(context, 'Увеличение характеристик. ', race.description),
       SizedBox(
         height: 25,
       ),

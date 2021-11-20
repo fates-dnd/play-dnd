@@ -1,9 +1,9 @@
 class Race {
   final String index;
   final String name;
-  final String? description;
+  final String description;
   final int baseSpeed;
-  final String? abilityBonusDescription;
+  final String abilityBonusDescription;
   final List<AbilityBonus> abilityBonuses;
   final AbilityBonusOptions? abilityBonusOptions;
   final String age;
