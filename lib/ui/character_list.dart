@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/bloc/character_list/character_list_bloc.dart';
+import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
@@ -10,7 +11,31 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class CharacterList extends StatelessWidget {
+class CharacterList extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _CharacterListState();
+  }
+}
+
+class _CharacterListState extends State<CharacterList> {
+  Key key = UniqueKey();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<SettingsBloc, SettingsState>(
+      listener: (context, state) {
+        setState(() {
+          // reset character
+          key = UniqueKey();
+        });
+      },
+      child: KeyedSubtree(key: key, child: _CharacterListDisplay()),
+    );
+  }
+}
+
+class _CharacterListDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -30,15 +55,7 @@ class CharacterList extends StatelessWidget {
                 icon: Icon(Icons.settings)),
           ],
         ),
-        body: BlocBuilder<CharacterListBloc, CharacterListState>(
-          builder: (context, state) {
-            if (state.characters.isEmpty) {
-              return noCharacters();
-            }
-
-            return characterList(state.characters);
-          },
-        ),
+        body: _CharacterListBody(),
         floatingActionButton: FloatingActionButton(
           child: Text(
             "+",
@@ -51,6 +68,21 @@ class CharacterList extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _CharacterListBody extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterListBloc, CharacterListState>(
+      builder: (context, state) {
+        if (state.characters.isEmpty) {
+          return noCharacters();
+        }
+
+        return characterList(state.characters);
+      },
     );
   }
 
