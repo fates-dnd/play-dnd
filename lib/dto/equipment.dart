@@ -7,7 +7,7 @@ class Equipment {
   final String index;
   final String name;
   final EquipmentCategory equipmentCategory;
-  final double weight;
+  final double? weight;
   final Cost cost;
   final String? weaponCategory;
   final WeaponRange? weaponRange;
@@ -44,11 +44,14 @@ class Equipment {
     this.throwRange,
   });
 
-  bool get isEquippable => equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
+  bool get isEquippable =>
+      equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
 
-  String get weaponRangeName => (weaponRange == WeaponRange.MELEE 
-    ? weaponRange?.getName() 
-    : "${range?.normal} / ${range?.long}") ?? "";
+  String get weaponRangeName =>
+      (weaponRange == WeaponRange.MELEE
+          ? weaponRange?.getName()
+          : "${range?.normal} / ${range?.long}") ??
+      "";
 }
 
 enum EquipmentCategory {

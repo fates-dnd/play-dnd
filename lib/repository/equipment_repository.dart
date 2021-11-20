@@ -20,7 +20,7 @@ class EquipmentRepository {
       index: json["index"],
       name: json["name"],
       equipmentCategory: _equipmentCategoryFromJson(json["equipment_category"]),
-      weight: json["weight"].toDouble(),
+      weight: json["weight"]?.toDouble(),
       cost: _costFromJson(json["cost"]),
       damage: _damageFromJson(json["damage"] ?? null),
       range: _rangeFromJson(json["range"] ?? null),
@@ -41,10 +41,14 @@ class EquipmentRepository {
   EquipmentCategory _equipmentCategoryFromJson(Map<String, dynamic> json) {
     final index = json["index"];
     switch (index) {
-      case "weapon": return EquipmentCategory.WEAPON;
-      case "armor": return EquipmentCategory.ARMOR;
-      case "adventuring-gear": return EquipmentCategory.ADVENTURING_GEAR;
-      default: return EquipmentCategory.ADVENTURING_GEAR;
+      case "weapon":
+        return EquipmentCategory.WEAPON;
+      case "armor":
+        return EquipmentCategory.ARMOR;
+      case "adventuring-gear":
+        return EquipmentCategory.ADVENTURING_GEAR;
+      default:
+        return EquipmentCategory.ADVENTURING_GEAR;
     }
   }
 
@@ -76,7 +80,7 @@ class EquipmentRepository {
     final amount = match?.group(1);
     Dice? dice;
     switch (match?.group(2)) {
-      case "d4": 
+      case "d4":
         dice = Dice.D4;
         break;
       case "d6":
@@ -154,11 +158,16 @@ class EquipmentRepository {
     }
     final index = json["index"];
     switch (index) {
-      case "standard-gear": return GearCategory.STANDARD_GEAR;
-      case "holy-symbols": return GearCategory.HOLY_SYMBOLS;
-      case "arcane-foci": return GearCategory.ACRANE_FOCI;
-      case "druidic-foci": return GearCategory.DRUIDIC_FOCI;
-      default: return null;
+      case "standard-gear":
+        return GearCategory.STANDARD_GEAR;
+      case "holy-symbols":
+        return GearCategory.HOLY_SYMBOLS;
+      case "arcane-foci":
+        return GearCategory.ACRANE_FOCI;
+      case "druidic-foci":
+        return GearCategory.DRUIDIC_FOCI;
+      default:
+        return null;
     }
   }
 
@@ -168,19 +177,27 @@ class EquipmentRepository {
 
   ArmorCategory? _armorCategoryFromJson(String? json) {
     switch (json?.toLowerCase()) {
-      case "shield": return ArmorCategory.SHIELD;
-      case "light": return ArmorCategory.LIGHT;
-      case "medium": return ArmorCategory.MEDIUM;
-      case "heavy": return ArmorCategory.HEAVY;
-      default: return null;
+      case "shield":
+        return ArmorCategory.SHIELD;
+      case "light":
+        return ArmorCategory.LIGHT;
+      case "medium":
+        return ArmorCategory.MEDIUM;
+      case "heavy":
+        return ArmorCategory.HEAVY;
+      default:
+        return null;
     }
   }
 
   WeaponRange? _weaponRangeFromJson(String? json) {
     switch (json?.toLowerCase()) {
-      case "melee": return WeaponRange.MELEE;
-      case "ranged": return WeaponRange.RANGED;
-      default: return null;
+      case "melee":
+        return WeaponRange.MELEE;
+      case "ranged":
+        return WeaponRange.RANGED;
+      default:
+        return null;
     }
   }
 }
