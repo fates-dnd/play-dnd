@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/set_characteristics/set_characteristics_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/ui/stat_calculator/stat_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -202,10 +203,10 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
       builder: (context, state) => OutlinedButton(
         onPressed: () {
           nameFocusNode.unfocus();
-          showDialog(
-              context: context,
-              builder: (dialogContext) =>
-                  _createCharacteristicDialog(context, characteristicBonus));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) =>
+                StatCalculatorScreen(characteristicBonus: characteristicBonus),
+          ));
         },
         child: Text(((state.getScoreForCharacteristic(
                         characteristicBonus.characteristic) ??
@@ -244,52 +245,6 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                   }
                 : null,
             child: Text(AppLocalizations.of(context)!.save)),
-      ),
-    );
-  }
-
-  AlertDialog _createCharacteristicDialog(
-      BuildContext inputContext, CharacteristicBonus characteristicBonus) {
-    final theme = Theme.of(inputContext);
-    final textController = TextEditingController();
-
-    return AlertDialog(
-      title: Text(characteristicBonus.characteristic.getName(context)),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: TextField(
-                cursorColor: theme.accentColor,
-                cursorHeight: 24,
-                style: TextStyle(color: Colors.white),
-                autofocus: true,
-                controller: textController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                    hintText:
-                        characteristicBonus.characteristic.getName(context)),
-              )),
-              SizedBox(width: 24),
-              Text("(${characteristicBonus.bonus.toBonusString()})",
-                  style: theme.textTheme.subtitle1)
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          OutlinedButton(
-              onPressed: () {
-                BlocProvider.of<SetCharacteristicsBloc>(inputContext).add(
-                    SubmitCharacteristicsScore(
-                        characteristicBonus.characteristic,
-                        int.tryParse(textController.value.text)));
-                Navigator.of(context).pop();
-              },
-              child: Text(AppLocalizations.of(context)!.save)),
-        ],
       ),
     );
   }
