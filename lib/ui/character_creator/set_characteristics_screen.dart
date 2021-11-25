@@ -200,12 +200,18 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
   Widget _characteristicButton(
       BuildContext inputContext, CharacteristicBonus characteristicBonus) {
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-      builder: (context, state) => OutlinedButton(
+      builder: (blocContext, state) => OutlinedButton(
         onPressed: () {
           nameFocusNode.unfocus();
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) =>
-                StatCalculatorScreen(characteristicBonus: characteristicBonus),
+          Navigator.of(blocContext).push(MaterialPageRoute(
+            builder: (context) => StatCalculatorScreen(
+              characteristicBonus: characteristicBonus,
+              onSubmit: (value) => {
+                BlocProvider.of<SetCharacteristicsBloc>(blocContext).add(
+                    SubmitCharacteristicsScore(
+                        characteristicBonus.characteristic, value))
+              },
+            ),
           ));
         },
         child: Text(((state.getScoreForCharacteristic(

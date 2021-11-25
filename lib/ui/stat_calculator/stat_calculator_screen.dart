@@ -1,15 +1,19 @@
+import 'package:dnd_player_flutter/bloc/set_characteristics/set_characteristics_bloc.dart';
 import 'package:dnd_player_flutter/bloc/stat_calulator/stat_calculator_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatCalculatorScreen extends StatelessWidget {
   final CharacteristicBonus characteristicBonus;
+  final Function(int) onSubmit;
 
   const StatCalculatorScreen({
     Key? key,
     required this.characteristicBonus,
+    required this.onSubmit,
   }) : super(key: key);
 
   @override
@@ -37,7 +41,9 @@ class StatCalculatorScreen extends StatelessWidget {
                 values: ["7", "8", "9"],
                 action: _BackspaceButton(),
               ),
-              _LastRow(),
+              _LastRow(
+                onSubmit: onSubmit,
+              ),
             ],
           )),
     );
@@ -54,6 +60,27 @@ class _Display extends StatelessWidget {
           Text(
             state.enteredValue.toString(),
             style: TextStyle(fontSize: 52),
+          ),
+          SizedBox(
+            width: 12,
+          ),
+          Text(
+            state.bonus.toBonusString(),
+            style:
+                TextStyle(fontSize: 46, color: Colors.white.withOpacity(0.5)),
+          ),
+          SizedBox(width: 12),
+          Text(
+            "=",
+            style: TextStyle(color: Colors.white, fontSize: 64),
+          ),
+          SizedBox(width: 12),
+          Text(
+            state.result.toString(),
+            style: TextStyle(
+              color: Color(0xFFFF5251),
+              fontSize: 64,
+            ),
           ),
         ],
       ),
@@ -83,6 +110,13 @@ class _NumpadRow extends StatelessWidget {
 }
 
 class _LastRow extends StatelessWidget {
+  final Function(int) onSubmit;
+
+  const _LastRow({
+    Key? key,
+    required this.onSubmit,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -94,11 +128,16 @@ class _LastRow extends StatelessWidget {
               aspectRatio: 3,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    AppLocalizations.of(context)!.save,
-                    style: TextStyle(fontSize: 32, color: Colors.white),
+                child: BlocBuilder<StatCalculatorBloc, StatCalculatorState>(
+                  builder: (context, state) => TextButton(
+                    onPressed: () {
+                      onSubmit(state.enteredValue);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.save,
+                      style: TextStyle(fontSize: 32, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
