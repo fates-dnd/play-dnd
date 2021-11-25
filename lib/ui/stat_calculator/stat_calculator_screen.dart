@@ -33,7 +33,10 @@ class StatCalculatorScreen extends StatelessWidget {
               ),
               _NumpadRow(values: ["1", "2", "3"]),
               _NumpadRow(values: ["4", "5", "6"]),
-              _NumpadRow(values: ["7", "8", "9"]),
+              _NumpadRow(
+                values: ["7", "8", "9"],
+                action: _BackspaceButton(),
+              ),
               _LastRow(),
             ],
           )),
@@ -46,8 +49,12 @@ class _Display extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<StatCalculatorBloc, StatCalculatorState>(
       builder: (context, state) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(state.enteredValue.toString()),
+          Text(
+            state.enteredValue.toString(),
+            style: TextStyle(fontSize: 52),
+          ),
         ],
       ),
     );
@@ -56,8 +63,13 @@ class _Display extends StatelessWidget {
 
 class _NumpadRow extends StatelessWidget {
   final List<String> values;
+  final Widget? action;
 
-  const _NumpadRow({Key? key, required this.values}) : super(key: key);
+  const _NumpadRow({
+    Key? key,
+    required this.values,
+    this.action,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +77,7 @@ class _NumpadRow extends StatelessWidget {
       children: values
           .map((value) => Expanded(child: _NumpadButton(value: value)))
           .toList()
-        ..add(Expanded(child: SizedBox())),
+        ..add(Expanded(child: action ?? SizedBox())),
     );
   }
 }
@@ -116,13 +128,40 @@ class _NumpadButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             onTap: () {
               BlocProvider.of<StatCalculatorBloc>(context)
-                  .add(ApplyNumberEvent(int.parse(value)));
+                  .add(ApplyNumber(int.parse(value)));
             },
             child: Center(
               child: Text(
                 value,
                 style: TextStyle(fontSize: 32),
               ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _BackspaceButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: Ink(
+          decoration: BoxDecoration(
+            color: Color(0xFFFF5251),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: InkWell(
+            onTap: () {
+              BlocProvider.of<StatCalculatorBloc>(context).add(Backspace());
+            },
+            child: Icon(
+              Icons.backspace,
+              color: Colors.white,
             ),
           ),
         ),
