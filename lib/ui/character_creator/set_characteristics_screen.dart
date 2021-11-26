@@ -164,66 +164,10 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                 (element) => element.characteristic == characteristic);
 
         final bonusPoints = (raceBonus?.bonus ?? selectedBonus?.bonus) ?? 0;
-        return _characteristicsRow(
-            context, CharacteristicBonus(characteristic, bonusPoints));
+        return _CharcateristicsRow(
+            characteristicBonus:
+                CharacteristicBonus(characteristic, bonusPoints));
       }).toList(),
-    );
-  }
-
-  Widget _characteristicsRow(
-      BuildContext context, CharacteristicBonus characteristicBonus) {
-    final theme = Theme.of(context);
-    return Container(
-      height: 48,
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                Text(
-                  characteristicBonus.characteristic.getName(context),
-                  style: theme.textTheme.headline5,
-                ),
-                SizedBox(width: 4),
-                if (characteristicBonus.bonus != 0)
-                  Text("(${characteristicBonus.bonus.toBonusString()})",
-                      style: theme.textTheme.subtitle1),
-              ],
-            ),
-          ),
-          _characteristicButton(context, characteristicBonus)
-        ],
-      ),
-    );
-  }
-
-  Widget _characteristicButton(
-      BuildContext inputContext, CharacteristicBonus characteristicBonus) {
-    return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-      builder: (blocContext, state) => OutlinedButton(
-        onPressed: () {
-          nameFocusNode.unfocus();
-          Navigator.of(blocContext).push(MaterialPageRoute(
-            builder: (context) => StatCalculatorScreen(
-              characteristicBonus: characteristicBonus,
-              onSubmit: (value) => {
-                BlocProvider.of<SetCharacteristicsBloc>(blocContext).add(
-                    SubmitCharacteristicsScore(
-                        characteristicBonus.characteristic, value))
-              },
-            ),
-          ));
-        },
-        child: Text(((state.getScoreForCharacteristic(
-                        characteristicBonus.characteristic) ??
-                    0) +
-                characteristicBonus.bonus)
-            .toString()),
-        style: OutlinedButton.styleFrom(
-          primary: Colors.white,
-          side: BorderSide(color: Color(0xFF272E32), width: 3),
-        ),
-      ),
     );
   }
 
@@ -251,6 +195,77 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                   }
                 : null,
             child: Text(AppLocalizations.of(context)!.save)),
+      ),
+    );
+  }
+}
+
+class _CharcateristicsRow extends StatelessWidget {
+  final CharacteristicBonus characteristicBonus;
+
+  const _CharcateristicsRow({Key? key, required this.characteristicBonus})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext rootContext) {
+    final theme = Theme.of(rootContext);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Ink(
+        decoration: BoxDecoration(
+          color: Color(0xFF272E32),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: InkWell(
+          onTap: () {
+            Navigator.of(rootContext).push(MaterialPageRoute(
+              builder: (context) => StatCalculatorScreen(
+                characteristicBonus: characteristicBonus,
+                onSubmit: (value) => {
+                  BlocProvider.of<SetCharacteristicsBloc>(rootContext).add(
+                      SubmitCharacteristicsScore(
+                          characteristicBonus.characteristic, value))
+                },
+              ),
+            ));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            height: 52,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      Text(
+                        characteristicBonus.characteristic.getName(rootContext),
+                        style: theme.textTheme.headline5,
+                      ),
+                      SizedBox(width: 4),
+                      if (characteristicBonus.bonus != 0)
+                        Text("(${characteristicBonus.bonus.toBonusString()})",
+                            style: theme.textTheme.subtitle1),
+                    ],
+                  ),
+                ),
+                BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
+                  builder: (context, state) {
+                    return Text(
+                      ((state.getScoreForCharacteristic(
+                                      characteristicBonus.characteristic) ??
+                                  0) +
+                              characteristicBonus.bonus)
+                          .toString(),
+                      style: TextStyle(
+                          fontSize: 32,
+                          color: characteristicBonus.characteristic.getColor()),
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

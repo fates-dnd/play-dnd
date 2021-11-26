@@ -30,21 +30,24 @@ class StatCalculatorScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(characteristicBonus.characteristic.getName(context)),
           ),
-          body: Column(
-            children: [
-              Expanded(
-                child: _Display(),
-              ),
-              _NumpadRow(values: ["1", "2", "3"]),
-              _NumpadRow(values: ["4", "5", "6"]),
-              _NumpadRow(
-                values: ["7", "8", "9"],
-                action: _BackspaceButton(),
-              ),
-              _LastRow(
-                onSubmit: onSubmit,
-              ),
-            ],
+          body: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 32),
+            child: Column(
+              children: [
+                Expanded(
+                  child: _Display(),
+                ),
+                _NumpadRow(values: ["1", "2", "3"]),
+                _NumpadRow(values: ["4", "5", "6"]),
+                _NumpadRow(
+                  values: ["7", "8", "9"],
+                  action: _BackspaceButton(),
+                ),
+                _LastRow(
+                  onSubmit: onSubmit,
+                ),
+              ],
+            ),
           )),
     );
   }
@@ -155,7 +158,7 @@ class _NumpadButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: AspectRatio(
         aspectRatio: 1,
         child: Ink(
