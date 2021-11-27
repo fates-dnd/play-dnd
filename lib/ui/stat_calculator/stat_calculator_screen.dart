@@ -1,4 +1,3 @@
-import 'package:dnd_player_flutter/bloc/set_characteristics/set_characteristics_bloc.dart';
 import 'package:dnd_player_flutter/bloc/stat_calulator/stat_calculator_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/utils.dart';
@@ -24,6 +23,7 @@ class StatCalculatorScreen extends StatelessWidget {
           0,
           characteristicBonus.bonus,
           characteristicBonus.bonus,
+          StatCalculatorError.NONE,
         ),
       ),
       child: Scaffold(

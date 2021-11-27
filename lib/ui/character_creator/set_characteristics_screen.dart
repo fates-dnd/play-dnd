@@ -79,7 +79,7 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
         cursorColor: theme.accentColor,
         cursorHeight: 24,
         decoration: InputDecoration(
-          hintText: AppLocalizations.of(context)!.level,
+          hintText: AppLocalizations.of(context)!.name,
         ),
         onChanged: (text) {
           BlocProvider.of<SetCharacteristicsBloc>(context)

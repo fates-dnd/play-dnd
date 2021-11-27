@@ -1,7 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/data/skills.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
-import 'package:dnd_player_flutter/ui/characters/characteristics_colors_map.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +58,9 @@ class AbilityItem extends StatelessWidget {
                         height: 2,
                       ),
                       Text(
-                        skillBonus.skill.characteristic.getName(context).toUpperCase(),
+                        skillBonus.skill.characteristic
+                            .getName(context)
+                            .toUpperCase(),
                         style: theme.textTheme.subtitle2,
                       )
                     ],
@@ -80,7 +81,7 @@ class AbilityItem extends StatelessWidget {
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: characteristicToColor[skillBonus.skill.characteristic],
+              color: skillBonus.skill.characteristic.getColor(),
             ),
             child: Image.asset("assets/drawable/dice/d20.png"),
           ),

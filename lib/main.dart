@@ -31,9 +31,9 @@ class DndApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => SettingsBloc(
-            getIt<SettingsRepository>(),
-          )),
+            create: (context) => SettingsBloc(
+                  getIt<SettingsRepository>(),
+                )),
         BlocProvider(
             create: (context) =>
                 CharacterCreatorBloc(getIt.get<CharacterRepository>()))
@@ -50,7 +50,9 @@ class DndApp extends StatelessWidget {
             Locale('en', ''),
             Locale('ru', ''),
           ],
-          locale: state.languageCode != null ? Locale(state.languageCode!, '') : null,
+          locale: state.languageCode != null
+              ? Locale(state.languageCode!, '')
+              : null,
           theme: theme.copyWith(
             colorScheme: theme.colorScheme.copyWith(
               secondary: Color(0xFFFF5251),
@@ -117,7 +119,7 @@ class DndApp extends StatelessWidget {
                     primary: Color(0xFF38282D),
                     textStyle:
                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 8),
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 16),
                     backgroundColor: Color(0xFFFF5251))),
             dialogTheme: DialogTheme(
                 backgroundColor: Color(0xFF272E32),

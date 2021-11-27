@@ -18,5 +18,10 @@
   "constitution": "Constitution",
   "intelligence": "Intelligence",
   "wisdom": "Wisdom",
-  "charisma": "Charisma"
+  "charisma": "Charisma",
+
+  "weapon": "Weapon",
+  "armor": "Armor",
+  "adventuring_gear": "Adventuring Gear",
+  "melee": "Melee"
 }

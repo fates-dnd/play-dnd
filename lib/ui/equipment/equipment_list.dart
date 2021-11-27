@@ -2,8 +2,8 @@ import 'package:dnd_player_flutter/bloc/equipment/equipment_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
-import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -104,7 +104,7 @@ class EquipmentDescriptionRow extends StatelessWidget {
     return Row(
       children: [
         Text(
-          equipmentCategory.getName(),
+          equipmentCategory.getName(context),
           style: TextStyle(color: Color(0xAADCDAD9), fontSize: 12),
         ),
         // properties

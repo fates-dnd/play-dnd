@@ -3,7 +3,6 @@ import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
-import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -133,7 +132,7 @@ class EquippedItem extends StatelessWidget {
                   height: 2,
                 ),
                 Text(
-                  equipment.weaponRangeName,
+                  equipment.getWeaponRangeName(context),
                   style: TextStyle(
                     color: Color(0xAADCDAD9),
                     fontSize: 12,
@@ -272,7 +271,7 @@ class EquipmentItem extends StatelessWidget {
                 ),
               ),
               Text(
-                equipment.equipmentCategory.getName(),
+                equipment.equipmentCategory.getName(rootContext),
                 style: TextStyle(
                   fontSize: 12,
                   color: Color(0xAADCDAD9),

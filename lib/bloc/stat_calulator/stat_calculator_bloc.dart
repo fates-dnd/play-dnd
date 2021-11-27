@@ -15,6 +15,7 @@ class StatCalculatorBloc
           newEnteredValue,
           state.bonus,
           newEnteredValue + state.bonus,
+          _evaluateError(),
         ));
       } else if (event is Backspace) {
         final stringEnteredValue = state.enteredValue.toString();
@@ -28,8 +29,19 @@ class StatCalculatorBloc
           newEnteredValue,
           state.bonus,
           newEnteredValue + state.bonus,
+          _evaluateError(),
         ));
       }
     });
+  }
+
+  StatCalculatorError _evaluateError() {
+    if (state.enteredValue < 3) {
+      return StatCalculatorError.MINIMUM_VALUE_IS_3;
+    }
+    if (state.enteredValue > 18) {
+      return StatCalculatorError.MAXIMUM_VALUE_IS_18;
+    }
+    return StatCalculatorError.NONE;
   }
 }

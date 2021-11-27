@@ -1,5 +1,4 @@
 import 'package:dnd_player_flutter/data/dice.dart';
-import 'package:dnd_player_flutter/localization/equipment_locale.dart';
 
 import 'damage_type.dart';
 
@@ -46,12 +45,6 @@ class Equipment {
 
   bool get isEquippable =>
       equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
-
-  String get weaponRangeName =>
-      (weaponRange == WeaponRange.MELEE
-          ? weaponRange?.getName()
-          : "${range?.normal} / ${range?.long}") ??
-      "";
 }
 
 enum EquipmentCategory {

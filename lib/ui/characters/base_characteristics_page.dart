@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import 'characteristics_colors_map.dart';
-
 class BaseCharateristicsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -29,37 +27,37 @@ class BaseCharateristicsPage extends StatelessWidget {
                   name: localizations.strength,
                   bonus: state.strengthBonus,
                   score: state.strength,
-                  accent: characteristicToColor[Characteristic.STRENGTH],
+                  accent: Characteristic.STRENGTH.getColor(),
                 ),
                 CharacteristicItem(
                   name: localizations.dexterity,
                   bonus: state.dexterityBonus,
                   score: state.dexterity,
-                  accent: characteristicToColor[Characteristic.DEXTERITY],
+                  accent: Characteristic.DEXTERITY.getColor(),
                 ),
                 CharacteristicItem(
                   name: localizations.constitution,
                   bonus: state.constitutionBonus,
                   score: state.constitution,
-                  accent: characteristicToColor[Characteristic.CONSTITUTION],
+                  accent: Characteristic.CONSTITUTION.getColor(),
                 ),
                 CharacteristicItem(
                   name: localizations.intelligence,
                   bonus: state.intelligenceBonus,
                   score: state.intelligence,
-                  accent: characteristicToColor[Characteristic.INTELLIGENCE],
+                  accent: Characteristic.INTELLIGENCE.getColor(),
                 ),
                 CharacteristicItem(
                   name: localizations.wisdom,
                   bonus: state.wisdomBonus,
                   score: state.wisdom,
-                  accent: characteristicToColor[Characteristic.WISDOM],
+                  accent: Characteristic.WISDOM.getColor(),
                 ),
                 CharacteristicItem(
                   name: localizations.charisma,
                   bonus: state.charismaBonus,
                   score: state.charisma,
-                  accent: characteristicToColor[Characteristic.CHARISMA],
+                  accent: Characteristic.CHARISMA.getColor(),
                 ),
               ],
             ),

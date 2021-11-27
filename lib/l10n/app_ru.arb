@@ -15,5 +15,11 @@
   "constitution": "Телосложение",
   "intelligence": "Интеллект",
   "wisdom": "Мудрость",
-  "charisma": "Харизма"
+  "charisma": "Харизма",
+
+  "weapon": "Оружие",
+  "armor": "Броня",
+  "adventuring_gear": "Приспособление",
+  "melee": "Ближний бой"
+
 }
