@@ -35,7 +35,12 @@ class StatCalculatorScreen extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: _Display(),
+                  child: Column(
+                    children: [
+                      Expanded(child: _Display()),
+                      _ErrorLine(),
+                    ],
+                  ),
                 ),
                 _NumpadRow(values: ["1", "2", "3"]),
                 _NumpadRow(values: ["4", "5", "6"]),
@@ -87,6 +92,37 @@ class _Display extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ErrorLine extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<StatCalculatorBloc, StatCalculatorState>(
+      builder: (context, state) {
+        final appLocalizations = AppLocalizations.of(context)!;
+        var errorMessage = "";
+        switch (state.error) {
+          case StatCalculatorError.MINIMUM_VALUE_IS_3:
+            errorMessage = appLocalizations.minimum_value_is_3;
+            break;
+          case StatCalculatorError.MAXIMUM_VALUE_IS_18:
+            errorMessage = appLocalizations.maximum_value_is_18;
+            break;
+          case StatCalculatorError.NONE:
+            errorMessage = "";
+            break;
+        }
+
+        return Text(
+          errorMessage,
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 18,
+          ),
+        );
+      },
     );
   }
 }
