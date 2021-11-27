@@ -169,10 +169,12 @@ class _LastRow extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: BlocBuilder<StatCalculatorBloc, StatCalculatorState>(
                   builder: (context, state) => TextButton(
-                    onPressed: () {
-                      onSubmit(state.enteredValue);
-                      Navigator.pop(context);
-                    },
+                    onPressed: state.error == StatCalculatorError.NONE
+                        ? () {
+                            onSubmit(state.enteredValue);
+                            Navigator.pop(context);
+                          }
+                        : null,
                     child: Text(
                       AppLocalizations.of(context)!.save,
                       style: TextStyle(fontSize: 32, color: Colors.white),
