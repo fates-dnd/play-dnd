@@ -24,7 +24,6 @@ class SubmitBonusCharacteristics extends CharacterCreatorEvent {
 
 class SubmitCharacteristics extends CharacterCreatorEvent {
   final String? name;
-  final int? level;
   final int? strength;
   final int? dexterity;
   final int? constitution;
@@ -34,7 +33,6 @@ class SubmitCharacteristics extends CharacterCreatorEvent {
 
   SubmitCharacteristics(
     this.name,
-    this.level,
     this.strength,
     this.dexterity,
     this.constitution,

@@ -2,7 +2,6 @@ part of 'set_characteristics_bloc.dart';
 
 class SetCharacteristicsState {
   final String? name;
-  final int? level;
   final int? strength;
   final int? dexterity;
   final int? constitution;
@@ -10,18 +9,17 @@ class SetCharacteristicsState {
   final int? wisdom;
   final int? charisma;
 
-  bool get isFilled => name != null
-    && level != null
-    && strength != null
-    && dexterity != null
-    && constitution != null
-    && intelligence != null
-    && wisdom != null
-    && charisma != null;
+  bool get isFilled =>
+      name != null &&
+      strength != null &&
+      dexterity != null &&
+      constitution != null &&
+      intelligence != null &&
+      wisdom != null &&
+      charisma != null;
 
   SetCharacteristicsState(
       {this.name,
-      this.level,
       this.strength,
       this.dexterity,
       this.constitution,

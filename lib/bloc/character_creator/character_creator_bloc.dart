@@ -36,7 +36,6 @@ class CharacterCreatorBloc
     } else if (event is SubmitCharacteristics) {
       final newState = state.copyWith(
         name: event.name,
-        level: event.level,
         strength: event.strength,
         dexterity: event.dexterity,
         constitution: event.constitution,

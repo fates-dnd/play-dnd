@@ -10,15 +10,14 @@ part 'set_characteristics_state.dart';
 class SetCharacteristicsBloc
     extends Bloc<SetCharacteristicsEvent, SetCharacteristicsState> {
   String? name;
-  int level = 1;
-  int? strenghBase;
+  int? strenghtBase;
   int? dexterityBase;
   int? constitutionBase;
   int? intelligenceBase;
   int? wisdomBase;
   int? charismaBase;
 
-  SetCharacteristicsBloc() : super(SetCharacteristicsState(level: 1)) {
+  SetCharacteristicsBloc() : super(SetCharacteristicsState()) {
     on<SetCharacteristicsEvent>((event, emit) async {
       emit(await processEvent(event));
     });
@@ -29,15 +28,12 @@ class SetCharacteristicsBloc
   ) async {
     if (event is SubmitName) {
       name = event.name;
-    } else if (event is SubmitLevel) {
-      level = event.level;
     } else if (event is SubmitCharacteristicsScore) {
       _saveCharacteristicsScore(event.characteristic, event.score);
     }
     return SetCharacteristicsState(
         name: name,
-        level: level,
-        strength: strenghBase,
+        strength: strenghtBase,
         dexterity: dexterityBase,
         constitution: constitutionBase,
         intelligence: intelligenceBase,
@@ -48,7 +44,7 @@ class SetCharacteristicsBloc
   _saveCharacteristicsScore(Characteristic characteristic, int? score) {
     switch (characteristic) {
       case Characteristic.STRENGTH:
-        strenghBase = score;
+        strenghtBase = score;
         break;
       case Characteristic.DEXTERITY:
         dexterityBase = score;

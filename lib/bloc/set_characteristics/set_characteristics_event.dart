@@ -9,12 +9,6 @@ class SubmitName extends SetCharacteristicsEvent {
   SubmitName(this.name);
 }
 
-class SubmitLevel extends SetCharacteristicsEvent {
-  final int level;
-
-  SubmitLevel(this.level);
-}
-
 class SubmitCharacteristicsScore extends SetCharacteristicsEvent {
   final Characteristic characteristic;
   final int? score;

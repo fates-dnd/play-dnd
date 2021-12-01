@@ -52,8 +52,6 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                             Expanded(
                               child: _nameField(context),
                             ),
-                            SizedBox(width: 48),
-                            _levelField(context)
                           ],
                         ),
                         SizedBox(height: 24),
@@ -87,46 +85,6 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
         },
         style: theme.textTheme.headline5,
       ),
-    );
-  }
-
-  Widget _levelField(BuildContext context) {
-    final theme = Theme.of(context);
-    return Column(
-      children: [
-        Text(
-          AppLocalizations.of(context)!.level,
-          style: theme.textTheme.subtitle2,
-        ),
-        BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-          builder: (context, state) => DropdownButton(
-            itemHeight: 52,
-            hint: Text(
-              AppLocalizations.of(context)!.level,
-              style: TextStyle(color: Color(0xffa4a4a4)),
-            ),
-            value: state.level,
-            underline: Container(height: 2, color: theme.accentColor),
-            dropdownColor: theme.primaryColorLight,
-            icon: Icon(Icons.arrow_drop_down),
-            items: List.generate(20, (index) => index + 1).map((e) {
-              return DropdownMenuItem<int>(
-                  value: e,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      e.toString(),
-                      style: theme.textTheme.headline5,
-                    ),
-                  ));
-            }).toList(),
-            onChanged: (value) => {
-              BlocProvider.of<SetCharacteristicsBloc>(context)
-                  .add(SubmitLevel(value as int))
-            },
-          ),
-        ),
-      ],
     );
   }
 
@@ -181,7 +139,6 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                     BlocProvider.of<CharacterCreatorBloc>(inputContext)
                         .add(SubmitCharacteristics(
                       state.name,
-                      state.level,
                       state.strength,
                       state.dexterity,
                       state.constitution,
