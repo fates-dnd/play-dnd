@@ -1,6 +1,7 @@
-import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
-import 'package:dnd_player_flutter/bloc/set_characteristics/set_characteristics_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/set_characteristics/set_characteristics_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/ui/character_creator/selected_proficiencies.dart';
 import 'package:dnd_player_flutter/ui/stat_calculator/stat_calculator_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,8 +137,10 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
         child: TextButton(
             onPressed: state.isFilled
                 ? () {
-                    BlocProvider.of<CharacterCreatorBloc>(inputContext)
-                        .add(SubmitCharacteristics(
+                    final characterCreatorBloc =
+                        BlocProvider.of<CharacterCreatorBloc>(inputContext);
+
+                    characterCreatorBloc.add(SubmitCharacteristics(
                       state.name,
                       state.strength,
                       state.dexterity,
@@ -147,8 +150,12 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                       state.charisma,
                     ));
 
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, '/', (r) => false);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SelectedProficiencies(
+                                  clazz: characterCreatorBloc.state.clazz!,
+                                )));
                   }
                 : null,
             child: Text(AppLocalizations.of(context)!.save)),
@@ -187,8 +194,8 @@ class _CharcateristicsRow extends StatelessWidget {
             ));
           },
           child: Container(
-            padding: const EdgeInsets.all(8.0),
-            height: 52,
+            padding: const EdgeInsets.all(16.0),
+            height: 64,
             child: Row(
               children: [
                 Expanded(

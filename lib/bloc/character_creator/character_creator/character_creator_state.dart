@@ -7,7 +7,6 @@ class CharacterCreatorState {
   final Class? clazz;
   final List<CharacteristicBonus>? bonusCharacteristic;
   final String? name;
-  final int? level;
   final int? strength;
   final int? dexterity;
   final int? constitution;
@@ -21,7 +20,6 @@ class CharacterCreatorState {
     this.clazz,
     this.bonusCharacteristic,
     this.name,
-    this.level,
     this.strength,
     this.dexterity,
     this.constitution,
@@ -50,7 +48,6 @@ class CharacterCreatorState {
       clazz: clazz ?? this.clazz,
       bonusCharacteristic: bonusCharacteristic ?? this.bonusCharacteristic,
       name: name ?? this.name,
-      level: level ?? this.level,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
@@ -63,14 +60,13 @@ class CharacterCreatorState {
   Character? toCharacter() {
     return Character(
       name!,
-      level!,
+      1, // level
       strength!,
       dexterity!,
       constitution!,
       intelligence!,
       wisdom!,
       charisma!,
-
       race!,
       clazz!,
     );

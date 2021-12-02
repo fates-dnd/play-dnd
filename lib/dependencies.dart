@@ -24,9 +24,11 @@ void registerDependencies() {
       .registerSingleton<SettingsRepository>(SettingsRepository(defaultLocale));
   getIt.registerSingleton<RacesRepository>(RacesRepository(readRacesJson));
   getIt.registerSingleton<TraitsRepository>(TraitsRepository(readTraitsJson));
-  getIt
-      .registerSingleton<ClassesRepository>(ClassesRepository(readClassesJson));
   getIt.registerSingleton<SkillsRepository>(SkillsRepository(readSkillsJson));
+  getIt.registerSingleton<ClassesRepository>(ClassesRepository(
+    getIt.get<SkillsRepository>(),
+    readClassesJson,
+  ));
   getIt.registerSingleton<CharacterRepository>(CharacterRepository(
     getIt.get<SettingsRepository>(),
     getIt.get<RacesRepository>(),

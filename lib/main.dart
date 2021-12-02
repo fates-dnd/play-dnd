@@ -1,4 +1,3 @@
-import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
@@ -11,6 +10,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'bloc/character_creator/character_creator/character_creator_bloc.dart';
 import 'hive_utils.dart';
 
 void main() async {

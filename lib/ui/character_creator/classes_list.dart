@@ -1,5 +1,5 @@
-import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
-import 'package:dnd_player_flutter/bloc/classes/classes_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/classes/classes_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';

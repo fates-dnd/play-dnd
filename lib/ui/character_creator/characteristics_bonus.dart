@@ -1,5 +1,5 @@
-import 'package:dnd_player_flutter/bloc/character_creator/character_creator_bloc.dart';
-import 'package:dnd_player_flutter/bloc/charteristics_bonus/characteristics_bonus_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_creator/charteristics_bonus/characteristics_bonus_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/ui/character_creator/set_characteristics_screen.dart';

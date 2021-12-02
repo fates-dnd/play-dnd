@@ -2,15 +2,21 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
 
 class ClassesRepository {
+  final SkillsRepository skillsRepository;
   final Future<String> Function(String lang) jsonReader;
 
   List<Class>? classes;
   String? language;
 
-  ClassesRepository(this.jsonReader);
+  ClassesRepository(
+    this.skillsRepository,
+    this.jsonReader,
+  );
 
   Future<List<Class>> getClasses(String language) async {
     if (classes != null && this.language == language) {
@@ -21,7 +27,13 @@ class ClassesRepository {
 
     final response = await jsonReader(language);
     final List<dynamic> classesJson = json.decode(response);
-    classes = classesJson.map((classJson) => _fromJson(classJson)).toList();
+    final futureClasses =
+        Future.wait(classesJson.map((classJson) async => await _fromJson(
+              language,
+              classJson,
+            )));
+
+    classes = await futureClasses;
     return classes!;
   }
 
@@ -30,12 +42,16 @@ class ClassesRepository {
     return classes.firstWhere((element) => element.index == index);
   }
 
-  Class _fromJson(Map<String, dynamic> json) {
+  Future<Class> _fromJson(String language, Map<String, dynamic> json) async {
     return Class(
         json["index"],
         json["name"],
         _readSavingThrows(json["saving_throws"] as List<dynamic>),
-        _readSpellcastingAbility(json["spellcasting"]));
+        _readSpellcastingAbility(json["spellcasting"]),
+        await _readProficiencyChoices(
+          language,
+          json["proficiency_choices"] as List<dynamic>,
+        ));
   }
 
   List<Characteristic> _readSavingThrows(List<dynamic> json) {
@@ -51,5 +67,29 @@ class ClassesRepository {
     }
     final index = json["spellcasting_ability"]["index"];
     return indexAsCharacteristic(index);
+  }
+
+  Future<ProficiencyChoices> _readProficiencyChoices(
+    String language,
+    List<dynamic> choices,
+  ) async {
+    final skillChoices =
+        choices.firstWhere((element) => element["type"] == "skills");
+    return ProficiencyChoices(
+      skillChoices["choose"],
+      await _readSkills(
+        language,
+        skillChoices["from"] as List<dynamic>,
+      ),
+    );
+  }
+
+  Future<List<Skill>> _readSkills(
+      String language, List<dynamic> fromSkills) async {
+    final skills = await skillsRepository.getSkills(language);
+    return fromSkills.map((e) {
+      final index = e["index"];
+      return skills.firstWhere((skill) => skill.index == index);
+    }).toList();
   }
 }
