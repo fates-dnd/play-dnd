@@ -34,7 +34,7 @@ class SelectedProficiencies extends StatelessWidget {
                   child: ProficiencyOptionRow(
                     index: index,
                     selectedSkill: state.selected[index],
-                    availableOptions: state.available,
+                    availableOptions: List.of(state.available[index]),
                   ),
                 );
               }),
@@ -59,16 +59,18 @@ class ProficiencyOptionRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return Center(
-      child: DropdownButton(
+      child: DropdownButton<Skill>(
         hint: Text(
-          AppLocalizations.of(context)!.skill + " $index",
+          AppLocalizations.of(context)!.skill + " ${index + 1}",
           style: TextStyle(color: Color(0xFFA4A4A4), fontSize: 28),
         ),
         underline: SizedBox(),
         dropdownColor: theme.primaryColorLight,
+        value: selectedSkill,
         items: availableOptions
-            .map((e) => DropdownMenuItem(
+            .map((e) => DropdownMenuItem<Skill>(
                   value: e,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -80,7 +82,14 @@ class ProficiencyOptionRow extends StatelessWidget {
                   ),
                 ))
             .toList(),
-        onChanged: (skill) {},
+        onChanged: (skill) {
+          if (skill == null) {
+            return;
+          }
+
+          BlocProvider.of<SelectedProficienciesBloc>(context)
+              .add(SelectSkillProficiency(index, skill));
+        },
       ),
     );
   }
