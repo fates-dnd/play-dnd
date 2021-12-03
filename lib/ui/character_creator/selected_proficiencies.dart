@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/selected_proficiencies/selected_proficiencies_bloc.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -26,10 +27,15 @@ class SelectedProficiencies extends StatelessWidget {
             BlocBuilder<SelectedProficienciesBloc, SelectedProficienciesState>(
           builder: (context, state) => ListView.builder(
               itemCount: state.choose,
+              padding: EdgeInsets.only(top: 32),
               itemBuilder: (context, index) {
-                return ProficiencyOptionRow(
-                  selectedSkill: state.selected[index],
-                  availableOptions: state.available,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: ProficiencyOptionRow(
+                    index: index,
+                    selectedSkill: state.selected[index],
+                    availableOptions: state.available,
+                  ),
                 );
               }),
         ),
@@ -39,23 +45,43 @@ class SelectedProficiencies extends StatelessWidget {
 }
 
 class ProficiencyOptionRow extends StatelessWidget {
+  final int index;
   final Skill? selectedSkill;
   final List<Skill> availableOptions;
 
   const ProficiencyOptionRow({
     Key? key,
+    required this.index,
     required this.selectedSkill,
     required this.availableOptions,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
+    final theme = Theme.of(context);
+    return Center(
+      child: DropdownButton(
+        hint: Text(
+          AppLocalizations.of(context)!.skill + " $index",
+          style: TextStyle(color: Color(0xFFA4A4A4), fontSize: 28),
+        ),
+        underline: SizedBox(),
+        dropdownColor: theme.primaryColorLight,
         items: availableOptions
             .map((e) => DropdownMenuItem(
                   value: e,
-                  child: Text(e.name),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(e.name,
+                        style: TextStyle(
+                          color: e.characteristic.getColor(),
+                          fontSize: 28,
+                        )),
+                  ),
                 ))
-            .toList());
+            .toList(),
+        onChanged: (skill) {},
+      ),
+    );
   }
 }

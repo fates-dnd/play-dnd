@@ -28,5 +28,6 @@
   "minimum_value_is_3": "The minimum value of a stat rolled is 3",
   "maximum_value_is_18": "The maximum value of a stat rolled is 18",
 
-  "skills": "Skills"
+  "skills": "Skills",
+  "skill": "Skill"
 }
