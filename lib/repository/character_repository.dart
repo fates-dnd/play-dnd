@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
@@ -11,6 +12,7 @@ class CharacterRepository {
   final SettingsRepository settingsRepository;
   final RacesRepository racesRepository;
   final ClassesRepository classesRepository;
+  final SkillsRepository skillsRepository;
 
   late Box box;
 
@@ -18,6 +20,7 @@ class CharacterRepository {
     this.settingsRepository,
     this.racesRepository,
     this.classesRepository,
+    this.skillsRepository,
   ) {
     box = Hive.box('characters');
   }
@@ -228,6 +231,8 @@ class CharacterRepository {
         outline.baseCharisma,
         await racesRepository.findByIndex(language, outline.raceIndex),
         await classesRepository.findByIndex(language, outline.classIndex),
+        await skillsRepository.findByIndexes(
+            language, outline.proficiencyIndexes),
       );
     }).toList());
   }

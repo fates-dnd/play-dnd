@@ -33,6 +33,7 @@ void registerDependencies() {
     getIt.get<SettingsRepository>(),
     getIt.get<RacesRepository>(),
     getIt.get<ClassesRepository>(),
+    getIt.get<SkillsRepository>(),
   ));
   getIt.registerSingleton<EquipmentRepository>(
       EquipmentRepository(readEquipmentJson));

@@ -5,6 +5,7 @@ import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/ui/character_creator/set_characteristics_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CharacteristicsBonus extends StatelessWidget {
   final Race race;
@@ -55,7 +56,7 @@ class CharacteristicsBonus extends StatelessWidget {
                                       SetCharacteristicsScreen()));
                             }
                           : null,
-                      child: Text("Выбрать")),
+                      child: Text(AppLocalizations.of(context)!.select)),
                 ),
               ],
             ),

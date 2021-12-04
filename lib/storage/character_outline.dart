@@ -12,6 +12,8 @@ class CharacterOutline {
 
   final String raceIndex;
   final String classIndex;
+  final List<String> proficiencyIndexes;
+
   final List<String> equipmentIndexes;
   final List<String> equippedItems;
 
@@ -31,6 +33,7 @@ class CharacterOutline {
     this.baseCharisma,
     this.raceIndex,
     this.classIndex,
+    this.proficiencyIndexes,
     this.equipmentIndexes,
     this.equippedItems,
     this.preparedSpells,
@@ -57,6 +60,7 @@ class CharacterOutline {
       character.baseCharisma,
       character.race.index,
       character.clazz.index,
+      character.selectedProficiencies.map((skill) => skill.index).toList(),
       equipment,
       equippedItems,
       preparedSpells,
@@ -76,6 +80,7 @@ class CharacterOutline {
     int? baseCharisma,
     String? raceIndex,
     String? classIndex,
+    List<String>? proficiencyIndexes,
     List<String>? equipmentIndexes,
     List<String>? equippedItems,
     List<String>? preparedSpells,
@@ -93,6 +98,7 @@ class CharacterOutline {
       baseCharisma ?? this.baseCharisma,
       raceIndex ?? this.raceIndex,
       classIndex ?? this.classIndex,
+      proficiencyIndexes ?? this.proficiencyIndexes,
       equipmentIndexes ?? this.equipmentIndexes,
       equippedItems ?? this.equippedItems,
       preparedSpells ?? this.preparedSpells,

@@ -11,6 +11,8 @@ class SelectedProficienciesState extends Equatable {
     this.available,
   );
 
+  bool get areSkillsSelected => !selected.any((element) => element == null);
+
   @override
   List<Object?> get props => [choose, selected, available];
 }

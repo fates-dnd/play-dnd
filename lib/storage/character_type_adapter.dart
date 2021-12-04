@@ -20,6 +20,8 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
         reader.readString(), // race
         reader.readString(), // class
 
+        readStringList(reader), // proficiency indexes
+
         readStringList(reader), // equipment indexes
         readStringList(reader), // equipped items indexes
 
@@ -52,6 +54,11 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
     writer.writeString(obj.raceIndex);
     writer.writeString(obj.classIndex);
+
+    writer.writeInt(obj.proficiencyIndexes.length);
+    obj.proficiencyIndexes.forEach((element) {
+      writer.writeString(element);
+    });
 
     writer.writeInt(obj.equipmentIndexes.length);
     obj.equipmentIndexes.forEach((element) {

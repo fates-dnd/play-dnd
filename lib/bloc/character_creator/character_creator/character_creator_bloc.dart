@@ -5,6 +5,7 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
+import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:meta/meta.dart';
@@ -34,7 +35,7 @@ class CharacterCreatorBloc
     } else if (event is SubmitBonusCharacteristics) {
       return state.copyWith(bonusCharacteristic: event.bonusCharacteristics);
     } else if (event is SubmitCharacteristics) {
-      final newState = state.copyWith(
+      return state.copyWith(
         name: event.name,
         strength: event.strength,
         dexterity: event.dexterity,
@@ -43,13 +44,15 @@ class CharacterCreatorBloc
         wisdom: event.wisdom,
         charisma: event.charisma,
       );
-
-      final characterToSave = newState.toCharacter();
+    } else if (event is SubmitSelectedProficiencies) {
+      return state.copyWith(
+        selectedProficiencies: event.proficiencies,
+      );
+    } else if (event is SaveCharacter) {
+      final characterToSave = state.toCharacter();
       if (characterToSave != null) {
         repository.insertCharacter(characterToSave);
       }
-
-      return newState;
     }
 
     return state;

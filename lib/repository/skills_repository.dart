@@ -20,6 +20,14 @@ class SkillsRepository {
     this.language = language;
   }
 
+  Future<List<Skill>> findByIndexes(
+      String language, List<String> indexes) async {
+    final skills = await getSkills(language);
+    return indexes
+        .map((index) => skills.firstWhere((element) => element.index == index))
+        .toList();
+  }
+
   Skill _fromJson(Map<String, dynamic> json) {
     return Skill(
       json["index"] as String,

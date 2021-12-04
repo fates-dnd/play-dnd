@@ -138,7 +138,16 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
             onPressed: state.isFilled
                 ? () {
                     final characterCreatorBloc =
-                        BlocProvider.of<CharacterCreatorBloc>(inputContext);
+                        BlocProvider.of<CharacterCreatorBloc>(inputContext)
+                          ..add(SubmitCharacteristics(
+                            state.name,
+                            state.strength,
+                            state.dexterity,
+                            state.constitution,
+                            state.intelligence,
+                            state.wisdom,
+                            state.charisma,
+                          ));
 
                     Navigator.push(
                         context,

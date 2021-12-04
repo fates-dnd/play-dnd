@@ -41,3 +41,11 @@ class SubmitCharacteristics extends CharacterCreatorEvent {
     this.charisma,
   );
 }
+
+class SubmitSelectedProficiencies extends CharacterCreatorEvent {
+  final List<Skill> proficiencies;
+
+  SubmitSelectedProficiencies(this.proficiencies);
+}
+
+class SaveCharacter extends CharacterCreatorEvent {}

@@ -13,6 +13,7 @@ class CharacterCreatorState {
   final int? intelligence;
   final int? wisdom;
   final int? charisma;
+  final List<Skill>? selectedProficiencies;
 
   CharacterCreatorState({
     this.race,
@@ -26,6 +27,7 @@ class CharacterCreatorState {
     this.intelligence,
     this.wisdom,
     this.charisma,
+    this.selectedProficiencies,
   });
 
   CharacterCreatorState copyWith({
@@ -41,6 +43,7 @@ class CharacterCreatorState {
     int? intelligence,
     int? wisdom,
     int? charisma,
+    List<Skill>? selectedProficiencies,
   }) {
     return CharacterCreatorState(
       race: race ?? this.race,
@@ -54,6 +57,8 @@ class CharacterCreatorState {
       intelligence: intelligence ?? this.intelligence,
       wisdom: wisdom ?? this.wisdom,
       charisma: charisma ?? this.charisma,
+      selectedProficiencies:
+          selectedProficiencies ?? this.selectedProficiencies,
     );
   }
 
@@ -69,6 +74,7 @@ class CharacterCreatorState {
       charisma!,
       race!,
       clazz!,
+      selectedProficiencies!,
     );
   }
 }

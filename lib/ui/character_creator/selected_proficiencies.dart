@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character_creator/selected_proficiencies/selected_proficiencies_bloc.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
@@ -25,19 +26,41 @@ class SelectedProficiencies extends StatelessWidget {
         ),
         body:
             BlocBuilder<SelectedProficienciesBloc, SelectedProficienciesState>(
-          builder: (context, state) => ListView.builder(
-              itemCount: state.choose,
-              padding: EdgeInsets.only(top: 32),
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: ProficiencyOptionRow(
-                    index: index,
-                    selectedSkill: state.selected[index],
-                    availableOptions: List.of(state.available[index]),
-                  ),
-                );
-              }),
+          builder: (context, state) => Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                    itemCount: state.choose,
+                    padding: EdgeInsets.only(top: 32),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ProficiencyOptionRow(
+                          index: index,
+                          selectedSkill: state.selected[index],
+                          availableOptions: List.of(state.available[index]),
+                        ),
+                      );
+                    }),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextButton(
+                    onPressed: state.areSkillsSelected
+                        ? () {
+                            final bloc =
+                                BlocProvider.of<CharacterCreatorBloc>(context);
+                            bloc.add(SubmitSelectedProficiencies(
+                                state.selected.map((e) => e!).toList()));
+                            bloc.add(SaveCharacter());
+                            Navigator.of(context)
+                                .pushNamedAndRemoveUntil("/", (route) => false);
+                          }
+                        : null,
+                    child: Text(AppLocalizations.of(context)!.select)),
+              ),
+            ],
+          ),
         ),
       ),
     );
