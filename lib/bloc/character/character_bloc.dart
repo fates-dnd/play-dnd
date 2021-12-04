@@ -60,7 +60,9 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         charisma: character.baseCharisma,
         race: character.race,
         clazz: character.clazz,
-        skills: await skillsRepository.getSkills(settingsRepository.getLanguage()),
+        skills:
+            await skillsRepository.getSkills(settingsRepository.getLanguage()),
+        proficienctSkills: await _getProficientSkills(),
         equipment: await _getCharacterEquipment(),
         equippedItems: await _getEquippedItems(),
         preparedSpells: await _getPreparedSpells(),
@@ -113,6 +115,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     }
 
     return state;
+  }
+
+  Future<List<Skill>> _getProficientSkills() async {
+    final language = settingsRepository.getLanguage();
+    final allSkills = await skillsRepository.getSkills(language);
+    final skillIndexes =
+        characterRepository.getProficientSkillIndexes(character);
+    return skillIndexes
+        .map((e) => allSkills.firstWhere((element) => element.index == e))
+        .toList();
   }
 
   Future<List<Equipment>> _getCharacterEquipment() async {

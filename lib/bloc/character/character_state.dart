@@ -13,9 +13,9 @@ class CharacterState {
   final Class? clazz;
 
   final List<Skill>? skills;
+  final List<Skill>? proficienctSkills;
 
   final List<Equipment>? equipment;
-
   final List<Equipment>? equippedItems;
 
   final List<Spell>? preparedSpells;
@@ -34,6 +34,7 @@ class CharacterState {
     this.race,
     this.clazz,
     this.skills,
+    this.proficienctSkills,
     this.equipment,
     this.equippedItems,
     this.preparedSpells,
@@ -131,13 +132,16 @@ class CharacterState {
       );
 
   List<SkillBonus> get skillBonuses =>
-      skills
-          ?.map((skill) => SkillBonus(
-                skill,
-                getCharacteristicBonus(skill.characteristic),
-                false,
-              ))
-          .toList() ??
+      skills?.map((skill) {
+        final isProficient = proficienctSkills?.contains(skill) ?? false;
+        final bonus = getCharacteristicBonus(skill.characteristic) +
+            (isProficient ? proficiencyBonus : 0);
+        return SkillBonus(
+          skill,
+          bonus,
+          isProficient,
+        );
+      }).toList() ??
       [];
 
   int? get spellcastingModifier => clazz?.spellcastingAbility != null

@@ -107,6 +107,13 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  List<String> getProficientSkillIndexes(Character character) {
+    final currentList = _readCharacterOutlines();
+    final storedCharacter =
+        currentList?.firstWhere((element) => element.name == character.name);
+    return storedCharacter?.proficiencyIndexes ?? [];
+  }
+
   List<String> getCharacterEquipmentIndexes(Character character) {
     final currentList = _readCharacterOutlines();
     final storedCharacter =
