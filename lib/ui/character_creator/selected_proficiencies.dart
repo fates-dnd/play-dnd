@@ -1,7 +1,10 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character_creator/selected_proficiencies/selected_proficiencies_bloc.dart';
+import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:dnd_player_flutter/repository/settings_repository.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +21,11 @@ class SelectedProficiencies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SelectedProficienciesBloc(clazz),
+      create: (context) => SelectedProficienciesBloc(
+        getIt<SettingsRepository>(),
+        getIt<SkillsRepository>(),
+        clazz,
+      )..add(LoadSkills()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.skills),
@@ -26,22 +33,41 @@ class SelectedProficiencies extends StatelessWidget {
         ),
         body:
             BlocBuilder<SelectedProficienciesBloc, SelectedProficienciesState>(
-          builder: (context, state) => Column(
+                builder: (context, state) {
+          var currentRowIndex = -1;
+          return Column(
             children: [
               Expanded(
-                child: ListView.builder(
-                    itemCount: state.choose,
-                    padding: EdgeInsets.only(top: 32),
-                    itemBuilder: (context, index) {
+                child: ListView(
+                  padding: EdgeInsets.only(top: 32),
+                  children: []
+                    ..add(Text("First description text"))
+                    ..addAll(state.selectedForClass.map((e) {
+                      currentRowIndex += 1;
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: ProficiencyOptionRow(
-                          index: index,
-                          selectedSkill: state.selected[index],
-                          availableOptions: List.of(state.available[index]),
+                          index: currentRowIndex,
+                          selectedSkill: state.selected[currentRowIndex],
+                          availableOptions:
+                              List.of(state.available[currentRowIndex]),
                         ),
                       );
-                    }),
+                    }).toList())
+                    ..add(Text("Some description text"))
+                    ..addAll(state.selectedForClass.map((e) {
+                      currentRowIndex += 1;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: ProficiencyOptionRow(
+                          index: currentRowIndex,
+                          selectedSkill: state.selected[currentRowIndex],
+                          availableOptions:
+                              List.of(state.available[currentRowIndex]),
+                        ),
+                      );
+                    }).toList()),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -60,10 +86,24 @@ class SelectedProficiencies extends StatelessWidget {
                     child: Text(AppLocalizations.of(context)!.select)),
               ),
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
+  }
+}
+
+class DescriptionText extends StatelessWidget {
+  final String description;
+
+  const DescriptionText({
+    Key? key,
+    required this.description,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(description);
   }
 }
 
