@@ -56,11 +56,11 @@ class _CharacterListDisplay extends StatelessWidget {
           ],
         ),
         body: _CharacterListBody(),
-        floatingActionButton: FloatingActionButton(
-          child: Text(
-            "+",
+        floatingActionButton: FloatingActionButton.extended(
+          label: Text(
+            AppLocalizations.of(context)!.new_character,
             style: TextStyle(
-                fontSize: 32, color: Theme.of(context).primaryColorLight),
+                fontSize: 24, color: Theme.of(context).primaryColorLight),
           ),
           onPressed: () {
             Navigator.push(context,

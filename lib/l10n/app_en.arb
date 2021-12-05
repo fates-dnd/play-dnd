@@ -32,5 +32,7 @@
   "skill": "Skill",
 
   "skill_proficiencies_for_class": "Select skill proficiencies that are available from your class.",
-  "skill_proficiencies_for_background": "Select skill proficiencies that are provided through your background."
+  "skill_proficiencies_for_background": "Select skill proficiencies that are provided through your background.",
+
+  "new_character": "New character"
 }
