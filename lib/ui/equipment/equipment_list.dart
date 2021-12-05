@@ -1,11 +1,13 @@
 import 'package:dnd_player_flutter/bloc/equipment/equipment_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
+import 'package:dnd_player_flutter/dto/damage_type.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EquipmentList extends StatelessWidget {
   final Function(Equipment) onEquipmentSelected;
@@ -22,7 +24,7 @@ class EquipmentList extends StatelessWidget {
       )..add(LoadEquipment()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Снаряжение"),
+          title: Text(AppLocalizations.of(context)!.equipment),
         ),
         body: BlocBuilder<EquipmentBloc, EquipmentState>(
           builder: (context, state) => ListView.builder(
@@ -125,8 +127,12 @@ class DamageCell extends StatelessWidget {
     if (damage == null) {
       return SizedBox();
     }
+
+    final damageDice = damage!.damageDice;
+    final damageDiceString =
+        "${damageDice.amount}${damageDice.dice.getName(context)}";
     return Text(
-      "${damage?.damageDice} ${damage?.damageType}",
+      "$damageDiceString ${damage?.damageType?.getName(context)}",
       style: TextStyle(
         fontSize: 14,
         color: Color(0xFFE5E1DE),

@@ -23,11 +23,11 @@ class CharacteristicsBonus extends StatelessWidget {
         ),
         body: BlocBuilder<CharacteristicsBonusBloc, CharacteristicsBonusState>(
           builder: (context, state) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               children: [
                 Text(race.abilityBonusDescription,
-                    style: Theme.of(context).textTheme.subtitle1),
+                    style: TextStyle(fontSize: 18)),
                 SizedBox(height: 25),
                 Expanded(
                   child: Column(
@@ -110,18 +110,22 @@ class CharacteristicsBonus extends StatelessWidget {
             characteristicBonus?.characteristic.index);
 
     return DropdownButton(
+      isExpanded: true,
       hint: Text(
         hint,
-        style: TextStyle(color: Color(0xffa4a4a4)),
+        style: TextStyle(color: Color(0xffa4a4a4), fontSize: 28),
       ),
       value: characteristicBonus?.characteristic,
-      underline: Container(height: 2, color: theme.accentColor),
+      underline: SizedBox(),
       dropdownColor: theme.primaryColorLight,
       icon: Icon(Icons.arrow_drop_down),
       items: providedOptions?.map((e) {
         return DropdownMenuItem<Characteristic>(
             value: e.characteristic,
-            child: Text(e.characteristic.getName(context)));
+            child: Text(
+              e.characteristic.getName(context),
+              style: TextStyle(fontSize: 28, color: Colors.white),
+            ));
       }).toList(),
       onChanged: (value) {
         final selectedCharacteristicBonus = providedOptions

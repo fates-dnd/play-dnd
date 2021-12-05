@@ -34,5 +34,29 @@
   "skill_proficiencies_for_class": "Select skill proficiencies that are available from your class.",
   "skill_proficiencies_for_background": "Select skill proficiencies that are provided through your background.",
 
-  "new_character": "New character"
+  "new_character": "New character",
+  
+  "equipment": "Equipment",
+
+  "acid": "Acid",
+  "slashing": "Slashing",
+  "necrotic": "Necrotic",
+  "radiant": "Radiant",
+  "fire": "Fire",
+  "lightning": "Lightning",
+  "poison": "Poison",
+  "cold": "Cold",
+  "bludgeoning": "Bludgeoning",
+  "force": "Force",
+  "psychic": "Psychic",
+  "piercing": "Piercing",
+  "thunder": "Thunder",
+
+  "d4": "d4",
+  "d6": "d6",
+  "d8": "d8",
+  "d10": "d10",
+  "d12": "d12",
+  "d20": "d20",
+  "d100": "d100"
 }
