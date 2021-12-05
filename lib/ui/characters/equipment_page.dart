@@ -38,8 +38,8 @@ class EquipmentPage extends StatelessWidget {
             ],
           ),
           SizedBox(height: 14),
-          for (var i = 0; i < (state.equipment?.length ?? 0); ++i)
-            EquipmentItem(equipment: state.equipment![i])
+          for (var i = 0; i < (state.groupedEquipment?.length ?? 0); ++i)
+            EquipmentItem(equipmentCount: state.groupedEquipment![i])
         ],
       ),
     );
@@ -108,7 +108,10 @@ class EquippedSection extends StatelessWidget {
 class EquippedItem extends StatelessWidget {
   final Equipment equipment;
 
-  const EquippedItem({Key? key, required this.equipment}) : super(key: key);
+  const EquippedItem({
+    Key? key,
+    required this.equipment,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +144,6 @@ class EquippedItem extends StatelessWidget {
               ],
             ),
           ),
-
           Expanded(
               flex: 1,
               child:
@@ -240,12 +242,16 @@ class ActionableInfo extends StatelessWidget {
 }
 
 class EquipmentItem extends StatelessWidget {
-  final Equipment equipment;
+  final EquipmentCount equipmentCount;
 
-  const EquipmentItem({Key? key, required this.equipment}) : super(key: key);
+  const EquipmentItem({
+    Key? key,
+    required this.equipmentCount,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext rootContext) {
+    final equipment = equipmentCount.equipment;
     return Row(
       children: [
         equipment.isEquippable
@@ -260,23 +266,35 @@ class EquipmentItem extends StatelessWidget {
               ),
         SizedBox(width: 15),
         Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                equipment.name,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFFFDCDAD9),
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    equipment.name,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(0xFFFDCDAD9),
+                    ),
+                  ),
+                  Text(
+                    equipment.equipmentCategory.getName(rootContext),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xAADCDAD9),
+                    ),
+                  )
+                ],
               ),
-              Text(
-                equipment.equipmentCategory.getName(rootContext),
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xAADCDAD9),
+              if (equipmentCount.count > 1) SizedBox(width: 16),
+              if (equipmentCount.count > 1)
+                Text(
+                  "(${equipmentCount.count})",
+                  style: TextStyle(
+                      fontSize: 20, color: Colors.white.withOpacity(.6)),
                 ),
-              )
             ],
           ),
         ),

@@ -185,4 +185,27 @@ class CharacterState {
     return equippedItems?.any((element) => element.index == equipment.index) ??
         false;
   }
+
+  List<EquipmentCount>? get groupedEquipment =>
+      equipment?.fold([], (value, equipment) {
+        final currentCountIndex =
+            value?.indexWhere((element) => element.equipment == equipment);
+        if (currentCountIndex == null ||
+            currentCountIndex == -1 ||
+            !equipment.isStackable) {
+          value?.add(EquipmentCount(equipment, 1));
+          return value;
+        }
+
+        final count = value![currentCountIndex];
+        value[currentCountIndex] = EquipmentCount(equipment, count.count + 1);
+        return value;
+      });
+}
+
+class EquipmentCount {
+  final Equipment equipment;
+  final int count;
+
+  EquipmentCount(this.equipment, this.count);
 }

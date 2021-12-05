@@ -80,8 +80,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
           character, event.equipment);
 
       final currentEquipment = state.equipment ?? [];
-      currentEquipment
-          .removeWhere((element) => element.index == event.equipment.index);
+      currentEquipment.remove(event.equipment);
       return state.copyWith(equipment: currentEquipment);
     } else if (event is EquipItem) {
       characterRepository.equipItem(character, event.equipment);
@@ -95,8 +94,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
       final currentEquippedItems = state.equippedItems ?? [];
       return state.copyWith(
-        equippedItems: currentEquippedItems
-          ..removeWhere((element) => element.index == event.equipment.index),
+        equippedItems: currentEquippedItems..remove(event.equipment),
       );
     } else if (event is UpdateSpells) {
       characterRepository.updatePreparedSpells(character, event.preparedSpells);

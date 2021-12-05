@@ -1,8 +1,9 @@
 import 'package:dnd_player_flutter/data/dice.dart';
+import 'package:equatable/equatable.dart';
 
 import 'damage_type.dart';
 
-class Equipment {
+class Equipment extends Equatable {
   final String index;
   final String name;
   final EquipmentCategory equipmentCategory;
@@ -45,6 +46,12 @@ class Equipment {
 
   bool get isEquippable =>
       equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
+
+  bool get isStackable =>
+      equipmentCategory == EquipmentCategory.ADVENTURING_GEAR;
+
+  @override
+  List<Object?> get props => [index, name];
 }
 
 enum EquipmentCategory {
