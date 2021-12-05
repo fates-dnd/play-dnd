@@ -55,11 +55,13 @@ class SelectedProficiencies extends StatelessWidget {
                       ..insert(
                           0,
                           DescriptionText(
-                              description: "Class description text"))
+                              description: AppLocalizations.of(context)!
+                                  .skill_proficiencies_for_class))
                       ..insert(
                           state.choose + 1,
                           DescriptionText(
-                              description: "Background description text"))
+                              description: AppLocalizations.of(context)!
+                                  .skill_proficiencies_for_background))
                       ..insert(state.choose + 1, SizedBox(height: 24))),
               ),
               Padding(
@@ -98,7 +100,7 @@ class DescriptionText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       description,
-      style: TextStyle(fontSize: 24),
+      style: TextStyle(fontSize: 18),
     );
   }
 }

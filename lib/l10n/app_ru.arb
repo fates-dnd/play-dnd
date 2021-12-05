@@ -26,5 +26,9 @@
   "maximum_value_is_18": "The maximum value of a stat rolled is 18",
 
   "skills": "Навыки",
-  "skill": "Навык"
+  "skill": "Навык",
+
+  "skill_proficiencies_for_class": "Выберите специализацию навыков которые предоставляет ваш класс.",
+  "skill_proficiencies_for_background": "Выберите специализацию навыков которые подходят для вашей предыстории."
+
 }

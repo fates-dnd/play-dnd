@@ -29,5 +29,8 @@
   "maximum_value_is_18": "The maximum value of a stat rolled is 18",
 
   "skills": "Skills",
-  "skill": "Skill"
+  "skill": "Skill",
+
+  "skill_proficiencies_for_class": "Select skill proficiencies that are available from your class.",
+  "skill_proficiencies_for_background": "Select skill proficiencies that are provided through your background."
 }
