@@ -39,10 +39,8 @@ class SelectedProficiencies extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView(
-                  padding: EdgeInsets.only(top: 32),
-                  children: []
-                    ..add(Text("First description text"))
-                    ..addAll(state.selectedForClass.map((e) {
+                    padding: EdgeInsets.only(top: 32, left: 32, right: 32),
+                    children: state.selected.map<Widget>((e) {
                       currentRowIndex += 1;
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -53,21 +51,16 @@ class SelectedProficiencies extends StatelessWidget {
                               List.of(state.available[currentRowIndex]),
                         ),
                       );
-                    }).toList())
-                    ..add(Text("Some description text"))
-                    ..addAll(state.selectedForClass.map((e) {
-                      currentRowIndex += 1;
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: ProficiencyOptionRow(
-                          index: currentRowIndex,
-                          selectedSkill: state.selected[currentRowIndex],
-                          availableOptions:
-                              List.of(state.available[currentRowIndex]),
-                        ),
-                      );
-                    }).toList()),
-                ),
+                    }).toList()
+                      ..insert(
+                          0,
+                          DescriptionText(
+                              description: "Class description text"))
+                      ..insert(
+                          state.choose + 1,
+                          DescriptionText(
+                              description: "Background description text"))
+                      ..insert(state.choose + 1, SizedBox(height: 24))),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -103,7 +96,10 @@ class DescriptionText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(description);
+    return Text(
+      description,
+      style: TextStyle(fontSize: 24),
+    );
   }
 }
 
@@ -123,37 +119,36 @@ class ProficiencyOptionRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Center(
-      child: DropdownButton<Skill>(
-        hint: Text(
-          AppLocalizations.of(context)!.skill + " ${index + 1}",
-          style: TextStyle(color: Color(0xFFA4A4A4), fontSize: 28),
-        ),
-        underline: SizedBox(),
-        dropdownColor: theme.primaryColorLight,
-        value: selectedSkill,
-        items: availableOptions
-            .map((e) => DropdownMenuItem<Skill>(
-                  value: e,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(e.name,
-                        style: TextStyle(
-                          color: e.characteristic.getColor(),
-                          fontSize: 28,
-                        )),
-                  ),
-                ))
-            .toList(),
-        onChanged: (skill) {
-          if (skill == null) {
-            return;
-          }
-
-          BlocProvider.of<SelectedProficienciesBloc>(context)
-              .add(SelectSkillProficiency(index, skill));
-        },
+    return DropdownButton<Skill>(
+      isExpanded: true,
+      hint: Text(
+        AppLocalizations.of(context)!.skill + " ${index + 1}",
+        style: TextStyle(color: Color(0xFFA4A4A4), fontSize: 28),
       ),
+      underline: SizedBox(),
+      dropdownColor: theme.primaryColorLight,
+      value: selectedSkill,
+      items: availableOptions
+          .map((e) => DropdownMenuItem<Skill>(
+                value: e,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(e.name,
+                      style: TextStyle(
+                        color: e.characteristic.getColor(),
+                        fontSize: 28,
+                      )),
+                ),
+              ))
+          .toList(),
+      onChanged: (skill) {
+        if (skill == null) {
+          return;
+        }
+
+        BlocProvider.of<SelectedProficienciesBloc>(context)
+            .add(SelectSkillProficiency(index, skill));
+      },
     );
   }
 }
