@@ -22,6 +22,7 @@ class Equipment extends Equatable {
   final Range? range;
   final List<Property>? properties;
   final ThrowRange? throwRange;
+  final List<Equipment>? contents;
 
   Equipment({
     required this.index,
@@ -42,7 +43,31 @@ class Equipment extends Equatable {
     this.range,
     this.properties,
     this.throwRange,
+    this.contents,
   });
+
+  Equipment copyWithContents(List<Equipment> contents) {
+    return Equipment(
+      index: index,
+      name: name,
+      equipmentCategory: equipmentCategory,
+      weight: weight,
+      cost: cost,
+      weaponCategory: weaponCategory,
+      weaponRange: weaponRange,
+      damage: damage,
+      categoryRange: categoryRange,
+      armorCategory: armorCategory,
+      armorClass: armorClass,
+      strMinimum: strMinimum,
+      stealthDisadvantage: stealthDisadvantage,
+      gearCategory: gearCategory,
+      desc: desc,
+      range: range,
+      throwRange: throwRange,
+      contents: contents,
+    );
+  }
 
   bool get isEquippable =>
       equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;

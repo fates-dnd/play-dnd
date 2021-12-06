@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
+import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:test/expect.dart';
 import 'package:test/test.dart';
@@ -15,14 +16,20 @@ void main() {
 
     final SkillsRepository skillsRepository =
         SkillsRepository((language) async {
-      return await File("assets/rules/ru/skills.json").readAsString();
+      return await File("assets/rules/en/skills.json").readAsString();
     });
 
-    classesRepository = ClassesRepository(skillsRepository, (language) async {
+    final EquipmentRepository equipmentRepository =
+        EquipmentRepository((language) async {
+      return await File("assets/rules/en/equipment.json").readAsString();
+    });
+
+    classesRepository = ClassesRepository(skillsRepository, equipmentRepository,
+        (language) async {
       return classesContents;
     });
 
-    final classes = await classesRepository.getClasses("ru");
+    final classes = await classesRepository.getClasses("en");
 
     expect(classes.length, 12);
     expect(classes[1].index, "bard");

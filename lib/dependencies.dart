@@ -25,8 +25,11 @@ void registerDependencies() {
   getIt.registerSingleton<RacesRepository>(RacesRepository(readRacesJson));
   getIt.registerSingleton<TraitsRepository>(TraitsRepository(readTraitsJson));
   getIt.registerSingleton<SkillsRepository>(SkillsRepository(readSkillsJson));
+  getIt.registerSingleton<EquipmentRepository>(
+      EquipmentRepository(readEquipmentJson));
   getIt.registerSingleton<ClassesRepository>(ClassesRepository(
     getIt.get<SkillsRepository>(),
+    getIt.get<EquipmentRepository>(),
     readClassesJson,
   ));
   getIt.registerSingleton<CharacterRepository>(CharacterRepository(
@@ -35,7 +38,5 @@ void registerDependencies() {
     getIt.get<ClassesRepository>(),
     getIt.get<SkillsRepository>(),
   ));
-  getIt.registerSingleton<EquipmentRepository>(
-      EquipmentRepository(readEquipmentJson));
   getIt.registerSingleton<SpellsRepository>(SpellsRepository(readSpellsJson));
 }

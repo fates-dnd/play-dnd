@@ -12,7 +12,21 @@ class EquipmentRepository {
   Future<List<Equipment>> getEquipment(String language) async {
     final response = await jsonReader(language);
     final List<dynamic> equipmentJson = json.decode(response);
-    return equipmentJson.map((item) => _fromJson(item)).toList();
+    final parsedEquipment =
+        equipmentJson.map((item) => _fromJson(item)).toList();
+    return parsedEquipment.map((equipment) {
+      if (equipment.contents == null) {
+        return equipment;
+      }
+
+      final json = equipmentJson
+          .firstWhere((element) => element["index"] == equipment.index);
+
+      return equipment.copyWithContents((json["contents"] as List<dynamic>)
+          .map((e) => parsedEquipment
+              .firstWhere((element) => element.index == e["index"]))
+          .toList());
+    }).toList();
   }
 
   Equipment _fromJson(Map<String, dynamic> json) {
@@ -35,6 +49,7 @@ class EquipmentRepository {
       stealthDisadvantage: json["stealth_disadvantage"],
       desc: _descriptionFromJson(json["desc"]),
       gearCategory: _gearCategoryFromJson(json["gear_category"] ?? null),
+      contents: json["contents"] != null ? [] : null,
     );
   }
 

@@ -121,6 +121,7 @@ class ClassesRepository {
   Future<List<EquipmentChoices>> _readEquipmentChoices(
       String language, List<dynamic> equipmentOptions) async {
     final options = <Equipment>[];
+    equipmentOptions.forEach((element) {});
 
     return [EquipmentChoices(1, options)];
   }
