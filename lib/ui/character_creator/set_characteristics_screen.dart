@@ -8,28 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../utils.dart';
 
-class SetCharacteristicsScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return SetCharacteristicsScreenState();
-  }
-}
-
-class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
-  late FocusNode nameFocusNode;
-
-  @override
-  void initState() {
-    nameFocusNode = FocusNode();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    nameFocusNode.dispose();
-    super.dispose();
-  }
-
+class SetCharacteristicsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -74,7 +53,6 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
     final theme = Theme.of(context);
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
       builder: (context, state) => TextField(
-        focusNode: nameFocusNode,
         cursorColor: theme.accentColor,
         cursorHeight: 24,
         decoration: InputDecoration(
@@ -150,14 +128,14 @@ class SetCharacteristicsScreenState extends State<SetCharacteristicsScreen> {
                           ));
 
                     Navigator.push(
-                        context,
+                        inputContext,
                         MaterialPageRoute(
                             builder: (context) => SelectedProficiencies(
                                   clazz: characterCreatorBloc.state.clazz!,
                                 )));
                   }
                 : null,
-            child: Text(AppLocalizations.of(context)!.save)),
+            child: Text(AppLocalizations.of(inputContext)!.save)),
       ),
     );
   }
@@ -181,6 +159,7 @@ class _CharcateristicsRow extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
+            FocusScope.of(rootContext).unfocus();
             Navigator.of(rootContext).push(MaterialPageRoute(
               builder: (context) => StatCalculatorScreen(
                 characteristicBonus: characteristicBonus,

@@ -2,12 +2,15 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 
 class ClassesRepository {
   final SkillsRepository skillsRepository;
+  final EquipmentRepository equipmentRepository;
   final Future<String> Function(String lang) jsonReader;
 
   List<Class>? classes;
@@ -15,6 +18,7 @@ class ClassesRepository {
 
   ClassesRepository(
     this.skillsRepository,
+    this.equipmentRepository,
     this.jsonReader,
   );
 
@@ -51,7 +55,10 @@ class ClassesRepository {
         await _readProficiencyChoices(
           language,
           json["proficiency_choices"] as List<dynamic>,
-        ));
+        ),
+        await _readEquipments(language, json["starting_equipment"]),
+        await _readEquipmentChoices(
+            language, json["starting_equipment_optionss"]));
   }
 
   List<Characteristic> _readSavingThrows(List<dynamic> json) {
@@ -91,5 +98,30 @@ class ClassesRepository {
       final index = e["index"];
       return skills.firstWhere((skill) => skill.index == index);
     }).toList();
+  }
+
+  Future<List<Equipment>> _readEquipments(
+      String language, List<dynamic>? startingEquipment) async {
+    final allEquipment = await equipmentRepository.getEquipment(language);
+    final result = <Equipment>[];
+    startingEquipment?.forEach((json) {
+      final index = json["equipment"]["index"];
+      final quantity = json["equipment"]["quantity"];
+
+      final foundEquipment =
+          allEquipment.firstWhere((element) => element.index == index);
+
+      List.generate(quantity, (index) => index).forEach((element) {
+        result.add(foundEquipment);
+      });
+    });
+    return result;
+  }
+
+  Future<List<EquipmentChoices>> _readEquipmentChoices(
+      String language, List<dynamic> equipmentOptions) async {
+    final options = <Equipment>[];
+
+    return [EquipmentChoices(1, options)];
   }
 }

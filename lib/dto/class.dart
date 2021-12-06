@@ -1,12 +1,16 @@
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 
+import 'equipment.dart';
+
 class Class {
   final String index;
   final String name;
   final List<Characteristic> savingThrows;
   final Characteristic? spellcastingAbility;
   final ProficiencyChoices proficiencyChoices;
+  final List<Equipment>? startingEquipment;
+  final List<EquipmentChoices>? equipmentChoices;
 
   String get imageAsset => _indexToImageAsset();
 
@@ -16,6 +20,8 @@ class Class {
     this.savingThrows,
     this.spellcastingAbility,
     this.proficiencyChoices,
+    this.startingEquipment,
+    this.equipmentChoices,
   );
 }
 
@@ -24,6 +30,13 @@ class ProficiencyChoices {
   final List<Skill> options;
 
   ProficiencyChoices(this.choose, this.options);
+}
+
+class EquipmentChoices {
+  final int choose;
+  final List<Equipment> options;
+
+  EquipmentChoices(this.choose, this.options);
 }
 
 extension OnClass on Class {
