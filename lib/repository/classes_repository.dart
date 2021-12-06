@@ -106,7 +106,7 @@ class ClassesRepository {
     final result = <Equipment>[];
     startingEquipment?.forEach((json) {
       final index = json["equipment"]["index"];
-      final quantity = json["equipment"]["quantity"];
+      final quantity = json["equipment"]["quantity"] ?? 1;
 
       final foundEquipment =
           allEquipment.firstWhere((element) => element.index == index);
@@ -119,9 +119,9 @@ class ClassesRepository {
   }
 
   Future<List<EquipmentChoices>> _readEquipmentChoices(
-      String language, List<dynamic> equipmentOptions) async {
+      String language, List<dynamic>? equipmentOptions) async {
     final options = <Equipment>[];
-    equipmentOptions.forEach((element) {});
+    equipmentOptions?.forEach((element) {});
 
     return [EquipmentChoices(1, options)];
   }

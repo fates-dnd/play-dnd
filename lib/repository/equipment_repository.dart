@@ -24,7 +24,7 @@ class EquipmentRepository {
 
       return equipment.copyWithContents((json["contents"] as List<dynamic>)
           .map((e) => parsedEquipment
-              .firstWhere((element) => element.index == e["index"]))
+              .firstWhere((element) => element.index == e["item"]["index"]))
           .toList());
     }).toList();
   }
