@@ -7,6 +7,7 @@ import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpellsList extends StatelessWidget {
   final Class? clazz;
@@ -71,6 +72,7 @@ class _SpellListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     if (spellDisplayItem is PreparedSeparatorItem) {
       return Text(
         "Подготовленные заклинания",
@@ -82,20 +84,29 @@ class _SpellListItem extends StatelessWidget {
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     } else if (spellDisplayItem is LevelSeparatorItem) {
+      final level = (spellDisplayItem as LevelSeparatorItem).level;
       return Text(
-        "Круг " + (spellDisplayItem as LevelSeparatorItem).level.toString(),
+        level == 0
+            ? localizations.cantrips
+            : "${localizations.spell_level} $level",
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     } else if (spellDisplayItem is ActualSpellItem) {
       final actualSpellItem = (spellDisplayItem as ActualSpellItem);
       return SpellItem(
         spell: actualSpellItem.spell,
-        onPrepareClick: !actualSpellItem.isPrepared ? () {
-          BlocProvider.of<SpellsBloc>(context).add(PrepareSpell(actualSpellItem.spell));
-        } : null,
-        onUnprepareClick: actualSpellItem.isPrepared ? () {
-          BlocProvider.of<SpellsBloc>(context).add(UnprepareSpell(actualSpellItem.spell));
-        } : null,
+        onPrepareClick: !actualSpellItem.isPrepared
+            ? () {
+                BlocProvider.of<SpellsBloc>(context)
+                    .add(PrepareSpell(actualSpellItem.spell));
+              }
+            : null,
+        onUnprepareClick: actualSpellItem.isPrepared
+            ? () {
+                BlocProvider.of<SpellsBloc>(context)
+                    .add(UnprepareSpell(actualSpellItem.spell));
+              }
+            : null,
       );
     }
 

@@ -58,5 +58,8 @@
   "d10": "d10",
   "d12": "d12",
   "d20": "d20",
-  "d100": "d100"
+  "d100": "d100",
+
+  "cantrips": "Cantrips",
+  "spell_level": "Level"
 }

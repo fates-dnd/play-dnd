@@ -6,6 +6,7 @@ import 'package:dnd_player_flutter/ui/spells/spells_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dnd_player_flutter/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpellsPage extends StatelessWidget {
   @override
@@ -124,8 +125,8 @@ class _EditSpellsButton extends StatelessWidget {
                       preparedSpells: state.preparedSpells ?? [],
                       learnedSpells: state.learnedSpells ?? [],
                       onSpellsUpdated: (newPreparedSpells, newLearnedSpells) {
-                        BlocProvider.of<CharacterBloc>(context)
-                            .add(UpdateSpells(newPreparedSpells, newLearnedSpells));
+                        BlocProvider.of<CharacterBloc>(context).add(
+                            UpdateSpells(newPreparedSpells, newLearnedSpells));
                       },
                     );
                   }));
@@ -152,6 +153,7 @@ class _SpellLevelTitleRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return Column(
       children: [
         SizedBox(height: 12),
@@ -159,7 +161,9 @@ class _SpellLevelTitleRow extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                "Круг " + level.toString(),
+                level == 0
+                    ? localizations.cantrips
+                    : "${localizations.spell_level} $level",
                 style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
               ),
             ),
