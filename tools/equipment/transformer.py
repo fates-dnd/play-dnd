@@ -9,11 +9,11 @@ english_json = json.load(english)
 result_json = []
 
 for item in english_json:
+    result_item = item.copy()
     for russian_item in english_russian_json["itemsList"]:
         if item["name"] == russian_item["en"]["name"]:
-            result_item = item.copy()
             result_item["name"] = russian_item["ru"]["name"]
-            result_json.append(result_item)
+    result_json.append(result_item)
 
 result_file = open("result.json", 'w', encoding='utf8')
 
