@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
@@ -49,12 +50,25 @@ class CharacterCreatorBloc
         selectedProficiencies: event.proficiencies,
       );
     } else if (event is SaveCharacter) {
-      final characterToSave = state.toCharacter();
+      final characterToSave = state
+          .copyWith(selectedEquipment: _generateSelectedEquipment())
+          .toCharacter();
       if (characterToSave != null) {
         repository.insertCharacter(characterToSave);
       }
     }
 
     return state;
+  }
+
+  List<Equipment> _generateSelectedEquipment() {
+    final clazz = state.clazz;
+
+    final equipment = clazz?.startingEquipment ?? [];
+    clazz?.equipmentChoices?.forEach((element) {
+      equipment.addAll(element.options.sublist(0, element.choose));
+    });
+
+    return equipment;
   }
 }

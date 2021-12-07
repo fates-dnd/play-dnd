@@ -37,6 +37,7 @@ void registerDependencies() {
     getIt.get<RacesRepository>(),
     getIt.get<ClassesRepository>(),
     getIt.get<SkillsRepository>(),
+    getIt.get<EquipmentRepository>(),
   ));
   getIt.registerSingleton<SpellsRepository>(SpellsRepository(readSpellsJson));
 }

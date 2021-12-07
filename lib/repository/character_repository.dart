@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
+import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
@@ -13,6 +14,7 @@ class CharacterRepository {
   final RacesRepository racesRepository;
   final ClassesRepository classesRepository;
   final SkillsRepository skillsRepository;
+  final EquipmentRepository equipmentRepository;
 
   late Box box;
 
@@ -21,6 +23,7 @@ class CharacterRepository {
     this.racesRepository,
     this.classesRepository,
     this.skillsRepository,
+    this.equipmentRepository,
   ) {
     box = Hive.box('characters');
   }
@@ -32,7 +35,7 @@ class CharacterRepository {
     }
     currentList.add(CharacterOutline.fromCharacter(
       character,
-      equipment: [],
+      equipment: character.selectedEquipment.map((e) => e.index).toList(),
       equippedItems: [],
       preparedSpells: [],
       learnedSpells: [],
@@ -228,19 +231,20 @@ class CharacterRepository {
     return Future.wait(outlines.map((outline) async {
       final language = settingsRepository.getLanguage();
       return Character(
-        outline.name,
-        outline.level,
-        outline.baseStrength,
-        outline.baseDexterity,
-        outline.baseConstitution,
-        outline.baseIntelligence,
-        outline.baseWisdom,
-        outline.baseCharisma,
-        await racesRepository.findByIndex(language, outline.raceIndex),
-        await classesRepository.findByIndex(language, outline.classIndex),
-        await skillsRepository.findByIndexes(
-            language, outline.proficiencyIndexes),
-      );
+          outline.name,
+          outline.level,
+          outline.baseStrength,
+          outline.baseDexterity,
+          outline.baseConstitution,
+          outline.baseIntelligence,
+          outline.baseWisdom,
+          outline.baseCharisma,
+          await racesRepository.findByIndex(language, outline.raceIndex),
+          await classesRepository.findByIndex(language, outline.classIndex),
+          await skillsRepository.findByIndexes(
+              language, outline.proficiencyIndexes),
+          await equipmentRepository.findByIndexes(
+              language, outline.equipmentIndexes));
     }).toList());
   }
 

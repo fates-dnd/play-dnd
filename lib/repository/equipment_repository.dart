@@ -29,6 +29,15 @@ class EquipmentRepository {
     }).toList();
   }
 
+  Future<List<Equipment>> findByIndexes(
+      String language, List<String> indexes) async {
+    final equipment = await getEquipment(language);
+    return indexes
+        .map((index) =>
+            equipment.firstWhere((element) => element.index == index))
+        .toList();
+  }
+
   Equipment _fromJson(Map<String, dynamic> json) {
     return Equipment(
       index: json["index"],
