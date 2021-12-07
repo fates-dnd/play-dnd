@@ -131,7 +131,7 @@ class ClassesRepository {
 
           (element["from"] as List<dynamic>?)?.forEach((e) {
             if (e is Map) {
-              if (element["equipment"] == null) {
+              if (e["equipment"] == null) {
                 return;
               }
 
