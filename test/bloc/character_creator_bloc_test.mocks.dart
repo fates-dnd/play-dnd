@@ -5,14 +5,15 @@
 import 'dart:async' as _i13;
 
 import 'package:dnd_player_flutter/data/characteristics.dart' as _i14;
-import 'package:dnd_player_flutter/dto/character.dart' as _i10;
+import 'package:dnd_player_flutter/dto/character.dart' as _i11;
 import 'package:dnd_player_flutter/dto/class.dart' as _i8;
-import 'package:dnd_player_flutter/dto/equipment.dart' as _i11;
+import 'package:dnd_player_flutter/dto/equipment.dart' as _i9;
 import 'package:dnd_player_flutter/dto/race.dart' as _i15;
 import 'package:dnd_player_flutter/dto/skill.dart' as _i17;
 import 'package:dnd_player_flutter/dto/spell.dart' as _i12;
 import 'package:dnd_player_flutter/dto/trait.dart' as _i16;
-import 'package:dnd_player_flutter/repository/character_repository.dart' as _i9;
+import 'package:dnd_player_flutter/repository/character_repository.dart'
+    as _i10;
 import 'package:dnd_player_flutter/repository/classes_repository.dart' as _i4;
 import 'package:dnd_player_flutter/repository/equipment_repository.dart' as _i6;
 import 'package:dnd_player_flutter/repository/races_repository.dart' as _i3;
@@ -49,11 +50,15 @@ class _FakeBox_5<E> extends _i1.Fake implements _i7.Box<E> {}
 class _FakeProficiencyChoices_6 extends _i1.Fake
     implements _i8.ProficiencyChoices {}
 
+class _FakeCost_7 extends _i1.Fake implements _i9.Cost {}
+
+class _FakeEquipment_8 extends _i1.Fake implements _i9.Equipment {}
+
 /// A class which mocks [CharacterRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockCharacterRepository extends _i1.Mock
-    implements _i9.CharacterRepository {
+    implements _i10.CharacterRepository {
   MockCharacterRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -86,83 +91,82 @@ class MockCharacterRepository extends _i1.Mock
       super.noSuchMethod(Invocation.setter(#box, _box),
           returnValueForMissingStub: null);
   @override
-  void insertCharacter(_i10.Character? character) =>
+  void insertCharacter(_i11.Character? character) =>
       super.noSuchMethod(Invocation.method(#insertCharacter, [character]),
           returnValueForMissingStub: null);
   @override
   void addEquipmentToCharacter(
-          _i10.Character? character, _i11.Equipment? equipment) =>
+          _i11.Character? character, _i9.Equipment? equipment) =>
       super.noSuchMethod(
           Invocation.method(#addEquipmentToCharacter, [character, equipment]),
           returnValueForMissingStub: null);
   @override
   void removeEquipmentFromCharacter(
-          _i10.Character? character, _i11.Equipment? equipment) =>
+          _i11.Character? character, _i9.Equipment? equipment) =>
       super.noSuchMethod(
           Invocation.method(
               #removeEquipmentFromCharacter, [character, equipment]),
           returnValueForMissingStub: null);
   @override
-  void equipItem(_i10.Character? character, _i11.Equipment? equipment) =>
+  void equipItem(_i11.Character? character, _i9.Equipment? equipment) =>
       super.noSuchMethod(Invocation.method(#equipItem, [character, equipment]),
           returnValueForMissingStub: null);
   @override
-  void unequipItem(_i10.Character? character, _i11.Equipment? equipment) =>
-      super.noSuchMethod(
-          Invocation.method(#unequipItem, [character, equipment]),
+  void unequipItem(_i11.Character? character, _i9.Equipment? equipment) => super
+      .noSuchMethod(Invocation.method(#unequipItem, [character, equipment]),
           returnValueForMissingStub: null);
   @override
-  List<String> getProficientSkillIndexes(_i10.Character? character) => (super
+  List<String> getProficientSkillIndexes(_i11.Character? character) => (super
       .noSuchMethod(Invocation.method(#getProficientSkillIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
-  List<String> getCharacterEquipmentIndexes(_i10.Character? character) =>
+  List<String> getCharacterEquipmentIndexes(_i11.Character? character) =>
       (super.noSuchMethod(
           Invocation.method(#getCharacterEquipmentIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
-  List<String> getCharacterEquippedItemsIndexes(_i10.Character? character) =>
+  List<String> getCharacterEquippedItemsIndexes(_i11.Character? character) =>
       (super.noSuchMethod(
           Invocation.method(#getCharacterEquippedItemsIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
   void updatePreparedSpells(
-          _i10.Character? character, List<_i12.Spell>? spells) =>
+          _i11.Character? character, List<_i12.Spell>? spells) =>
       super.noSuchMethod(
           Invocation.method(#updatePreparedSpells, [character, spells]),
           returnValueForMissingStub: null);
   @override
-  List<String> getPreparedSpellsIndexes(_i10.Character? character) => (super
+  List<String> getPreparedSpellsIndexes(_i11.Character? character) => (super
       .noSuchMethod(Invocation.method(#getPreparedSpellsIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
   void updateLearnedSpells(
-          _i10.Character? character, List<_i12.Spell>? spells) =>
+          _i11.Character? character, List<_i12.Spell>? spells) =>
       super.noSuchMethod(
           Invocation.method(#updateLearnedSpells, [character, spells]),
           returnValueForMissingStub: null);
   @override
-  List<String> getLearnedSpellsIndexes(_i10.Character? character) => (super
+  List<String> getLearnedSpellsIndexes(_i11.Character? character) => (super
       .noSuchMethod(Invocation.method(#getLearnedSpellsIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
-  void useSpellSlot(_i10.Character? character, int? level) =>
+  void useSpellSlot(_i11.Character? character, int? level) =>
       super.noSuchMethod(Invocation.method(#useSpellSlot, [character, level]),
           returnValueForMissingStub: null);
   @override
-  void unuseSpellSlot(_i10.Character? character, int? level) =>
+  void unuseSpellSlot(_i11.Character? character, int? level) =>
       super.noSuchMethod(Invocation.method(#unuseSpellSlot, [character, level]),
           returnValueForMissingStub: null);
   @override
-  _i13.Future<Map<int, int>> getUsedSpellSlots(_i10.Character? character) =>
+  _i13.Future<Map<int, int>> getUsedSpellSlots(_i11.Character? character) =>
       (super.noSuchMethod(Invocation.method(#getUsedSpellSlots, [character]),
               returnValue: Future<Map<int, int>>.value(<int, int>{}))
           as _i13.Future<Map<int, int>>);
   @override
-  _i13.Future<List<_i10.Character>> getCharacters() => (super.noSuchMethod(
+  _i13.Future<List<_i11.Character>> getCharacters() => (super.noSuchMethod(
           Invocation.method(#getCharacters, []),
-          returnValue: Future<List<_i10.Character>>.value(<_i10.Character>[]))
-      as _i13.Future<List<_i10.Character>>);
+          returnValue: Future<List<_i11.Character>>.value(<_i11.Character>[]))
+      as _i13.Future<List<_i11.Character>>);
   @override
   String toString() => super.toString();
 }
@@ -194,6 +198,10 @@ class MockClass extends _i1.Mock implements _i8.Class {
   String get imageAsset =>
       (super.noSuchMethod(Invocation.getter(#imageAsset), returnValue: '')
           as String);
+  @override
+  List<Object?> get props =>
+      (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[])
+          as List<Object?>);
   @override
   String toString() => super.toString();
 }
@@ -248,6 +256,10 @@ class MockRace extends _i1.Mock implements _i15.Race {
       (super.noSuchMethod(Invocation.getter(#languagesDescription),
           returnValue: '') as String);
   @override
+  List<Object?> get props =>
+      (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[])
+          as List<Object?>);
+  @override
   String toString() => super.toString();
 }
 
@@ -301,6 +313,49 @@ class MockSkill extends _i1.Mock implements _i17.Skill {
   List<Object?> get props =>
       (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[])
           as List<Object?>);
+  @override
+  String toString() => super.toString();
+}
+
+/// A class which mocks [Equipment].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockEquipment extends _i1.Mock implements _i9.Equipment {
+  MockEquipment() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  String get index =>
+      (super.noSuchMethod(Invocation.getter(#index), returnValue: '')
+          as String);
+  @override
+  String get name =>
+      (super.noSuchMethod(Invocation.getter(#name), returnValue: '') as String);
+  @override
+  _i9.EquipmentCategory get equipmentCategory =>
+      (super.noSuchMethod(Invocation.getter(#equipmentCategory),
+          returnValue: _i9.EquipmentCategory.WEAPON) as _i9.EquipmentCategory);
+  @override
+  _i9.Cost get cost =>
+      (super.noSuchMethod(Invocation.getter(#cost), returnValue: _FakeCost_7())
+          as _i9.Cost);
+  @override
+  bool get isEquippable =>
+      (super.noSuchMethod(Invocation.getter(#isEquippable), returnValue: false)
+          as bool);
+  @override
+  bool get isStackable =>
+      (super.noSuchMethod(Invocation.getter(#isStackable), returnValue: false)
+          as bool);
+  @override
+  List<Object?> get props =>
+      (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[])
+          as List<Object?>);
+  @override
+  _i9.Equipment copyWithContents(List<_i9.Equipment>? contents) =>
+      (super.noSuchMethod(Invocation.method(#copyWithContents, [contents]),
+          returnValue: _FakeEquipment_8()) as _i9.Equipment);
   @override
   String toString() => super.toString();
 }

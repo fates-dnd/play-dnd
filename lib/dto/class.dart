@@ -10,7 +10,7 @@ class Class extends Equatable {
   final List<Characteristic> savingThrows;
   final Characteristic? spellcastingAbility;
   final ProficiencyChoices proficiencyChoices;
-  final List<Equipment>? startingEquipment;
+  final List<EquipmentQuantity>? startingEquipment;
   final List<EquipmentChoices>? equipmentChoices;
 
   String get imageAsset => _indexToImageAsset();
@@ -38,9 +38,16 @@ class ProficiencyChoices {
 
 class EquipmentChoices {
   final int choose;
-  final List<Equipment> options;
+  final List<EquipmentQuantity> options;
 
   EquipmentChoices(this.choose, this.options);
+}
+
+class EquipmentQuantity {
+  final Equipment equipment;
+  final int quantity;
+
+  EquipmentQuantity(this.equipment, this.quantity);
 }
 
 extension OnClass on Class {

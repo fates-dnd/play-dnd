@@ -100,22 +100,19 @@ class ClassesRepository {
     }).toList();
   }
 
-  Future<List<Equipment>> _readEquipments(
+  Future<List<EquipmentQuantity>> _readEquipments(
       String language, List<dynamic>? startingEquipment) async {
     final allEquipment = await equipmentRepository.getEquipment(language);
-    final result = <Equipment>[];
-    startingEquipment?.forEach((json) {
-      final index = json["equipment"]["index"];
-      final quantity = json["quantity"] ?? 1;
+    return startingEquipment?.map((json) {
+          final index = json["equipment"]["index"];
+          final quantity = json["quantity"] ?? 1;
 
-      final foundEquipment =
-          allEquipment.firstWhere((element) => element.index == index);
+          final foundEquipment =
+              allEquipment.firstWhere((element) => element.index == index);
 
-      List.generate(quantity, (index) => index).forEach((element) {
-        result.add(foundEquipment);
-      });
-    });
-    return result;
+          return EquipmentQuantity(foundEquipment, quantity);
+        }).toList() ??
+        [];
   }
 
   Future<List<EquipmentChoices>> _readEquipmentChoices(
@@ -124,7 +121,7 @@ class ClassesRepository {
 
     return equipmentOptions?.map((element) {
           // TODO: unwrap equipment categories
-          final options = <Equipment>[];
+          final options = <EquipmentQuantity>[];
           if (element["from"] is Map) {
             return EquipmentChoices(element["choose"], []);
           }
@@ -137,11 +134,7 @@ class ClassesRepository {
 
               final item = allEquipment.firstWhere(
                   (element) => element.index == e["equipment"]["index"]);
-              List.generate(e["quantity"] ?? 1, (index) => index).forEach(
-                (element) {
-                  options.add(item);
-                },
-              );
+              options.add(EquipmentQuantity(item, e["quantity"] ?? 1));
             }
 
             if (e is List) {
@@ -152,12 +145,7 @@ class ClassesRepository {
 
                 final item = allEquipment.firstWhere((equipment) =>
                     equipment.index == element["equipment"]["index"]);
-                List.generate(element["quantity"] ?? 1, (index) => index)
-                    .forEach(
-                  (element) {
-                    options.add(item);
-                  },
-                );
+                options.add(EquipmentQuantity(item, element["quantity"] ?? 1));
               });
             }
           });
