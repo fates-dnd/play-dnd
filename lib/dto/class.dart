@@ -1,9 +1,10 @@
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:equatable/equatable.dart';
 
 import 'equipment.dart';
 
-class Class {
+class Class extends Equatable {
   final String index;
   final String name;
   final List<Characteristic> savingThrows;
@@ -23,6 +24,9 @@ class Class {
     this.startingEquipment,
     this.equipmentChoices,
   );
+
+  @override
+  List<Object?> get props => [index, name];
 }
 
 class ProficiencyChoices {

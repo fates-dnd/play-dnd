@@ -1,4 +1,6 @@
-class Race {
+import 'package:equatable/equatable.dart';
+
+class Race extends Equatable {
   final String index;
   final String name;
   final String description;
@@ -25,6 +27,9 @@ class Race {
       this.size,
       this.sizeDescription,
       this.languagesDescription);
+
+  @override
+  List<Object?> get props => [index, name];
 }
 
 class AbilityBonus {

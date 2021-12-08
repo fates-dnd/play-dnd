@@ -101,7 +101,7 @@ class SetCharacteristicsScreen extends StatelessWidget {
                 (element) => element.characteristic == characteristic);
 
         final bonusPoints = (raceBonus?.bonus ?? selectedBonus?.bonus) ?? 0;
-        return _CharcateristicsRow(
+        return _CharacteristicsRow(
             characteristicBonus:
                 CharacteristicBonus(characteristic, bonusPoints));
       }).toList(),
@@ -110,7 +110,7 @@ class SetCharacteristicsScreen extends StatelessWidget {
 
   Widget _submitButton(BuildContext inputContext) {
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
-      builder: (contetxt, state) => Padding(
+      builder: (context, state) => Padding(
         padding: const EdgeInsets.all(16.0),
         child: TextButton(
             onPressed: state.isFilled
@@ -141,10 +141,10 @@ class SetCharacteristicsScreen extends StatelessWidget {
   }
 }
 
-class _CharcateristicsRow extends StatelessWidget {
+class _CharacteristicsRow extends StatelessWidget {
   final CharacteristicBonus characteristicBonus;
 
-  const _CharcateristicsRow({Key? key, required this.characteristicBonus})
+  const _CharacteristicsRow({Key? key, required this.characteristicBonus})
       : super(key: key);
 
   @override

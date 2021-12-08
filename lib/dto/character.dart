@@ -2,8 +2,9 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
+import 'package:equatable/equatable.dart';
 
-class Character {
+class Character extends Equatable {
   final String name;
   final int level;
   final int baseStrength;
@@ -33,4 +34,20 @@ class Character {
     this.selectedProficiencies,
     this.selectedEquipment,
   );
+
+  @override
+  List<Object?> get props => [
+        name,
+        level,
+        baseStrength,
+        baseDexterity,
+        baseConstitution,
+        baseIntelligence,
+        baseWisdom,
+        baseCharisma,
+        race,
+        clazz,
+        selectedProficiencies,
+        selectedEquipment,
+      ];
 }
