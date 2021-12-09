@@ -73,6 +73,7 @@ class Equipment extends Equatable {
       equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
 
   bool get isStackable =>
+      (properties?.any((element) => element.index == "thrown") ?? false) ||
       equipmentCategory == EquipmentCategory.ADVENTURING_GEAR;
 
   @override

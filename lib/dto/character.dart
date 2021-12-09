@@ -18,7 +18,7 @@ class Character extends Equatable {
   final Class clazz;
 
   final List<Skill> selectedProficiencies;
-  final List<Equipment> selectedEquipment;
+  final List<EquipmentQuantity> selectedEquipment;
 
   Character(
     this.name,

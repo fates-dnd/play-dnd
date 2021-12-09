@@ -22,14 +22,27 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
         readStringList(reader), // proficiency indexes
 
-        readStringList(reader), // equipment indexes
-        readStringList(reader), // equipped items indexes
+        readEquipmentQuantities(reader), // equipment indexes
+        readEquipmentQuantities(reader), // equipped items indexes
 
         readStringList(reader), // prepared spells
         readStringList(reader), // learned spells
 
         reader.readMap().cast() // spell slots
         );
+  }
+
+  List<EquipmentIndexQuantity> readEquipmentQuantities(BinaryReader reader) {
+    final result = <EquipmentIndexQuantity>[];
+    final total = reader.readInt();
+    for (var i = 0; i < total; ++i) {
+      final item = EquipmentIndexQuantity(
+        reader.readString(),
+        reader.readInt(),
+      );
+      result.add(item);
+    }
+    return result;
   }
 
   List<String> readStringList(BinaryReader reader) {
@@ -60,14 +73,16 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
       writer.writeString(element);
     });
 
-    writer.writeInt(obj.equipmentIndexes.length);
-    obj.equipmentIndexes.forEach((element) {
-      writer.writeString(element);
+    writer.writeInt(obj.allEquipment.length);
+    obj.allEquipment.forEach((indexQuantity) {
+      writer.writeString(indexQuantity.index);
+      writer.writeInt(indexQuantity.quantity);
     });
 
     writer.writeInt(obj.equippedItems.length);
-    obj.equippedItems.forEach((element) {
-      writer.writeString(element);
+    obj.equippedItems.forEach((indexQuantity) {
+      writer.writeString(indexQuantity.index);
+      writer.writeInt(indexQuantity.quantity);
     });
 
     writer.writeInt(obj.preparedSpells.length);

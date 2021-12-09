@@ -16,19 +16,19 @@ class AddEquipmentItem extends CharacterEvent {
 }
 
 class RemoveEquipmentItem extends CharacterEvent {
-  final Equipment equipment;
+  final EquipmentQuantity equipment;
 
   RemoveEquipmentItem(this.equipment);
 }
 
 class EquipItem extends CharacterEvent {
-  final Equipment equipment;
+  final EquipmentQuantity equipment;
 
   EquipItem(this.equipment);
 }
 
 class UnequipItem extends CharacterEvent {
-  final Equipment equipment;
+  final EquipmentQuantity equipment;
 
   UnequipItem(this.equipment);
 }

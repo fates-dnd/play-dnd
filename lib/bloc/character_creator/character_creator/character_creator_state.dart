@@ -14,7 +14,7 @@ class CharacterCreatorState {
   final int? wisdom;
   final int? charisma;
   final List<Skill>? selectedProficiencies;
-  final List<Equipment>? selectedEquipment;
+  final List<EquipmentQuantity>? selectedEquipment;
 
   CharacterCreatorState({
     this.race,
@@ -46,7 +46,7 @@ class CharacterCreatorState {
     int? wisdom,
     int? charisma,
     List<Skill>? selectedProficiencies,
-    List<Equipment>? selectedEquipment,
+    List<EquipmentQuantity>? selectedEquipment,
   }) {
     return CharacterCreatorState(
       race: race ?? this.race,

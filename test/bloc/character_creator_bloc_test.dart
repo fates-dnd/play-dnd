@@ -36,7 +36,8 @@ void main() {
     bloc.add(SaveCharacter());
   }
 
-  final startingEquipment = List.generate(5, (index) => MockEquipment());
+  final startingEquipment =
+      List.generate(5, (index) => EquipmentQuantity(MockEquipment(), 1));
 
   blocTest<CharacterCreatorBloc, CharacterCreatorState>(
     "character creation works fine with all steps completed with only starting equipment",
@@ -64,11 +65,11 @@ void main() {
     },
   );
 
-  final knife = MockEquipment();
-  final sword = MockEquipment();
-  final dart = MockEquipment();
-  final bow = MockEquipment();
-  final arrow = MockEquipment();
+  final knife = EquipmentQuantity(MockEquipment(), 1);
+  final sword = EquipmentQuantity(MockEquipment(), 1);
+  final dart = EquipmentQuantity(MockEquipment(), 1);
+  final bow = EquipmentQuantity(MockEquipment(), 1);
+  final arrow = EquipmentQuantity(MockEquipment(), 1);
 
   blocTest<CharacterCreatorBloc, CharacterCreatorState>(
     "character creation works fine with all steps completed with starting equipment options",
@@ -76,7 +77,7 @@ void main() {
       when(clazz.startingEquipment).thenReturn([]);
       when(clazz.equipmentChoices).thenReturn([
         EquipmentChoices(1, [knife, sword]),
-        EquipmentChoices(1, [knife, sword]),
+        EquipmentChoices(1, [dart, bow]),
       ]);
     },
     build: () => CharacterCreatorBloc(repository),
@@ -94,7 +95,7 @@ void main() {
         race,
         clazz,
         [skill],
-        startingEquipment,
+        [knife, dart],
       )));
     },
   );

@@ -1,6 +1,5 @@
 import 'package:dnd_player_flutter/bloc/equipment/equipment_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
-import 'package:dnd_player_flutter/dto/damage_type.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';

@@ -73,7 +73,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
 
       final currentEquipment = state.equipment ?? [];
-      currentEquipment.add(event.equipment);
+      final equipmentIndex = currentEquipment.indexWhere(
+          (element) => element.equipment.index == event.equipment.index);
+      if (!event.equipment.isStackable || equipmentIndex == -1) {
+        currentEquipment.add(EquipmentQuantity(event.equipment, 1));
+        return state.copyWith(equipment: currentEquipment);
+      }
+
+      final equipmentQuantity = currentEquipment[equipmentIndex];
+      currentEquipment[equipmentIndex] =
+          EquipmentQuantity(event.equipment, equipmentQuantity.quantity + 1);
       return state.copyWith(equipment: currentEquipment);
     } else if (event is RemoveEquipmentItem) {
       characterRepository.removeEquipmentFromCharacter(
@@ -125,23 +134,27 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         .toList();
   }
 
-  Future<List<Equipment>> _getCharacterEquipment() async {
-    final equipmentIndexes =
-        characterRepository.getCharacterEquipmentIndexes(character);
+  Future<List<EquipmentQuantity>> _getCharacterEquipment() async {
+    final equipmentIndexQuantities =
+        characterRepository.getCharacterEquipmentIndexQuantities(character);
     final language = settingsRepository.getLanguage();
     final allEquipment = await equipmentRepository.getEquipment(language);
-    return equipmentIndexes.map((index) {
-      return allEquipment.firstWhere((element) => element.index == index);
+    return equipmentIndexQuantities.map((indexQuantity) {
+      final equipment = allEquipment
+          .firstWhere((element) => element.index == indexQuantity.index);
+      return EquipmentQuantity(equipment, indexQuantity.quantity);
     }).toList();
   }
 
-  Future<List<Equipment>> _getEquippedItems() async {
-    final equippedItemsIndexes =
-        characterRepository.getCharacterEquippedItemsIndexes(character);
+  Future<List<EquipmentQuantity>> _getEquippedItems() async {
+    final equippedItemsIndexQuantities =
+        characterRepository.getCharacterEquippedItemsIndexQuantities(character);
     final language = settingsRepository.getLanguage();
     final allEquipment = await equipmentRepository.getEquipment(language);
-    return equippedItemsIndexes.map((index) {
-      return allEquipment.firstWhere((element) => element.index == index);
+    return equippedItemsIndexQuantities.map((indexQuantity) {
+      final equipment = allEquipment
+          .firstWhere((element) => element.index == indexQuantity.index);
+      return EquipmentQuantity(equipment, indexQuantity.quantity);
     }).toList();
   }
 

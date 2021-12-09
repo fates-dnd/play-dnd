@@ -4,7 +4,6 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
-import 'package:test/expect.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -38,9 +37,12 @@ void main() {
     expect(classes[1].spellcastingAbility, Characteristic.CHARISMA);
     expect(classes[1].savingThrows[0], Characteristic.DEXTERITY);
     expect(classes[1].savingThrows[1], Characteristic.CHARISMA);
-    expect(classes[1].startingEquipment![0].index, "leather");
-    expect(classes[1].startingEquipment![1].index, "dagger");
-    expect(classes[1].equipmentChoices![0].options[0].index, "rapier");
+    expect(classes[1].startingEquipment![0].equipment.index, "leather");
+    expect(classes[1].startingEquipment![0].quantity, 1);
+    expect(classes[1].startingEquipment![1].equipment.index, "dagger");
+    expect(
+        classes[1].equipmentChoices![0].options[0].equipment.index, "rapier");
+    expect(classes[1].equipmentChoices![0].options[0].quantity, 1);
   });
 
   test('load classes ru', () async {
@@ -71,8 +73,12 @@ void main() {
     expect(classes[1].spellcastingAbility, Characteristic.CHARISMA);
     expect(classes[1].savingThrows[0], Characteristic.DEXTERITY);
     expect(classes[1].savingThrows[1], Characteristic.CHARISMA);
-    expect(classes[1].startingEquipment![0].index, "leather");
-    expect(classes[1].startingEquipment![1].index, "dagger");
-    expect(classes[1].equipmentChoices![0].options[0].index, "rapier");
+    expect(classes[1].startingEquipment![0].equipment.index, "leather");
+    expect(classes[1].startingEquipment![0].quantity, 1);
+    expect(classes[1].startingEquipment![1].equipment.index, "dagger");
+    expect(classes[1].startingEquipment![1].quantity, 1);
+    expect(
+        classes[1].equipmentChoices![0].options[0].equipment.index, "rapier");
+    expect(classes[1].equipmentChoices![0].options[0].quantity, 1);
   });
 }

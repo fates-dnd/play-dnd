@@ -14,8 +14,8 @@ class CharacterOutline {
   final String classIndex;
   final List<String> proficiencyIndexes;
 
-  final List<String> equipmentIndexes;
-  final List<String> equippedItems;
+  final List<EquipmentIndexQuantity> allEquipment;
+  final List<EquipmentIndexQuantity> equippedItems;
 
   final List<String> preparedSpells;
   final List<String> learnedSpells;
@@ -34,7 +34,7 @@ class CharacterOutline {
     this.raceIndex,
     this.classIndex,
     this.proficiencyIndexes,
-    this.equipmentIndexes,
+    this.allEquipment,
     this.equippedItems,
     this.preparedSpells,
     this.learnedSpells,
@@ -43,8 +43,8 @@ class CharacterOutline {
 
   static CharacterOutline fromCharacter(
     Character character, {
-    required List<String> equipment,
-    required List<String> equippedItems,
+    required List<EquipmentIndexQuantity> equipment,
+    required List<EquipmentIndexQuantity> equippedItems,
     required List<String> preparedSpells,
     required List<String> learnedSpells,
     required Map<int, int> usedSpellSlots,
@@ -81,8 +81,8 @@ class CharacterOutline {
     String? raceIndex,
     String? classIndex,
     List<String>? proficiencyIndexes,
-    List<String>? equipmentIndexes,
-    List<String>? equippedItems,
+    List<EquipmentIndexQuantity>? allEquipmentIndexes,
+    List<EquipmentIndexQuantity>? equippedItems,
     List<String>? preparedSpells,
     List<String>? learnedSpells,
     Map<int, int>? usedSpellSlots,
@@ -99,11 +99,18 @@ class CharacterOutline {
       raceIndex ?? this.raceIndex,
       classIndex ?? this.classIndex,
       proficiencyIndexes ?? this.proficiencyIndexes,
-      equipmentIndexes ?? this.equipmentIndexes,
+      allEquipmentIndexes ?? this.allEquipment,
       equippedItems ?? this.equippedItems,
       preparedSpells ?? this.preparedSpells,
       learnedSpells ?? this.learnedSpells,
       usedSpellSlots ?? this.usedSpellSlots,
     );
   }
+}
+
+class EquipmentIndexQuantity {
+  final String index;
+  final int quantity;
+
+  EquipmentIndexQuantity(this.index, this.quantity);
 }

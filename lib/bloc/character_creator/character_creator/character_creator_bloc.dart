@@ -61,7 +61,7 @@ class CharacterCreatorBloc
     return state;
   }
 
-  List<Equipment> _generateSelectedEquipment() {
+  List<EquipmentQuantity> _generateSelectedEquipment() {
     final clazz = state.clazz;
 
     final equipment = clazz?.startingEquipment ?? [];

@@ -15,8 +15,8 @@ class CharacterState {
   final List<Skill>? skills;
   final List<Skill>? proficienctSkills;
 
-  final List<Equipment>? equipment;
-  final List<Equipment>? equippedItems;
+  final List<EquipmentQuantity>? equipment;
+  final List<EquipmentQuantity>? equippedItems;
 
   final List<Spell>? preparedSpells;
   final List<Spell>? learnedSpells;
@@ -53,8 +53,8 @@ class CharacterState {
     Race? race,
     Class? clazz,
     List<Skill>? skills,
-    List<Equipment>? equipment,
-    List<Equipment>? equippedItems,
+    List<EquipmentQuantity>? equipment,
+    List<EquipmentQuantity>? equippedItems,
     List<Spell>? preparedSpells,
     List<Spell>? learnedSpells,
     Map<int, SpellSlots>? levelSpellSlots,
@@ -182,30 +182,8 @@ class CharacterState {
   }
 
   bool isEquipped(Equipment equipment) {
-    return equippedItems?.any((element) => element.index == equipment.index) ??
+    return equippedItems
+            ?.any((element) => element.equipment.index == equipment.index) ??
         false;
   }
-
-  List<EquipmentCount>? get groupedEquipment =>
-      equipment?.fold([], (value, equipment) {
-        final currentCountIndex =
-            value?.indexWhere((element) => element.equipment == equipment);
-        if (currentCountIndex == null ||
-            currentCountIndex == -1 ||
-            !equipment.isStackable) {
-          value?.add(EquipmentCount(equipment, 1));
-          return value;
-        }
-
-        final count = value![currentCountIndex];
-        value[currentCountIndex] = EquipmentCount(equipment, count.count + 1);
-        return value;
-      });
-}
-
-class EquipmentCount {
-  final Equipment equipment;
-  final int count;
-
-  EquipmentCount(this.equipment, this.count);
 }

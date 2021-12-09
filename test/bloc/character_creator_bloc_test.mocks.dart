@@ -2,16 +2,16 @@
 // in dnd_player_flutter/test/bloc/character_creator_bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i13;
+import 'dart:async' as _i14;
 
-import 'package:dnd_player_flutter/data/characteristics.dart' as _i14;
+import 'package:dnd_player_flutter/data/characteristics.dart' as _i15;
 import 'package:dnd_player_flutter/dto/character.dart' as _i11;
 import 'package:dnd_player_flutter/dto/class.dart' as _i8;
 import 'package:dnd_player_flutter/dto/equipment.dart' as _i9;
-import 'package:dnd_player_flutter/dto/race.dart' as _i15;
-import 'package:dnd_player_flutter/dto/skill.dart' as _i17;
-import 'package:dnd_player_flutter/dto/spell.dart' as _i12;
-import 'package:dnd_player_flutter/dto/trait.dart' as _i16;
+import 'package:dnd_player_flutter/dto/race.dart' as _i16;
+import 'package:dnd_player_flutter/dto/skill.dart' as _i18;
+import 'package:dnd_player_flutter/dto/spell.dart' as _i13;
+import 'package:dnd_player_flutter/dto/trait.dart' as _i17;
 import 'package:dnd_player_flutter/repository/character_repository.dart'
     as _i10;
 import 'package:dnd_player_flutter/repository/classes_repository.dart' as _i4;
@@ -19,6 +19,7 @@ import 'package:dnd_player_flutter/repository/equipment_repository.dart' as _i6;
 import 'package:dnd_player_flutter/repository/races_repository.dart' as _i3;
 import 'package:dnd_player_flutter/repository/settings_repository.dart' as _i2;
 import 'package:dnd_player_flutter/repository/skills_repository.dart' as _i5;
+import 'package:dnd_player_flutter/storage/character_outline.dart' as _i12;
 import 'package:hive/hive.dart' as _i7;
 import 'package:mockito/mockito.dart' as _i1;
 
@@ -102,36 +103,45 @@ class MockCharacterRepository extends _i1.Mock
           returnValueForMissingStub: null);
   @override
   void removeEquipmentFromCharacter(
-          _i11.Character? character, _i9.Equipment? equipment) =>
+          _i11.Character? character, _i8.EquipmentQuantity? equipment) =>
       super.noSuchMethod(
           Invocation.method(
               #removeEquipmentFromCharacter, [character, equipment]),
           returnValueForMissingStub: null);
   @override
-  void equipItem(_i11.Character? character, _i9.Equipment? equipment) =>
+  void equipItem(_i11.Character? character, _i8.EquipmentQuantity? equipment) =>
       super.noSuchMethod(Invocation.method(#equipItem, [character, equipment]),
           returnValueForMissingStub: null);
   @override
-  void unequipItem(_i11.Character? character, _i9.Equipment? equipment) => super
-      .noSuchMethod(Invocation.method(#unequipItem, [character, equipment]),
+  void unequipItem(
+          _i11.Character? character, _i8.EquipmentQuantity? equipment) =>
+      super.noSuchMethod(
+          Invocation.method(#unequipItem, [character, equipment]),
           returnValueForMissingStub: null);
   @override
   List<String> getProficientSkillIndexes(_i11.Character? character) => (super
       .noSuchMethod(Invocation.method(#getProficientSkillIndexes, [character]),
           returnValue: <String>[]) as List<String>);
   @override
-  List<String> getCharacterEquipmentIndexes(_i11.Character? character) =>
-      (super.noSuchMethod(
-          Invocation.method(#getCharacterEquipmentIndexes, [character]),
-          returnValue: <String>[]) as List<String>);
+  List<_i12.EquipmentIndexQuantity> getCharacterEquipmentIndexQuantities(
+          _i11.Character? character) =>
+      (super
+              .noSuchMethod(
+                  Invocation.method(
+                      #getCharacterEquipmentIndexQuantities, [character]),
+                  returnValue: <_i12.EquipmentIndexQuantity>[])
+          as List<_i12.EquipmentIndexQuantity>);
   @override
-  List<String> getCharacterEquippedItemsIndexes(_i11.Character? character) =>
+  List<_i12.EquipmentIndexQuantity> getCharacterEquippedItemsIndexQuantities(
+          _i11.Character? character) =>
       (super.noSuchMethod(
-          Invocation.method(#getCharacterEquippedItemsIndexes, [character]),
-          returnValue: <String>[]) as List<String>);
+              Invocation.method(
+                  #getCharacterEquippedItemsIndexQuantities, [character]),
+              returnValue: <_i12.EquipmentIndexQuantity>[])
+          as List<_i12.EquipmentIndexQuantity>);
   @override
   void updatePreparedSpells(
-          _i11.Character? character, List<_i12.Spell>? spells) =>
+          _i11.Character? character, List<_i13.Spell>? spells) =>
       super.noSuchMethod(
           Invocation.method(#updatePreparedSpells, [character, spells]),
           returnValueForMissingStub: null);
@@ -141,7 +151,7 @@ class MockCharacterRepository extends _i1.Mock
           returnValue: <String>[]) as List<String>);
   @override
   void updateLearnedSpells(
-          _i11.Character? character, List<_i12.Spell>? spells) =>
+          _i11.Character? character, List<_i13.Spell>? spells) =>
       super.noSuchMethod(
           Invocation.method(#updateLearnedSpells, [character, spells]),
           returnValueForMissingStub: null);
@@ -158,15 +168,15 @@ class MockCharacterRepository extends _i1.Mock
       super.noSuchMethod(Invocation.method(#unuseSpellSlot, [character, level]),
           returnValueForMissingStub: null);
   @override
-  _i13.Future<Map<int, int>> getUsedSpellSlots(_i11.Character? character) =>
+  _i14.Future<Map<int, int>> getUsedSpellSlots(_i11.Character? character) =>
       (super.noSuchMethod(Invocation.method(#getUsedSpellSlots, [character]),
               returnValue: Future<Map<int, int>>.value(<int, int>{}))
-          as _i13.Future<Map<int, int>>);
+          as _i14.Future<Map<int, int>>);
   @override
-  _i13.Future<List<_i11.Character>> getCharacters() => (super.noSuchMethod(
+  _i14.Future<List<_i11.Character>> getCharacters() => (super.noSuchMethod(
           Invocation.method(#getCharacters, []),
           returnValue: Future<List<_i11.Character>>.value(<_i11.Character>[]))
-      as _i13.Future<List<_i11.Character>>);
+      as _i14.Future<List<_i11.Character>>);
   @override
   String toString() => super.toString();
 }
@@ -187,9 +197,9 @@ class MockClass extends _i1.Mock implements _i8.Class {
   String get name =>
       (super.noSuchMethod(Invocation.getter(#name), returnValue: '') as String);
   @override
-  List<_i14.Characteristic> get savingThrows =>
+  List<_i15.Characteristic> get savingThrows =>
       (super.noSuchMethod(Invocation.getter(#savingThrows),
-          returnValue: <_i14.Characteristic>[]) as List<_i14.Characteristic>);
+          returnValue: <_i15.Characteristic>[]) as List<_i15.Characteristic>);
   @override
   _i8.ProficiencyChoices get proficiencyChoices =>
       (super.noSuchMethod(Invocation.getter(#proficiencyChoices),
@@ -209,7 +219,7 @@ class MockClass extends _i1.Mock implements _i8.Class {
 /// A class which mocks [Race].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockRace extends _i1.Mock implements _i15.Race {
+class MockRace extends _i1.Mock implements _i16.Race {
   MockRace() {
     _i1.throwOnMissingStub(this);
   }
@@ -234,9 +244,9 @@ class MockRace extends _i1.Mock implements _i15.Race {
       (super.noSuchMethod(Invocation.getter(#abilityBonusDescription),
           returnValue: '') as String);
   @override
-  List<_i15.AbilityBonus> get abilityBonuses =>
+  List<_i16.AbilityBonus> get abilityBonuses =>
       (super.noSuchMethod(Invocation.getter(#abilityBonuses),
-          returnValue: <_i15.AbilityBonus>[]) as List<_i15.AbilityBonus>);
+          returnValue: <_i16.AbilityBonus>[]) as List<_i16.AbilityBonus>);
   @override
   String get age =>
       (super.noSuchMethod(Invocation.getter(#age), returnValue: '') as String);
@@ -245,8 +255,8 @@ class MockRace extends _i1.Mock implements _i15.Race {
       (super.noSuchMethod(Invocation.getter(#alignment), returnValue: '')
           as String);
   @override
-  _i15.Size get size => (super.noSuchMethod(Invocation.getter(#size),
-      returnValue: _i15.Size.SMALL) as _i15.Size);
+  _i16.Size get size => (super.noSuchMethod(Invocation.getter(#size),
+      returnValue: _i16.Size.SMALL) as _i16.Size);
   @override
   String get sizeDescription =>
       (super.noSuchMethod(Invocation.getter(#sizeDescription), returnValue: '')
@@ -266,7 +276,7 @@ class MockRace extends _i1.Mock implements _i15.Race {
 /// A class which mocks [Trait].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTrait extends _i1.Mock implements _i16.Trait {
+class MockTrait extends _i1.Mock implements _i17.Trait {
   MockTrait() {
     _i1.throwOnMissingStub(this);
   }
@@ -276,9 +286,9 @@ class MockTrait extends _i1.Mock implements _i16.Trait {
       (super.noSuchMethod(Invocation.getter(#index), returnValue: '')
           as String);
   @override
-  List<_i16.TraitRace> get races =>
+  List<_i17.TraitRace> get races =>
       (super.noSuchMethod(Invocation.getter(#races),
-          returnValue: <_i16.TraitRace>[]) as List<_i16.TraitRace>);
+          returnValue: <_i17.TraitRace>[]) as List<_i17.TraitRace>);
   @override
   String get name =>
       (super.noSuchMethod(Invocation.getter(#name), returnValue: '') as String);
@@ -293,7 +303,7 @@ class MockTrait extends _i1.Mock implements _i16.Trait {
 /// A class which mocks [Skill].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSkill extends _i1.Mock implements _i17.Skill {
+class MockSkill extends _i1.Mock implements _i18.Skill {
   MockSkill() {
     _i1.throwOnMissingStub(this);
   }
@@ -306,9 +316,9 @@ class MockSkill extends _i1.Mock implements _i17.Skill {
   String get name =>
       (super.noSuchMethod(Invocation.getter(#name), returnValue: '') as String);
   @override
-  _i14.Characteristic get characteristic =>
+  _i15.Characteristic get characteristic =>
       (super.noSuchMethod(Invocation.getter(#characteristic),
-          returnValue: _i14.Characteristic.STRENGTH) as _i14.Characteristic);
+          returnValue: _i15.Characteristic.STRENGTH) as _i15.Characteristic);
   @override
   List<Object?> get props =>
       (super.noSuchMethod(Invocation.getter(#props), returnValue: <Object?>[])

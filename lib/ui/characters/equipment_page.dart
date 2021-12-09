@@ -1,6 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
-import 'package:dnd_player_flutter/dto/equipment.dart';
+import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
 import 'package:dnd_player_flutter/utils.dart';
@@ -38,8 +38,8 @@ class EquipmentPage extends StatelessWidget {
             ],
           ),
           SizedBox(height: 14),
-          for (var i = 0; i < (state.groupedEquipment?.length ?? 0); ++i)
-            EquipmentItem(equipmentCount: state.groupedEquipment![i])
+          for (var i = 0; i < (state.equipment?.length ?? 0); ++i)
+            EquipmentItem(equipmentQuantity: state.equipment![i])
         ],
       ),
     );
@@ -94,7 +94,7 @@ class EquippedSection extends StatelessWidget {
               ],
             ),
             for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
-              EquippedItem(equipment: state.equippedItems![i]),
+              EquippedItem(equipmentQuantity: state.equippedItems![i]),
             UnarmedAttackRow(
               unarmedAttack: state.unarmedAttack,
             ),
@@ -106,15 +106,16 @@ class EquippedSection extends StatelessWidget {
 }
 
 class EquippedItem extends StatelessWidget {
-  final Equipment equipment;
+  final EquipmentQuantity equipmentQuantity;
 
   const EquippedItem({
     Key? key,
-    required this.equipment,
+    required this.equipmentQuantity,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final equipment = equipmentQuantity.equipment;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -242,20 +243,21 @@ class ActionableInfo extends StatelessWidget {
 }
 
 class EquipmentItem extends StatelessWidget {
-  final EquipmentCount equipmentCount;
+  final EquipmentQuantity equipmentQuantity;
 
   const EquipmentItem({
     Key? key,
-    required this.equipmentCount,
+    required this.equipmentQuantity,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext rootContext) {
-    final equipment = equipmentCount.equipment;
+    final equipment = equipmentQuantity.equipment;
     return Row(
       children: [
         equipment.isEquippable
-            ? EquipmentSelectionButton(equipment: equipment, isEquipped: false)
+            ? EquipmentSelectionButton(
+                equipmentQuantity: equipmentQuantity, isEquipped: false)
             : Padding(
                 padding: const EdgeInsets.all(8),
                 child: Container(
@@ -288,10 +290,10 @@ class EquipmentItem extends StatelessWidget {
                   )
                 ],
               ),
-              if (equipmentCount.count > 1) SizedBox(width: 16),
-              if (equipmentCount.count > 1)
+              if (equipmentQuantity.quantity > 1) SizedBox(width: 16),
+              if (equipmentQuantity.quantity > 1)
                 Text(
-                  "(${equipmentCount.count})",
+                  "(${equipmentQuantity.quantity})",
                   style: TextStyle(
                       fontSize: 20, color: Colors.white.withOpacity(.6)),
                 ),
@@ -303,7 +305,7 @@ class EquipmentItem extends StatelessWidget {
               showDialog(
                   context: rootContext,
                   builder: (context) {
-                    return SureToDeleteEquipment(context, equipment,
+                    return SureToDeleteEquipment(context, equipmentQuantity,
                         (equipment) {
                       BlocProvider.of<CharacterBloc>(rootContext)
                           .add(RemoveEquipmentItem(equipment));
@@ -320,25 +322,26 @@ class EquipmentItem extends StatelessWidget {
 }
 
 class EquipmentSelectionButton extends StatelessWidget {
-  final Equipment equipment;
+  final EquipmentQuantity equipmentQuantity;
   final bool isEquipped;
 
   const EquipmentSelectionButton({
     Key? key,
-    required this.equipment,
+    required this.equipmentQuantity,
     required this.isEquipped,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final equipment = equipmentQuantity.equipment;
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => InkWell(
         onTap: () {
           final bloc = BlocProvider.of<CharacterBloc>(context);
           if (state.isEquipped(equipment)) {
-            bloc.add(UnequipItem(equipment));
+            bloc.add(UnequipItem(equipmentQuantity));
           } else {
-            bloc.add(EquipItem(equipment));
+            bloc.add(EquipItem(equipmentQuantity));
           }
         },
         child: Stack(
