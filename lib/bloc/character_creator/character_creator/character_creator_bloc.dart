@@ -4,7 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
-import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
@@ -66,6 +65,10 @@ class CharacterCreatorBloc
 
     final equipment = clazz?.startingEquipment ?? [];
     clazz?.equipmentChoices?.forEach((element) {
+      if (element.options.length <= 1) {
+        equipment.addAll(element.options);
+        return;
+      }
       equipment.addAll(element.options.sublist(0, element.choose));
     });
 

@@ -180,10 +180,4 @@ class CharacterState {
         return charismaBonus;
     }
   }
-
-  bool isEquipped(Equipment equipment) {
-    return equippedItems
-            ?.any((element) => element.equipment.index == equipment.index) ??
-        false;
-  }
 }

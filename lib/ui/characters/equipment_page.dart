@@ -9,39 +9,36 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EquipmentPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (rootContext, state) => ListView(
-        children: [
-          EquippedSection(),
-          SizedBox(height: 12),
-          MoneyInfoRow(),
-          SizedBox(height: 12),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) {
-                    return EquipmentList(
-                      onEquipmentSelected: (item) {
-                        BlocProvider.of<CharacterBloc>(rootContext)
-                            .add(AddEquipmentItem(item));
-                      },
-                    );
-                  }));
-                },
-                child: Text("Добавить"),
-              ),
-            ],
-          ),
-          SizedBox(height: 14),
-          for (var i = 0; i < (state.equipment?.length ?? 0); ++i)
-            EquipmentItem(equipmentQuantity: state.equipment![i])
-        ],
-      ),
+  Widget build(BuildContext rootContext) {
+    return ListView(
+      children: [
+        EquippedSection(),
+        SizedBox(height: 12),
+        MoneyInfoRow(),
+        SizedBox(height: 12),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.of(rootContext)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return EquipmentList(
+                    onEquipmentSelected: (item) {
+                      BlocProvider.of<CharacterBloc>(rootContext)
+                          .add(AddEquipmentItem(item));
+                    },
+                  );
+                }));
+              },
+              child: Text("Добавить"),
+            ),
+          ],
+        ),
+        SizedBox(height: 14),
+        AllItemsSection(),
+      ],
     );
   }
 }
@@ -242,12 +239,35 @@ class ActionableInfo extends StatelessWidget {
   }
 }
 
+class AllItemsSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+        builder: (context, state) {
+      final equippedItems = List.from(state.equippedItems ?? []);
+      final items = List.from(state.equipment ?? []);
+
+      return Column(
+        children: items.map((e) {
+          final isEquipped = equippedItems.remove(e);
+          return EquipmentItem(
+            equipmentQuantity: e,
+            isEquipped: isEquipped,
+          );
+        }).toList(),
+      );
+    });
+  }
+}
+
 class EquipmentItem extends StatelessWidget {
   final EquipmentQuantity equipmentQuantity;
+  final bool isEquipped;
 
   const EquipmentItem({
     Key? key,
     required this.equipmentQuantity,
+    required this.isEquipped,
   }) : super(key: key);
 
   @override
@@ -257,7 +277,9 @@ class EquipmentItem extends StatelessWidget {
       children: [
         equipment.isEquippable
             ? EquipmentSelectionButton(
-                equipmentQuantity: equipmentQuantity, isEquipped: false)
+                equipmentQuantity: equipmentQuantity,
+                isEquipped: isEquipped,
+              )
             : Padding(
                 padding: const EdgeInsets.all(8),
                 child: Container(
@@ -333,37 +355,34 @@ class EquipmentSelectionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final equipment = equipmentQuantity.equipment;
-    return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) => InkWell(
-        onTap: () {
-          final bloc = BlocProvider.of<CharacterBloc>(context);
-          if (state.isEquipped(equipment)) {
-            bloc.add(UnequipItem(equipmentQuantity));
-          } else {
-            bloc.add(EquipItem(equipmentQuantity));
-          }
-        },
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
+    return InkWell(
+      onTap: () {
+        final bloc = BlocProvider.of<CharacterBloc>(context);
+        if (isEquipped) {
+          bloc.add(UnequipItem(equipmentQuantity));
+        } else {
+          bloc.add(EquipItem(equipmentQuantity));
+        }
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+                border: Border.all(color: Color(0xFFDCDAD9), width: 3),
+                borderRadius: BorderRadius.circular(8)),
+          ),
+          if (isEquipped)
             Container(
-              width: 28,
-              height: 28,
+              width: 14,
+              height: 14,
               decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFDCDAD9), width: 3),
-                  borderRadius: BorderRadius.circular(8)),
+                  color: Color(0xFFFF5251),
+                  borderRadius: BorderRadius.circular(4)),
             ),
-            if (state.isEquipped(equipment))
-              Container(
-                width: 14,
-                height: 14,
-                decoration: BoxDecoration(
-                    color: Color(0xFFFF5251),
-                    borderRadius: BorderRadius.circular(4)),
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
