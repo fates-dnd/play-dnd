@@ -132,13 +132,14 @@ class EquippedItem extends StatelessWidget {
                 SizedBox(
                   height: 2,
                 ),
-                Text(
-                  equipment.getWeaponRangeName(context),
-                  style: TextStyle(
-                    color: Color(0xAADCDAD9),
-                    fontSize: 12,
-                  ),
-                ), // range
+                if (equipment.weaponRange != null)
+                  Text(
+                    equipment.getWeaponRangeName(context),
+                    style: TextStyle(
+                      color: Color(0xAADCDAD9),
+                      fontSize: 12,
+                    ),
+                  ), // range
               ],
             ),
           ),
