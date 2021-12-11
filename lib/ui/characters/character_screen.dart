@@ -225,7 +225,7 @@ class _RestIcon extends StatelessWidget {
     return _CharacterRowButton(
       imageAsset: "assets/drawable/stats/tent.png",
       text: AppLocalizations.of(context)!.rest,
-      textColor: Color(0xFF4847FB),
+      textColor: Color(0xFF7C7BFC),
     );
   }
 }
