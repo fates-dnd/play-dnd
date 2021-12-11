@@ -27,7 +27,7 @@ void main() {
       "Name",
       4, // strength
       5, // dexterity
-      6, // constitution
+      10, // constitution
       7, // intelligence
       8, // wisdom
       9, // charisma
@@ -44,6 +44,7 @@ void main() {
     setUp: () {
       when(clazz.startingEquipment).thenReturn(startingEquipment);
       when(clazz.equipmentChoices).thenReturn([]);
+      when(clazz.hitDie).thenReturn(10);
     },
     build: () => CharacterCreatorBloc(repository),
     act: _submitAllStepsForBloc,
@@ -54,7 +55,7 @@ void main() {
         10, // hp
         4,
         5,
-        6,
+        10, // constitution
         7,
         8,
         9,
@@ -89,7 +90,7 @@ void main() {
         10, // hp
         4,
         5,
-        6,
+        10, // constitution
         7,
         8,
         9,
