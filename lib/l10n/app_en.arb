@@ -63,5 +63,7 @@
   "cantrips": "Cantrips",
   "spell_level": "Level",
 
-  "rest": "Rest"
+  "rest": "Rest",
+  "money": "Money",
+  "level_up": "Level Up"
 }

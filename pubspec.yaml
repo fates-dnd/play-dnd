@@ -85,6 +85,8 @@ flutter:
     - assets/drawable/stats/tent.png
     - assets/drawable/stats/shield.png
     - assets/drawable/stats/hammer.png
+    - assets/drawable/stats/money.png
+    - assets/drawable/stats/xp.png
 
     # dice
     - assets/drawable/dice/d20.png

@@ -15,8 +15,6 @@ class EquipmentPage extends StatelessWidget {
       children: [
         EquippedSection(),
         SizedBox(height: 12),
-        MoneyInfoRow(),
-        SizedBox(height: 12),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -407,30 +405,6 @@ class EquipmentSelectionButton extends StatelessWidget {
             ),
         ],
       ),
-    );
-  }
-}
-
-class MoneyInfoRow extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        OutlinedButton(
-          onPressed: () {},
-          child: Text("Деньги"),
-        ),
-        SizedBox(width: 12),
-        MoneyItem(assetUrl: "assets/drawable/money/platinum.png", value: "0"),
-        SizedBox(width: 12),
-        MoneyItem(assetUrl: "assets/drawable/money/gold.png", value: "0"),
-        SizedBox(width: 12),
-        MoneyItem(assetUrl: "assets/drawable/money/electrum.png", value: "0"),
-        SizedBox(width: 12),
-        MoneyItem(assetUrl: "assets/drawable/money/silver.png", value: "0"),
-        SizedBox(width: 12),
-        MoneyItem(assetUrl: "assets/drawable/money/bronze.png", value: "0"),
-      ],
     );
   }
 }

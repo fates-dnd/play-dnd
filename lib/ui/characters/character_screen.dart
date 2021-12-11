@@ -198,7 +198,9 @@ class _CharacterActionsRow extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           children: [
             _HealthButtonIcon(),
-            _RestIcon(),
+            _RestButtonIcon(),
+            _MoneyButtonIcon(),
+            _LevelUpButtonIcon(),
           ],
         ),
       ),
@@ -219,13 +221,35 @@ class _HealthButtonIcon extends StatelessWidget {
   }
 }
 
-class _RestIcon extends StatelessWidget {
+class _RestButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _CharacterRowButton(
       imageAsset: "assets/drawable/stats/tent.png",
       text: AppLocalizations.of(context)!.rest,
       textColor: Color(0xFF7C7BFC),
+    );
+  }
+}
+
+class _MoneyButtonIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _CharacterRowButton(
+      imageAsset: "assets/drawable/stats/money.png",
+      text: AppLocalizations.of(context)!.money,
+      textColor: Color(0xFFE5DD1C),
+    );
+  }
+}
+
+class _LevelUpButtonIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _CharacterRowButton(
+      imageAsset: "assets/drawable/stats/xp.png",
+      text: AppLocalizations.of(context)!.level_up,
+      textColor: Color(0xFF05FF96),
     );
   }
 }
@@ -245,10 +269,14 @@ class _CharacterRowButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Container(
-      height: 42,
-      child: Card(
-        color: theme.primaryColorLight,
+    return Padding(
+      padding: const EdgeInsets.only(right: 8.0, top: 8),
+      child: Container(
+        height: 42,
+        decoration: BoxDecoration(
+          color: theme.primaryColorLight,
+          borderRadius: BorderRadius.circular(24),
+        ),
         child: InkWell(
           onTap: () {},
           child: Padding(
