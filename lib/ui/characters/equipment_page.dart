@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character/unarmed_attack.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/ui/equipment/equipment_list.dart';
 import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
 import 'package:dnd_player_flutter/utils.dart';
@@ -90,11 +91,12 @@ class EquippedSection extends StatelessWidget {
                 ),
               ],
             ),
-            for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
-              EquippedItem(equipmentQuantity: state.equippedItems![i]),
             UnarmedAttackRow(
               unarmedAttack: state.unarmedAttack,
             ),
+            for (var i = 0; i < (state.equippedItems?.length ?? 0); ++i)
+              EquippedItem(
+                  equipmentQuantity: state.equippedItems![i], state: state),
           ],
         ),
       ),
@@ -104,10 +106,12 @@ class EquippedSection extends StatelessWidget {
 
 class EquippedItem extends StatelessWidget {
   final EquipmentQuantity equipmentQuantity;
+  final CharacterState state;
 
   const EquippedItem({
     Key? key,
     required this.equipmentQuantity,
+    required this.state,
   }) : super(key: key);
 
   @override
@@ -143,17 +147,35 @@ class EquippedItem extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
-              flex: 1,
-              child:
-                  Center(child: ActionableInfo(content: "+4"))), // attack roll
-          Expanded(
-              flex: 1,
-              child: Center(
-                  child: ActionableInfo(content: "1d4+2"))), // damage roll
+
+          if (equipment.damage != null)
+            Expanded(
+                flex: 1,
+                child: Center(
+                    child: ActionableInfo(
+                        content: state
+                            .getAttackBonus(equipment)
+                            .toBonusString()))), // attack roll
+
+          if (equipment.damage != null)
+            Expanded(
+                flex: 1,
+                child: Center(
+                    child: ActionableInfo(
+                        content: _damageToString(
+                            context, state, equipment)))), // damage roll
         ],
       ),
     );
+  }
+
+  String _damageToString(
+      BuildContext context, CharacterState state, Equipment equipment) {
+    final damage = equipment.damage;
+    if (damage == null) {
+      return "";
+    }
+    return "${damage.damageDice.amount}${damage.damageDice.dice.getName(context)} +${state.getDamageBonus(equipment)}";
   }
 }
 

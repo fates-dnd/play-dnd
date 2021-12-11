@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:dnd_player_flutter/dto/damage_type.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
-import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
 
 class SpellsRepository {
   final Future<String> Function(String lang) jsonReader;
@@ -57,7 +57,7 @@ class SpellsRepository {
     }
 
     return Damage(
-      parseDamageType(damage["damage_type"]),
+      (damage["damage_type"]?["index"] as String?).toDamageType(),
       damage["damage_at_character_level"]?.cast<String, String>(),
       damage["damage_at_slot_level"]?.cast<String, String>(),
     );

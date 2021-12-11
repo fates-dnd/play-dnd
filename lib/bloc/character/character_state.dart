@@ -180,4 +180,23 @@ class CharacterState {
         return charismaBonus;
     }
   }
+
+  int getAttackBonus(Equipment equipment) {
+    final isDexBased = _isDexBased(equipment);
+    final isProficient = true; // TODO: implement proficiency bonus calc
+    if (isDexBased) {
+      return dexterityBonus + (isProficient ? proficiencyBonus : 0);
+    }
+    return strengthBonus + (isProficient ? proficiencyBonus : 0);
+  }
+
+  int getDamageBonus(Equipment equipment) {
+    return _isDexBased(equipment) ? dexterityBonus : strengthBonus;
+  }
+
+  bool _isDexBased(Equipment equipment) {
+    return equipment.weaponRange == WeaponRange.RANGED ||
+        (equipment.properties ?? []).any((element) =>
+            element == Property.FINESSE || element == Property.THROWN);
+  }
 }

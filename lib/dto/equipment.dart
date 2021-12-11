@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/data/dice.dart';
+import 'package:dnd_player_flutter/dto/equipment_property.dart';
 import 'package:equatable/equatable.dart';
 
 import 'damage_type.dart';
@@ -73,7 +74,7 @@ class Equipment extends Equatable {
       equipmentCategory != EquipmentCategory.ADVENTURING_GEAR;
 
   bool get isStackable =>
-      (properties?.any((element) => element.index == "thrown") ?? false) ||
+      (properties?.any((element) => element == Property.THROWN) ?? false) ||
       equipmentCategory == EquipmentCategory.ADVENTURING_GEAR;
 
   @override
@@ -136,13 +137,6 @@ class Range {
   final int? long;
 
   Range(this.normal, this.long);
-}
-
-class Property {
-  final String index;
-  final String name;
-
-  Property(this.index, this.name);
 }
 
 class ThrowRange {

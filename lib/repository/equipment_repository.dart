@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/dice.dart';
+import 'package:dnd_player_flutter/dto/damage_type.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
-import 'package:dnd_player_flutter/repository/parse_damage_type.dart';
+import 'package:dnd_player_flutter/dto/equipment_property.dart';
 
 class EquipmentRepository {
   final Future<String> Function(String lang) jsonReader;
@@ -90,7 +91,7 @@ class EquipmentRepository {
 
     return Damage(
       _damageDiceFromString(json["damage_dice"]),
-      parseDamageType(json["damage_type"]),
+      (json["damage_type"]?["index"] as String?).toDamageType(),
     );
   }
 
@@ -145,15 +146,10 @@ class EquipmentRepository {
   }
 
   List<Property>? _propertiesFromJson(List<dynamic>? json) {
-    if (json == null) {
-      return null;
-    }
-
     return json
-        .map((property) => Property(
-              property["index"],
-              property["name"],
-            ))
+        ?.map((property) => (property["index"] as String?).toProperty())
+        .where((element) => element != null)
+        .map((e) => e!)
         .toList();
   }
 
