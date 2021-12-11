@@ -12,6 +12,7 @@ class Class extends Equatable {
   final ProficiencyChoices proficiencyChoices;
   final List<EquipmentQuantity>? startingEquipment;
   final List<EquipmentChoices>? equipmentChoices;
+  final List<Map<String, String>> equipmentProficiencies;
 
   String get imageAsset => _indexToImageAsset();
 
@@ -23,6 +24,7 @@ class Class extends Equatable {
     this.proficiencyChoices,
     this.startingEquipment,
     this.equipmentChoices,
+    this.equipmentProficiencies,
   );
 
   @override

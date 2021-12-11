@@ -41,31 +41,21 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "medium-armor",
-        "name": "Medium Armor",
-        "url": "/api/proficiencies/medium-armor"
+        "armor_category": "Medium"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "index": "shield"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       },
       {
-        "index": "martial-weapons",
-        "name": "Martial Weapons",
-        "url": "/api/proficiencies/martial-weapons"
+        "weapon_category": "Martial"
       }
     ],
     "saving_throws": [
@@ -166,21 +156,15 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         },
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         },
         {
-          "index": "martial-weapons",
-          "name": "Martial Weapons",
-          "url": "/api/proficiencies/martial-weapons"
+          "weapon_category": "Martial"
         }
       ]
     },
@@ -351,36 +335,24 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       },
       {
-        "index": "longswords",
-        "name": "Longswords",
-        "url": "/api/proficiencies/longswords"
+        "index": "longsword"
       },
       {
-        "index": "rapiers",
-        "name": "Rapiers",
-        "url": "/api/proficiencies/rapiers"
+        "index": "rapier"
       },
       {
-        "index": "shortswords",
-        "name": "Shortswords",
-        "url": "/api/proficiencies/shortswords"
+        "index": "shortsword"
       },
       {
-        "index": "hand-crossbows",
-        "name": "Hand crossbows",
-        "url": "/api/proficiencies/hand-crossbows"
+        "index": "crossbow-hand"
       }
     ],
     "saving_throws": [
@@ -511,11 +483,9 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         }
       ],
       "proficiency_choices": [
@@ -772,26 +742,18 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "medium-armor",
-        "name": "Medium Armor",
-        "url": "/api/proficiencies/medium-armor"
+        "armor_category": "Medium"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "index": "shield"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       }
     ],
     "saving_throws": [
@@ -839,10 +801,8 @@
             "prerequisites": [
               {
                 "type": "proficiency",
-                "proficiency": {
-                  "index": "warhammers",
-                  "name": "Warhammers",
-                  "url": "/api/proficiencies/warhammers"
+                "equipment_proficiencies": {
+                  "index": "warhammer"
                 }
               }
             ]
@@ -972,21 +932,15 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "medium-armor",
-          "name": "Medium Armor",
-          "url": "/api/proficiencies/medium-armor"
+          "armor_category": "Medium"
         },
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         }
       ]
     },
@@ -1097,76 +1051,48 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "medium-armor",
-        "name": "Medium Armor",
-        "url": "/api/proficiencies/medium-armor"
+        "armor_category": "Medium"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "index": "shield"
       },
       {
-        "index": "clubs",
-        "name": "Clubs",
-        "url": "/api/proficiencies/clubs"
+        "index": "club"
       },
       {
-        "index": "daggers",
-        "name": "Daggers",
-        "url": "/api/proficiencies/daggers"
+        "index": "dagger"
       },
       {
-        "index": "javelins",
-        "name": "Javelins",
-        "url": "/api/proficiencies/javelins"
+        "index": "javelin"
       },
       {
-        "index": "maces",
-        "name": "Maces",
-        "url": "/api/proficiencies/maces"
+        "index": "mace"
       },
       {
-        "index": "quarterstaffs",
-        "name": "Quarterstaffs",
-        "url": "/api/proficiencies/quarterstaffs"
+        "index": "quarterstaff"
       },
       {
-        "index": "sickles",
-        "name": "Sickles",
-        "url": "/api/proficiencies/sickles"
+        "index": "sickle"
       },
       {
-        "index": "spears",
-        "name": "Spears",
-        "url": "/api/proficiencies/spears"
+        "index": "spear"
       },
       {
-        "index": "darts",
-        "name": "Darts",
-        "url": "/api/proficiencies/darts"
+        "index": "dart"
       },
       {
-        "index": "slings",
-        "name": "Slings",
-        "url": "/api/proficiencies/slings"
+        "index": "sling"
       },
       {
-        "index": "scimitars",
-        "name": "Scimitars",
-        "url": "/api/proficiencies/scimitars"
+        "index": "scimitar"
       },
       {
-        "index": "herbalism-kit",
-        "name": "Herbalism Kit",
-        "url": "/api/proficiencies/herbalism-kit"
+        "index": "herbalism-kit"
       }
     ],
     "saving_throws": [
@@ -1278,21 +1204,15 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "medium-armor",
-          "name": "Medium Armor",
-          "url": "/api/proficiencies/medium-armor"
+          "armor_category": "Medium"
         },
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         }
       ]
     },
@@ -1401,16 +1321,18 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "all-armor",
-        "name": "All armor",
-        "url": "/api/proficiencies/all-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "armor_category": "Medium"
+      },
+      {
+        "armor_category": "Heavy"
+      },
+      {
+        "index": "shield"
       },
       {
         "index": "simple-weapons",
@@ -1598,31 +1520,21 @@
           }
         ]
       },
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "medium-armor",
-          "name": "Medium Armor",
-          "url": "/api/proficiencies/medium-armor"
+          "armor_category": "Medium"
         },
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         },
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         },
         {
-          "index": "martial-weapons",
-          "name": "Martial Weapons",
-          "url": "/api/proficiencies/martial-weapons"
+          "weapon_category": "Martial"
         }
       ]
     },
@@ -1834,16 +1746,12 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       },
       {
-        "index": "shortswords",
-        "name": "Shortswords",
-        "url": "/api/proficiencies/shortswords"
+        "index": "shortsword"
       }
     ],
     "saving_throws": [
@@ -1939,16 +1847,12 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         },
         {
-          "index": "shortswords",
-          "name": "Shortswords",
-          "url": "/api/proficiencies/shortswords"
+          "index": "shortsword"
         }
       ]
     },
@@ -2003,26 +1907,24 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "all-armor",
-        "name": "All armor",
-        "url": "/api/proficiencies/all-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "armor_category": "Medium"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "armor_category": "Heavy"
       },
       {
-        "index": "martial-weapons",
-        "name": "Martial Weapons",
-        "url": "/api/proficiencies/martial-weapons"
+        "index": "shield"
+      },
+      {
+        "weapon_category": "Simple"
+      },
+      {
+        "weapon_category": "Martial"
       }
     ],
     "saving_throws": [
@@ -2171,31 +2073,21 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "medium-armor",
-          "name": "Medium Armor",
-          "url": "/api/proficiencies/medium-armor"
+          "armor_category": "Medium"
         },
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         },
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         },
         {
-          "index": "martial-weapons",
-          "name": "Martial Weapons",
-          "url": "/api/proficiencies/martial-weapons"
+          "weapon_category": "Martial"
         }
       ]
     },
@@ -2292,31 +2184,21 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "medium-armor",
-        "name": "Medium Armor",
-        "url": "/api/proficiencies/medium-armor"
+        "armor_category": "Medium"
       },
       {
-        "index": "shields",
-        "name": "Shields",
-        "url": "/api/proficiencies/shields"
+        "index": "shield"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       },
       {
-        "index": "martial-weapons",
-        "name": "Martial Weapons",
-        "url": "/api/proficiencies/martial-weapons"
+        "weapon_category": "Martial"
       }
     ],
     "saving_throws": [
@@ -2442,31 +2324,21 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "medium-armor",
-          "name": "Medium Armor",
-          "url": "/api/proficiencies/medium-armor"
+          "armor_category": "Medium"
         },
         {
-          "index": "shields",
-          "name": "Shields",
-          "url": "/api/proficiencies/shields"
+          "index": "shield"
         },
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         },
         {
-          "index": "martial-weapons",
-          "name": "Martial Weapons",
-          "url": "/api/proficiencies/martial-weapons"
+          "weapon_category": "Martial"
         }
       ],
       "proficiency_choices": [
@@ -2626,41 +2498,27 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       },
       {
-        "index": "longswords",
-        "name": "Longswords",
-        "url": "/api/proficiencies/longswords"
+        "index": "longsword"
       },
       {
-        "index": "rapiers",
-        "name": "Rapiers",
-        "url": "/api/proficiencies/rapiers"
+        "index": "rapier"
       },
       {
-        "index": "shortswords",
-        "name": "Shortswords",
-        "url": "/api/proficiencies/shortswords"
+        "index": "shortsword"
       },
       {
-        "index": "hand-crossbows",
-        "name": "Hand crossbows",
-        "url": "/api/proficiencies/hand-crossbows"
+        "index": "crossbow-hand"
       },
       {
-        "index": "thieves-tools",
-        "name": "Thieves' Tools",
-        "url": "/api/proficiencies/thieves-tools"
+        "index": "thieves-tools"
       }
     ],
     "saving_throws": [
@@ -2799,16 +2657,12 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "thieves-tools",
-          "name": "Thieves' Tools",
-          "url": "/api/proficiencies/thieves-tools"
+          "index": "thieves-tools"
         }
       ],
       "proficiency_choices": [
@@ -2926,26 +2780,18 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "daggers",
-        "name": "Daggers",
-        "url": "/api/proficiencies/daggers"
+        "index": "dagger"
       },
       {
-        "index": "quarterstaffs",
-        "name": "Quarterstaffs",
-        "url": "/api/proficiencies/quarterstaffs"
+        "index": "quarterstaff"
       },
       {
-        "index": "darts",
-        "name": "Darts",
-        "url": "/api/proficiencies/darts"
+        "index": "dart"
       },
       {
-        "index": "slings",
-        "name": "Slings",
-        "url": "/api/proficiencies/slings"
+        "index": "sling"
       }
     ],
     "saving_throws": [
@@ -3070,7 +2916,7 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": []
+      "equipment_proficiencies": []
     },
     "subclasses": [
       {
@@ -3172,16 +3018,12 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "light-armor",
-        "name": "Light Armor",
-        "url": "/api/proficiencies/light-armor"
+        "armor_category": "Light"
       },
       {
-        "index": "simple-weapons",
-        "name": "Simple Weapons",
-        "url": "/api/proficiencies/simple-weapons"
+        "weapon_category": "Simple"
       }
     ],
     "saving_throws": [
@@ -3325,16 +3167,12 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": [
+      "equipment_proficiencies": [
         {
-          "index": "light-armor",
-          "name": "Light Armor",
-          "url": "/api/proficiencies/light-armor"
+          "armor_category": "Light"
         },
         {
-          "index": "simple-weapons",
-          "name": "Simple Weapons",
-          "url": "/api/proficiencies/simple-weapons"
+          "weapon_category": "Simple"
         }
       ]
     },
@@ -3434,26 +3272,18 @@
         ]
       }
     ],
-    "proficiencies": [
+    "equipment_proficiencies": [
       {
-        "index": "daggers",
-        "name": "Daggers",
-        "url": "/api/proficiencies/daggers"
+        "index": "dagger"
       },
       {
-        "index": "quarterstaffs",
-        "name": "Quarterstaffs",
-        "url": "/api/proficiencies/quarterstaffs"
+        "index": "quarterstaff"
       },
       {
-        "index": "darts",
-        "name": "Darts",
-        "url": "/api/proficiencies/darts"
+        "index": "dart"
       },
       {
-        "index": "slings",
-        "name": "Slings",
-        "url": "/api/proficiencies/slings"
+        "index": "sling"
       }
     ],
     "saving_throws": [
@@ -3563,7 +3393,7 @@
           "minimum_score": 13
         }
       ],
-      "proficiencies": []
+      "equipment_proficiencies": []
     },
     "subclasses": [
       {

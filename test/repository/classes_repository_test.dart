@@ -43,6 +43,7 @@ void main() {
     expect(
         classes[1].equipmentChoices![0].options[0].equipment.index, "rapier");
     expect(classes[1].equipmentChoices![0].options[0].quantity, 1);
+    expect(classes[1].equipmentProficiencies[0]["armor_category"], "Light");
   });
 
   test('load classes ru', () async {
@@ -80,5 +81,6 @@ void main() {
     expect(
         classes[1].equipmentChoices![0].options[0].equipment.index, "rapier");
     expect(classes[1].equipmentChoices![0].options[0].quantity, 1);
+    expect(classes[1].equipmentProficiencies[0]["armor_category"], "Light");
   });
 }

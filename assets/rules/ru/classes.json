@@ -41,31 +41,21 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "medium-armor",
-                "name": "Средняя броня",
-                "url": "/api/proficiencies/medium-armor"
+                "armor_category": "Medium"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "index": "shield"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             },
             {
-                "index": "martial-weapons",
-                "name": "Боевое оружие",
-                "url": "/api/proficiencies/martial-weapons"
+                "weapon_category": "Martial"
             }
         ],
         "saving_throws": [
@@ -322,36 +312,24 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             },
             {
-                "index": "longswords",
-                "name": "Длинный меч",
-                "url": "/api/proficiencies/longswords"
+                "index": "longsword"
             },
             {
-                "index": "rapiers",
-                "name": "Рапира",
-                "url": "/api/proficiencies/rapiers"
+                "index": "rapier"
             },
             {
-                "index": "shortswords",
-                "name": "Короткий меч",
-                "url": "/api/proficiencies/shortswords"
+                "index": "shortsword"
             },
             {
-                "index": "crossbows-hand",
-                "name": "Ручной арбалет",
-                "url": "/api/proficiencies/crossbows-hand"
+                "index": "crossbow-hand"
             }
         ],
         "saving_throws": [
@@ -568,26 +546,18 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "medium-armor",
-                "name": "Средняя броня",
-                "url": "/api/proficiencies/medium-armor"
+                "armor_category": "Medium"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "index": "shield"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             }
         ],
         "saving_throws": [
@@ -864,76 +834,48 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "medium-armor",
-                "name": "Средняя броня",
-                "url": "/api/proficiencies/medium-armor"
+                "armor_category": "Medium"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "index": "shield"
             },
             {
-                "index": "clubs",
-                "name": "Дубинки",
-                "url": "/api/proficiencies/clubs"
+                "index": "club"
             },
             {
-                "index": "daggers",
-                "name": "Кинжалы",
-                "url": "/api/proficiencies/daggers"
+                "index": "dagger"
             },
             {
-                "index": "javelins",
-                "name": "Метательные копья",
-                "url": "/api/proficiencies/javelins"
+                "index": "javelin"
             },
             {
-                "index": "maces",
-                "name": "Булавы",
-                "url": "/api/proficiencies/maces"
+                "index": "mace"
             },
             {
-                "index": "quarterstaffs",
-                "name": "Посохи",
-                "url": "/api/proficiencies/quarterstaffs"
+                "index": "quarterstaff"
             },
             {
-                "index": "sickles",
-                "name": "Серпы",
-                "url": "/api/proficiencies/sickles"
+                "index": "sickle"
             },
             {
-                "index": "spears",
-                "name": "Копья",
-                "url": "/api/proficiencies/spears"
+                "index": "spear"
             },
             {
-                "index": "darts",
-                "name": "Дротики",
-                "url": "/api/proficiencies/darts"
+                "index": "dart"
             },
             {
-                "index": "slings",
-                "name": "Пращи",
-                "url": "/api/proficiencies/slings"
+                "index": "sling"
             },
             {
-                "index": "scimitars",
-                "name": "Скимитары",
-                "url": "/api/proficiencies/scimitars"
+                "index": "scimitar"
             },
             {
-                "index": "herbalism-kit",
-                "name": "Набор травника",
-                "url": "/api/proficiencies/herbalism-kit"
+                "index": "herbalism-kit"
             }
         ],
         "saving_throws": [
@@ -1139,25 +1081,27 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "all-armor",
-                "name": "Вся броня",
-                "url": "/api/proficiencies/all-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "armor_category": "Medium"
+            },
+            {
+                "armor_category": "Heavy"
+            },
+            {
+                "index": "shield"
             },
             {
                 "index": "simple-weapons",
-                "name": "Простое оружие",
+                "name": "Simple Weapons",
                 "url": "/api/proficiencies/simple-weapons"
             },
             {
                 "index": "martial-weapons",
-                "name": "Боевое оружие",
+                "name": "Martial Weapons",
                 "url": "/api/proficiencies/martial-weapons"
             }
         ],
@@ -1521,16 +1465,12 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             },
             {
-                "index": "shortswords",
-                "name": "Короткий меч",
-                "url": "/api/proficiencies/shortswords"
+                "index": "shortsword"
             }
         ],
         "saving_throws": [
@@ -1658,26 +1598,24 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "all-armor",
-                "name": "Любая броня",
-                "url": "/api/proficiencies/all-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "armor_category": "Medium"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "armor_category": "Heavy"
             },
             {
-                "index": "martial-weapons",
-                "name": "Боевое оружие",
-                "url": "/api/proficiencies/martial-weapons"
+                "index": "shield"
+            },
+            {
+                "weapon_category": "Simple"
+            },
+            {
+                "weapon_category": "Martial"
             }
         ],
         "saving_throws": [
@@ -1900,31 +1838,21 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "medium-armor",
-                "name": "Средняя броня",
-                "url": "/api/proficiencies/medium-armor"
+                "armor_category": "Medium"
             },
             {
-                "index": "shields",
-                "name": "Щиты",
-                "url": "/api/proficiencies/shields"
+                "index": "shield"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             },
             {
-                "index": "martial-weapons",
-                "name": "Боевое оружие",
-                "url": "/api/proficiencies/martial-weapons"
+                "weapon_category": "Martial"
             }
         ],
         "saving_throws": [
@@ -2139,41 +2067,27 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             },
             {
-                "index": "longswords",
-                "name": "Длинный меч",
-                "url": "/api/proficiencies/longswords"
+                "index": "longsword"
             },
             {
-                "index": "rapiers",
-                "name": "Рапиры",
-                "url": "/api/proficiencies/rapiers"
+                "index": "rapier"
             },
             {
-                "index": "shortswords",
-                "name": "Короткий меч",
-                "url": "/api/proficiencies/shortswords"
+                "index": "shortsword"
             },
             {
-                "index": "crossbows-hand",
-                "name": "Ручной арбалет",
-                "url": "/api/proficiencies/crossbows-hand"
+                "index": "crossbow-hand"
             },
             {
-                "index": "thieves-tools",
-                "name": "Воровские инструменты",
-                "url": "/api/proficiencies/thieves-tools"
+                "index": "thieves-tools"
             }
         ],
         "saving_throws": [
@@ -2352,26 +2266,18 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "daggers",
-                "name": "Кинжал",
-                "url": "/api/proficiencies/daggers"
+                "index": "dagger"
             },
             {
-                "index": "quarterstaffs",
-                "name": "Посох",
-                "url": "/api/proficiencies/quarterstaffs"
+                "index": "quarterstaff"
             },
             {
-                "index": "darts",
-                "name": "Дротики",
-                "url": "/api/proficiencies/darts"
+                "index": "dart"
             },
             {
-                "index": "slings",
-                "name": "Праща",
-                "url": "/api/proficiencies/slings"
+                "index": "sling"
             }
         ],
         "saving_throws": [
@@ -2585,16 +2491,12 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "light-armor",
-                "name": "Легкая броня",
-                "url": "/api/proficiencies/light-armor"
+                "armor_category": "Light"
             },
             {
-                "index": "simple-weapons",
-                "name": "Простое оружие",
-                "url": "/api/proficiencies/simple-weapons"
+                "weapon_category": "Simple"
             }
         ],
         "saving_throws": [
@@ -2822,26 +2724,18 @@
                 ]
             }
         ],
-        "proficiencies": [
+        "equipment_proficiencies": [
             {
-                "index": "daggers",
-                "name": "Кинжал",
-                "url": "/api/proficiencies/daggers"
+                "index": "dagger"
             },
             {
-                "index": "quarterstaffs",
-                "name": "Посох",
-                "url": "/api/proficiencies/quarterstaffs"
+                "index": "quarterstaff"
             },
             {
-                "index": "darts",
-                "name": "Дротики",
-                "url": "/api/proficiencies/darts"
+                "index": "dart"
             },
             {
-                "index": "slings",
-                "name": "Праща",
-                "url": "/api/proficiencies/slings"
+                "index": "sling"
             }
         ],
         "saving_throws": [

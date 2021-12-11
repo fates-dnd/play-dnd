@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
-import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/mappers.dart';
@@ -48,17 +47,21 @@ class ClassesRepository {
 
   Future<Class> _fromJson(String language, Map<String, dynamic> json) async {
     return Class(
-        json["index"],
-        json["name"],
-        _readSavingThrows(json["saving_throws"] as List<dynamic>),
-        _readSpellcastingAbility(json["spellcasting"]),
-        await _readProficiencyChoices(
-          language,
-          json["proficiency_choices"] as List<dynamic>,
-        ),
-        await _readEquipments(language, json["starting_equipment"]),
-        await _readEquipmentChoices(
-            language, json["starting_equipment_options"]));
+      json["index"],
+      json["name"],
+      _readSavingThrows(json["saving_throws"] as List<dynamic>),
+      _readSpellcastingAbility(json["spellcasting"]),
+      await _readProficiencyChoices(
+        language,
+        json["proficiency_choices"] as List<dynamic>,
+      ),
+      await _readEquipments(language, json["starting_equipment"]),
+      await _readEquipmentChoices(language, json["starting_equipment_options"]),
+      ((json["equipment_proficiencies"] ?? []) as List)
+          .map((e) => (e as Map)
+              .map((key, value) => MapEntry(key as String, value as String)))
+          .toList(),
+    );
   }
 
   List<Characteristic> _readSavingThrows(List<dynamic> json) {
