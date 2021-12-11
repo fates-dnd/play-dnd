@@ -51,6 +51,7 @@ void main() {
       verify(repository.insertCharacter(Character(
         "Name",
         1, // level
+        10, // hp
         4,
         5,
         6,
@@ -85,6 +86,7 @@ void main() {
       verify(repository.insertCharacter(Character(
         "Name",
         1, // level
+        10, // hp
         4,
         5,
         6,

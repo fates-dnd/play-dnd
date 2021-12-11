@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
 
-class PagerWithIndicators extends StatefulWidget {
+class PagerWithIndicators extends StatelessWidget {
   final Map<String, Widget> namedPages;
 
   const PagerWithIndicators({Key? key, required this.namedPages})
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return PagerWithIndicatorsState();
-  }
-}
-
-class PagerWithIndicatorsState extends State<PagerWithIndicators> {
-  late PageController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = PageController();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: widget.namedPages.length,
+      length: namedPages.length,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -34,14 +19,14 @@ class PagerWithIndicatorsState extends State<PagerWithIndicators> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               isScrollable: true,
               unselectedLabelColor: Colors.white.withOpacity(0.3),
-              tabs: widget.namedPages.keys
+              tabs: namedPages.keys
                   .map((e) => Tab(
                         child: Text(e),
                       ))
                   .toList()),
           Expanded(
             child: TabBarView(
-                children: widget.namedPages.values
+                children: namedPages.values
                     .map((e) => Padding(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           child: e,

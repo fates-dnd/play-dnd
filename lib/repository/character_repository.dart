@@ -277,6 +277,7 @@ class CharacterRepository {
       return Character(
         outline.name,
         outline.level,
+        outline.hp,
         outline.baseStrength,
         outline.baseDexterity,
         outline.baseConstitution,

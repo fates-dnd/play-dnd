@@ -49,8 +49,12 @@ class CharacterCreatorBloc
         selectedProficiencies: event.proficiencies,
       );
     } else if (event is SaveCharacter) {
+      final constitutionModifier = ((state.constitution ?? 0) - 10) ~/ 2;
       final characterToSave = state
-          .copyWith(selectedEquipment: _generateSelectedEquipment())
+          .copyWith(
+            hp: state.clazz?.hitDie ?? 1 + constitutionModifier,
+            selectedEquipment: _generateSelectedEquipment(),
+          )
           .toCharacter();
       if (characterToSave != null) {
         repository.insertCharacter(characterToSave);

@@ -53,7 +53,7 @@ class SetCharacteristicsScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
       builder: (context, state) => TextField(
-        cursorColor: theme.accentColor,
+        cursorColor: Colors.white,
         cursorHeight: 24,
         decoration: InputDecoration(
           hintText: AppLocalizations.of(context)!.name,

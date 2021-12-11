@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 class CharacterOutline {
   final String name;
   final int level;
+  final int hp;
   final int baseStrength;
   final int baseDexterity;
   final int baseConstitution;
@@ -25,6 +26,7 @@ class CharacterOutline {
   CharacterOutline(
     this.name,
     this.level,
+    this.hp,
     this.baseStrength,
     this.baseDexterity,
     this.baseConstitution,
@@ -52,6 +54,7 @@ class CharacterOutline {
     return CharacterOutline(
       character.name,
       character.level,
+      character.hp,
       character.baseStrength,
       character.baseDexterity,
       character.baseConstitution,
@@ -72,6 +75,7 @@ class CharacterOutline {
   CharacterOutline copyWith({
     String? name,
     int? level,
+    int? hp,
     int? baseStrength,
     int? baseDexterity,
     int? baseConstitution,
@@ -90,6 +94,7 @@ class CharacterOutline {
     return CharacterOutline(
       name ?? this.name,
       level ?? this.level,
+      hp ?? this.hp,
       baseStrength ?? this.baseStrength,
       baseDexterity ?? this.baseDexterity,
       baseConstitution ?? this.baseConstitution,

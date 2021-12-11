@@ -2,14 +2,14 @@ part of 'character_bloc.dart';
 
 class CharacterState {
   final int level;
+  final int hp;
+
   final int strength;
   final int dexterity;
   final int constitution;
   final int intelligence;
   final int wisdom;
   final int charisma;
-
-  final int hp = -1; // TODO: implement hp
 
   final Race? race;
   final Class? clazz;
@@ -27,6 +27,7 @@ class CharacterState {
 
   CharacterState({
     this.level = 1,
+    this.hp = 0,
     this.strength = 10,
     this.dexterity = 10,
     this.constitution = 10,

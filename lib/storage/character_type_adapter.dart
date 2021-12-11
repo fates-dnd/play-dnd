@@ -10,6 +10,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
     return CharacterOutline(
         reader.readString(), // name
         reader.readInt(), // level
+        reader.readInt(), // hp
         reader.readInt(), // base strength
         reader.readInt(), // base dexterity
         reader.readInt(), // base constitution
@@ -58,6 +59,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
   void write(BinaryWriter writer, CharacterOutline obj) {
     writer.writeString(obj.name);
     writer.writeInt(obj.level);
+    writer.writeInt(obj.hp);
     writer.writeInt(obj.baseStrength);
     writer.writeInt(obj.baseDexterity);
     writer.writeInt(obj.baseConstitution);

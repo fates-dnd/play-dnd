@@ -49,6 +49,7 @@ class ClassesRepository {
     return Class(
       json["index"],
       json["name"],
+      json["hit_die"],
       _readSavingThrows(json["saving_throws"] as List<dynamic>),
       _readSpellcastingAbility(json["spellcasting"]),
       await _readProficiencyChoices(

@@ -20,6 +20,7 @@ void main() {
   final clazz = Class(
     "index",
     "name",
+    10, // hit die
     [], // saving throws
     null, // spellcasting ability
     proficiencyChoices,

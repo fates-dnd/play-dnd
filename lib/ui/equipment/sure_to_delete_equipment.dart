@@ -1,5 +1,4 @@
 import 'package:dnd_player_flutter/dto/class.dart';
-import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:flutter/material.dart';
 
 class SureToDeleteEquipment extends AlertDialog {

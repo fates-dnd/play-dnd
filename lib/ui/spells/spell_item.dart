@@ -1,9 +1,7 @@
-import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_description_row.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_info_extended.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SpellItem extends StatelessWidget {
   final Spell spell;

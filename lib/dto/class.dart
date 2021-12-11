@@ -7,6 +7,7 @@ import 'equipment.dart';
 class Class extends Equatable {
   final String index;
   final String name;
+  final int hitDie;
   final List<Characteristic> savingThrows;
   final Characteristic? spellcastingAbility;
   final ProficiencyChoices proficiencyChoices;
@@ -19,6 +20,7 @@ class Class extends Equatable {
   Class(
     this.index,
     this.name,
+    this.hitDie,
     this.savingThrows,
     this.spellcastingAbility,
     this.proficiencyChoices,

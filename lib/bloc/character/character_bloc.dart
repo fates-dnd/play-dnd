@@ -53,6 +53,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
       return CharacterState(
         level: character.level,
+        hp: character.hp,
         strength: character.baseStrength,
         dexterity: character.baseDexterity,
         constitution: character.baseConstitution,
