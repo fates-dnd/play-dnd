@@ -152,3 +152,20 @@ enum ArmorCategory {
   MEDIUM,
   HEAVY,
 }
+
+extension ToArmorCategory on String? {
+  ArmorCategory? toArmorCategory() {
+    switch (this?.toLowerCase()) {
+      case "shield":
+        return ArmorCategory.SHIELD;
+      case "light":
+        return ArmorCategory.LIGHT;
+      case "medium":
+        return ArmorCategory.MEDIUM;
+      case "heavy":
+        return ArmorCategory.HEAVY;
+      default:
+        return null;
+    }
+  }
+}

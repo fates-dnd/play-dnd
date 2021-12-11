@@ -183,7 +183,11 @@ class CharacterState {
 
   int getAttackBonus(Equipment equipment) {
     final isDexBased = _isDexBased(equipment);
-    final isProficient = true; // TODO: implement proficiency bonus calc
+    final isProficient =
+        (clazz?.equipmentProficiencies ?? []).any((proficiency) {
+      return proficiency["index"] == equipment.index ||
+          proficiency["weapon_category"] == equipment.weaponCategory;
+    });
     if (isDexBased) {
       return dexterityBonus + (isProficient ? proficiencyBonus : 0);
     }

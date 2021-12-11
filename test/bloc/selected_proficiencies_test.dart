@@ -23,7 +23,9 @@ void main() {
     [], // saving throws
     null, // spellcasting ability
     proficiencyChoices,
-    [], [],
+    [],
+    [],
+    [],
   );
 
   final defaultState =

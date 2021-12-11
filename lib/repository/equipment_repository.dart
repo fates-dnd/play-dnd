@@ -53,7 +53,7 @@ class EquipmentRepository {
       weaponCategory: json["weapon_category"],
       weaponRange: _weaponRangeFromJson(json["weapon_range"]),
       categoryRange: json["category_range"],
-      armorCategory: _armorCategoryFromJson(json["armor_category"]),
+      armorCategory: (json["armor_category"] as String?).toArmorCategory(),
       armorClass: _armorClassFromJson(json["armor_class"] ?? {}),
       strMinimum: json["str_minimum"],
       stealthDisadvantage: json["stealth_disadvantage"],
@@ -193,21 +193,6 @@ class EquipmentRepository {
 
   List<String>? _descriptionFromJson(List<dynamic>? json) {
     return json?.map((e) => e as String).toList();
-  }
-
-  ArmorCategory? _armorCategoryFromJson(String? json) {
-    switch (json?.toLowerCase()) {
-      case "shield":
-        return ArmorCategory.SHIELD;
-      case "light":
-        return ArmorCategory.LIGHT;
-      case "medium":
-        return ArmorCategory.MEDIUM;
-      case "heavy":
-        return ArmorCategory.HEAVY;
-      default:
-        return null;
-    }
   }
 
   WeaponRange? _weaponRangeFromJson(String? json) {
