@@ -75,7 +75,7 @@ class _CharacterScreenHeader extends StatelessWidget {
           Text(
             "${character.race.name} ${character.clazz.name}, ${character.level}",
             style: TextStyle(
-                color: Color(0xFFB5B0AE),
+                color: Colors.black.withOpacity(0.7),
                 fontSize: 18,
                 fontStyle: FontStyle.italic),
           ),
@@ -143,7 +143,7 @@ class _ProficiencyBonusInfo extends StatelessWidget {
       builder: (context, state) => _NotActionInfo(
           assetUrl: "assets/drawable/stats/hammer.png",
           value: state.proficiencyBonus.toBonusString(),
-          color: Color(0xCCFB9538)),
+          color: Color(0xFFFB9538)),
     );
   }
 }
@@ -163,11 +163,12 @@ class _NotActionInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 44,
-      height: 44,
+      width: 56,
+      height: 56,
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Color(0xFFA4A3A1), width: 3)),
+          border: Border.all(color: color, width: 3)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -178,7 +179,7 @@ class _NotActionInfo extends StatelessWidget {
             style: TextStyle(
               color: color,
               fontWeight: FontWeight.bold,
-              fontSize: 18,
+              fontSize: 24,
             ),
           ),
         ],
