@@ -58,5 +58,7 @@
   "d100": "к100",
 
   "cantrips": "Трюки",
-  "spell_level": "Круг"
+  "spell_level": "Круг",
+
+  "rest": "Отдых"
 }

@@ -61,5 +61,7 @@
   "d100": "d100",
 
   "cantrips": "Cantrips",
-  "spell_level": "Level"
+  "spell_level": "Level",
+
+  "rest": "Rest"
 }

@@ -14,6 +14,7 @@ import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CharacterScreen extends StatelessWidget {
   final Character character;
@@ -38,7 +39,10 @@ class CharacterScreen extends StatelessWidget {
               return [
                 SliverToBoxAdapter(
                   child: _CharacterScreenHeader(character: character),
-                )
+                ),
+                SliverToBoxAdapter(
+                  child: _CharacterActionsRow(),
+                ),
               ];
             },
             body: Pages(),
@@ -83,9 +87,7 @@ class _CharacterScreenHeader extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    _HealthButtonIcon(),
                     _InitiativeIcon(),
-                    _RestIcon(),
                   ],
                 ),
               ),
@@ -98,40 +100,6 @@ class _CharacterScreenHeader extends StatelessWidget {
             ],
           )
         ],
-      ),
-    );
-  }
-}
-
-class _HealthButtonIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Container(
-      width: 62,
-      height: 62,
-      child: Card(
-        color: theme.primaryColorLight,
-        child: InkWell(
-          onTap: () {},
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset("assets/drawable/stats/heart.png"),
-                  Text(
-                    "14",
-                    style: TextStyle(
-                      color: Color(0xFFFF5251),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ]),
-          ),
-        ),
       ),
     );
   }
@@ -163,21 +131,6 @@ class _InitiativeIcon extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _RestIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return Card(
-      color: theme.primaryColorLight,
-      shape: CircleBorder(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Image.asset("assets/drawable/stats/tent.png"),
       ),
     );
   }
@@ -229,6 +182,94 @@ class _NotActionInfo extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _CharacterActionsRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 48,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            _HealthButtonIcon(),
+            _RestIcon(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HealthButtonIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => _CharacterRowButton(
+        imageAsset: "assets/drawable/stats/heart.png",
+        text: state.hp.toString(),
+        textColor: Color(0xFFFF5251),
+      ),
+    );
+  }
+}
+
+class _RestIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _CharacterRowButton(
+      imageAsset: "assets/drawable/stats/tent.png",
+      text: AppLocalizations.of(context)!.rest,
+      textColor: Color(0xFF4847FB),
+    );
+  }
+}
+
+class _CharacterRowButton extends StatelessWidget {
+  final String imageAsset;
+  final String text;
+  final Color textColor;
+
+  const _CharacterRowButton({
+    Key? key,
+    required this.imageAsset,
+    required this.text,
+    required this.textColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      height: 42,
+      child: Card(
+        color: theme.primaryColorLight,
+        child: InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Image.asset(imageAsset),
+                  SizedBox(width: 12),
+                  Text(
+                    text,
+                    style: TextStyle(
+                      color: textColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ]),
+          ),
+        ),
       ),
     );
   }

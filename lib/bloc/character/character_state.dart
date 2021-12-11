@@ -9,6 +9,8 @@ class CharacterState {
   final int wisdom;
   final int charisma;
 
+  final int hp = -1; // TODO: implement hp
+
   final Race? race;
   final Class? clazz;
 
