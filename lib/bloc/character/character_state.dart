@@ -47,6 +47,7 @@ class CharacterState {
 
   CharacterState copyWith({
     int? level,
+    int? hp,
     int? strength,
     int? dexterity,
     int? constitution,
@@ -64,6 +65,7 @@ class CharacterState {
   }) {
     return CharacterState(
       level: level ?? this.level,
+      hp: hp ?? this.hp,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
