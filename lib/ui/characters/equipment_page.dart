@@ -173,7 +173,7 @@ class EquippedItem extends StatelessWidget {
     if (damage == null) {
       return "";
     }
-    return "${damage.damageDice.amount}${damage.damageDice.dice.getName(context)} +${state.getDamageBonus(equipment)}";
+    return "${damage.damageDice.amount}${damage.damageDice.dice.getName(context)}${state.getDamageBonus(equipment).toBonusString()}";
   }
 }
 

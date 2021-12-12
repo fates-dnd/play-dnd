@@ -8,6 +8,7 @@ import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:meta/meta.dart';
 
 part 'character_creator_event.dart';
@@ -49,10 +50,10 @@ class CharacterCreatorBloc
         selectedProficiencies: event.proficiencies,
       );
     } else if (event is SaveCharacter) {
-      final constitutionModifier = ((state.constitution ?? 0) - 10) ~/ 2;
+      final constitutionModifier = (state.constitution ?? 0).toModifier();
       final characterToSave = state
           .copyWith(
-            hp: state.clazz?.hitDie ?? 1 + constitutionModifier,
+            hp: (state.clazz?.hitDie ?? 1) + constitutionModifier,
             selectedEquipment: _generateSelectedEquipment(),
           )
           .toCharacter();

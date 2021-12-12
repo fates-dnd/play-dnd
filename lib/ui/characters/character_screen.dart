@@ -272,7 +272,7 @@ class _CharacterRowButton extends StatelessWidget {
     final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, top: 8),
-      child: Container(
+      child: Ink(
         height: 42,
         decoration: BoxDecoration(
           color: theme.primaryColorLight,
@@ -280,6 +280,7 @@ class _CharacterRowButton extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {},
+          borderRadius: BorderRadius.circular(24),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             child: Row(

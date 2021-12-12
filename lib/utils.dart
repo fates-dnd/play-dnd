@@ -24,6 +24,12 @@ extension ToBonusNumber on int {
   }
 }
 
+extension ToModifier on int {
+  int toModifier() {
+    return ((this - 10) / 2.0).floor();
+  }
+}
+
 extension CharacteristicColor on Characteristic {
   Color getColor() {
     return characteristicToColor[this] ?? Colors.yellow;

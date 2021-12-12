@@ -80,12 +80,12 @@ class CharacterState {
     );
   }
 
-  int get strengthBonus => (strength - 10) ~/ 2;
-  int get dexterityBonus => (dexterity - 10) ~/ 2;
-  int get constitutionBonus => (constitution - 10) ~/ 2;
-  int get intelligenceBonus => (intelligence - 10) ~/ 2;
-  int get wisdomBonus => (wisdom - 10) ~/ 2;
-  int get charismaBonus => (charisma - 10) ~/ 2;
+  int get strengthBonus => strength.toModifier();
+  int get dexterityBonus => dexterity.toModifier();
+  int get constitutionBonus => constitution.toModifier();
+  int get intelligenceBonus => intelligence.toModifier();
+  int get wisdomBonus => wisdom.toModifier();
+  int get charismaBonus => charisma.toModifier();
 
   int get strengthSavingThrow =>
       strengthBonus +

@@ -19,6 +19,7 @@ import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
