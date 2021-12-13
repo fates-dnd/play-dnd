@@ -131,6 +131,25 @@ class CharacterState {
 
   bool get isASpellcaster => clazz?.spellcastingAbility != null;
 
+  int get armorClass {
+    final armorBonus = equippedItems?.fold<int>(0, (previousValue, element) {
+      final armorCategory = element.equipment.armorCategory;
+      final armorClass = element.equipment.armorClass;
+      if (armorCategory != null) {
+        return previousValue +
+            (armorClass?.base ?? 0) +
+            ((armorClass?.dexBonus == true) ? dexterityBonus : 0);
+      }
+      return 0;
+    });
+
+    if (armorBonus != null && armorBonus > 0) {
+      return armorBonus;
+    }
+
+    return 10 + dexterityBonus;
+  }
+
   UnarmedAttack get unarmedAttack => UnarmedAttack(
         attackBonus: strengthBonus + proficiencyBonus,
         damage: strengthBonus,

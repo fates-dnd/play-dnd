@@ -91,10 +91,7 @@ class _CharacterScreenHeader extends StatelessWidget {
                   ],
                 ),
               ),
-              _NotActionInfo(
-                  assetUrl: "assets/drawable/stats/shield.png",
-                  value: "12",
-                  color: Color(0xFFADADAD)),
+              _ArmorClass(),
               SizedBox(width: 12),
               _ProficiencyBonusInfo(),
             ],
@@ -131,6 +128,19 @@ class _InitiativeIcon extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ArmorClass extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => _NotActionInfo(
+        assetUrl: "assets/drawable/stats/shield.png",
+        value: state.armorClass.toString(),
+        color: Color(0xFFADADAD),
       ),
     );
   }
