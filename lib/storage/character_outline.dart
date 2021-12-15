@@ -16,7 +16,6 @@ class CharacterOutline {
   final List<String> proficiencyIndexes;
 
   final List<EquipmentIndexQuantity> allEquipment;
-  final List<EquipmentIndexQuantity> equippedItems;
 
   final List<String> preparedSpells;
   final List<String> learnedSpells;
@@ -37,7 +36,6 @@ class CharacterOutline {
     this.classIndex,
     this.proficiencyIndexes,
     this.allEquipment,
-    this.equippedItems,
     this.preparedSpells,
     this.learnedSpells,
     this.usedSpellSlots,
@@ -65,7 +63,6 @@ class CharacterOutline {
       character.clazz.index,
       character.selectedProficiencies.map((skill) => skill.index).toList(),
       equipment,
-      equippedItems,
       preparedSpells,
       learnedSpells,
       usedSpellSlots,
@@ -86,7 +83,6 @@ class CharacterOutline {
     String? classIndex,
     List<String>? proficiencyIndexes,
     List<EquipmentIndexQuantity>? allEquipmentIndexes,
-    List<EquipmentIndexQuantity>? equippedItems,
     List<String>? preparedSpells,
     List<String>? learnedSpells,
     Map<int, int>? usedSpellSlots,
@@ -105,7 +101,6 @@ class CharacterOutline {
       classIndex ?? this.classIndex,
       proficiencyIndexes ?? this.proficiencyIndexes,
       allEquipmentIndexes ?? this.allEquipment,
-      equippedItems ?? this.equippedItems,
       preparedSpells ?? this.preparedSpells,
       learnedSpells ?? this.learnedSpells,
       usedSpellSlots ?? this.usedSpellSlots,
@@ -116,6 +111,7 @@ class CharacterOutline {
 class EquipmentIndexQuantity {
   final String index;
   final int quantity;
+  final bool isEquipped;
 
-  EquipmentIndexQuantity(this.index, this.quantity);
+  EquipmentIndexQuantity(this.index, this.quantity, this.isEquipped);
 }

@@ -24,7 +24,6 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
         readStringList(reader), // proficiency indexes
 
         readEquipmentQuantities(reader), // equipment indexes
-        readEquipmentQuantities(reader), // equipped items indexes
 
         readStringList(reader), // prepared spells
         readStringList(reader), // learned spells
@@ -40,6 +39,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
       final item = EquipmentIndexQuantity(
         reader.readString(),
         reader.readInt(),
+        reader.readBool(),
       );
       result.add(item);
     }
@@ -79,12 +79,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
     obj.allEquipment.forEach((indexQuantity) {
       writer.writeString(indexQuantity.index);
       writer.writeInt(indexQuantity.quantity);
-    });
-
-    writer.writeInt(obj.equippedItems.length);
-    obj.equippedItems.forEach((indexQuantity) {
-      writer.writeString(indexQuantity.index);
-      writer.writeInt(indexQuantity.quantity);
+      writer.writeBool(indexQuantity.isEquipped);
     });
 
     writer.writeInt(obj.preparedSpells.length);

@@ -37,7 +37,8 @@ class CharacterRepository {
     currentList.add(CharacterOutline.fromCharacter(
       character,
       equipment: character.selectedEquipment
-          .map((e) => EquipmentIndexQuantity(e.equipment.index, e.quantity))
+          .map((e) => EquipmentIndexQuantity(
+              e.equipment.index, e.quantity, e.isEquipped))
           .toList(),
       equippedItems: [],
       preparedSpells: [],
@@ -61,10 +62,14 @@ class CharacterRepository {
 
     if (foundEquipmentIndex != -1 && equipment.isStackable) {
       final foundEquipment = currentEquipmentList[foundEquipmentIndex];
-      currentEquipmentList[foundEquipmentIndex] =
-          EquipmentIndexQuantity(equipment.index, foundEquipment.quantity + 1);
+      currentEquipmentList[foundEquipmentIndex] = EquipmentIndexQuantity(
+        equipment.index,
+        foundEquipment.quantity + 1,
+        foundEquipment.isEquipped,
+      );
     } else {
-      currentEquipmentList.add(EquipmentIndexQuantity(equipment.index, 1));
+      currentEquipmentList
+          .add(EquipmentIndexQuantity(equipment.index, 1, false));
     }
 
     currentList[targetIndex] = currentList[targetIndex]
@@ -83,35 +88,23 @@ class CharacterRepository {
     final targetIndex =
         currentList.indexWhere((element) => element.name == character.name);
     final currentEquipmentList = currentList[targetIndex].allEquipment;
-    final currentEquippedItems = currentList[targetIndex].equippedItems;
 
     final equipmentIndex = currentEquipmentList
-        .indexWhere((element) => element.index == equipment.equipment.index);
-    final equippedIndex = currentEquippedItems
         .indexWhere((element) => element.index == equipment.equipment.index);
 
     final equipmentItem = currentEquipmentList[equipmentIndex];
 
     if (equipmentItem.quantity > 1) {
       currentEquipmentList[equipmentIndex] = EquipmentIndexQuantity(
-          equipmentItem.index, equipmentItem.quantity - 1);
+          equipmentItem.index,
+          equipmentItem.quantity - 1,
+          equipmentItem.isEquipped);
     } else {
       currentEquipmentList.removeAt(equipmentIndex);
     }
 
-    if (equippedIndex != -1) {
-      final equippedItem = currentEquippedItems[equippedIndex];
-      if (equippedItem.quantity > 1) {
-        currentEquippedItems[equippedIndex] = EquipmentIndexQuantity(
-            equippedItem.index, equippedItem.quantity - 1);
-      } else {
-        currentEquippedItems.removeAt(equippedIndex);
-      }
-    }
-
     currentList[targetIndex] = currentList[targetIndex].copyWith(
       allEquipmentIndexes: currentEquipmentList,
-      equippedItems: currentEquippedItems,
     );
 
     box.put('character_list', currentList);
@@ -125,11 +118,21 @@ class CharacterRepository {
 
     final targetIndex =
         currentList.indexWhere((element) => element.name == character.name);
-    final currentEquippedItems = currentList[targetIndex].equippedItems;
+    final allEquipment = currentList[targetIndex].allEquipment;
+
+    final itemIndex = allEquipment.indexWhere((element) =>
+        element.index == equipment.equipment.index &&
+        element.quantity == equipment.quantity &&
+        element.isEquipped == equipment.isEquipped);
+
+    allEquipment[itemIndex] = EquipmentIndexQuantity(
+      equipment.equipment.index,
+      equipment.quantity,
+      true,
+    );
+
     currentList[targetIndex] = currentList[targetIndex].copyWith(
-      equippedItems: currentEquippedItems
-        ..add(EquipmentIndexQuantity(
-            equipment.equipment.index, equipment.quantity)),
+      allEquipmentIndexes: allEquipment,
     );
 
     box.put('character_list', currentList);
@@ -143,10 +146,21 @@ class CharacterRepository {
 
     final targetIndex =
         currentList.indexWhere((element) => element.name == character.name);
-    final currentEquippedItems = currentList[targetIndex].equippedItems;
+    final allEquipment = currentList[targetIndex].allEquipment;
+
+    final itemIndex = allEquipment.indexWhere((element) =>
+        element.index == equipment.equipment.index &&
+        element.quantity == equipment.quantity &&
+        element.isEquipped == equipment.isEquipped);
+
+    allEquipment[itemIndex] = EquipmentIndexQuantity(
+      equipment.equipment.index,
+      equipment.quantity,
+      false,
+    );
+
     currentList[targetIndex] = currentList[targetIndex].copyWith(
-      equippedItems: currentEquippedItems
-        ..removeWhere((item) => item.index == equipment.equipment.index),
+      allEquipmentIndexes: allEquipment,
     );
 
     box.put('character_list', currentList);
@@ -165,14 +179,6 @@ class CharacterRepository {
     final storedCharacter =
         currentList?.firstWhere((element) => element.name == character.name);
     return storedCharacter?.allEquipment ?? [];
-  }
-
-  List<EquipmentIndexQuantity> getCharacterEquippedItemsIndexQuantities(
-      Character character) {
-    final currentList = _readCharacterOutlines();
-    final storedCharacter =
-        currentList?.firstWhere((element) => element.name == character.name);
-    return storedCharacter?.equippedItems ?? [];
   }
 
   void updatePreparedSpells(Character character, List<Spell> spells) {
@@ -301,7 +307,7 @@ class CharacterRepository {
     return indexQuantities.map((e) {
       final equipment =
           allEquipment.firstWhere((element) => element.index == e.index);
-      return EquipmentQuantity(equipment, e.quantity);
+      return EquipmentQuantity(equipment, e.quantity, e.isEquipped);
     }).toList();
   }
 

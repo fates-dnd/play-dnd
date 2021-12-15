@@ -67,7 +67,6 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
             await skillsRepository.getSkills(settingsRepository.getLanguage()),
         proficienctSkills: await _getProficientSkills(),
         equipment: await _getCharacterEquipment(),
-        equippedItems: await _getEquippedItems(),
         preparedSpells: await _getPreparedSpells(),
         learnedSpells: await _getLearnedSpells(),
         levelSpellSlots: await getSpellSlots(),
@@ -79,13 +78,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       final equipmentIndex = currentEquipment.indexWhere(
           (element) => element.equipment.index == event.equipment.index);
       if (!event.equipment.isStackable || equipmentIndex == -1) {
-        currentEquipment.add(EquipmentQuantity(event.equipment, 1));
+        currentEquipment.add(EquipmentQuantity(event.equipment, 1, false));
         return state.copyWith(equipment: currentEquipment);
       }
 
       final equipmentQuantity = currentEquipment[equipmentIndex];
-      currentEquipment[equipmentIndex] =
-          EquipmentQuantity(event.equipment, equipmentQuantity.quantity + 1);
+      currentEquipment[equipmentIndex] = EquipmentQuantity(
+        event.equipment,
+        equipmentQuantity.quantity + 1,
+        equipmentQuantity.isEquipped,
+      );
       return state.copyWith(equipment: currentEquipment);
     } else if (event is RemoveEquipmentItem) {
       characterRepository.removeEquipmentFromCharacter(
@@ -97,16 +99,30 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     } else if (event is EquipItem) {
       characterRepository.equipItem(character, event.equipment);
 
-      final currentEquippedItems = state.equippedItems ?? [];
+      final currentEquippedItems = state.equipment ?? [];
+      final index = currentEquippedItems
+          .indexWhere((element) => element == event.equipment);
+      currentEquippedItems[index] = EquipmentQuantity(
+        event.equipment.equipment,
+        event.equipment.quantity,
+        true,
+      );
       return state.copyWith(
-        equippedItems: currentEquippedItems..add(event.equipment),
+        equipment: currentEquippedItems,
       );
     } else if (event is UnequipItem) {
       characterRepository.unequipItem(character, event.equipment);
 
-      final currentEquippedItems = state.equippedItems ?? [];
+      final currentEquippedItems = state.equipment ?? [];
+      final index = currentEquippedItems
+          .indexWhere((element) => element == event.equipment);
+      currentEquippedItems[index] = EquipmentQuantity(
+        event.equipment.equipment,
+        event.equipment.quantity,
+        false,
+      );
       return state.copyWith(
-        equippedItems: currentEquippedItems..remove(event.equipment),
+        equipment: currentEquippedItems,
       );
     } else if (event is UpdateSpells) {
       characterRepository.updatePreparedSpells(character, event.preparedSpells);
@@ -145,19 +161,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     return equipmentIndexQuantities.map((indexQuantity) {
       final equipment = allEquipment
           .firstWhere((element) => element.index == indexQuantity.index);
-      return EquipmentQuantity(equipment, indexQuantity.quantity);
-    }).toList();
-  }
-
-  Future<List<EquipmentQuantity>> _getEquippedItems() async {
-    final equippedItemsIndexQuantities =
-        characterRepository.getCharacterEquippedItemsIndexQuantities(character);
-    final language = settingsRepository.getLanguage();
-    final allEquipment = await equipmentRepository.getEquipment(language);
-    return equippedItemsIndexQuantities.map((indexQuantity) {
-      final equipment = allEquipment
-          .firstWhere((element) => element.index == indexQuantity.index);
-      return EquipmentQuantity(equipment, indexQuantity.quantity);
+      return EquipmentQuantity(
+          equipment, indexQuantity.quantity, indexQuantity.isEquipped);
     }).toList();
   }
 

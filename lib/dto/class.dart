@@ -50,13 +50,14 @@ class EquipmentChoices {
 class EquipmentQuantity extends Equatable {
   final Equipment equipment;
   final int quantity;
+  final bool isEquipped;
 
-  EquipmentQuantity(this.equipment, this.quantity);
+  EquipmentQuantity(this.equipment, this.quantity, this.isEquipped);
 
   bool get isStackable => equipment.isStackable;
 
   @override
-  List<Object?> get props => [equipment, quantity];
+  List<Object?> get props => [equipment, quantity, isEquipped];
 }
 
 extension OnClass on Class {

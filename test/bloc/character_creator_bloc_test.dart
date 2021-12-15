@@ -37,7 +37,7 @@ void main() {
   }
 
   final startingEquipment =
-      List.generate(5, (index) => EquipmentQuantity(MockEquipment(), 1));
+      List.generate(5, (index) => EquipmentQuantity(MockEquipment(), 1, false));
 
   blocTest<CharacterCreatorBloc, CharacterCreatorState>(
     "character creation works fine with all steps completed with only starting equipment",
@@ -67,10 +67,10 @@ void main() {
     },
   );
 
-  final knife = EquipmentQuantity(MockEquipment(), 1);
-  final sword = EquipmentQuantity(MockEquipment(), 1);
-  final dart = EquipmentQuantity(MockEquipment(), 1);
-  final bow = EquipmentQuantity(MockEquipment(), 1);
+  final knife = EquipmentQuantity(MockEquipment(), 1, false);
+  final sword = EquipmentQuantity(MockEquipment(), 1, false);
+  final dart = EquipmentQuantity(MockEquipment(), 1, false);
+  final bow = EquipmentQuantity(MockEquipment(), 1, false);
 
   blocTest<CharacterCreatorBloc, CharacterCreatorState>(
     "character creation works fine with all steps completed with starting equipment options",

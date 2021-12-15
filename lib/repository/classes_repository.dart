@@ -114,7 +114,7 @@ class ClassesRepository {
           final foundEquipment =
               allEquipment.firstWhere((element) => element.index == index);
 
-          return EquipmentQuantity(foundEquipment, quantity);
+          return EquipmentQuantity(foundEquipment, quantity, false);
         }).toList() ??
         [];
   }
@@ -138,7 +138,7 @@ class ClassesRepository {
 
               final item = allEquipment.firstWhere(
                   (element) => element.index == e["equipment"]["index"]);
-              options.add(EquipmentQuantity(item, e["quantity"] ?? 1));
+              options.add(EquipmentQuantity(item, e["quantity"] ?? 1, false));
             }
 
             if (e is List) {
@@ -149,7 +149,8 @@ class ClassesRepository {
 
                 final item = allEquipment.firstWhere((equipment) =>
                     equipment.index == element["equipment"]["index"]);
-                options.add(EquipmentQuantity(item, element["quantity"] ?? 1));
+                options.add(
+                    EquipmentQuantity(item, element["quantity"] ?? 1, false));
               });
             }
           });

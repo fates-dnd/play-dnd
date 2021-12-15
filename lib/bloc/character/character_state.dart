@@ -18,7 +18,6 @@ class CharacterState {
   final List<Skill>? proficienctSkills;
 
   final List<EquipmentQuantity>? equipment;
-  final List<EquipmentQuantity>? equippedItems;
 
   final List<Spell>? preparedSpells;
   final List<Spell>? learnedSpells;
@@ -39,7 +38,6 @@ class CharacterState {
     this.skills,
     this.proficienctSkills,
     this.equipment,
-    this.equippedItems,
     this.preparedSpells,
     this.learnedSpells,
     this.levelSpellSlots,
@@ -58,7 +56,6 @@ class CharacterState {
     Class? clazz,
     List<Skill>? skills,
     List<EquipmentQuantity>? equipment,
-    List<EquipmentQuantity>? equippedItems,
     List<Spell>? preparedSpells,
     List<Spell>? learnedSpells,
     Map<int, SpellSlots>? levelSpellSlots,
@@ -76,7 +73,6 @@ class CharacterState {
       clazz: clazz ?? this.clazz,
       skills: skills ?? this.skills,
       equipment: equipment ?? this.equipment,
-      equippedItems: equippedItems ?? this.equippedItems,
       preparedSpells: preparedSpells ?? this.preparedSpells,
       levelSpellSlots: levelSpellSlots ?? this.levelSpellSlots,
     );
@@ -130,6 +126,9 @@ class CharacterState {
   int get proficiencyBonus => calculateProficiencyBonus(level);
 
   bool get isASpellcaster => clazz?.spellcastingAbility != null;
+
+  List<EquipmentQuantity>? get equippedItems =>
+      equipment?.where((element) => element.isEquipped).toList();
 
   int get armorClass {
     final armorBonus = equippedItems?.fold<int>(0, (previousValue, element) {
