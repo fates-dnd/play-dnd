@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class SearchAppBar extends StatefulWidget {
   final String title;
   final Function(String) onSearchValueChanged;
+  final VoidCallback onSearchCancelled;
 
   const SearchAppBar({
     Key? key,
     required this.title,
     required this.onSearchValueChanged,
+    required this.onSearchCancelled,
   }) : super(key: key);
 
   @override
@@ -20,11 +22,19 @@ class _SearchAppBarState extends State<SearchAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(widget.title),
+      title: isSearching
+          ? TextField(
+              style: TextStyle(color: Colors.white),
+              onChanged: (value) => widget.onSearchValueChanged(value),
+            )
+          : Text(widget.title),
       actions: [
         if (isSearching)
           IconButton(
-              onPressed: () => setState(() => isSearching = false),
+              onPressed: () {
+                setState(() => isSearching = false);
+                widget.onSearchCancelled();
+              },
               icon: Icon(Icons.cancel_outlined)),
         if (!isSearching)
           IconButton(
