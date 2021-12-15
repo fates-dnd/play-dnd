@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
+import 'package:dnd_player_flutter/ui/search_app_bar.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,9 +23,12 @@ class EquipmentList extends StatelessWidget {
         getIt.get<EquipmentRepository>(),
       )..add(LoadEquipment()),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.equipment),
-        ),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: SearchAppBar(
+              title: AppLocalizations.of(context)!.equipment,
+              onSearchValueChanged: (search) {},
+            )),
         body: BlocBuilder<EquipmentBloc, EquipmentState>(
           builder: (context, state) => ListView.builder(
               padding: EdgeInsets.symmetric(horizontal: 8),
