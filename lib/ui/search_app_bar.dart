@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatefulWidget {
   final String title;
-  final Function(String) onSearchValueChanged;
-  final VoidCallback onSearchCancelled;
+  final Function(BuildContext, String) onSearchValueChanged;
+  final Function(BuildContext) onSearchCancelled;
 
   const SearchAppBar({
     Key? key,
@@ -24,8 +24,9 @@ class _SearchAppBarState extends State<SearchAppBar> {
     return AppBar(
       title: isSearching
           ? TextField(
+              autofocus: true,
               style: TextStyle(color: Colors.white),
-              onChanged: (value) => widget.onSearchValueChanged(value),
+              onChanged: (value) => widget.onSearchValueChanged(context, value),
             )
           : Text(widget.title),
       actions: [
@@ -33,7 +34,7 @@ class _SearchAppBarState extends State<SearchAppBar> {
           IconButton(
               onPressed: () {
                 setState(() => isSearching = false);
-                widget.onSearchCancelled();
+                widget.onSearchCancelled(context);
               },
               icon: Icon(Icons.cancel_outlined)),
         if (!isSearching)

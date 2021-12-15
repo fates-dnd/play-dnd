@@ -27,11 +27,11 @@ class EquipmentList extends StatelessWidget {
             preferredSize: Size.fromHeight(kToolbarHeight),
             child: SearchAppBar(
               title: AppLocalizations.of(context)!.equipment,
-              onSearchValueChanged: (search) {
+              onSearchValueChanged: (context, search) {
                 BlocProvider.of<EquipmentBloc>(context)
                     .add(SearchValueChanged(search));
               },
-              onSearchCancelled: () {
+              onSearchCancelled: (context) {
                 BlocProvider.of<EquipmentBloc>(context).add(SearchCancelled());
               },
             )),

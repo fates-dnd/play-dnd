@@ -8,14 +8,23 @@ import 'package:dnd_player_flutter/dto/equipment_property.dart';
 class EquipmentRepository {
   final Future<String> Function(String lang) jsonReader;
 
+  List<Equipment>? loadedEquipment;
+  String? language;
+
   EquipmentRepository(this.jsonReader);
 
   Future<List<Equipment>> getEquipment(String language) async {
+    if (this.language == language && loadedEquipment != null) {
+      return loadedEquipment!;
+    }
+
+    this.language = language;
+
     final response = await jsonReader(language);
     final List<dynamic> equipmentJson = json.decode(response);
     final parsedEquipment =
         equipmentJson.map((item) => _fromJson(item)).toList();
-    return parsedEquipment.map((equipment) {
+    loadedEquipment = parsedEquipment.map((equipment) {
       if (equipment.contents == null) {
         return equipment;
       }
@@ -28,6 +37,8 @@ class EquipmentRepository {
               .firstWhere((element) => element.index == e["item"]["index"]))
           .toList());
     }).toList();
+
+    return loadedEquipment!;
   }
 
   Future<List<Equipment>> findByIndexes(
