@@ -28,3 +28,11 @@ class UnlearnSpell extends SpellsEvent {
 
   UnlearnSpell(this.spell);
 }
+
+class SearchValueChanged extends SpellsEvent {
+  final String searchValue;
+
+  SearchValueChanged(this.searchValue);
+}
+
+class SearchCanceled extends SpellsEvent {}

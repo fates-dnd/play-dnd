@@ -18,6 +18,8 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
 
   List<Spell> allAvailableSpells = [];
 
+  String? searchValue;
+
   SpellsBloc(
     this.clazz,
     this.settingsRepository,
@@ -36,28 +38,36 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
           return;
         }
         preparedSpells.add(event.spell);
-        emit.call(SpellsState(
-            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
       } else if (event is UnprepareSpell) {
         preparedSpells
             .removeWhere((element) => element.index == event.spell.index);
-        emit.call(SpellsState(
-            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
       } else if (event is LearnSpell) {
         if (learnedSpells
             .any((element) => element.index == event.spell.index)) {
           return;
         }
         learnedSpells.add(event.spell);
-        emit.call(SpellsState(
-            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
       } else if (event is UnlearnSpell) {
         preparedSpells
             .removeWhere((element) => element.index == event.spell.index);
         learnedSpells
             .removeWhere((element) => element.index == event.spell.index);
-        emit.call(SpellsState(
-            preparedSpells, learnedSpells, getCompletedSpellDisplayItem()));
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
+      } else if (event is SearchValueChanged) {
+        searchValue = event.searchValue;
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(event.searchValue)));
+      } else if (event is SearchCanceled) {
+        searchValue = null;
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
       }
     });
   }
@@ -70,33 +80,59 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
         .where((element) => element.classesIds.contains(clazz?.index))
         .toList();
 
-    return getCompletedSpellDisplayItem();
+    return searchCompletedSpellDisplayItem(searchValue);
   }
 
-  List<SpellDisplayItem> getCompletedSpellDisplayItem() {
+  List<SpellDisplayItem> searchCompletedSpellDisplayItem(String? searchValue) {
+    final lowercaseSearchValue = searchValue?.toLowerCase();
+
     final result = <SpellDisplayItem>[];
-    if (preparedSpells.isNotEmpty) {
+    final foundPreparedSpells = preparedSpells.where((element) {
+      if (lowercaseSearchValue == null) {
+        return true;
+      }
+
+      return element.index.contains(lowercaseSearchValue) ||
+          element.name.toLowerCase().contains(lowercaseSearchValue);
+    });
+    final foundLearnedSpells = learnedSpells.where((element) {
+      if (lowercaseSearchValue == null) {
+        return true;
+      }
+
+      return element.index.contains(lowercaseSearchValue) ||
+          element.name.toLowerCase().contains(lowercaseSearchValue);
+    });
+    final foundSpells = allAvailableSpells.where((element) {
+      if (lowercaseSearchValue == null) {
+        return true;
+      }
+
+      return element.index.contains(lowercaseSearchValue) ||
+          element.name.contains(lowercaseSearchValue);
+    });
+    if (foundPreparedSpells.isNotEmpty) {
       result.add(PreparedSeparatorItem());
-      preparedSpells.forEach((spell) {
+      foundPreparedSpells.forEach((spell) {
         final isLearned =
             learnedSpells.any((element) => element.index == spell.index);
         result.add(ActualSpellItem(spell, true, isLearned));
       });
     }
 
-    if (learnedSpells.isNotEmpty) {
+    if (foundLearnedSpells.isNotEmpty) {
       result.add(LearnedSeparatorItem());
-      learnedSpells.forEach((spell) {
+      foundLearnedSpells.forEach((spell) {
         final isPrepared =
             preparedSpells.any((element) => element.index == spell.index);
         result.add(ActualSpellItem(spell, isPrepared, true));
       });
     }
 
-    if (allAvailableSpells.isNotEmpty) {
+    if (foundSpells.isNotEmpty) {
       var currentLevel = 0;
       result.add(LevelSeparatorItem(currentLevel));
-      allAvailableSpells.forEach((spell) {
+      foundSpells.forEach((spell) {
         if (spell.level != currentLevel) {
           currentLevel = spell.level;
           result.add(LevelSeparatorItem(currentLevel));

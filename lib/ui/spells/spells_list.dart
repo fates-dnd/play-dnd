@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../search_app_bar.dart';
+
 class SpellsList extends StatelessWidget {
   final Class? clazz;
 
@@ -37,9 +39,18 @@ class SpellsList extends StatelessWidget {
         learnedSpells,
       )..add(LoadSpells()),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Заклинания"),
-        ),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(kToolbarHeight),
+            child: SearchAppBar(
+              title: AppLocalizations.of(context)!.spells,
+              onSearchValueChanged: (context, search) {
+                BlocProvider.of<SpellsBloc>(context)
+                    .add(SearchValueChanged(search));
+              },
+              onSearchCancelled: (context) {
+                BlocProvider.of<SpellsBloc>(context).add(SearchCanceled());
+              },
+            )),
         body: BlocListener<SpellsBloc, SpellsState>(
           listener: (context, state) {
             onSpellsUpdated(state.preparedSpells, state.learnedSpells);

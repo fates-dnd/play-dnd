@@ -7,12 +7,22 @@ import 'package:dnd_player_flutter/repository/mappers.dart';
 class SpellsRepository {
   final Future<String> Function(String lang) jsonReader;
 
+  List<Spell>? spells;
+  String? language;
+
   SpellsRepository(this.jsonReader);
 
   Future<List<Spell>> getSpells(String language) async {
+    if (this.language == language && spells != null) {
+      return spells!;
+    }
+
+    this.language = language;
+
     final response = await jsonReader(language);
     final List<dynamic> spellsJson = json.decode(response);
-    return spellsJson.map((item) => _fromJson(item)).toList();
+    spells = spellsJson.map((item) => _fromJson(item)).toList();
+    return spells!;
   }
 
   Spell _fromJson(Map<String, dynamic> json) {
