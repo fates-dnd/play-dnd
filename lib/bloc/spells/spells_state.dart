@@ -11,6 +11,13 @@ class SpellsState {
 
 abstract class SpellDisplayItem {}
 
+class FilterItem extends SpellDisplayItem {
+  final Class? selectedOption;
+  final List<Class?> options;
+
+  FilterItem(this.selectedOption, this.options);
+}
+
 class PreparedSeparatorItem extends SpellDisplayItem {}
 
 class LearnedSeparatorItem extends SpellDisplayItem {}

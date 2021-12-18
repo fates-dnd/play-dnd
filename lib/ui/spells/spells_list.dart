@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/bloc/spells/spells_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
@@ -35,6 +36,7 @@ class SpellsList extends StatelessWidget {
         clazz,
         getIt<SettingsRepository>(),
         getIt<SpellsRepository>(),
+        getIt<ClassesRepository>(),
         preparedSpells,
         learnedSpells,
       )..add(LoadSpells()),
@@ -84,7 +86,13 @@ class _SpellListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    if (spellDisplayItem is PreparedSeparatorItem) {
+    if (spellDisplayItem is FilterItem) {
+      final filter = spellDisplayItem as FilterItem;
+      return _FilterButton(
+        clazz: filter.selectedOption,
+        options: filter.options,
+      );
+    } else if (spellDisplayItem is PreparedSeparatorItem) {
       return Text(
         "Подготовленные заклинания",
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
@@ -122,5 +130,57 @@ class _SpellListItem extends StatelessWidget {
     }
 
     return SizedBox();
+  }
+}
+
+class _FilterButton extends StatelessWidget {
+  final Class? clazz;
+  final List<Class?> options;
+
+  const _FilterButton({
+    Key? key,
+    required this.clazz,
+    required this.options,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        children: [
+          Ink(
+            width: 200,
+            decoration: BoxDecoration(
+              color: Color(0xFF272E32),
+              borderRadius: BorderRadius.circular(24),
+            ),
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(24),
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 80,
+                      child: Icon(
+                        Icons.filter_list,
+                        color: Color(0xFFFF5251),
+                      ),
+                    ),
+                    Text(
+                      clazz?.name ?? "",
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

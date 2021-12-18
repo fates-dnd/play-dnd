@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:meta/meta.dart';
@@ -9,27 +10,33 @@ part 'spells_event.dart';
 part 'spells_state.dart';
 
 class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
-  final Class? clazz;
   final SettingsRepository settingsRepository;
   final SpellsRepository spellsRepository;
+  final ClassesRepository classesRepository;
 
   final List<Spell> preparedSpells;
   final List<Spell> learnedSpells;
 
   List<Spell> allAvailableSpells = [];
+  List<Class> allClasses = [];
 
+  Class? clazz;
   String? searchValue;
 
   SpellsBloc(
     this.clazz,
     this.settingsRepository,
     this.spellsRepository,
+    this.classesRepository,
     this.preparedSpells,
     this.learnedSpells,
   ) : super(SpellsState(preparedSpells, learnedSpells, [])) {
     on<SpellsEvent>((event, emit) async {
       if (event is LoadSpells) {
-        final spellDisplayItems = await loadSpells();
+        final language = settingsRepository.getLanguage();
+        allClasses = await classesRepository.getClasses(language);
+
+        final spellDisplayItems = await loadSpells(language);
         emit.call(
             SpellsState(preparedSpells, learnedSpells, spellDisplayItems));
       } else if (event is PrepareSpell) {
@@ -68,12 +75,15 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
         searchValue = null;
         emit.call(SpellsState(preparedSpells, learnedSpells,
             searchCompletedSpellDisplayItem(searchValue)));
+      } else if (event is ClassFilterChangedFor) {
+        clazz = event.clazz;
+        emit.call(SpellsState(preparedSpells, learnedSpells,
+            searchCompletedSpellDisplayItem(searchValue)));
       }
     });
   }
 
-  Future<List<SpellDisplayItem>> loadSpells() async {
-    final language = settingsRepository.getLanguage();
+  Future<List<SpellDisplayItem>> loadSpells(String language) async {
     final spells = await spellsRepository.getSpells(language);
     spells.sort((left, right) => left.level.compareTo(right.level));
     allAvailableSpells = spells
@@ -87,6 +97,11 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
     final lowercaseSearchValue = searchValue?.toLowerCase();
 
     final result = <SpellDisplayItem>[];
+    result.add(FilterItem(
+      clazz,
+      allClasses,
+    ));
+
     final foundPreparedSpells = preparedSpells.where((element) {
       if (lowercaseSearchValue == null) {
         return true;
