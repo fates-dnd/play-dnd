@@ -66,5 +66,7 @@
 
   "rest": "Rest",
   "money": "Money",
-  "level_up": "Level Up"
+  "level_up": "Level Up",
+
+  "all": "All"
 }

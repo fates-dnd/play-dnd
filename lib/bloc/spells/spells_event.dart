@@ -38,7 +38,7 @@ class SearchValueChanged extends SpellsEvent {
 class SearchCanceled extends SpellsEvent {}
 
 class ClassFilterChangedFor extends SpellsEvent {
-  final Class clazz;
+  final Class? clazz;
 
   ClassFilterChangedFor(this.clazz);
 }

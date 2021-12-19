@@ -28,7 +28,7 @@ class SpellItem extends StatelessWidget {
           showDialog(
               context: context,
               builder: (context) => Padding(
-                    padding: const EdgeInsets.all(33.0),
+                    padding: const EdgeInsets.all(32.0),
                     child: SpellInfoExtended(spell: spell),
                   ));
         },

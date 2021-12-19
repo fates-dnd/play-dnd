@@ -144,7 +144,7 @@ class _FilterButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext rootContext) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Wrap(
@@ -157,7 +157,21 @@ class _FilterButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(24),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                showDialog(
+                    context: rootContext,
+                    builder: (context) => _ClassOptionDialog(
+                        options: options,
+                        clazz: clazz,
+                        onClassSelected: (clazz) {
+                          BlocProvider.of<SpellsBloc>(rootContext)
+                              .add(ClassFilterChangedFor(
+                            clazz,
+                          ));
+
+                          Navigator.of(context).pop();
+                        }));
+              },
               borderRadius: BorderRadius.circular(24),
               child: Padding(
                 padding: const EdgeInsets.all(8),
@@ -171,7 +185,7 @@ class _FilterButton extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      clazz?.name ?? "",
+                      clazz?.name ?? AppLocalizations.of(rootContext)!.all,
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
                   ],
@@ -180,6 +194,87 @@ class _FilterButton extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ClassOptionDialog extends StatelessWidget {
+  final List<Class?> options;
+  final Class? clazz;
+  final Function(Class?) onClassSelected;
+
+  const _ClassOptionDialog({
+    Key? key,
+    required this.options,
+    required this.clazz,
+    required this.onClassSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              constraints: BoxConstraints(maxHeight: 600),
+              decoration: BoxDecoration(
+                color: Color(0xFF272E32),
+                borderRadius: BorderRadius.circular(32),
+              ),
+              child: ListView(
+                padding: const EdgeInsets.all(32),
+                shrinkWrap: true,
+                children: options
+                    .map((e) => ClassOptionItem(
+                          clazz: e,
+                          isSelected: e == clazz,
+                          onSelected: onClassSelected,
+                        ))
+                    .toList(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ClassOptionItem extends StatelessWidget {
+  final Class? clazz;
+  final bool isSelected;
+  final Function(Class?) onSelected;
+
+  const ClassOptionItem({
+    Key? key,
+    required this.clazz,
+    required this.isSelected,
+    required this.onSelected,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Color(0xFF272E32),
+      child: InkWell(
+        onTap: () => onSelected(clazz),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6.0),
+          child: Row(
+            children: [
+              Text(
+                clazz?.name ?? AppLocalizations.of(context)!.all,
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white.withOpacity(isSelected ? 0.5 : 1.0)),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

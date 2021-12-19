@@ -86,9 +86,7 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
   Future<List<SpellDisplayItem>> loadSpells(String language) async {
     final spells = await spellsRepository.getSpells(language);
     spells.sort((left, right) => left.level.compareTo(right.level));
-    allAvailableSpells = spells
-        .where((element) => element.classesIds.contains(clazz?.index))
-        .toList();
+    allAvailableSpells = spells.toList();
 
     return searchCompletedSpellDisplayItem(searchValue);
   }
@@ -99,7 +97,7 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
     final result = <SpellDisplayItem>[];
     result.add(FilterItem(
       clazz,
-      allClasses,
+      [null]..addAll(allClasses),
     ));
 
     final foundPreparedSpells = preparedSpells.where((element) {
@@ -118,7 +116,11 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
       return element.index.contains(lowercaseSearchValue) ||
           element.name.toLowerCase().contains(lowercaseSearchValue);
     });
-    final foundSpells = allAvailableSpells.where((element) {
+    final foundSpells = allAvailableSpells
+        .where((element) => clazz?.index != null
+            ? element.classesIds.contains(clazz?.index)
+            : true)
+        .where((element) {
       if (lowercaseSearchValue == null) {
         return true;
       }
