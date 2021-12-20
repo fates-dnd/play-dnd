@@ -178,15 +178,22 @@ class _FilterButton extends StatelessWidget {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 80,
+                      width: 40,
                       child: Icon(
                         Icons.filter_list,
                         color: Color(0xFFFF5251),
                       ),
                     ),
-                    Text(
-                      clazz?.name ?? AppLocalizations.of(rootContext)!.all,
-                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          clazz?.name ?? AppLocalizations.of(rootContext)!.all,
+                          style: TextStyle(fontSize: 18, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 30,
                     ),
                   ],
                 ),
@@ -213,6 +220,7 @@ class _ClassOptionDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dialogHeight = MediaQuery.of(context).size.height * 0.8;
     return Padding(
       padding: const EdgeInsets.all(32.0),
       child: Center(
@@ -220,7 +228,7 @@ class _ClassOptionDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              constraints: BoxConstraints(maxHeight: 600),
+              constraints: BoxConstraints(maxHeight: dialogHeight),
               decoration: BoxDecoration(
                 color: Color(0xFF272E32),
                 borderRadius: BorderRadius.circular(32),
