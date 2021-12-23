@@ -51,9 +51,11 @@ class CharacterCreatorBloc
       );
     } else if (event is SaveCharacter) {
       final constitutionModifier = (state.constitution ?? 0).toModifier();
+      final hp = (state.clazz?.hitDie ?? 1) + constitutionModifier;
       final characterToSave = state
           .copyWith(
-            hp: (state.clazz?.hitDie ?? 1) + constitutionModifier,
+            maxHp: hp,
+            hp: hp,
             selectedEquipment: _generateSelectedEquipment(),
           )
           .toCharacter();

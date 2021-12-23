@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 class Character extends Equatable {
   final String name;
   final int level;
+  final int maxHp;
   final int hp;
   final int baseStrength;
   final int baseDexterity;
@@ -23,6 +24,7 @@ class Character extends Equatable {
   Character(
     this.name,
     this.level,
+    this.maxHp,
     this.hp,
     this.baseStrength,
     this.baseDexterity,
@@ -40,6 +42,7 @@ class Character extends Equatable {
   List<Object?> get props => [
         name,
         level,
+        maxHp,
         hp,
         baseStrength,
         baseDexterity,

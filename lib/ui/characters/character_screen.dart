@@ -9,6 +9,7 @@ import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
+import 'package:dnd_player_flutter/ui/characters/hp_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
@@ -223,10 +224,19 @@ class _HealthButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) => _CharacterRowButton(
+      builder: (rootContext, state) => _CharacterRowButton(
         imageAsset: "assets/drawable/stats/heart.png",
-        text: state.hp.toString(),
+        text: "${state.hp} / ${state.maxHp}",
         textColor: Color(0xFFFF5251),
+        onTap: () {
+          showDialog(
+              context: context,
+              builder: (context) => BlocProvider(
+                    create: (context) =>
+                        BlocProvider.of<CharacterBloc>(rootContext),
+                    child: HpDialog(),
+                  ));
+        },
       ),
     );
   }
@@ -239,6 +249,7 @@ class _RestButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/tent.png",
       text: AppLocalizations.of(context)!.rest,
       textColor: Color(0xFF7C7BFC),
+      onTap: () {},
     );
   }
 }
@@ -250,6 +261,7 @@ class _MoneyButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/money.png",
       text: AppLocalizations.of(context)!.money,
       textColor: Color(0xFFE5DD1C),
+      onTap: () {},
     );
   }
 }
@@ -261,6 +273,7 @@ class _LevelUpButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/xp.png",
       text: AppLocalizations.of(context)!.level_up,
       textColor: Color(0xFF05FF96),
+      onTap: () {},
     );
   }
 }
@@ -269,12 +282,14 @@ class _CharacterRowButton extends StatelessWidget {
   final String imageAsset;
   final String text;
   final Color textColor;
+  final Function() onTap;
 
   const _CharacterRowButton({
     Key? key,
     required this.imageAsset,
     required this.text,
     required this.textColor,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -289,7 +304,7 @@ class _CharacterRowButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
         child: InkWell(
-          onTap: () {},
+          onTap: onTap,
           borderRadius: BorderRadius.circular(24),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),

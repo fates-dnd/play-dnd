@@ -68,5 +68,8 @@
   "money": "Money",
   "level_up": "Level Up",
 
-  "all": "All"
+  "all": "All",
+  "health": "Health",
+  "max_hp": "Max",
+  "current_hp": "Current"
 }

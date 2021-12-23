@@ -2,6 +2,7 @@ part of 'character_bloc.dart';
 
 class CharacterState {
   final int level;
+  final int maxHp;
   final int hp;
 
   final int strength;
@@ -26,6 +27,7 @@ class CharacterState {
 
   CharacterState({
     this.level = 1,
+    this.maxHp = 0,
     this.hp = 0,
     this.strength = 10,
     this.dexterity = 10,
@@ -46,6 +48,7 @@ class CharacterState {
   CharacterState copyWith({
     int? level,
     int? hp,
+    int? maxHp,
     int? strength,
     int? dexterity,
     int? constitution,
@@ -63,6 +66,7 @@ class CharacterState {
     return CharacterState(
       level: level ?? this.level,
       hp: hp ?? this.hp,
+      maxHp: maxHp ?? this.maxHp,
       strength: strength ?? this.strength,
       dexterity: dexterity ?? this.dexterity,
       constitution: constitution ?? this.constitution,
