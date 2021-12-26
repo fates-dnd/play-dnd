@@ -51,3 +51,15 @@ class UnuseSpellSlot extends CharacterEvent {
 
   UnuseSpellSlot(this.spellLevel);
 }
+
+class Heal extends CharacterEvent {
+  final int amount;
+
+  Heal(this.amount);
+}
+
+class Damage extends CharacterEvent {
+  final int amount;
+
+  Damage(this.amount);
+}

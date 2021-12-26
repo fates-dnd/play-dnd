@@ -139,6 +139,14 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     } else if (event is UnuseSpellSlot) {
       characterRepository.unuseSpellSlot(character, event.spellLevel);
       return state.copyWith(levelSpellSlots: await getSpellSlots());
+    } else if (event is Heal) {
+      final newHp = (state.hp + event.amount).clamp(0, state.maxHp);
+      characterRepository.setHp(character, newHp);
+      return state.copyWith(hp: newHp);
+    } else if (event is Damage) {
+      final newHp = (state.hp - event.amount).clamp(0, state.maxHp);
+      characterRepository.setHp(character, newHp);
+      return state.copyWith(hp: newHp);
     }
 
     return state;

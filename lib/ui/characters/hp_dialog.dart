@@ -1,43 +1,70 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/bloc/hp_dialog/hp_dialog_bloc.dart';
+import 'package:dnd_player_flutter/ui/common/slider_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HpDialog extends StatelessWidget {
+  final CharacterBloc characterBloc;
+
+  const HpDialog({
+    Key? key,
+    required this.characterBloc,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      content: Container(
-        constraints: BoxConstraints(maxHeight: 300),
-        decoration: BoxDecoration(
-          color: Color(0xFF272E32),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.health,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
+    return BlocProvider(
+      create: (context) => HpDialogBloc(),
+      child: AlertDialog(
+        content: Container(
+          height: 240,
+          decoration: BoxDecoration(
+            color: Color(0xFF272E32),
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.health,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                _MaxHpText(),
-                SizedBox(
-                  width: 24,
-                ),
-                _CurrentHpText(),
-              ],
-            ),
-          ],
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                children: [
+                  _MaxHpText(value: characterBloc.state.maxHp),
+                  SizedBox(
+                    width: 24,
+                  ),
+                  _CurrentHpText(value: characterBloc.state.hp),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(width: 24),
+                  _PointsSelector(),
+                  _ActionsGroup(
+                    onHeal: (amount) => characterBloc.add(Heal(amount)),
+                    onDamage: (amount) => characterBloc.add(Damage(amount)),
+                  )
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -45,28 +72,29 @@ class HpDialog extends StatelessWidget {
 }
 
 class _MaxHpText extends StatelessWidget {
+  final int value;
+
+  const _MaxHpText({Key? key, required this.value}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharacterBloc, CharacterState>(
-        builder: (context, state) {
-      return _HpText(
-        description: AppLocalizations.of(context)!.max_hp,
-        value: state.maxHp,
-      );
-    });
+    return _HpText(
+      description: AppLocalizations.of(context)!.max_hp,
+      value: value,
+    );
   }
 }
 
 class _CurrentHpText extends StatelessWidget {
+  final int value;
+
+  const _CurrentHpText({Key? key, required this.value}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (context, state) {
-        return _HpText(
-          description: AppLocalizations.of(context)!.current_hp,
-          value: state.hp,
-        );
-      },
+    return _HpText(
+      description: AppLocalizations.of(context)!.current_hp,
+      value: value,
     );
   }
 }
@@ -100,5 +128,90 @@ class _HpText extends StatelessWidget {
             )),
       ],
     ));
+  }
+}
+
+class _ActionsGroup extends StatelessWidget {
+  final Function(int) onHeal;
+  final Function(int) onDamage;
+
+  const _ActionsGroup({
+    Key? key,
+    required this.onHeal,
+    required this.onDamage,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    return Column(
+      children: [
+        TextButton(
+          onPressed: () {
+            final hpDialogAmount =
+                BlocProvider.of<HpDialogBloc>(context).state.selectedAmount;
+            onHeal(hpDialogAmount);
+            Navigator.of(context).pop();
+          },
+          child: Text(localizations!.heal),
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(120, 40),
+            backgroundColor: Color(0xFF3AFFBD),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            final hpDialogAmount =
+                BlocProvider.of<HpDialogBloc>(context).state.selectedAmount;
+            onDamage(hpDialogAmount);
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            localizations.damage,
+          ),
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.all(0),
+            minimumSize: Size(120, 40),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _PointsSelector extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 120,
+      width: 60,
+      child: SliderSelector(
+        children: List.generate(
+            100,
+            (index) => BlocBuilder<HpDialogBloc, HpDialogState>(
+                  buildWhen: (oldState, newState) =>
+                      oldState.selectedAmount == index ||
+                      newState.selectedAmount == index,
+                  builder: (context, state) {
+                    return Text(
+                      "$index",
+                      style: TextStyle(
+                          fontSize: index == state.selectedAmount ? 24 : 18,
+                          fontWeight: index == state.selectedAmount
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                          color: index == state.selectedAmount
+                              ? Colors.white
+                              : Colors.white30),
+                    );
+                  },
+                )),
+        onItemChanged: (value) =>
+            BlocProvider.of<HpDialogBloc>(context).add(HpDialogEvent(value)),
+        itemExtent: 30,
+        shrinkWrap: true,
+      ),
+    );
   }
 }

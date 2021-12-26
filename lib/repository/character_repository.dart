@@ -275,6 +275,19 @@ class CharacterRepository {
     return currentList[targetIndex].usedSpellSlots;
   }
 
+  void setHp(Character character, int newHp) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      currentList![targetIndex] = currentList[targetIndex].copyWith(
+        hp: newHp,
+      );
+    }
+    box.put('character_list', currentList);
+  }
+
   Future<List<Character>> getCharacters() async {
     final outlines = _readCharacterOutlines() ?? [];
 

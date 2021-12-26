@@ -223,22 +223,20 @@ class _CharacterActionsRow extends StatelessWidget {
 class _HealthButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final characterBloc = BlocProvider.of<CharacterBloc>(context);
     return BlocBuilder<CharacterBloc, CharacterState>(
-      builder: (rootContext, state) => _CharacterRowButton(
+        builder: (context, state) {
+      return _CharacterRowButton(
         imageAsset: "assets/drawable/stats/heart.png",
         text: "${state.hp} / ${state.maxHp}",
         textColor: Color(0xFFFF5251),
         onTap: () {
           showDialog(
               context: context,
-              builder: (context) => BlocProvider(
-                    create: (context) =>
-                        BlocProvider.of<CharacterBloc>(rootContext),
-                    child: HpDialog(),
-                  ));
+              builder: (context) => HpDialog(characterBloc: characterBloc));
         },
-      ),
-    );
+      );
+    });
   }
 }
 

@@ -71,5 +71,7 @@
   "all": "All",
   "health": "Health",
   "max_hp": "Max",
-  "current_hp": "Current"
+  "current_hp": "Current",
+  "heal": "Heal",
+  "damage": "Damage"
 }
