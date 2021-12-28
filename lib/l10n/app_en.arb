@@ -73,5 +73,9 @@
   "max_hp": "Max",
   "current_hp": "Current",
   "heal": "Heal",
-  "damage": "Damage"
+  "damage": "Damage",
+
+  "rest": "Rest",
+  "short_rest": "Short Rest",
+  "long_rest": "Long Rest"
 }

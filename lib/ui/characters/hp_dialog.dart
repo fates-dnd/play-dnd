@@ -184,8 +184,8 @@ class _PointsSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
-      width: 60,
+      height: 142,
+      width: 80,
       child: SliderSelector(
         children: List.generate(
             100,
@@ -197,7 +197,7 @@ class _PointsSelector extends StatelessWidget {
                     return Text(
                       "$index",
                       style: TextStyle(
-                          fontSize: index == state.selectedAmount ? 24 : 18,
+                          fontSize: index == state.selectedAmount ? 32 : 24,
                           fontWeight: index == state.selectedAmount
                               ? FontWeight.bold
                               : FontWeight.normal,
@@ -209,7 +209,7 @@ class _PointsSelector extends StatelessWidget {
                 )),
         onItemChanged: (value) =>
             BlocProvider.of<HpDialogBloc>(context).add(HpDialogEvent(value)),
-        itemExtent: 30,
+        itemExtent: 42,
         shrinkWrap: true,
       ),
     );

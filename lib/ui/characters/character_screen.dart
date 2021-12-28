@@ -11,6 +11,7 @@ import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart'
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
 import 'package:dnd_player_flutter/ui/characters/hp_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
+import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
@@ -247,7 +248,9 @@ class _RestButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/tent.png",
       text: AppLocalizations.of(context)!.rest,
       textColor: Color(0xFF7C7BFC),
-      onTap: () {},
+      onTap: () {
+        showDialog(context: context, builder: (context) => RestDialog());
+      },
     );
   }
 }
