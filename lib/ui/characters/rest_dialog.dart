@@ -6,24 +6,23 @@ class RestDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     return AlertDialog(
+      title: Center(
+        child: Text(
+          localizations!.rest,
+          style: TextStyle(
+            fontSize: 32,
+            color: Colors.white,
+          ),
+        ),
+      ),
       content: Container(
-        height: 232,
+        height: 160,
         decoration: BoxDecoration(
           color: Color(0xFF272E32),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           children: [
-            Text(
-              localizations!.rest,
-              style: TextStyle(
-                fontSize: 32,
-                color: Colors.white,
-              ),
-            ),
-            SizedBox(
-              height: 32,
-            ),
             OutlinedButton(
               onPressed: () {},
               child: Text(

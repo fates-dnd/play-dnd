@@ -10,6 +10,7 @@ import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
 import 'package:dnd_player_flutter/ui/characters/hp_dialog.dart';
+import 'package:dnd_player_flutter/ui/characters/money_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
@@ -262,7 +263,9 @@ class _MoneyButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/money.png",
       text: AppLocalizations.of(context)!.money,
       textColor: Color(0xFFE5DD1C),
-      onTap: () {},
+      onTap: () {
+        showDialog(context: context, builder: (context) => MoneyDialog());
+      },
     );
   }
 }

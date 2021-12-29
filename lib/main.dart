@@ -55,6 +55,7 @@ class DndApp extends StatelessWidget {
               : null,
           theme: theme.copyWith(
             colorScheme: theme.colorScheme.copyWith(
+              primary: Color(0xFFFF5251),
               secondary: Color(0xFFFF5251),
             ),
             primaryColor: Color(0xFF1A1E21),

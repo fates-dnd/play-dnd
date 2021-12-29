@@ -77,5 +77,11 @@
 
   "rest": "Rest",
   "short_rest": "Short Rest",
-  "long_rest": "Long Rest"
+  "long_rest": "Long Rest",
+
+  "copper": "Copper",
+  "silver": "Silver",
+  "electrum": "Electrum",
+  "gold": "Gold",
+  "platinum": "Platinum"
 }

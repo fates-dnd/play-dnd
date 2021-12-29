@@ -96,7 +96,7 @@ flutter:
     - assets/drawable/money/gold.png
     - assets/drawable/money/electrum.png
     - assets/drawable/money/silver.png
-    - assets/drawable/money/bronze.png
+    - assets/drawable/money/copper.png
 
     # class icons
     - assets/drawable/icons/fighter.png
