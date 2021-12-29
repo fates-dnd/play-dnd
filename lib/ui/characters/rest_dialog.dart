@@ -27,7 +27,7 @@ class RestDialog extends StatelessWidget {
             OutlinedButton(
               onPressed: () {},
               child: Text(
-                localizations!.short_rest,
+                localizations.short_rest,
                 style: TextStyle(
                   fontSize: 24,
                 ),
