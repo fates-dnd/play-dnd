@@ -64,19 +64,19 @@ class _AmountCurrencyRow extends StatelessWidget {
               onItemChanged: (position) {
                 final bloc = BlocProvider.of<MoneyDialogBloc>(context);
                 switch (position) {
-                  case 1:
+                  case 0:
                     bloc.add(ChangeCurrency(Currency.COPPER));
                     break;
-                  case 2:
+                  case 1:
                     bloc.add(ChangeCurrency(Currency.SILVER));
                     break;
-                  case 3:
+                  case 2:
                     bloc.add(ChangeCurrency(Currency.ELECTRUM));
                     break;
-                  case 4:
+                  case 3:
                     bloc.add(ChangeCurrency(Currency.GOLD));
                     break;
-                  case 5:
+                  case 4:
                     bloc.add(ChangeCurrency(Currency.PLATINUM));
                     break;
                 }
