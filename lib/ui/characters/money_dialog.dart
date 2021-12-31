@@ -61,6 +61,7 @@ class _AmountCurrencyRow extends StatelessWidget {
             width: 140,
             child: SliderSelector(
               itemExtent: 48,
+              totalHeight: 142,
               onItemChanged: (position) {
                 final bloc = BlocProvider.of<MoneyDialogBloc>(context);
                 switch (position) {

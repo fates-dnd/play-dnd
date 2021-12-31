@@ -10,6 +10,7 @@ class SliderSelector extends StatefulWidget {
   final int? itemCount;
 
   final double itemExtent;
+  final double? totalHeight;
   final ValueChanged<int>? onItemChanged;
 
   final EdgeInsets padding;
@@ -22,6 +23,7 @@ class SliderSelector extends StatefulWidget {
     this.controller,
     required this.children,
     required this.itemExtent,
+    this.totalHeight,
     this.onItemChanged,
     this.padding = const EdgeInsets.all(0.0),
     this.shrinkWrap = false,
@@ -37,6 +39,7 @@ class SliderSelector extends StatefulWidget {
     required this.itemBuilder,
     this.itemCount,
     required this.itemExtent,
+    this.totalHeight,
     this.onItemChanged,
     this.padding = const EdgeInsets.all(0.0),
     this.shrinkWrap = false,
@@ -58,11 +61,18 @@ class _SliderSelectorState extends State<SliderSelector> {
         : widget.padding.top;
     final scrollPhysics = SnappingListScrollPhysics(
         mainAxisStartPadding: startPadding, itemExtent: widget.itemExtent);
+    final emptyItemsCount = (widget.totalHeight ?? 0) ~/ widget.itemExtent;
     final listView = widget.children != null
         ? ListView(
             scrollDirection: widget.scrollDirection,
             controller: widget.controller,
-            children: widget.children!,
+            children: widget.children!
+              ..addAll(List.generate(
+                emptyItemsCount,
+                (index) => SizedBox(
+                  height: widget.itemExtent,
+                ),
+              )),
             itemExtent: widget.itemExtent,
             physics: scrollPhysics,
             padding: widget.padding,
