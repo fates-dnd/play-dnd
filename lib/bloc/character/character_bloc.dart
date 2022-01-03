@@ -8,6 +8,7 @@ import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/data/skills.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
+import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/equipment_property.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
@@ -71,6 +72,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         preparedSpells: await _getPreparedSpells(),
         learnedSpells: await _getLearnedSpells(),
         levelSpellSlots: await getSpellSlots(),
+        money: await getMoney(),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -212,6 +214,13 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         key,
         SpellSlots(usedSpellSlots[key] ?? 0, value),
       );
+    });
+  }
+
+  Future<Map<Currency, int>?> getMoney() async {
+    final rawMoney = await characterRepository.getMoney(character);
+    return rawMoney.map((key, value) {
+      return MapEntry(Currency.values[key], value);
     });
   }
 }

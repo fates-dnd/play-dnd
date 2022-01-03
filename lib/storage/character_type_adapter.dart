@@ -8,29 +8,30 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
   @override
   CharacterOutline read(BinaryReader reader) {
     return CharacterOutline(
-        reader.readString(), // name
-        reader.readInt(), // level
-        reader.readInt(), // maxHp
-        reader.readInt(), // hp
-        reader.readInt(), // base strength
-        reader.readInt(), // base dexterity
-        reader.readInt(), // base constitution
-        reader.readInt(), // base intelligence
-        reader.readInt(), // base wisdom
-        reader.readInt(), // base charisma
+      reader.readString(), // name
+      reader.readInt(), // level
+      reader.readInt(), // maxHp
+      reader.readInt(), // hp
+      reader.readInt(), // base strength
+      reader.readInt(), // base dexterity
+      reader.readInt(), // base constitution
+      reader.readInt(), // base intelligence
+      reader.readInt(), // base wisdom
+      reader.readInt(), // base charisma
 
-        reader.readString(), // race
-        reader.readString(), // class
+      reader.readString(), // race
+      reader.readString(), // class
 
-        readStringList(reader), // proficiency indexes
+      readStringList(reader), // proficiency indexes
 
-        readEquipmentQuantities(reader), // equipment indexes
+      readEquipmentQuantities(reader), // equipment indexes
 
-        readStringList(reader), // prepared spells
-        readStringList(reader), // learned spells
+      readStringList(reader), // prepared spells
+      readStringList(reader), // learned spells
 
-        reader.readMap().cast() // spell slots
-        );
+      reader.readMap().cast(), // spell slots
+      reader.readMap().cast(), // money
+    );
   }
 
   List<EquipmentIndexQuantity> readEquipmentQuantities(BinaryReader reader) {
@@ -95,5 +96,6 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
     });
 
     writer.writeMap(obj.usedSpellSlots);
+    writer.writeMap(obj.money);
   }
 }

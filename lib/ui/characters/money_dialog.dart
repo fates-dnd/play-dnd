@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/money_dialog/money_dialog_bloc.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/ui/common/slider_selector.dart';
@@ -6,6 +7,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MoneyDialog extends StatelessWidget {
+  final CharacterBloc characterBloc;
+
+  const MoneyDialog({Key? key, required this.characterBloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -20,14 +25,75 @@ class MoneyDialog extends StatelessWidget {
           ),
         ),
         content: Container(
-          height: 160,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
+              _MoneyInfo(money: characterBloc.state.money),
+              SizedBox(height: 16),
               _AmountCurrencyRow(),
+              SizedBox(height: 32),
+              _ActionRow(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _MoneyInfo extends StatelessWidget {
+  final Map<Currency, int>? money;
+
+  const _MoneyInfo({Key? key, required this.money}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.start,
+      direction: Axis.horizontal,
+      alignment: WrapAlignment.start,
+      runSpacing: 8,
+      spacing: 16,
+      children: money?.entries
+              .map(
+                (entry) => _MoneyInfoItem(
+                  currency: entry.key,
+                  value: entry.value,
+                ),
+              )
+              .toList() ??
+          [],
+    );
+  }
+}
+
+class _MoneyInfoItem extends StatelessWidget {
+  final Currency currency;
+  final int value;
+
+  const _MoneyInfoItem({
+    Key? key,
+    required this.currency,
+    required this.value,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Image.asset(
+          _currencyToAssetPath(currency),
+        ),
+        SizedBox(width: 4),
+        Padding(
+          padding: const EdgeInsets.only(top: 4.0),
+          child: Text(
+            value.toString(),
+            style: TextStyle(color: Colors.white),
+          ),
+        )
+      ],
     );
   }
 }
@@ -42,9 +108,13 @@ class _AmountCurrencyRow extends StatelessWidget {
         Flexible(
           flex: 1,
           child: TextField(
+            decoration: InputDecoration(
+              hintText: "0",
+              hintStyle: TextStyle(fontSize: 32, color: Colors.white30),
+            ),
             keyboardType: TextInputType.number,
             onChanged: (value) => BlocProvider.of<MoneyDialogBloc>(context)
-                .add(ChangeMoneyValue(int.parse(value))),
+                .add(ChangeMoneyValue(int.tryParse(value) ?? 0)),
             style: TextStyle(
               fontSize: 32,
               color: Colors.white,
@@ -55,7 +125,7 @@ class _AmountCurrencyRow extends StatelessWidget {
           width: 24,
         ),
         Flexible(
-          flex: 1,
+          flex: 2,
           child: SizedBox(
             height: 142,
             width: 140,
@@ -85,27 +155,22 @@ class _AmountCurrencyRow extends StatelessWidget {
               children: [
                 _RowMoneyOption(
                   currency: Currency.COPPER,
-                  assetIcon: "assets/drawable/money/copper.png",
                   title: localizations!.copper,
                 ),
                 _RowMoneyOption(
                   currency: Currency.SILVER,
-                  assetIcon: "assets/drawable/money/silver.png",
                   title: localizations.silver,
                 ),
                 _RowMoneyOption(
                   currency: Currency.ELECTRUM,
-                  assetIcon: "assets/drawable/money/electrum.png",
                   title: localizations.electrum,
                 ),
                 _RowMoneyOption(
                   currency: Currency.GOLD,
-                  assetIcon: "assets/drawable/money/gold.png",
                   title: localizations.gold,
                 ),
                 _RowMoneyOption(
                   currency: Currency.PLATINUM,
-                  assetIcon: "assets/drawable/money/platinum.png",
                   title: localizations.platinum,
                 ),
               ],
@@ -119,13 +184,11 @@ class _AmountCurrencyRow extends StatelessWidget {
 
 class _RowMoneyOption extends StatelessWidget {
   final Currency currency;
-  final String assetIcon;
   final String title;
 
   const _RowMoneyOption({
     Key? key,
     required this.currency,
-    required this.assetIcon,
     required this.title,
   }) : super(key: key);
 
@@ -143,7 +206,7 @@ class _RowMoneyOption extends StatelessWidget {
             children: [
               SizedBox(
                 width: 24,
-                child: Image.asset(assetIcon),
+                child: Image.asset(_currencyToAssetPath(currency)),
               ),
               SizedBox(
                 width: 8,
@@ -160,5 +223,60 @@ class _RowMoneyOption extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class _ActionRow extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          flex: 1,
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(localizations!.earn),
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+              backgroundColor: Color(0xFF3AFFBD),
+            ),
+          ),
+        ),
+        SizedBox(width: 16),
+        Flexible(
+          flex: 1,
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(
+              localizations.spend,
+            ),
+            style: TextButton.styleFrom(
+              padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+String _currencyToAssetPath(Currency currency) {
+  switch (currency) {
+    case Currency.COPPER:
+      return "assets/drawable/money/copper.png";
+    case Currency.SILVER:
+      return "assets/drawable/money/silver.png";
+    case Currency.ELECTRUM:
+      return "assets/drawable/money/electrum.png";
+    case Currency.GOLD:
+      return "assets/drawable/money/gold.png";
+    case Currency.PLATINUM:
+      return "assets/drawable/money/platinum.png";
   }
 }

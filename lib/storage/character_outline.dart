@@ -22,6 +22,7 @@ class CharacterOutline {
   final List<String> learnedSpells;
 
   final Map<int, int> usedSpellSlots;
+  final Map<int, int> money;
 
   CharacterOutline(
     this.name,
@@ -41,6 +42,7 @@ class CharacterOutline {
     this.preparedSpells,
     this.learnedSpells,
     this.usedSpellSlots,
+    this.money,
   );
 
   static CharacterOutline fromCharacter(
@@ -50,6 +52,7 @@ class CharacterOutline {
     required List<String> preparedSpells,
     required List<String> learnedSpells,
     required Map<int, int> usedSpellSlots,
+    required Map<int, int> money,
   }) {
     return CharacterOutline(
       character.name,
@@ -69,6 +72,7 @@ class CharacterOutline {
       preparedSpells,
       learnedSpells,
       usedSpellSlots,
+      money,
     );
   }
 
@@ -90,6 +94,7 @@ class CharacterOutline {
     List<String>? preparedSpells,
     List<String>? learnedSpells,
     Map<int, int>? usedSpellSlots,
+    Map<int, int>? money,
   }) {
     return CharacterOutline(
       name ?? this.name,
@@ -109,6 +114,7 @@ class CharacterOutline {
       preparedSpells ?? this.preparedSpells,
       learnedSpells ?? this.learnedSpells,
       usedSpellSlots ?? this.usedSpellSlots,
+      money ?? this.money,
     );
   }
 }

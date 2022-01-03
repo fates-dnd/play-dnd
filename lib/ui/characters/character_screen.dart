@@ -259,12 +259,17 @@ class _RestButtonIcon extends StatelessWidget {
 class _MoneyButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final characterBloc = BlocProvider.of<CharacterBloc>(context);
     return _CharacterRowButton(
       imageAsset: "assets/drawable/stats/money.png",
       text: AppLocalizations.of(context)!.money,
       textColor: Color(0xFFE5DD1C),
       onTap: () {
-        showDialog(context: context, builder: (context) => MoneyDialog());
+        showDialog(
+            context: context,
+            builder: (context) => MoneyDialog(
+                  characterBloc: characterBloc,
+                ));
       },
     );
   }

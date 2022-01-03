@@ -83,5 +83,8 @@
   "silver": "Silver",
   "electrum": "Electrum",
   "gold": "Gold",
-  "platinum": "Platinum"
+  "platinum": "Platinum",
+
+  "earn": "Earn",
+  "spend": "Spend"
 }
