@@ -149,6 +149,18 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       final newHp = (state.hp - event.amount).clamp(0, state.maxHp);
       characterRepository.setHp(character, newHp);
       return state.copyWith(hp: newHp);
+    } else if (event is EarnMoney) {
+      characterRepository.earnMoney(
+          character, event.currency.index, event.amount);
+      return state.copyWith(
+        money: await getMoney(),
+      );
+    } else if (event is SpendMoney) {
+      characterRepository.spendMoney(
+          character, event.currency.index, event.amount);
+      return state.copyWith(
+        money: await getMoney(),
+      );
     }
 
     return state;

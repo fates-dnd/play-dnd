@@ -63,3 +63,17 @@ class Damage extends CharacterEvent {
 
   Damage(this.amount);
 }
+
+class EarnMoney extends CharacterEvent {
+  final Currency currency;
+  final int amount;
+
+  EarnMoney(this.currency, this.amount);
+}
+
+class SpendMoney extends CharacterEvent {
+  final Currency currency;
+  final int amount;
+
+  SpendMoney(this.currency, this.amount);
+}

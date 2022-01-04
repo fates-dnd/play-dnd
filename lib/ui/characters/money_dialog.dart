@@ -32,7 +32,7 @@ class MoneyDialog extends StatelessWidget {
               SizedBox(height: 16),
               _AmountCurrencyRow(),
               SizedBox(height: 32),
-              _ActionRow(),
+              _ActionRow(characterBloc: characterBloc),
             ],
           ),
         ),
@@ -227,6 +227,10 @@ class _RowMoneyOption extends StatelessWidget {
 }
 
 class _ActionRow extends StatelessWidget {
+  final CharacterBloc characterBloc;
+
+  const _ActionRow({Key? key, required this.characterBloc}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
@@ -237,6 +241,10 @@ class _ActionRow extends StatelessWidget {
           flex: 1,
           child: TextButton(
             onPressed: () {
+              final moneyState =
+                  BlocProvider.of<MoneyDialogBloc>(context).state;
+              characterBloc.add(EarnMoney(
+                  moneyState.selectedCurrency, moneyState.selectedValue));
               Navigator.of(context).pop();
             },
             child: Text(localizations!.earn),
@@ -251,6 +259,10 @@ class _ActionRow extends StatelessWidget {
           flex: 1,
           child: TextButton(
             onPressed: () {
+              final moneyState =
+                  BlocProvider.of<MoneyDialogBloc>(context).state;
+              characterBloc.add(SpendMoney(
+                  moneyState.selectedCurrency, moneyState.selectedValue));
               Navigator.of(context).pop();
             },
             child: Text(
