@@ -83,5 +83,12 @@
   "platinum": "Платина",
   
   "earn": "Получить",
-  "spend": "Потратить"
+  "spend": "Потратить",
+
+  "characteristics": "Характеристики",
+  "skills": "Навыки",
+  "equipment": "Снаряжение",
+  "spells": "Заклинания",
+
+  "saving_throws": "Спас Броски"
 }

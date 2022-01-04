@@ -62,7 +62,7 @@ class BaseCharateristicsPage extends StatelessWidget {
               ],
             ),
             SizedBox(height: 32),
-            Text("Спас броски", style: theme.textTheme.headline2),
+            Text(localizations.saving_throws, style: theme.textTheme.headline2),
             SizedBox(height: 16),
             GridView.count(
               mainAxisSpacing: 12,
@@ -236,7 +236,6 @@ class SavingThrowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(color: Color(0xFF272E32)),

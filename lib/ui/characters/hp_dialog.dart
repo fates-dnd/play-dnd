@@ -18,8 +18,14 @@ class HpDialog extends StatelessWidget {
     return BlocProvider(
       create: (context) => HpDialogBloc(),
       child: AlertDialog(
+        title: Text(
+          AppLocalizations.of(context)!.health,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 32,
+          ),
+        ),
         content: Container(
-          height: 240,
           decoration: BoxDecoration(
             color: Color(0xFF272E32),
             borderRadius: BorderRadius.circular(16),
@@ -28,18 +34,6 @@ class HpDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Row(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.health,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 16),
               Row(
                 children: [
                   _MaxHpText(value: characterBloc.state.maxHp),

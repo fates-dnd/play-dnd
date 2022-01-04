@@ -15,7 +15,7 @@ class PagerWithIndicators extends StatelessWidget {
         children: [
           TabBar(
               indicatorColor: Colors.red,
-              indicatorPadding: EdgeInsets.symmetric(horizontal: 32),
+              indicatorPadding: EdgeInsets.symmetric(horizontal: 16),
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               isScrollable: true,
               unselectedLabelColor: Colors.white.withOpacity(0.3),

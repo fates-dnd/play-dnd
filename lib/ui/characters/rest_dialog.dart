@@ -16,12 +16,12 @@ class RestDialog extends StatelessWidget {
         ),
       ),
       content: Container(
-        height: 160,
         decoration: BoxDecoration(
           color: Color(0xFF272E32),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             OutlinedButton(
               onPressed: () {},
