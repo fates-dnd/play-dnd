@@ -61,9 +61,9 @@ class BaseCharateristicsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 28),
+            SizedBox(height: 32),
             Text("Спас броски", style: theme.textTheme.headline2),
-            SizedBox(height: 12),
+            SizedBox(height: 16),
             GridView.count(
               mainAxisSpacing: 12,
               crossAxisSpacing: 12,
@@ -186,6 +186,7 @@ class CharacteristicItem extends StatelessWidget {
           left: 0,
           child: Container(
             width: 60,
+            padding: EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
@@ -195,7 +196,10 @@ class CharacteristicItem extends StatelessWidget {
               color: theme.primaryColorLight,
             ),
             alignment: Alignment.center,
-            child: Text(score.toString()),
+            child: Text(
+              score.toString(),
+              style: TextStyle(fontSize: 14),
+            ),
           ),
         ),
         Positioned(
@@ -243,11 +247,19 @@ class SavingThrowItem extends StatelessWidget {
           Expanded(
             child: Text(
               name,
-              style: theme.textTheme.bodyText2,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
           ),
-          Text(bonus.toBonusString(),
-              style: theme.textTheme.bodyText2?.copyWith(fontSize: 14))
+          Text(
+            bonus.toBonusString(),
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          )
         ],
       ),
     );

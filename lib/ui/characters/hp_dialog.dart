@@ -160,6 +160,7 @@ class _ActionsGroup extends StatelessWidget {
             backgroundColor: Color(0xFF3AFFBD),
           ),
         ),
+        SizedBox(height: 8),
         TextButton(
           onPressed: () {
             final hpDialogAmount =

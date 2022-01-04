@@ -101,23 +101,23 @@ class AbilityProficiencyIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (proficient) {
-      return Container(
-        width: 24,
-        height: 24,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(0xFFDCDAD9),
-        ),
-      );
-    } else {
-      return DottedBorder(
-          borderType: BorderType.Circle,
-          color: Color(0xFFDCDAD9),
-          child: SizedBox(
-            width: 24,
-            height: 24,
-          ));
-    }
+    return DottedBorder(
+      dashPattern: [7, 4],
+      borderType: BorderType.Circle,
+      color: Color(0xFFDCDAD9),
+      child: proficient
+          ? Container(
+              width: 24,
+              height: 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFDCDAD9),
+              ),
+            )
+          : SizedBox(
+              width: 24,
+              height: 24,
+            ),
+    );
   }
 }

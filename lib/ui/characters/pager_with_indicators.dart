@@ -20,8 +20,14 @@ class PagerWithIndicators extends StatelessWidget {
               isScrollable: true,
               unselectedLabelColor: Colors.white.withOpacity(0.3),
               tabs: namedPages.keys
-                  .map((e) => Tab(
-                        child: Text(e),
+                  .map((name) => Tab(
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
                       ))
                   .toList()),
           Expanded(

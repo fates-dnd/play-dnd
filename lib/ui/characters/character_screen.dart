@@ -305,7 +305,7 @@ class _CharacterRowButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(right: 8.0, top: 8),
+      padding: const EdgeInsets.only(right: 16, top: 8),
       child: Ink(
         height: 42,
         decoration: BoxDecoration(
