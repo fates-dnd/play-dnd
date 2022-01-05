@@ -186,6 +186,8 @@ class CharacterState {
   int? get spellSavingThrow =>
       8 + (spellcastingModifier ?? 0) + proficiencyBonus;
 
+  bool get hasMoney => money?.values.any((element) => element != 0) ?? false;
+
   Map<int, List<Spell>>? get groupedSpells =>
       preparedSpells?.fold(<int, List<Spell>>{}, (previousValue, element) {
         var list = previousValue![element.level];

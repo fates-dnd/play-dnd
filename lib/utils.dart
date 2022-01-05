@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/data/dice.dart';
+import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/damage_type.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -119,6 +120,23 @@ extension DiceName on Dice {
         return localizations.d20;
       case Dice.D100:
         return localizations.d100;
+    }
+  }
+}
+
+extension CurrencyAssets on Currency {
+  String toAssetPath() {
+    switch (this) {
+      case Currency.COPPER:
+        return "assets/drawable/money/copper.png";
+      case Currency.SILVER:
+        return "assets/drawable/money/silver.png";
+      case Currency.ELECTRUM:
+        return "assets/drawable/money/electrum.png";
+      case Currency.GOLD:
+        return "assets/drawable/money/gold.png";
+      case Currency.PLATINUM:
+        return "assets/drawable/money/platinum.png";
     }
   }
 }

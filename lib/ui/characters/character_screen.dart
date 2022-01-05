@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
@@ -11,6 +12,7 @@ import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart'
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
 import 'package:dnd_player_flutter/ui/characters/hp_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/money_dialog.dart';
+import 'package:dnd_player_flutter/ui/characters/money_info_item.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
@@ -260,17 +262,77 @@ class _MoneyButtonIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final characterBloc = BlocProvider.of<CharacterBloc>(context);
-    return _CharacterRowButton(
-      imageAsset: "assets/drawable/stats/money.png",
-      text: AppLocalizations.of(context)!.money,
-      textColor: Color(0xFFE5DD1C),
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) => MoneyDialog(
-                  characterBloc: characterBloc,
-                ));
+    final action = () {
+      showDialog(
+          context: context,
+          builder: (context) => MoneyDialog(
+                characterBloc: characterBloc,
+              ));
+    };
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) {
+        return state.hasMoney
+            ? _DetailedMoneyInfo(
+                money: state.money,
+                onTap: action,
+              )
+            : _CharacterRowButton(
+                imageAsset: "assets/drawable/stats/money.png",
+                text: AppLocalizations.of(context)!.money,
+                textColor: Color(0xFFE5DD1C),
+                onTap: action,
+              );
       },
+    );
+  }
+}
+
+class _DetailedMoneyInfo extends StatelessWidget {
+  final Map<Currency, int>? money;
+  final Function() onTap;
+
+  const _DetailedMoneyInfo({
+    Key? key,
+    required this.money,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.only(right: 16, top: 8),
+      child: Ink(
+        height: 42,
+        decoration: BoxDecoration(
+          color: theme.primaryColorLight,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(24),
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: money?.entries
+                      .where((element) => element.value != 0)
+                      .map((element) => Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: MoneyInfoItem(
+                              currency: element.key,
+                              value: element.value,
+                              fontSize: 20,
+                            ),
+                          ))
+                      .toList() ??
+                  [],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

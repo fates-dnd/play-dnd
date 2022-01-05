@@ -1,7 +1,9 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/money_dialog/money_dialog_bloc.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
+import 'package:dnd_player_flutter/ui/characters/money_info_item.dart';
 import 'package:dnd_player_flutter/ui/common/slider_selector.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -56,44 +58,13 @@ class _MoneyInfo extends StatelessWidget {
       spacing: 16,
       children: money?.entries
               .map(
-                (entry) => _MoneyInfoItem(
+                (entry) => MoneyInfoItem(
                   currency: entry.key,
                   value: entry.value,
                 ),
               )
               .toList() ??
           [],
-    );
-  }
-}
-
-class _MoneyInfoItem extends StatelessWidget {
-  final Currency currency;
-  final int value;
-
-  const _MoneyInfoItem({
-    Key? key,
-    required this.currency,
-    required this.value,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          _currencyToAssetPath(currency),
-        ),
-        SizedBox(width: 4),
-        Padding(
-          padding: const EdgeInsets.only(top: 4.0),
-          child: Text(
-            value.toString(),
-            style: TextStyle(color: Colors.white),
-          ),
-        )
-      ],
     );
   }
 }
@@ -206,7 +177,7 @@ class _RowMoneyOption extends StatelessWidget {
             children: [
               SizedBox(
                 width: 24,
-                child: Image.asset(_currencyToAssetPath(currency)),
+                child: Image.asset(currency.toAssetPath()),
               ),
               SizedBox(
                 width: 8,
@@ -275,20 +246,5 @@ class _ActionRow extends StatelessWidget {
         ),
       ],
     );
-  }
-}
-
-String _currencyToAssetPath(Currency currency) {
-  switch (currency) {
-    case Currency.COPPER:
-      return "assets/drawable/money/copper.png";
-    case Currency.SILVER:
-      return "assets/drawable/money/silver.png";
-    case Currency.ELECTRUM:
-      return "assets/drawable/money/electrum.png";
-    case Currency.GOLD:
-      return "assets/drawable/money/gold.png";
-    case Currency.PLATINUM:
-      return "assets/drawable/money/platinum.png";
   }
 }
