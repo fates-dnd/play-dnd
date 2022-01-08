@@ -337,7 +337,7 @@ class CharacterRepository {
     final outlines = _readCharacterOutlines() ?? [];
 
     return Future.wait(outlines.map((outline) async {
-      final language = settingsRepository.getLanguage();
+      final language = await settingsRepository.getLanguage();
       return Character(
         outline.name,
         outline.level,

@@ -33,7 +33,7 @@ class SpellsBloc extends Bloc<SpellsEvent, SpellsState> {
   ) : super(SpellsState(preparedSpells, learnedSpells, [])) {
     on<SpellsEvent>((event, emit) async {
       if (event is LoadSpells) {
-        final language = settingsRepository.getLanguage();
+        final language = await settingsRepository.getLanguage();
         allClasses = await classesRepository.getClasses(language);
 
         final spellDisplayItems = await loadSpells(language);

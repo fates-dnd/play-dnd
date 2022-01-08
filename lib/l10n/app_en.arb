@@ -3,7 +3,7 @@
   "@characters": {
     "description": "Title of the characters page"
   },
-  "languages": "Languages",
+  "settings": "Settings",
   "race": "Race",
   "details": "Details",
   "select": "Select",
@@ -93,5 +93,7 @@
   "equipment": "Equipment",
   "spells": "Spells",
   
-  "saving_throws": "Saving Throws"
+  "saving_throws": "Saving Throws",
+
+  "language": "Language"
 }

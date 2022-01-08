@@ -8,8 +8,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SettingsRepository repository;
 
   SettingsBloc(this.repository) : super(SettingsState(null)) {
-    on((event, emit) {
-      if (event is UpdateLanguageCode) {
+    on((event, emit) async {
+      if (event is InitSettings) {
+        final language = await repository.getLanguage();
+        emit(SettingsState(language));
+      } else if (event is UpdateLanguageCode) {
         repository.setLanguage(event.newLanguageCode);
         emit(SettingsState(event.newLanguageCode));
       }

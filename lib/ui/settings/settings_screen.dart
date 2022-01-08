@@ -6,13 +6,19 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.languages)),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settings)),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 12),
         children: [
+          _SettingsTitle(title: localizations!.language),
+          SizedBox(
+            height: 8,
+          ),
           _LanguageOption(
               title: "English",
+              code: "en",
               onPress: () {
                 BlocProvider.of<SettingsBloc>(context)
                     .add(UpdateLanguageCode("en"));
@@ -20,6 +26,7 @@ class SettingsScreen extends StatelessWidget {
           SizedBox(height: 12),
           _LanguageOption(
               title: "Русский",
+              code: "ru",
               onPress: () {
                 BlocProvider.of<SettingsBloc>(context)
                     .add(UpdateLanguageCode("ru"));
@@ -30,24 +37,65 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+class _SettingsTitle extends StatelessWidget {
+  final String title;
+
+  const _SettingsTitle({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 24,
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
 class _LanguageOption extends StatelessWidget {
   final String title;
+  final String code;
   final VoidCallback onPress;
 
   const _LanguageOption({
     Key? key,
     required this.title,
+    required this.code,
     required this.onPress,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(title, style: TextStyle(fontSize: 18)),
-      ),
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      builder: (context, state) {
+        return InkWell(
+          onTap: onPress,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                state.languageCode == code
+                    ? Icon(
+                        Icons.check,
+                        color: Colors.white,
+                        size: 24,
+                      )
+                    : SizedBox(width: 24),
+                SizedBox(width: 16),
+                Text(title, style: TextStyle(fontSize: 18)),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

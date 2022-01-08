@@ -65,8 +65,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         charisma: character.baseCharisma,
         race: character.race,
         clazz: character.clazz,
-        skills:
-            await skillsRepository.getSkills(settingsRepository.getLanguage()),
+        skills: await skillsRepository
+            .getSkills(await settingsRepository.getLanguage()),
         proficienctSkills: await _getProficientSkills(),
         equipment: await _getCharacterEquipment(),
         preparedSpells: await _getPreparedSpells(),
@@ -167,7 +167,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   }
 
   Future<List<Skill>> _getProficientSkills() async {
-    final language = settingsRepository.getLanguage();
+    final language = await settingsRepository.getLanguage();
     final allSkills = await skillsRepository.getSkills(language);
     final skillIndexes =
         characterRepository.getProficientSkillIndexes(character);
@@ -179,7 +179,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<List<EquipmentQuantity>> _getCharacterEquipment() async {
     final equipmentIndexQuantities =
         characterRepository.getCharacterEquipmentIndexQuantities(character);
-    final language = settingsRepository.getLanguage();
+    final language = await settingsRepository.getLanguage();
     final allEquipment = await equipmentRepository.getEquipment(language);
     return equipmentIndexQuantities.map((indexQuantity) {
       final equipment = allEquipment
@@ -190,7 +190,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   }
 
   Future<List<Spell>> _getLearnedSpells() async {
-    final language = settingsRepository.getLanguage();
+    final language = await settingsRepository.getLanguage();
     final learnedSpellsIndexes =
         characterRepository.getLearnedSpellsIndexes(character);
     final allSpells = await spellsRepository.getSpells(language);
@@ -204,7 +204,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   Future<List<Spell>> _getPreparedSpells() async {
     final preparedSpellsIndexes =
         characterRepository.getPreparedSpellsIndexes(character);
-    final language = settingsRepository.getLanguage();
+    final language = await settingsRepository.getLanguage();
     final allSpells = await spellsRepository.getSpells(language);
 
     final result = preparedSpellsIndexes

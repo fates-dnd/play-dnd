@@ -1,15 +1,19 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 class SettingsRepository {
+  String defaultLanguage;
 
-  // TODO: store in actual local storage
-  String language;
+  SettingsRepository(this.defaultLanguage);
 
-  SettingsRepository(this.language);
-
-  void setLanguage(String language) {
-    this.language = language;
+  void setLanguage(String language) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString("language", language);
   }
 
-  String getLanguage() {
+  Future<String> getLanguage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final storedLanguage = prefs.getString("language");
+    final language = storedLanguage ?? defaultLanguage;
     if (language != "en" && language != "ru") {
       return "en";
     }

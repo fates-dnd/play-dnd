@@ -14,7 +14,7 @@ class EquipmentBloc extends Bloc<EquipmentEvent, EquipmentState> {
   EquipmentBloc(this.settingsRepository, this.repository)
       : super(EquipmentState([])) {
     on<EquipmentEvent>((event, emit) async {
-      final language = settingsRepository.getLanguage();
+      final language = await settingsRepository.getLanguage();
       if (event is LoadEquipment) {
         final equipment = await repository.getEquipment(language);
         emit.call(EquipmentState(equipment));

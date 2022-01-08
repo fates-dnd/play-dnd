@@ -23,7 +23,7 @@ class SelectedProficienciesBloc
     this.clazz,
   ) : super(SelectedProficienciesState()) {
     on<SelectedProficienciesEvent>((event, emit) async {
-      final language = settingsRepository.getLanguage();
+      final language = await settingsRepository.getLanguage();
       final allSkills = await skillsRepository.getSkills(language);
       if (event is LoadSkills) {
         emit(SelectedProficienciesState(

@@ -1,6 +1,6 @@
 {
   "characters": "Персонажи",
-  "languages": "Языки",
+  "settings": "Настройки",
   "race": "Раса",
   "details": "Подробнее",
   "select": "Выбрать",
@@ -90,5 +90,7 @@
   "equipment": "Снаряжение",
   "spells": "Заклинания",
 
-  "saving_throws": "Спас Броски"
+  "saving_throws": "Спас Броски",
+
+  "language": "Язык"
 }

@@ -33,7 +33,7 @@ class DndApp extends StatelessWidget {
         BlocProvider(
             create: (context) => SettingsBloc(
                   getIt<SettingsRepository>(),
-                )),
+                )..add(InitSettings())),
         BlocProvider(
             create: (context) =>
                 CharacterCreatorBloc(getIt.get<CharacterRepository>()))

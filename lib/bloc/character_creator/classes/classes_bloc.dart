@@ -30,7 +30,7 @@ class ClassesBloc extends Bloc<ClassesEvent, ClassesState> {
     ClassesEvent event,
   ) async {
     if (event is LoadClasses) {
-      final language = settingsRepository.getLanguage();
+      final language = await settingsRepository.getLanguage();
       classes = await classesRepository.getClasses(language);
       return Classes(clazz, classes);
     } else if (event is SelectClass) {

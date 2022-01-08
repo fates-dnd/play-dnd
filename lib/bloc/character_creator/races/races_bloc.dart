@@ -31,7 +31,7 @@ class RacesBloc extends Bloc<RacesEvent, RacesState> {
     RacesEvent event,
   ) async {
     if (event is LoadRaces) {
-      final language = settingsRepository.getLanguage();
+      final language = await settingsRepository.getLanguage();
       final races = await racesRepository.getRaces(language);
       final traits = await traitsRepository.getTraits(language);
       final racesWithTraits = Map<Race, List<Trait>>.fromIterable(races,
