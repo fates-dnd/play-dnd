@@ -8,7 +8,7 @@ class LevelInfo {
   final int proficiencyBonus;
   final List<Feature> features;
   final ClassSpecific classSpecific;
-  final Class classIndex;
+  final Class clazz;
 
   LevelInfo(
     this.level,
@@ -16,7 +16,7 @@ class LevelInfo {
     this.proficiencyBonus,
     this.features,
     this.classSpecific,
-    this.classIndex,
+    this.clazz,
   );
 }
 
@@ -72,12 +72,12 @@ class ClassSpecific {
   final int? mysticArcanumLevel6;
   final int? mysticArcanumLevel7;
   final int? mysticArcanumLevel8;
-  final int? myysticArcanumLevel9;
+  final int? mysticArcanumLevel9;
 
   // wizard section
   final int? arcaneRecoveryLevels;
 
-  ClassSpecific(
+  ClassSpecific({
     this.rageCount,
     this.rageDamageBonus,
     this.brutalCriticalDice,
@@ -108,9 +108,9 @@ class ClassSpecific {
     this.mysticArcanumLevel6,
     this.mysticArcanumLevel7,
     this.mysticArcanumLevel8,
-    this.myysticArcanumLevel9,
+    this.mysticArcanumLevel9,
     this.arcaneRecoveryLevels,
-  );
+  });
 }
 
 class MartialArts {
