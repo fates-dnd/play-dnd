@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/dice.dart';
-import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/level_info.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
@@ -44,7 +43,11 @@ class LevelsRepository {
     );
   }
 
-  ClassSpecific _parseClassSpecific(Map<String, dynamic> classSpecific) {
+  ClassSpecific? _parseClassSpecific(Map<String, dynamic>? classSpecific) {
+    if (classSpecific == null) {
+      return null;
+    }
+
     return ClassSpecific(
       rageCount: classSpecific["rage_count"],
       rageDamageBonus: classSpecific["rage_damage_bonus"],
@@ -55,8 +58,8 @@ class LevelsRepository {
       magicalSecretsMax7: classSpecific["magical_secrets_max_7"],
       magicalSecretsMax9: classSpecific["magical_secrets_max_9"],
       channelDivinityCharges: classSpecific["channel_divinity_charges"],
-      destroryUndeadCR: classSpecific["destroy_undead_cr"],
-      wildShapeMaxCR: classSpecific["wild_shape_max_cr"],
+      destroryUndeadCR: classSpecific["destroy_undead_cr"]?.toDouble(),
+      wildShapeMaxCR: classSpecific["wild_shape_max_cr"]?.toDouble(),
       wildShapeSwim: classSpecific["wild_shape_swim"],
       wildShapeFly: classSpecific["wild_shape_fly"],
       actionSurges: classSpecific["action_surges"],
@@ -101,9 +104,9 @@ class LevelsRepository {
     return SneakAttack(dice, value);
   }
 
-  List<SpellSlotPrice> _parseSpellSlotPrice(List<dynamic> spellSlotPrices) {
+  List<SpellSlotPrice>? _parseSpellSlotPrice(List<dynamic>? spellSlotPrices) {
     return spellSlotPrices
-        .map((e) => SpellSlotPrice(
+        ?.map((e) => SpellSlotPrice(
               e["spell_slot_level"],
               e["sorcery_point_cost"],
             ))

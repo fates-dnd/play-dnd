@@ -37,7 +37,7 @@ class FeaturesRepository {
       await classesRepository.findByIndex(language, json["class"]["index"]),
       json["name"],
       json["level"],
-      json["desc"],
+      (json["desc"] as List<dynamic>).cast(),
     );
   }
 }

@@ -4,10 +4,10 @@ import 'package:dnd_player_flutter/dto/feature.dart';
 
 class LevelInfo {
   final int level;
-  final int abilityScoreBonuses;
-  final int proficiencyBonus;
+  final int? abilityScoreBonuses;
+  final int? proficiencyBonus;
   final List<Feature> features;
-  final ClassSpecific classSpecific;
+  final ClassSpecific? classSpecific;
   final Class clazz;
 
   LevelInfo(

@@ -1,33 +1,11 @@
-import 'dart:io';
-
 import 'package:dnd_player_flutter/data/characteristics.dart';
-import 'package:dnd_player_flutter/repository/classes_repository.dart';
-import 'package:dnd_player_flutter/repository/equipment_repository.dart';
-import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:test/test.dart';
 
+import 'test_repository_factory.dart';
+
 void main() {
-  late ClassesRepository classesRepository;
-
   test('load classes en', () async {
-    final classesFile = File("assets/rules/en/classes.json");
-    final classesContents = await classesFile.readAsString();
-
-    final SkillsRepository skillsRepository =
-        SkillsRepository((language) async {
-      return await File("assets/rules/en/skills.json").readAsString();
-    });
-
-    final EquipmentRepository equipmentRepository =
-        EquipmentRepository((language) async {
-      return await File("assets/rules/en/equipment.json").readAsString();
-    });
-
-    classesRepository = ClassesRepository(skillsRepository, equipmentRepository,
-        (language) async {
-      return classesContents;
-    });
-
+    final classesRepository = await createClassesRepository();
     final classes = await classesRepository.getClasses("en");
 
     expect(classes.length, 12);
@@ -47,23 +25,7 @@ void main() {
   });
 
   test('load classes ru', () async {
-    final classesFile = File("assets/rules/ru/classes.json");
-    final classesContents = await classesFile.readAsString();
-
-    final SkillsRepository skillsRepository =
-        SkillsRepository((language) async {
-      return await File("assets/rules/ru/skills.json").readAsString();
-    });
-
-    final EquipmentRepository equipmentRepository =
-        EquipmentRepository((language) async {
-      return await File("assets/rules/ru/equipment.json").readAsString();
-    });
-
-    classesRepository = ClassesRepository(skillsRepository, equipmentRepository,
-        (language) async {
-      return classesContents;
-    });
+    final classesRepository = await createClassesRepository();
 
     final classes = await classesRepository.getClasses("ru");
 
