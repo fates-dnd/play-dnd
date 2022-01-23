@@ -8,7 +8,7 @@ import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:test/fake.dart';
 
 void main() {
-  final settingsRepository = SettingsRepository("en");
+  final settingsRepository = FakeSettingsRepository("en");
   final skillsRepository = FakeSkillsRepository();
 
   final proficiencyChoices = ProficiencyChoices(2, [
@@ -218,5 +218,16 @@ class FakeSkillsRepository extends Fake implements SkillsRepository {
       Skill("index5", "name5", Characteristic.WISDOM),
       Skill("index6", "name6", Characteristic.DEXTERITY),
     ];
+  }
+}
+
+class FakeSettingsRepository extends Fake implements SettingsRepository {
+  final String language;
+
+  FakeSettingsRepository(this.language);
+
+  @override
+  Future<String> getLanguage() async {
+    return language;
   }
 }
