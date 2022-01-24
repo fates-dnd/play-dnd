@@ -6,14 +6,19 @@ import 'package:dnd_player_flutter/dto/skill.dart';
 class SkillsRepository {
   final Future<String> Function(String lang) jsonReader;
 
+  List<Skill>? skills;
   String? language;
 
   SkillsRepository(this.jsonReader);
 
   Future<List<Skill>> getSkills(String language) async {
+    if (skills != null && this.language == language) {
+      return skills!;
+    }
     final response = await jsonReader(language);
     final List<dynamic> skillsJson = json.decode(response);
-    return skillsJson.map((skillJson) => _fromJson(skillJson)).toList();
+    skills = skillsJson.map((skillJson) => _fromJson(skillJson)).toList();
+    return skills!;
   }
 
   void resetWithLanguage(String language) {

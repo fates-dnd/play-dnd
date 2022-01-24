@@ -1,22 +1,20 @@
 import 'package:dnd_player_flutter/data/dice.dart';
-import 'package:dnd_player_flutter/dto/class.dart';
-import 'package:dnd_player_flutter/dto/feature.dart';
 
 class LevelInfo {
   final int level;
   final int? abilityScoreBonuses;
   final int? proficiencyBonus;
-  final List<Feature> features;
+  final List<String> featureIndexes;
   final ClassSpecific? classSpecific;
-  final Class clazz;
+  final String classIndex;
 
   LevelInfo(
     this.level,
     this.abilityScoreBonuses,
     this.proficiencyBonus,
-    this.features,
+    this.featureIndexes,
     this.classSpecific,
-    this.clazz,
+    this.classIndex,
   );
 }
 

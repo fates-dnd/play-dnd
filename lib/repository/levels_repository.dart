@@ -2,21 +2,15 @@ import 'dart:convert';
 
 import 'package:dnd_player_flutter/data/dice.dart';
 import 'package:dnd_player_flutter/dto/level_info.dart';
-import 'package:dnd_player_flutter/repository/classes_repository.dart';
-import 'package:dnd_player_flutter/repository/features_repository.dart';
 
 class LevelsRepository {
   final Future<String> Function(String lang) jsonReader;
-  final FeaturesRepository featuresRepository;
-  final ClassesRepository classesRepository;
 
   List<LevelInfo>? loadedLevels;
   String? language;
 
   LevelsRepository(
     this.jsonReader,
-    this.featuresRepository,
-    this.classesRepository,
   );
 
   Future<List<LevelInfo>> getLevels(String language) async {
@@ -26,20 +20,19 @@ class LevelsRepository {
 
     final response = await jsonReader(language);
     final List<dynamic> levelsJson = json.decode(response);
-    return Future.wait(levelsJson.map((e) => _fromJson(language, e)).toList());
+    return levelsJson.map((e) => _fromJson(e)).toList();
   }
 
-  Future<LevelInfo> _fromJson(
-      String language, Map<String, dynamic> json) async {
+  LevelInfo _fromJson(Map<String, dynamic> json) {
     return LevelInfo(
       json["level"],
       json["ability_score_bonuses"],
       json["prof_bonus"],
-      await Future.wait((json["features"] as List<dynamic>)
-          .map((e) => featuresRepository.findByIndex(language, e["index"]))
-          .toList()),
+      (json["features"] as List<dynamic>)
+          .map((e) => e["index"] as String)
+          .toList(),
       _parseClassSpecific(json["class_specific"]),
-      await classesRepository.findByIndex(language, json["class"]["index"]),
+      json["class"]["index"],
     );
   }
 
