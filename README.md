@@ -1,4 +1,4 @@
-# dnd_player_flutter
+# Fates for D&D
 
 ![tests](https://github.com/ariedov/dnd_player_flutter/actions/workflows/main.yml/badge.svg)
 
