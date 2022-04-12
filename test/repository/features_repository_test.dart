@@ -9,11 +9,4 @@ void main() {
 
     expect(features.length, 377);
   });
-
-  test('load features ru', () async {
-    final repository = await createFeaturesRepository();
-    final features = await repository.getFeatures("ru");
-
-    expect(features.length, 377);
-  });
 }

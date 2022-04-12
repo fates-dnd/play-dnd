@@ -23,14 +23,6 @@ class SettingsScreen extends StatelessWidget {
                 BlocProvider.of<SettingsBloc>(context)
                     .add(UpdateLanguageCode("en"));
               }),
-          SizedBox(height: 12),
-          _LanguageOption(
-              title: "Русский",
-              code: "ru",
-              onPress: () {
-                BlocProvider.of<SettingsBloc>(context)
-                    .add(UpdateLanguageCode("ru"));
-              }),
         ],
       ),
     );

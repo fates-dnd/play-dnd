@@ -15,16 +15,4 @@ void main() {
     final equipmentList = await repository.getEquipment("en");
     expect(equipmentList.length, 238);
   });
-
-  test('load equipment ru', () async {
-    final equipmentFile = File("assets/rules/ru/equipment.json");
-    final contents = await equipmentFile.readAsString();
-
-    final repository = EquipmentRepository((language) async {
-      return contents;
-    });
-
-    final equipmentList = await repository.getEquipment("ru");
-    expect(equipmentList.length, 238);
-  });
 }

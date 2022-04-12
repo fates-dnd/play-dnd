@@ -12,14 +12,4 @@ void main() {
       expect(levelInfo.length, 290);
     },
   );
-
-  test(
-    'load levels ru',
-    () async {
-      final repository = await createLevelsRepository();
-      final levelInfo = await repository.getLevels("ru");
-
-      expect(levelInfo.length, 290);
-    },
-  );
 }

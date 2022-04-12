@@ -70,13 +70,6 @@ flutter:
     - assets/rules/en/equipment.json
     - assets/rules/en/spells.json
 
-    - assets/rules/ru/races.json
-    - assets/rules/ru/traits.json
-    - assets/rules/ru/classes.json
-    - assets/rules/ru/skills.json
-    - assets/rules/ru/equipment.json
-    - assets/rules/ru/spells.json
-
     # stats
     - assets/drawable/stats/heart.png
     - assets/drawable/stats/sword.png
