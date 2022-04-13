@@ -6,6 +6,7 @@ class Feature {
   final String name;
   final int level;
   final List<String> description;
+  final String? parent;
 
   Feature(
     this.index,
@@ -13,5 +14,6 @@ class Feature {
     this.name,
     this.level,
     this.description,
+    this.parent,
   );
 }

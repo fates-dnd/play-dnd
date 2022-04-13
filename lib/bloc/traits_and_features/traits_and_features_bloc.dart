@@ -1,4 +1,6 @@
+import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/feature.dart';
+import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
@@ -26,7 +28,19 @@ class TraitsAndFeaturesBloc
         final traits = await traitsRepository.getTraits(language);
         final features = await featuresRepository.getFeatures(language);
 
-        emit(TraitsAndFeaturesState(traits, features));
+        emit(TraitsAndFeaturesState(
+          traits
+              .where(
+                (trait) =>
+                    trait.races.any((race) => race.index == event.race.index),
+              )
+              .toList(),
+          features
+              .where((feature) => feature.clazz.index == event.clazz.index)
+              .where((feature) => feature.level <= event.level)
+              .where((feature) => feature.parent == null)
+              .toList(),
+        ));
       }
     });
   }

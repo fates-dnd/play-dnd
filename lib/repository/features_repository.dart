@@ -38,6 +38,7 @@ class FeaturesRepository {
       json["name"],
       json["level"],
       (json["desc"] as List<dynamic>).cast(),
+      json["parent"]?["index"],
     );
   }
 }
