@@ -8,6 +8,10 @@ Future<String> readTraitsJson(String lang) async {
   return rootBundle.loadString("assets/rules/$lang/traits.json");
 }
 
+Future<String> readFeaturesJson(String lang) async {
+  return rootBundle.loadString("assets/rules/$lang/features.json");
+}
+
 Future<String> readClassesJson(String lang) async {
   return rootBundle.loadString("assets/rules/$lang/classes.json");
 }

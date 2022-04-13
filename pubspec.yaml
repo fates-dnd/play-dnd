@@ -42,6 +42,8 @@ dependencies:
 
   
 dev_dependencies:
+  flutter_lints: ^1.0.4
+
   hive_generator: ^1.1.0
   build_runner: ^2.1.5
   test: ^1.20.1
@@ -65,6 +67,7 @@ flutter:
     # jsons
     - assets/rules/en/races.json
     - assets/rules/en/traits.json
+    - assets/rules/en/features.json
     - assets/rules/en/classes.json
     - assets/rules/en/skills.json
     - assets/rules/en/equipment.json

@@ -16,6 +16,7 @@ import 'package:dnd_player_flutter/ui/characters/money_info_item.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
+import 'package:dnd_player_flutter/ui/characters/traits_and_features_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -407,12 +408,14 @@ class Pages extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
         final localizations = AppLocalizations.of(context);
+
         return PagerWithIndicators(namedPages: {
           localizations!.characteristics: BaseCharateristicsPage(),
           localizations.skill: AbilitiesPage(),
           localizations.equipment: EquipmentPage(),
           if (state.clazz?.spellcastingAbility != null)
             localizations.spells: SpellsPage(),
+          localizations.traits_and_features: TraitsAndFeaturesPage(),
         });
       },
     );
