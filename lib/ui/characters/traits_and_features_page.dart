@@ -7,8 +7,9 @@ import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/traits_repository.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TraitsAndFeaturesPage extends StatelessWidget {
   final Race race;
@@ -24,6 +25,7 @@ class TraitsAndFeaturesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return BlocProvider(
       create: (context) => TraitsAndFeaturesBloc(
         getIt<SettingsRepository>(),
@@ -38,13 +40,71 @@ class TraitsAndFeaturesPage extends StatelessWidget {
         builder: (context, state) {
           return ListView(
             children: []
-              ..addAll(state.traits.map((trait) => TraitItem(trait: trait)))
+              ..add(SectionTitle(title: localizations.racial_traits))
+              ..addAll(state.traits
+                  .map((trait) => FeatureAndTraitItem(trait: trait)))
+              ..add(SectionTitle(title: localizations.class_features))
               ..addAll(state.features
-                  .map((feature) => FeatureItem(feature: feature))),
+                  .map((feature) => FeatureAndTraitItem(feature: feature))),
           );
         },
       ),
     );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  final String title;
+
+  const SectionTitle({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      child: Text(
+        title,
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  }
+}
+
+class FeatureAndTraitItem extends StatelessWidget {
+  final Feature? feature;
+  final Trait? trait;
+
+  const FeatureAndTraitItem({
+    Key? key,
+    this.feature,
+    this.trait,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: theme.primaryColorLight,
+        ),
+        padding: const EdgeInsets.all(16),
+        child: _getChild(),
+      ),
+    );
+  }
+
+  Widget _getChild() {
+    if (feature != null) {
+      return FeatureItem(feature: feature!);
+    }
+    if (trait != null) {
+      return TraitItem(trait: trait!);
+    }
+
+    return SizedBox();
   }
 }
 
@@ -55,8 +115,19 @@ class TraitItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(trait.name),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          trait.name,
+          style: TextStyle(fontSize: 16),
+        ),
+        SizedBox(height: 8),
+        Text(
+          trait.description.join("\n"),
+          style: TextStyle(fontSize: 14),
+        ),
+      ],
     );
   }
 }
@@ -68,8 +139,19 @@ class FeatureItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(feature.name),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          feature.name,
+          style: TextStyle(fontSize: 16),
+        ),
+        SizedBox(height: 8),
+        Text(
+          feature.description.join("\n"),
+          style: TextStyle(fontSize: 14),
+        ),
+      ],
     );
   }
 }

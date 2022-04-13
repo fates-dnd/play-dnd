@@ -96,5 +96,8 @@
   
   "saving_throws": "Saving Throws",
 
+  "racial_traits": "Racial Traits",
+  "class_features": "Class Features",
+
   "language": "Language"
 }
