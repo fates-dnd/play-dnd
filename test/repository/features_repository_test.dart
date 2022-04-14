@@ -7,6 +7,6 @@ void main() {
     final repository = await createFeaturesRepository();
     final features = await repository.getFeatures("en");
 
-    expect(features.length, 378);
+    expect(features.length, 375);
   });
 }
