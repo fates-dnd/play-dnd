@@ -4,7 +4,9 @@ class Feature {
   final String index;
   final Class clazz;
   final String name;
-  final int level;
+  final int? level;
+  final Map<String, int>? levels;
+  final bool? expandable;
   final List<String> description;
   final String? parent;
 
@@ -13,6 +15,8 @@ class Feature {
     this.clazz,
     this.name,
     this.level,
+    this.levels,
+    this.expandable,
     this.description,
     this.parent,
   );

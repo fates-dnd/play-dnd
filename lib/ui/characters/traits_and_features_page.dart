@@ -41,11 +41,15 @@ class TraitsAndFeaturesPage extends StatelessWidget {
           return ListView(
             children: []
               ..add(SectionTitle(title: localizations.racial_traits))
-              ..addAll(state.traits
-                  .map((trait) => FeatureAndTraitItem(trait: trait)))
+              ..addAll(state.traits.map((trait) => FeatureAndTraitItem(
+                    trait: trait,
+                    level: level,
+                  )))
               ..add(SectionTitle(title: localizations.class_features))
-              ..addAll(state.features
-                  .map((feature) => FeatureAndTraitItem(feature: feature))),
+              ..addAll(state.features.map((feature) => FeatureAndTraitItem(
+                    feature: feature,
+                    level: level,
+                  ))),
           );
         },
       ),
@@ -73,11 +77,13 @@ class SectionTitle extends StatelessWidget {
 class FeatureAndTraitItem extends StatelessWidget {
   final Feature? feature;
   final Trait? trait;
+  final int level;
 
   const FeatureAndTraitItem({
     Key? key,
     this.feature,
     this.trait,
+    required this.level,
   }) : super(key: key);
 
   @override
@@ -98,7 +104,10 @@ class FeatureAndTraitItem extends StatelessWidget {
 
   Widget _getChild() {
     if (feature != null) {
-      return FeatureItem(feature: feature!);
+      return FeatureItem(
+        feature: feature!,
+        level: level,
+      );
     }
     if (trait != null) {
       return TraitItem(trait: trait!);
@@ -120,7 +129,7 @@ class TraitItem extends StatelessWidget {
       children: [
         Text(
           trait.name,
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 18),
         ),
         SizedBox(height: 8),
         Text(
@@ -134,17 +143,32 @@ class TraitItem extends StatelessWidget {
 
 class FeatureItem extends StatelessWidget {
   final Feature feature;
+  final int level;
 
-  const FeatureItem({Key? key, required this.feature}) : super(key: key);
+  const FeatureItem({
+    Key? key,
+    required this.feature,
+    required this.level,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          feature.name,
-          style: TextStyle(fontSize: 16),
+        Row(
+          children: [
+            Text(
+              feature.name,
+              style: TextStyle(fontSize: 18),
+            ),
+            SizedBox(width: 8),
+            if (feature.levels != null && feature.expandable == false)
+              Text(
+                "(${feature.levels![feature.levels!.keys.lastWhere((key) => int.parse(key) <= level)]})",
+                style: TextStyle(fontSize: 18),
+              )
+          ],
         ),
         SizedBox(height: 8),
         Text(

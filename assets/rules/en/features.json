@@ -7,7 +7,14 @@
       "url": "/api/classes/barbarian"
     },
     "name": "Rage",
-    "level": 1,
+    "levels": {
+      "1": 2,
+      "3": 3,
+      "6": 4,
+      "12": 5,
+      "17": 6
+    },
+    "expandable": true,
     "prerequisites": [],
     "desc": [
       "In battle, you fight with primal ferocity. On your turn, you can enter a rage as a bonus action. While raging, you gain the following benefits if you aren't wearing heavy armor:",
@@ -3777,14 +3784,19 @@
     "url": "/api/features/holy-nimbus"
   },
   {
-    "index": "favored-enemy-1-type",
+    "index": "favored-enemy",
     "class": {
       "index": "ranger",
       "name": "Ranger",
       "url": "/api/classes/ranger"
     },
-    "name": "Favored Enemy (1 type)",
-    "level": 1,
+    "name": "Favored Enemy",
+    "levels": {
+      "1": 1,
+      "6": 2,
+      "14": 3
+    },
+    "expandable": false,
     "prerequisites": [],
     "desc": [
       "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.",
@@ -3792,8 +3804,7 @@
       "You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.",
       "When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.",
       "You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures."
-    ],
-    "url": "/api/features/favored-enemy-1-type"
+    ]
   },
   {
     "index": "natural-explorer-1-terrain-type",
@@ -4139,25 +4150,6 @@
     "url": "/api/features/ranger-extra-attack"
   },
   {
-    "index": "favored-enemy-2-types",
-    "class": {
-      "index": "ranger",
-      "name": "Ranger",
-      "url": "/api/classes/ranger"
-    },
-    "name": "Favored Enemy (2 types)",
-    "level": 6,
-    "prerequisites": [],
-    "desc": [
-      "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.",
-      "Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.",
-      "You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.",
-      "When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.",
-      "You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures."
-    ],
-    "url": "/api/features/favored-enemy-2-types"
-  },
-  {
     "index": "natural-explorer-2-terrain-types",
     "class": {
       "index": "ranger",
@@ -4475,25 +4467,6 @@
       "When you reach 4th level, and again at 8th, 12th, 16th, and 19th level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can't increase an ability score above 20 using this feature."
     ],
     "url": "/api/features/ranger-ability-score-improvement-3"
-  },
-  {
-    "index": "favored-enemy-3-enemies",
-    "class": {
-      "index": "ranger",
-      "name": "Ranger",
-      "url": "/api/classes/ranger"
-    },
-    "name": "Favored Enemy (3 enemies)",
-    "level": 14,
-    "prerequisites": [],
-    "desc": [
-      "Beginning at 1st level, you have significant experience studying, tracking, hunting, and even talking to a certain type of enemy.",
-      "Choose a type of favored enemy: aberrations, beasts, celestials, constructs, dragons, elementals, fey, fiends, giants, monstrosities, oozes, plants, or undead. Alternatively, you can select two races of humanoid (such as gnolls and orcs) as favored enemies.",
-      "You have advantage on Wisdom (Survival) checks to track your favored enemies, as well as on Intelligence checks to recall information about them.",
-      "When you gain this feature, you also learn one language of your choice that is spoken by your favored enemies, if they speak one at all.",
-      "You choose one additional favored enemy, as well as an associated language, at 6th and 14th level. As you gain levels, your choices should reflect the types of monsters you have encountered on your adventures."
-    ],
-    "url": "/api/features/favored-enemy-3-enemies"
   },
   {
     "index": "vanish",

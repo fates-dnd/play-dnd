@@ -37,7 +37,20 @@ class TraitsAndFeaturesBloc
               .toList(),
           features
               .where((feature) => feature.clazz.index == event.clazz.index)
-              .where((feature) => feature.level <= event.level)
+              .where((feature) {
+                final level = feature.level;
+                final levels = feature.levels;
+                if (level != null) {
+                  return level <= event.level;
+                }
+
+                if (levels != null) {
+                  return levels.keys
+                      .any((key) => int.parse(key) <= event.level);
+                }
+
+                return false;
+              })
               .where((feature) => feature.parent == null)
               .toList(),
         ));
