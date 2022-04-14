@@ -20,4 +20,11 @@ class Feature {
     this.description,
     this.parent,
   );
+
+  int? getNonExpandableItemSize(int level) {
+    if (levels != null && expandable == false) {
+      return levels![levels!.keys.lastWhere((key) => int.parse(key) <= level)];
+    }
+    return null;
+  }
 }

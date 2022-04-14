@@ -165,7 +165,7 @@ class FeatureItem extends StatelessWidget {
             SizedBox(width: 8),
             if (feature.levels != null && feature.expandable == false)
               Text(
-                "(${feature.levels![feature.levels!.keys.lastWhere((key) => int.parse(key) <= level)]})",
+                "(${feature.getNonExpandableItemSize(level)})",
                 style: TextStyle(fontSize: 18),
               )
           ],
