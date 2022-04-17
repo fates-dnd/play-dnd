@@ -38,6 +38,7 @@ class FeaturesRepository {
       json["name"],
       json["level"],
       json["levels"]?.cast<String, int>(),
+      json["level_names"]?.cast<String, String>(),
       json["expandable"],
       (json["desc"] as List<dynamic>).cast(),
       json["parent"]?["index"],

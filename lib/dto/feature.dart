@@ -6,6 +6,7 @@ class Feature {
   final String name;
   final int? level;
   final Map<String, int>? levels;
+  final Map<String, String>? levelNames;
   final bool? expandable;
   final List<String> description;
   final String? parent;
@@ -16,14 +17,16 @@ class Feature {
     this.name,
     this.level,
     this.levels,
+    this.levelNames,
     this.expandable,
     this.description,
     this.parent,
   );
 
-  int? getNonExpandableItemSize(int level) {
-    if (levels != null && expandable == false) {
-      return levels![levels!.keys.lastWhere((key) => int.parse(key) <= level)];
+  String? getNonExpandableNameForLevel(int level) {
+    if (levelNames != null && expandable == false) {
+      return levelNames![
+          levelNames!.keys.lastWhere((key) => int.parse(key) <= level)];
     }
     return null;
   }

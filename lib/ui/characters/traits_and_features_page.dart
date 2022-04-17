@@ -165,7 +165,7 @@ class FeatureItem extends StatelessWidget {
             SizedBox(width: 8),
             if (feature.levels != null && feature.expandable == false)
               Text(
-                "(${feature.getNonExpandableItemSize(level)})",
+                "(${feature.getNonExpandableNameForLevel(level)})",
                 style: TextStyle(fontSize: 18),
               )
           ],

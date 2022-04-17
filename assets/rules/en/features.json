@@ -3796,6 +3796,11 @@
       "6": 2,
       "14": 3
     },
+    "level_names": {
+      "1": "1 enemy",
+      "2": "2 enemies",
+      "3": "3 enemies"
+    },
     "expandable": false,
     "prerequisites": [],
     "desc": [
