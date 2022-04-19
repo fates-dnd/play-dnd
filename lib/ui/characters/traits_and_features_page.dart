@@ -175,7 +175,65 @@ class FeatureItem extends StatelessWidget {
           feature.description.join("\n"),
           style: TextStyle(fontSize: 14),
         ),
+        SizedBox(height: 16),
+        SelectionRows(
+          count: feature.getExpandableCountForLevel(level) ?? 0,
+        ),
       ],
+    );
+  }
+}
+
+class SelectionRows extends StatelessWidget {
+  final int count;
+
+  const SelectionRows({Key? key, required this.count}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: List.generate(
+          count,
+          (index) => Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: SelectionItem(isUsed: false),
+              )),
+    );
+  }
+}
+
+class SelectionItem extends StatelessWidget {
+  final bool isUsed;
+
+  const SelectionItem({
+    Key? key,
+    required this.isUsed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 3,
+          color: Color(0xFFDCDAD9),
+        ),
+      ),
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: isUsed
+              ? Container(
+                  decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: Color(0xFFFF5251),
+                ))
+              : SizedBox(),
+        ),
+      ),
     );
   }
 }

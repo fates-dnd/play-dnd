@@ -30,4 +30,11 @@ class Feature {
     }
     return null;
   }
+
+  int? getExpandableCountForLevel(int level) {
+    if (levels != null && expandable == true) {
+      return levels![levels!.keys.lastWhere((key) => int.parse(key) <= level)];
+    }
+    return null;
+  }
 }

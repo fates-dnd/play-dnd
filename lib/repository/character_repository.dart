@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
+import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
@@ -35,22 +36,25 @@ class CharacterRepository {
     if (currentList == null) {
       currentList = <CharacterOutline>[];
     }
-    currentList.add(CharacterOutline.fromCharacter(character,
-        equipment: character.selectedEquipment
-            .map((e) => EquipmentIndexQuantity(
-                e.equipment.index, e.quantity, e.isEquipped))
-            .toList(),
-        equippedItems: [],
-        preparedSpells: [],
-        learnedSpells: [],
-        usedSpellSlots: {},
-        money: {
-          Currency.COPPER.index: 0,
-          Currency.SILVER.index: 0,
-          Currency.ELECTRUM.index: 0,
-          Currency.GOLD.index: 0,
-          Currency.PLATINUM.index: 0,
-        }));
+    currentList.add(CharacterOutline.fromCharacter(
+      character,
+      equipment: character.selectedEquipment
+          .map((e) => EquipmentIndexQuantity(
+              e.equipment.index, e.quantity, e.isEquipped))
+          .toList(),
+      equippedItems: [],
+      preparedSpells: [],
+      learnedSpells: [],
+      usedSpellSlots: {},
+      money: {
+        Currency.COPPER.index: 0,
+        Currency.SILVER.index: 0,
+        Currency.ELECTRUM.index: 0,
+        Currency.GOLD.index: 0,
+        Currency.PLATINUM.index: 0,
+      },
+      featureUsage: {},
+    ));
     box.put('character_list', currentList);
   }
 
@@ -329,6 +333,43 @@ class CharacterRepository {
       currentMoney[currency] = (currentMoney[currency] ?? 0) - amount;
       currentList[targetIndex] =
           currentList[targetIndex].copyWith(money: currentMoney);
+    }
+    box.put('character_list', currentList);
+  }
+
+  Future<Map<String, int>> getFeatureUsage(Character character) async {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return {};
+    }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    return currentList[targetIndex].featureUsage;
+  }
+
+  void incrementFeature(Character character, Feature feature) async {
+    final currentList = _readCharacterOutlines();
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final featureUsage = currentList![targetIndex].featureUsage;
+      featureUsage[feature.index] = (featureUsage[feature.index] ?? 0) + 1;
+      currentList[targetIndex] =
+          currentList[targetIndex].copyWith(featureUsage: featureUsage);
+    }
+    box.put('character_list', currentList);
+  }
+
+  void decrementFeature(Character character, Feature feature) async {
+    final currentList = _readCharacterOutlines();
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final featureUsage = currentList![targetIndex].featureUsage;
+      featureUsage[feature.index] = (featureUsage[feature.index] ?? 0) - 1;
+      currentList[targetIndex] =
+          currentList[targetIndex].copyWith(featureUsage: featureUsage);
     }
     box.put('character_list', currentList);
   }

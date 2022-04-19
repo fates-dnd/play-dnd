@@ -11,6 +11,7 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/equipment_property.dart';
+import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
@@ -73,6 +74,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         learnedSpells: await _getLearnedSpells(),
         levelSpellSlots: await getSpellSlots(),
         money: await getMoney(),
+        featureUsage: await getFeatureUsage(),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -161,6 +163,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       return state.copyWith(
         money: await getMoney(),
       );
+    } else if (event is IncrementFeature) {
+      characterRepository.incrementFeature(character, event.feature);
+      return state.copyWith(
+        featureUsage: await getFeatureUsage(),
+      );
+    } else if (event is DecrementFeature) {
+      characterRepository.decrementFeature(character, event.feature);
+      return state.copyWith(
+        featureUsage: await getFeatureUsage(),
+      );
     }
 
     return state;
@@ -234,5 +246,9 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     return rawMoney.map((key, value) {
       return MapEntry(Currency.values[key], value);
     });
+  }
+
+  Future<Map<String, int>?> getFeatureUsage() async {
+    return await characterRepository.getFeatureUsage(character);
   }
 }
