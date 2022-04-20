@@ -34,6 +34,7 @@ class TraitsAndFeaturesBloc
                 (trait) =>
                     trait.races.any((race) => race.index == event.race.index),
               )
+              .where((trait) => trait.parent == null)
               .toList(),
           features
               .where((feature) => feature.clazz.index == event.clazz.index)
