@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/traits_and_features/traits_and_features_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
@@ -177,6 +178,7 @@ class FeatureItem extends StatelessWidget {
         ),
         SizedBox(height: 16),
         SelectionRows(
+          feature: feature,
           count: feature.getExpandableCountForLevel(level) ?? 0,
         ),
       ],
@@ -185,28 +187,39 @@ class FeatureItem extends StatelessWidget {
 }
 
 class SelectionRows extends StatelessWidget {
+  final Feature feature;
   final int count;
 
-  const SelectionRows({Key? key, required this.count}) : super(key: key);
+  const SelectionRows({Key? key, required this.feature, required this.count})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(
-          count,
-          (index) => Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: SelectionItem(isUsed: false),
-              )),
-    );
+    return BlocBuilder<CharacterBloc, CharacterState>(
+        builder: (context, state) {
+      final usedSlots = state.featureUsage?[feature.index] ?? 0;
+      return Row(
+        children: List.generate(
+            count,
+            (index) => Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: SelectionItem(
+                    feature: feature,
+                    isUsed: index < usedSlots,
+                  ),
+                )),
+      );
+    });
   }
 }
 
 class SelectionItem extends StatelessWidget {
+  final Feature feature;
   final bool isUsed;
 
   const SelectionItem({
     Key? key,
+    required this.feature,
     required this.isUsed,
   }) : super(key: key);
 
@@ -222,7 +235,10 @@ class SelectionItem extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          BlocProvider.of<CharacterBloc>(context).add(
+              isUsed ? DecrementFeature(feature) : IncrementFeature(feature));
+        },
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: isUsed
