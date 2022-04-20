@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
@@ -36,6 +37,7 @@ class CharacterScreen extends StatelessWidget {
         getIt<SkillsRepository>(),
         getIt<EquipmentRepository>(),
         getIt<SpellsRepository>(),
+        getIt<FeaturesRepository>(),
       )..add(SetCharacter(character)),
       child: SafeArea(
         child: Scaffold(

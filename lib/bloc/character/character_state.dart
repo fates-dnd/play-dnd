@@ -26,7 +26,7 @@ class CharacterState {
   final Map<int, SpellSlots>? levelSpellSlots;
   final Map<Currency, int>? money;
 
-  final Map<String, int>? featureUsage;
+  final Map<Feature, int>? featureUsage;
 
   CharacterState({
     this.level = 1,
@@ -69,7 +69,7 @@ class CharacterState {
     List<Spell>? learnedSpells,
     Map<int, SpellSlots>? levelSpellSlots,
     Map<Currency, int>? money,
-    Map<String, int>? featureUsage,
+    Map<Feature, int>? featureUsage,
   }) {
     return CharacterState(
       level: level ?? this.level,
