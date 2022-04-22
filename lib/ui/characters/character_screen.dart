@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
@@ -16,6 +17,7 @@ import 'package:dnd_player_flutter/ui/characters/money_info_item.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
+import 'package:dnd_player_flutter/ui/characters/traits_and_features_page.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +37,7 @@ class CharacterScreen extends StatelessWidget {
         getIt<SkillsRepository>(),
         getIt<EquipmentRepository>(),
         getIt<SpellsRepository>(),
+        getIt<FeaturesRepository>(),
       )..add(SetCharacter(character)),
       child: SafeArea(
         child: Scaffold(
@@ -407,12 +410,19 @@ class Pages extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
         final localizations = AppLocalizations.of(context);
+
         return PagerWithIndicators(namedPages: {
           localizations!.characteristics: BaseCharateristicsPage(),
           localizations.skill: AbilitiesPage(),
           localizations.equipment: EquipmentPage(),
           if (state.clazz?.spellcastingAbility != null)
             localizations.spells: SpellsPage(),
+          if (state.clazz != null && state.race != null)
+            localizations.traits_and_features: TraitsAndFeaturesPage(
+              race: state.race!,
+              clazz: state.clazz!,
+              level: state.level,
+            ),
         });
       },
     );

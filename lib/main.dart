@@ -15,7 +15,7 @@ import 'hive_utils.dart';
 void main() async {
   setupTypeAdapters();
   await Hive.initFlutter();
-  await Hive.openBox('characters');
+  await Hive.openBox("characters");
 
   registerDependencies();
 

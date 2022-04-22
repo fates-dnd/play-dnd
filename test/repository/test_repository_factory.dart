@@ -5,10 +5,12 @@ import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/levels_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/repository/traits_repository.dart';
 
 SkillsRepository? skillsRepository;
 EquipmentRepository? equipmentRepository;
 ClassesRepository? classesRepository;
+TraitsRepository? traitsRepository;
 FeaturesRepository? featuresRepository;
 LevelsRepository? levelsRepository;
 
@@ -40,6 +42,15 @@ Future<ClassesRepository> createClassesRepository() async {
     });
   }
   return classesRepository!;
+}
+
+Future<TraitsRepository> createTraitsRepository() async {
+  if (traitsRepository == null) {
+    traitsRepository = TraitsRepository((language) async {
+      return File("assets/rules/$language/traits.json").readAsStringSync();
+    });
+  }
+  return traitsRepository!;
 }
 
 Future<FeaturesRepository> createFeaturesRepository() async {

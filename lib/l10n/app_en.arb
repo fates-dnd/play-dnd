@@ -92,8 +92,12 @@
   "skills": "Skills",
   "equipment": "Equipment",
   "spells": "Spells",
+  "traits_and_features": "Traits and Features",
   
   "saving_throws": "Saving Throws",
+
+  "racial_traits": "Racial Traits",
+  "class_features": "Class Features",
 
   "language": "Language"
 }

@@ -31,6 +31,8 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
       reader.readMap().cast(), // spell slots
       reader.readMap().cast(), // money
+
+      reader.readMap().cast(), // feature usage
     );
   }
 
@@ -97,5 +99,7 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
 
     writer.writeMap(obj.usedSpellSlots);
     writer.writeMap(obj.money);
+
+    writer.writeMap(obj.featureUsage);
   }
 }

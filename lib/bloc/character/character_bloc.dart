@@ -11,11 +11,13 @@ import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/equipment_property.dart';
+import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
@@ -32,6 +34,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final SkillsRepository skillsRepository;
   final EquipmentRepository equipmentRepository;
   final SpellsRepository spellsRepository;
+  final FeaturesRepository featuresRepository;
 
   late Character character;
   late Spellcasting? spellcasting;
@@ -42,6 +45,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     this.skillsRepository,
     this.equipmentRepository,
     this.spellsRepository,
+    this.featuresRepository,
   ) : super(CharacterState()) {
     on<CharacterEvent>((event, emit) async {
       emit(await processEvent(event));
@@ -73,6 +77,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         learnedSpells: await _getLearnedSpells(),
         levelSpellSlots: await getSpellSlots(),
         money: await getMoney(),
+        featureUsage: await getFeatureUsage(),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -161,6 +166,16 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       return state.copyWith(
         money: await getMoney(),
       );
+    } else if (event is IncrementFeature) {
+      characterRepository.incrementFeature(character, event.feature);
+      return state.copyWith(
+        featureUsage: await getFeatureUsage(),
+      );
+    } else if (event is DecrementFeature) {
+      characterRepository.decrementFeature(character, event.feature);
+      return state.copyWith(
+        featureUsage: await getFeatureUsage(),
+      );
     }
 
     return state;
@@ -234,5 +249,17 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     return rawMoney.map((key, value) {
       return MapEntry(Currency.values[key], value);
     });
+  }
+
+  Future<Map<Feature, int>?> getFeatureUsage() async {
+    final language = await settingsRepository.getLanguage();
+    final featureUsage = await characterRepository.getFeatureUsage(character);
+
+    final result = <Feature, int>{};
+    featureUsage.entries.forEach((entry) async =>
+        result[await featuresRepository.findByIndex(language, entry.key)] =
+            entry.value);
+
+    return result;
   }
 }
