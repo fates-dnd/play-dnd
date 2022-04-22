@@ -12,6 +12,8 @@ import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
+const CURRENT_VERSION = 1;
+
 class CharacterRepository {
   final SettingsRepository settingsRepository;
   final RacesRepository racesRepository;
@@ -28,7 +30,13 @@ class CharacterRepository {
     this.skillsRepository,
     this.equipmentRepository,
   ) {
-    box = Hive.box('characters');
+    box = Hive.box("characters");
+
+    final version = box.get("version", defaultValue: 0);
+    if (CURRENT_VERSION > version) {
+      box.put("character_list", []);
+      box.put("version", CURRENT_VERSION);
+    }
   }
 
   void insertCharacter(Character character) {
