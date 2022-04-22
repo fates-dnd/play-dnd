@@ -34,7 +34,7 @@ class CharacterRepository {
 
     final version = box.get("version", defaultValue: 0);
     if (CURRENT_VERSION > version) {
-      box.put("character_list", []);
+      box.clear();
       box.put("version", CURRENT_VERSION);
     }
   }
