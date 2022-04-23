@@ -1,39 +1,61 @@
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
-class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
+class CharacterTypeAdapter extends TypeAdapter<CharacterOutline?> {
   @override
   int get typeId => 0;
 
   @override
-  CharacterOutline read(BinaryReader reader) {
-    return CharacterOutline(
-      reader.readString(), // name
-      reader.readInt(), // level
-      reader.readInt(), // maxHp
-      reader.readInt(), // hp
-      reader.readInt(), // base strength
-      reader.readInt(), // base dexterity
-      reader.readInt(), // base constitution
-      reader.readInt(), // base intelligence
-      reader.readInt(), // base wisdom
-      reader.readInt(), // base charisma
+  CharacterOutline? read(BinaryReader reader) {
+    try {
+      return CharacterOutline(
+        reader.readString(),
+        // name
+        reader.readInt(),
+        // level
+        reader.readInt(),
+        // maxHp
+        reader.readInt(),
+        // hp
+        reader.readInt(),
+        // base strength
+        reader.readInt(),
+        // base dexterity
+        reader.readInt(),
+        // base constitution
+        reader.readInt(),
+        // base intelligence
+        reader.readInt(),
+        // base wisdom
+        reader.readInt(),
+        // base charisma
 
-      reader.readString(), // race
-      reader.readString(), // class
+        reader.readString(),
+        // race
+        reader.readString(),
+        // class
 
-      readStringList(reader), // proficiency indexes
+        readStringList(reader),
+        // proficiency indexes
 
-      readEquipmentQuantities(reader), // equipment indexes
+        readEquipmentQuantities(reader),
+        // equipment indexes
 
-      readStringList(reader), // prepared spells
-      readStringList(reader), // learned spells
+        readStringList(reader),
+        // prepared spells
+        readStringList(reader),
+        // learned spells
 
-      reader.readMap().cast(), // spell slots
-      reader.readMap().cast(), // money
+        reader.readMap().cast(),
+        // spell slots
+        reader.readMap().cast(),
+        // money
 
-      reader.readMap().cast(), // feature usage
-    );
+        reader.readMap().cast(), // feature usage
+      );
+    } catch (e) {
+      return null;
+    }
   }
 
   List<EquipmentIndexQuantity> readEquipmentQuantities(BinaryReader reader) {
@@ -60,7 +82,11 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline> {
   }
 
   @override
-  void write(BinaryWriter writer, CharacterOutline obj) {
+  void write(BinaryWriter writer, CharacterOutline? obj) {
+    if (obj == null) {
+      throw ArgumentError("Do not store null CharacterOutline");
+    }
+
     writer.writeString(obj.name);
     writer.writeInt(obj.level);
     writer.writeInt(obj.maxHp);

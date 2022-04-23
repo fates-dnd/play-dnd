@@ -421,7 +421,8 @@ class CharacterRepository {
 
   List<CharacterOutline>? _readCharacterOutlines() {
     return (box.get('character_list') as List?)
-        ?.map((e) => e as CharacterOutline)
+        ?.where((e) => e != null)
+        .map((e) => e as CharacterOutline)
         .toList();
   }
 }
