@@ -2,6 +2,7 @@ import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_description_row.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_info_extended.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpellItem extends StatelessWidget {
   final Spell spell;
@@ -18,6 +19,8 @@ class SpellItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+
     return Container(
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -54,11 +57,15 @@ class SpellItem extends StatelessWidget {
             Text(spell.school.toString(),
                 style: TextStyle(fontSize: 10, color: Color(0xCCDCDAD9))),
             SizedBox(height: 5),
-            SpellDescriptionRow(name: "Время", value: spell.castingTime),
-            SpellDescriptionRow(name: "Дистанция", value: spell.range),
             SpellDescriptionRow(
-                name: "Компоненты", value: spell.components.join(", ")),
-            SpellDescriptionRow(name: "Длительность", value: spell.duration),
+                name: localizations.time, value: spell.castingTime),
+            SpellDescriptionRow(
+                name: localizations.distance, value: spell.range),
+            SpellDescriptionRow(
+                name: localizations.components,
+                value: spell.components.join(", ")),
+            SpellDescriptionRow(
+                name: localizations.duration, value: spell.duration),
           ],
         ),
       ),
@@ -78,8 +85,9 @@ class _PrepareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return _SpellActionButton(
-      title: "Подготовить",
+      title: localizations.prepare,
       onPressed: onPressed,
     );
   }

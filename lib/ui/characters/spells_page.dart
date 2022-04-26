@@ -3,9 +3,9 @@ import 'package:dnd_player_flutter/bloc/character/spell_slots.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/ui/spells/spell_item.dart';
 import 'package:dnd_player_flutter/ui/spells/spells_list.dart';
+import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SpellsPage extends StatelessWidget {
@@ -55,6 +55,8 @@ class _SpellcastingInfoRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
         return Container(
@@ -67,13 +69,13 @@ class _SpellcastingInfoRow extends StatelessWidget {
             children: [
               _SpellcastingInfoItem(
                   modifier: state.spellcastingModifier?.toBonusString() ?? "",
-                  description: "модификатор"),
+                  description: localizations.spell_modifier),
               _SpellcastingInfoItem(
                   modifier: state.spellcastingAttack?.toBonusString() ?? "",
-                  description: "атака"),
+                  description: localizations.spell_attack),
               _SpellcastingInfoItem(
                   modifier: state.spellSavingThrow.toString(),
-                  description: "спас бросок"),
+                  description: localizations.spell_saving_throw),
             ],
           ),
         );
@@ -110,6 +112,8 @@ class _SpellcastingInfoItem extends StatelessWidget {
 class _EditSpellsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) {
         return Row(
@@ -131,7 +135,7 @@ class _EditSpellsButton extends StatelessWidget {
                     );
                   }));
                 },
-                child: Text("Изменить"),
+                child: Text(localizations.modify),
               ),
             ),
           ],

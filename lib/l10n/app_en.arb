@@ -39,6 +39,20 @@
   "equipment": "Equipment",
   "spells": "Spells",
 
+  "unarmed_strike": "Unarmed Strike",
+
+  "spell_modifier": "modifier",
+  "spell_attack": "spell attack",
+  "spell_saving_throw": "saving throw",
+
+  "modify": "Modify",
+  "prepare": "Prepare",
+
+  "time": "Time",
+  "distance": "Distance",
+  "components": "Components",
+  "duration": "Duration",
+
   "acid": "Acid",
   "slashing": "Slashing",
   "necrotic": "Necrotic",
@@ -98,6 +112,8 @@
 
   "racial_traits": "Racial Traits",
   "class_features": "Class Features",
+
+  "add": "Add",
 
   "language": "Language"
 }

@@ -7,10 +7,13 @@ import 'package:dnd_player_flutter/ui/equipment/sure_to_delete_equipment.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EquipmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext rootContext) {
+    final localizations = AppLocalizations.of(rootContext)!;
+
     return ListView(
       children: [
         EquippedSection(),
@@ -31,7 +34,7 @@ class EquipmentPage extends StatelessWidget {
                   );
                 }));
               },
-              child: Text("Добавить"),
+              child: Text(localizations.add),
             ),
           ],
         ),
@@ -46,6 +49,8 @@ class EquippedSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+
     return BlocBuilder<CharacterBloc, CharacterState>(
       builder: (context, state) => Container(
         padding: EdgeInsets.all(12),
@@ -57,7 +62,7 @@ class EquippedSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Екипировка",
+              localizations.equipment,
               style: theme.textTheme.headline2,
             ),
             Row(
@@ -79,7 +84,7 @@ class EquippedSection extends StatelessWidget {
                   flex: 1,
                   child: Center(
                     child: Text(
-                      "Урон",
+                      localizations.damage,
                       style: TextStyle(
                         fontSize: 14,
                         color: Color(0xFFDCDAD9),
@@ -185,6 +190,8 @@ class UnarmedAttackRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
@@ -195,7 +202,7 @@ class UnarmedAttackRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Безоружная атака",
+                  localizations.unarmed_strike,
                   style: TextStyle(
                     color: Color(0xDDDCDAD9),
                     fontSize: 18,
@@ -205,7 +212,7 @@ class UnarmedAttackRow extends StatelessWidget {
                   height: 2,
                 ),
                 Text(
-                  "Ближний бой",
+                  localizations.melee,
                   style: TextStyle(
                     color: Color(0xAADCDAD9),
                     fontSize: 12,
