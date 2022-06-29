@@ -107,10 +107,15 @@ class ClassCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                classItem.imageAsset,
-                width: 116,
-                height: 116,
+              SizedBox(
+                height: 5,
+              ),
+              Expanded(
+                child: Image.asset(
+                  classItem.imageAsset,
+                  width: 100,
+                  height: 100,
+                ),
               ),
               SizedBox(
                 height: 5,
@@ -118,6 +123,9 @@ class ClassCard extends StatelessWidget {
               Text(
                 classItem.name,
                 style: Theme.of(context).textTheme.headline5,
+              ),
+              SizedBox(
+                height: 5,
               ),
             ],
           ),

@@ -18,7 +18,7 @@ class BaseCharateristicsPage extends StatelessWidget {
           children: [
             GridView.count(
               shrinkWrap: true,
-              crossAxisCount: 3,
+              crossAxisCount: 2,
               mainAxisSpacing: 24,
               crossAxisSpacing: 24,
               physics: NeverScrollableScrollPhysics(),
@@ -64,11 +64,7 @@ class BaseCharateristicsPage extends StatelessWidget {
             SizedBox(height: 32),
             Text(localizations.saving_throws, style: theme.textTheme.headline2),
             SizedBox(height: 16),
-            GridView.count(
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
-              childAspectRatio: 4 / 1,
-              crossAxisCount: 2,
+            ListView(
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               children: [
@@ -158,7 +154,7 @@ class CharacteristicItem extends StatelessWidget {
                 name.toUpperCase(),
                 style: TextStyle(
                   color: Color(0xFF9D9D9D),
-                  fontSize: 10,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -185,7 +181,7 @@ class CharacteristicItem extends StatelessWidget {
           bottom: 0,
           left: 0,
           child: Container(
-            width: 60,
+            width: 70,
             padding: EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16),
@@ -198,7 +194,7 @@ class CharacteristicItem extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               score.toString(),
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 16),
             ),
           ),
         ),
@@ -206,7 +202,7 @@ class CharacteristicItem extends StatelessWidget {
           bottom: 0,
           right: 0,
           child: Container(
-            padding: EdgeInsets.all(2),
+            padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: accent,
@@ -214,7 +210,11 @@ class CharacteristicItem extends StatelessWidget {
                   color: theme.primaryColor,
                   width: 5,
                 )),
-            child: Image.asset("assets/drawable/dice/d20.png"),
+            child: Image.asset(
+              "assets/drawable/dice/d20.png",
+              width: 16,
+              height: 16,
+            ),
           ),
         ),
       ],
@@ -236,31 +236,38 @@ class SavingThrowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(color: Color(0xFF272E32)),
-      child: Row(
-        children: [
-          ProficiencyRing(filled: proficient),
-          SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              name,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(12),
+          decoration: BoxDecoration(color: Color(0xFF272E32)),
+          child: Row(
+            children: [
+              ProficiencyRing(filled: proficient),
+              SizedBox(width: 16),
+              Expanded(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
               ),
-            ),
+              Text(
+                bonus.toBonusString(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              )
+            ],
           ),
-          Text(
-            bonus.toBonusString(),
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-            ),
-          )
-        ],
-      ),
+        ),
+        SizedBox(
+          height: 12,
+        )
+      ],
     );
   }
 }
