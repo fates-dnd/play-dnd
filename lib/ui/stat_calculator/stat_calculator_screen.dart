@@ -51,6 +51,7 @@ class StatCalculatorScreen extends StatelessWidget {
                 _LastRow(
                   onSubmit: onSubmit,
                 ),
+                SizedBox(height: 24),
               ],
             ),
           )),

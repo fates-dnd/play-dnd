@@ -111,7 +111,7 @@ class SetCharacteristicsScreen extends StatelessWidget {
   Widget _submitButton(BuildContext inputContext) {
     return BlocBuilder<SetCharacteristicsBloc, SetCharacteristicsState>(
       builder: (context, state) => Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(bottom: 24, top: 16),
         child: TextButton(
             onPressed: state.isFilled
                 ? () {

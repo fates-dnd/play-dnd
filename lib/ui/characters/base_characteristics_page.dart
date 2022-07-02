@@ -165,9 +165,9 @@ class CharacteristicItem extends StatelessWidget {
                     Text(
                       bonus >= 0 ? "+${bonus.toString()}" : bonus.toString(),
                       style: TextStyle(
-                          color: Color(0xFFDCDAD9),
-                          fontSize: 38,
-                          fontWeight: FontWeight.bold),
+                        color: Color(0xFFDCDAD9),
+                        fontSize: 52,
+                      ),
                     ),
                     // artificially increased height
                     SizedBox(height: 10),

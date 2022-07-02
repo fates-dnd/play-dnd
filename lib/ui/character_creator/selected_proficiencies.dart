@@ -65,7 +65,7 @@ class SelectedProficiencies extends StatelessWidget {
                       ..insert(state.choose + 1, SizedBox(height: 24))),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.only(bottom: 24, top: 8.0),
                 child: TextButton(
                     onPressed: state.areSkillsSelected
                         ? () {

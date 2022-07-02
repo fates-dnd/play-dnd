@@ -41,7 +41,7 @@ class ClassesList extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.only(bottom: 24, top: 16),
                 child: TextButton(
                     onPressed: state.selectedClass == null
                         ? null
