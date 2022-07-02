@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "dnd_player_flutter",
+            "name": "Fates D&D",
             "request": "launch",
             "type": "dart"
         },
