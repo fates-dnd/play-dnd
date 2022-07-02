@@ -1,6 +1,7 @@
 part of 'character_bloc.dart';
 
 class CharacterState {
+  final String name;
   final int level;
   final int maxHp;
   final int hp;
@@ -29,6 +30,7 @@ class CharacterState {
   final Map<Feature, int>? featureUsage;
 
   CharacterState({
+    this.name = "",
     this.level = 1,
     this.maxHp = 0,
     this.hp = 0,

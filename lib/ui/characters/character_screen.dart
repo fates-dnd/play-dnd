@@ -1,13 +1,5 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
-import 'package:dnd_player_flutter/dependencies.dart';
-import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
-import 'package:dnd_player_flutter/repository/character_repository.dart';
-import 'package:dnd_player_flutter/repository/equipment_repository.dart';
-import 'package:dnd_player_flutter/repository/features_repository.dart';
-import 'package:dnd_player_flutter/repository/settings_repository.dart';
-import 'package:dnd_player_flutter/repository/skills_repository.dart';
-import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
@@ -24,37 +16,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CharacterScreen extends StatelessWidget {
-  final Character character;
-
-  const CharacterScreen({Key? key, required this.character}) : super(key: key);
+  const CharacterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CharacterBloc(
-        getIt<SettingsRepository>(),
-        getIt<CharacterRepository>(),
-        getIt<SkillsRepository>(),
-        getIt<EquipmentRepository>(),
-        getIt<SpellsRepository>(),
-        getIt<FeaturesRepository>(),
-      )..add(SetCharacter(character)),
-      child: SafeArea(
-        child: Scaffold(
-          body: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverToBoxAdapter(
-                  child: _CharacterScreenHeader(character: character),
-                ),
-                SliverToBoxAdapter(
-                  child: _CharacterActionsRow(),
-                ),
-              ];
-            },
-            body: Pages(),
-          ),
+    return SafeArea(
+      child: Scaffold(
+        body: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(
+                child: _CharacterScreenHeader(),
+              ),
+              SliverToBoxAdapter(
+                child: _CharacterActionsRow(),
+              ),
+            ];
+          },
+          body: Pages(),
         ),
       ),
     );
@@ -62,49 +41,50 @@ class CharacterScreen extends StatelessWidget {
 }
 
 class _CharacterScreenHeader extends StatelessWidget {
-  final Character character;
-
-  const _CharacterScreenHeader({Key? key, required this.character})
-      : super(key: key);
+  const _CharacterScreenHeader({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Color(0xFFE5E1DE),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            character.name,
-            style: TextStyle(
-                color: Colors.black, fontSize: 32, fontWeight: FontWeight.bold),
-          ),
-          Text(
-            "${character.race.name} ${character.clazz.name}, ${character.level}",
-            style: TextStyle(
-                color: Colors.black.withOpacity(0.7),
-                fontSize: 18,
-                fontStyle: FontStyle.italic),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    _InitiativeIcon(),
-                  ],
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) => Container(
+        color: Color(0xFFE5E1DE),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              state.name,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "${state.race?.name} ${state.clazz?.name}, ${state.level}",
+              style: TextStyle(
+                  color: Colors.black.withOpacity(0.7),
+                  fontSize: 18,
+                  fontStyle: FontStyle.italic),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    children: [
+                      _InitiativeIcon(),
+                    ],
+                  ),
                 ),
-              ),
-              _ArmorClass(),
-              SizedBox(width: 12),
-              _ProficiencyBonusInfo(),
-            ],
-          )
-        ],
+                _ArmorClass(),
+                SizedBox(width: 12),
+                _ProficiencyBonusInfo(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

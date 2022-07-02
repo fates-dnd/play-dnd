@@ -1,0 +1,4 @@
+enum Rest {
+  SHORT,
+  LONG,
+}

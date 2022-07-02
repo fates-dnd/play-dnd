@@ -110,5 +110,10 @@
 
   "add": "Add",
 
-  "language": "Language"
+  "language": "Language",
+
+  "add_feature": "Add feature",
+  "description": "Description",
+  "usages": "Usages",
+  "resets_on": "Resets on"
 }

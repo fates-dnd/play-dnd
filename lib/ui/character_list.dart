@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character_list/character_list_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
@@ -112,8 +113,9 @@ class CharacterItem extends StatelessWidget {
       color: theme.primaryColorLight,
       child: InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CharacterScreen(character: character)));
+          BlocProvider.of<CharacterBloc>(context).add(SetCharacter(character));
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => CharacterScreen()));
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

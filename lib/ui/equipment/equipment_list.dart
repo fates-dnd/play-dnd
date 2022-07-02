@@ -37,7 +37,7 @@ class EquipmentList extends StatelessWidget {
             )),
         body: BlocBuilder<EquipmentBloc, EquipmentState>(
           builder: (context, state) => ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 8),
+              padding: EdgeInsets.symmetric(horizontal: 16),
               itemCount: state.equipment.length,
               itemBuilder: (context, index) {
                 final item = state.equipment[index];

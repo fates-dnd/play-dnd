@@ -15,6 +15,7 @@ import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
@@ -23,6 +24,7 @@ import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
 import 'package:dnd_player_flutter/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
 part 'character_event.dart';
@@ -58,6 +60,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       spellcasting = Spellcasting.createForClass(character.clazz);
 
       return CharacterState(
+        name: character.name,
         level: character.level,
         maxHp: character.maxHp,
         hp: character.hp,

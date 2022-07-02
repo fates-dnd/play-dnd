@@ -78,6 +78,12 @@ class SpendMoney extends CharacterEvent {
   SpendMoney(this.currency, this.amount);
 }
 
+class AddUserFeature extends CharacterEvent {
+  final UserFeature userFeature;
+
+  AddUserFeature(this.userFeature);
+}
+
 class IncrementFeature extends CharacterEvent {
   final Feature feature;
 

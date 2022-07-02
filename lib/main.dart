@@ -1,7 +1,12 @@
+import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
+import 'package:dnd_player_flutter/repository/equipment_repository.dart';
+import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
+import 'package:dnd_player_flutter/repository/skills_repository.dart';
+import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/ui/character_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,7 +40,17 @@ class DndApp extends StatelessWidget {
                 )..add(InitSettings())),
         BlocProvider(
             create: (context) =>
-                CharacterCreatorBloc(getIt.get<CharacterRepository>()))
+                CharacterCreatorBloc(getIt.get<CharacterRepository>())),
+        BlocProvider(
+          create: (context) => CharacterBloc(
+            getIt<SettingsRepository>(),
+            getIt<CharacterRepository>(),
+            getIt<SkillsRepository>(),
+            getIt<EquipmentRepository>(),
+            getIt<SpellsRepository>(),
+            getIt<FeaturesRepository>(),
+          ),
+        )
       ],
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) => MaterialApp(
@@ -96,7 +111,7 @@ class DndApp extends StatelessWidget {
               ),
             ),
             inputDecorationTheme: InputDecorationTheme(
-                hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 18),
+                hintStyle: TextStyle(color: Color(0xAAE5E1DE), fontSize: 16),
                 focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Color(0xFFFF5251), width: 2)),
                 enabledBorder: UnderlineInputBorder(

@@ -63,7 +63,7 @@ class SpellsList extends StatelessWidget {
                 children: state.spellDisplayItems
                     .map((spellDisplayItem) => Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 4.0, horizontal: 12),
+                              vertical: 4.0, horizontal: 16),
                           child: _SpellListItem(
                               spellDisplayItem: spellDisplayItem),
                         ))

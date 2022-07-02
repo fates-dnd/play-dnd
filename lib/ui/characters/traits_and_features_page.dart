@@ -8,6 +8,7 @@ import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/traits_repository.dart';
+import 'package:dnd_player_flutter/ui/traits_and_features/manage_feature_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -42,6 +43,7 @@ class TraitsAndFeaturesPage extends StatelessWidget {
           return ListView(
             children: []
               ..add(SectionTitle(title: localizations.racial_traits))
+              ..add(ManageButton())
               ..addAll(state.traits.map((trait) => FeatureAndTraitItem(
                     trait: trait,
                     level: level,
@@ -71,6 +73,21 @@ class SectionTitle extends StatelessWidget {
         title,
         style: TextStyle(fontSize: 24),
       ),
+    );
+  }
+}
+
+class ManageButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return ManageFeatureScreen();
+        }));
+      },
+      child: Text(localizations.add),
     );
   }
 }
