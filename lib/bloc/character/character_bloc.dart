@@ -81,6 +81,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         levelSpellSlots: await getSpellSlots(),
         money: await getMoney(),
         featureUsage: await getFeatureUsage(),
+        userFeatures: characterRepository.getUserFeatures(character),
       );
     } else if (event is AddEquipmentItem) {
       characterRepository.addEquipmentToCharacter(character, event.equipment);
@@ -169,6 +170,10 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       return state.copyWith(
         money: await getMoney(),
       );
+    } else if (event is AddUserFeature) {
+      characterRepository.addUserFeature(character, event.userFeature);
+      return state.copyWith(
+          userFeatures: characterRepository.getUserFeatures(character));
     } else if (event is IncrementFeature) {
       characterRepository.incrementFeature(character, event.feature);
       return state.copyWith(

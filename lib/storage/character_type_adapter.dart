@@ -1,3 +1,5 @@
+import 'package:dnd_player_flutter/dto/rest.dart';
+import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
@@ -52,6 +54,8 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline?> {
         // money
 
         reader.readMap().cast(), // feature usage
+
+        readUserFeatures(reader),
       );
     } catch (e) {
       return null;
@@ -79,6 +83,30 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline?> {
       result.add(reader.readString());
     }
     return result;
+  }
+
+  List<UserFeature> readUserFeatures(BinaryReader reader) {
+    final result = <UserFeature>[];
+    final total = reader.readInt();
+    for (var i = 0; i < total; ++i) {
+      result.add(readUserFeature(reader));
+    }
+    return result;
+  }
+
+  UserFeature readUserFeature(BinaryReader reader) {
+    final name = reader.readString();
+    final description = reader.readString();
+    final isUsageAvailable = reader.readBool();
+
+    Usage? usage;
+    if (isUsageAvailable) {
+      final usages = reader.readInt();
+      final resetsOn = Rest.values[reader.readInt()];
+      usage = Usage(usages, resetsOn);
+    }
+
+    return UserFeature(name: name, description: description, usage: usage);
   }
 
   @override
@@ -127,5 +155,28 @@ class CharacterTypeAdapter extends TypeAdapter<CharacterOutline?> {
     writer.writeMap(obj.money);
 
     writer.writeMap(obj.featureUsage);
+
+    writeUserFeatures(writer, obj.userFeatures);
+  }
+
+  void writeUserFeatures(BinaryWriter writer, List<UserFeature> userFeatures) {
+    writer.write(userFeatures.length);
+    userFeatures.forEach((feature) {
+      writeUserFeature(writer, feature);
+    });
+  }
+
+  void writeUserFeature(BinaryWriter writer, UserFeature userFeature) {
+    writer.write(userFeature.name);
+    writer.write(userFeature.description);
+
+    final usage = userFeature.usage;
+
+    final isUsageAvailable = usage != null;
+    writer.writeBool(isUsageAvailable);
+    if (isUsageAvailable) {
+      writer.write(usage!.usages);
+      writer.write(usage.resetsOn?.index);
+    }
   }
 }

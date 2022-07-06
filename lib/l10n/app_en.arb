@@ -115,5 +115,6 @@
   "add_feature": "Add feature",
   "description": "Description",
   "usages": "Usages",
-  "resets_on": "Resets on"
+  "resets_on": "Resets on",
+  "has_limited_usage": "Has limited usage"
 }

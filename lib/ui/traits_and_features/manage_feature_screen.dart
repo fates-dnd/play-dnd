@@ -64,7 +64,16 @@ class _Form extends StatelessWidget {
   }
 }
 
-class _UsagesSection extends StatelessWidget {
+class _UsagesSection extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _UsagesSectionState();
+  }
+}
+
+class _UsagesSectionState extends State<_UsagesSection> {
+  bool _isSectionVisible = false;
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -72,22 +81,43 @@ class _UsagesSection extends StatelessWidget {
       children: [
         Row(
           children: [
-            Text(
-              localizations.usages + ": ",
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(width: 16),
-            Container(
-              width: 80,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(hintText: localizations.usages),
-              ),
-            )
+            Expanded(
+                child: Text(
+              localizations.has_limited_usage,
+              style: TextStyle(fontSize: 18),
+            )),
+            Switch(
+                thumbColor:
+                    MaterialStateColor.resolveWith((states) => Colors.red),
+                activeTrackColor: MaterialStateColor.resolveWith(
+                    (states) => Colors.red.withOpacity(0.5)),
+                value: _isSectionVisible,
+                onChanged: (value) {
+                  setState(() {
+                    _isSectionVisible = value;
+                  });
+                })
           ],
         ),
-        SizedBox(height: 16),
-        _ShortLongRestSwitch(),
+        if (_isSectionVisible)
+          Row(
+            children: [
+              Text(
+                localizations.usages + ": ",
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(width: 16),
+              Container(
+                width: 80,
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(hintText: localizations.usages),
+                ),
+              )
+            ],
+          ),
+        if (_isSectionVisible) SizedBox(height: 16),
+        if (_isSectionVisible) _ShortLongRestSwitch(),
       ],
     );
   }
@@ -123,6 +153,8 @@ class _ShortLongRestSwitchState extends State<_ShortLongRestSwitch> {
               children: [
                 Radio<String>(
                   value: "short",
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.red),
                   groupValue: _groupValue,
                   onChanged: (value) => setState(
                     () => _groupValue = value,
@@ -138,6 +170,8 @@ class _ShortLongRestSwitchState extends State<_ShortLongRestSwitch> {
               children: [
                 Radio<String>(
                   value: "long",
+                  fillColor:
+                      MaterialStateColor.resolveWith((states) => Colors.red),
                   groupValue: _groupValue,
                   onChanged: (value) => setState(
                     () => _groupValue = value,
@@ -176,6 +210,8 @@ class _Button extends StatelessWidget {
                                   state.resetsOn,
                                 )
                               : null)));
+
+                  Navigator.of(context).pop();
                 }
               : null,
           child: Text(AppLocalizations.of(context)!.add),

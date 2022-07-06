@@ -68,6 +68,7 @@ class DndApp extends StatelessWidget {
             primaryColor: Color(0xFF1A1E21),
             primaryColorLight: Color(0xFF272E32),
             scaffoldBackgroundColor: Color(0xFF1A1E21),
+            unselectedWidgetColor: Colors.grey,
             appBarTheme: AppBarTheme(
               systemOverlayStyle: SystemUiOverlayStyle(
                 statusBarColor: Color(0xFF1A1E21),

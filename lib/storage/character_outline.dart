@@ -1,4 +1,5 @@
 import 'package:dnd_player_flutter/dto/character.dart';
+import 'package:dnd_player_flutter/dto/user_feature.dart';
 
 class CharacterOutline {
   final String name;
@@ -25,6 +26,8 @@ class CharacterOutline {
   final Map<int, int> money;
   final Map<String, int> featureUsage;
 
+  final List<UserFeature> userFeatures;
+
   CharacterOutline(
     this.name,
     this.level,
@@ -45,6 +48,7 @@ class CharacterOutline {
     this.usedSpellSlots,
     this.money,
     this.featureUsage,
+    this.userFeatures,
   );
 
   static CharacterOutline fromCharacter(
@@ -56,6 +60,7 @@ class CharacterOutline {
     required Map<int, int> usedSpellSlots,
     required Map<int, int> money,
     required Map<String, int> featureUsage,
+    required List<UserFeature> userFeatures,
   }) {
     return CharacterOutline(
       character.name,
@@ -77,6 +82,7 @@ class CharacterOutline {
       usedSpellSlots,
       money,
       featureUsage,
+      userFeatures,
     );
   }
 
@@ -100,6 +106,7 @@ class CharacterOutline {
     Map<int, int>? usedSpellSlots,
     Map<int, int>? money,
     Map<String, int>? featureUsage,
+    List<UserFeature>? userFeatures,
   }) {
     return CharacterOutline(
       name ?? this.name,
@@ -121,6 +128,7 @@ class CharacterOutline {
       usedSpellSlots ?? this.usedSpellSlots,
       money ?? this.money,
       featureUsage ?? this.featureUsage,
+      userFeatures ?? this.userFeatures,
     );
   }
 }

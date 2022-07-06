@@ -29,6 +29,8 @@ class CharacterState {
 
   final Map<Feature, int>? featureUsage;
 
+  final List<UserFeature>? userFeatures;
+
   CharacterState({
     this.name = "",
     this.level = 1,
@@ -50,6 +52,7 @@ class CharacterState {
     this.levelSpellSlots,
     this.money,
     this.featureUsage,
+    this.userFeatures,
   });
 
   CharacterState copyWith({
@@ -72,6 +75,7 @@ class CharacterState {
     Map<int, SpellSlots>? levelSpellSlots,
     Map<Currency, int>? money,
     Map<Feature, int>? featureUsage,
+    List<UserFeature>? userFeatures,
   }) {
     return CharacterState(
       level: level ?? this.level,
@@ -92,6 +96,7 @@ class CharacterState {
       levelSpellSlots: levelSpellSlots ?? this.levelSpellSlots,
       money: money ?? this.money,
       featureUsage: featureUsage ?? this.featureUsage,
+      userFeatures: userFeatures ?? this.userFeatures,
     );
   }
 

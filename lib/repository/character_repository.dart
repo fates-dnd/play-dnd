@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
 import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
@@ -12,7 +13,7 @@ import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/storage/character_outline.dart';
 import 'package:hive/hive.dart';
 
-const CURRENT_VERSION = 1;
+const CURRENT_VERSION = 2;
 
 class CharacterRepository {
   final SettingsRepository settingsRepository;
@@ -62,6 +63,7 @@ class CharacterRepository {
         Currency.PLATINUM.index: 0,
       },
       featureUsage: {},
+      userFeatures: [],
     ));
     box.put('character_list', currentList);
   }
@@ -343,6 +345,30 @@ class CharacterRepository {
           currentList[targetIndex].copyWith(money: currentMoney);
     }
     box.put('character_list', currentList);
+  }
+
+  void addUserFeature(Character character, UserFeature userFeature) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final userFeatures = currentList![targetIndex].userFeatures;
+      currentList[targetIndex] = currentList[targetIndex]
+          .copyWith(userFeatures: userFeatures..add(userFeature));
+    }
+    box.put('character_list', currentList);
+  }
+
+  List<UserFeature> getUserFeatures(Character character) {
+    final currentList = _readCharacterOutlines();
+    if (currentList == null) {
+      return [];
+    }
+
+    final targetIndex =
+        currentList.indexWhere((element) => element.name == character.name);
+    return currentList[targetIndex].userFeatures;
   }
 
   Future<Map<String, int>> getFeatureUsage(Character character) async {
