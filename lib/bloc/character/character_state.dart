@@ -77,6 +77,7 @@ class CharacterState {
     List<UserFeature>? userFeatures,
   }) {
     return CharacterState(
+      name: name,
       level: level ?? this.level,
       hp: hp ?? this.hp,
       maxHp: maxHp ?? this.maxHp,
@@ -94,6 +95,7 @@ class CharacterState {
       preparedSpells: preparedSpells ?? this.preparedSpells,
       levelSpellSlots: levelSpellSlots ?? this.levelSpellSlots,
       money: money ?? this.money,
+      traits: traits,
       userFeatures: userFeatures ?? this.userFeatures,
     );
   }
