@@ -83,3 +83,15 @@ class AddUserFeature extends CharacterEvent {
 
   AddUserFeature(this.userFeature);
 }
+
+class SpendUserFeature extends CharacterEvent {
+  final UserFeature userFeature;
+
+  SpendUserFeature(this.userFeature);
+}
+
+class RecoverUserFeature extends CharacterEvent {
+  final UserFeature userFeature;
+
+  RecoverUserFeature(this.userFeature);
+}

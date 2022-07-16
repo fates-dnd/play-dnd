@@ -204,7 +204,7 @@ class SelectionRows extends StatelessWidget {
                           padding: const EdgeInsets.only(right: 8, bottom: 8),
                           child: SelectionItem(
                             feature: feature,
-                            isUsed: index < usedSlots,
+                            isUsed: ((itemsPerRow * row) + index) < usedSlots,
                           ),
                         )))),
       );
@@ -234,7 +234,14 @@ class SelectionItem extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          final bloc = BlocProvider.of<CharacterBloc>(context);
+          if (isUsed) {
+            bloc.add(RecoverUserFeature(feature));
+          } else {
+            bloc.add(SpendUserFeature(feature));
+          }
+        },
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: isUsed

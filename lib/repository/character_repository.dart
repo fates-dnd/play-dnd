@@ -359,6 +359,48 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void spendUserFeature(Character character, UserFeature userFeature) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final userFeatures = currentList![targetIndex].userFeatures;
+      final featureIndex = userFeatures.indexOf(userFeature);
+      final newFeature = userFeatures[featureIndex]
+        ..usage = Usage(
+          userFeature.usage?.maxUsages ?? 0,
+          (userFeature.usage?.usages ?? 0) + 1,
+          userFeature.usage?.resetsOn,
+        );
+      userFeatures[featureIndex] = newFeature;
+      currentList[targetIndex] =
+          currentList[targetIndex].copyWith(userFeatures: userFeatures);
+    }
+    box.put('character_list', currentList);
+  }
+
+  void recoverUserFeature(Character character, UserFeature userFeature) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final userFeatures = currentList![targetIndex].userFeatures;
+      final featureIndex = userFeatures.indexOf(userFeature);
+      final newFeature = userFeatures[featureIndex]
+        ..usage = Usage(
+          userFeature.usage?.maxUsages ?? 0,
+          (userFeature.usage?.usages ?? 0) - 1,
+          userFeature.usage?.resetsOn,
+        );
+      userFeatures[featureIndex] = newFeature;
+      currentList[targetIndex] =
+          currentList[targetIndex].copyWith(userFeatures: userFeatures);
+    }
+    box.put('character_list', currentList);
+  }
+
   List<UserFeature> getUserFeatures(Character character) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {
