@@ -371,43 +371,6 @@ class CharacterRepository {
     return currentList[targetIndex].userFeatures;
   }
 
-  Future<Map<String, int>> getFeatureUsage(Character character) async {
-    final currentList = _readCharacterOutlines();
-    if (currentList == null) {
-      return {};
-    }
-
-    final targetIndex =
-        currentList.indexWhere((element) => element.name == character.name);
-    return currentList[targetIndex].featureUsage;
-  }
-
-  void incrementFeature(Character character, Feature feature) async {
-    final currentList = _readCharacterOutlines();
-    final targetIndex =
-        currentList?.indexWhere((element) => element.name == character.name);
-    if (targetIndex != null) {
-      final featureUsage = currentList![targetIndex].featureUsage;
-      featureUsage[feature.index] = (featureUsage[feature.index] ?? 0) + 1;
-      currentList[targetIndex] =
-          currentList[targetIndex].copyWith(featureUsage: featureUsage);
-    }
-    box.put('character_list', currentList);
-  }
-
-  void decrementFeature(Character character, Feature feature) async {
-    final currentList = _readCharacterOutlines();
-    final targetIndex =
-        currentList?.indexWhere((element) => element.name == character.name);
-    if (targetIndex != null) {
-      final featureUsage = currentList![targetIndex].featureUsage;
-      featureUsage[feature.index] = (featureUsage[feature.index] ?? 0) - 1;
-      currentList[targetIndex] =
-          currentList[targetIndex].copyWith(featureUsage: featureUsage);
-    }
-    box.put('character_list', currentList);
-  }
-
   Future<List<Character>> getCharacters() async {
     final outlines = _readCharacterOutlines() ?? [];
 

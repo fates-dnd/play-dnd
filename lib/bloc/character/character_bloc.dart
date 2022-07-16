@@ -15,6 +15,7 @@ import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/skill.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
+import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/repository/equipment_repository.dart';
@@ -22,6 +23,7 @@ import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
+import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:dnd_player_flutter/rules/spellcasting/spellcasting.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +38,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final SkillsRepository skillsRepository;
   final EquipmentRepository equipmentRepository;
   final SpellsRepository spellsRepository;
+  final TraitsRepository traitsRepository;
   final FeaturesRepository featuresRepository;
 
   late Character character;
@@ -47,6 +50,7 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     this.skillsRepository,
     this.equipmentRepository,
     this.spellsRepository,
+    this.traitsRepository,
     this.featuresRepository,
   ) : super(CharacterState()) {
     on<CharacterEvent>((event, emit) async {
@@ -56,6 +60,8 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
   Future<CharacterState> processEvent(CharacterEvent event) async {
     if (event is SetCharacter) {
+      final language = await settingsRepository.getLanguage();
+
       character = event.character;
       spellcasting = Spellcasting.createForClass(character.clazz);
 
@@ -72,15 +78,20 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         charisma: character.baseCharisma,
         race: character.race,
         clazz: character.clazz,
-        skills: await skillsRepository
-            .getSkills(await settingsRepository.getLanguage()),
+        skills: await skillsRepository.getSkills(language),
         proficienctSkills: await _getProficientSkills(),
         equipment: await _getCharacterEquipment(),
         preparedSpells: await _getPreparedSpells(),
         learnedSpells: await _getLearnedSpells(),
         levelSpellSlots: await getSpellSlots(),
         money: await getMoney(),
-        featureUsage: await getFeatureUsage(),
+        traits: (await traitsRepository.getTraits(language))
+            .where(
+              (trait) =>
+                  trait.races.any((race) => race.index == character.race.index),
+            )
+            .where((trait) => trait.parent == null)
+            .toList(),
         userFeatures: characterRepository.getUserFeatures(character),
       );
     } else if (event is AddEquipmentItem) {
@@ -174,16 +185,6 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       characterRepository.addUserFeature(character, event.userFeature);
       return state.copyWith(
           userFeatures: characterRepository.getUserFeatures(character));
-    } else if (event is IncrementFeature) {
-      characterRepository.incrementFeature(character, event.feature);
-      return state.copyWith(
-        featureUsage: await getFeatureUsage(),
-      );
-    } else if (event is DecrementFeature) {
-      characterRepository.decrementFeature(character, event.feature);
-      return state.copyWith(
-        featureUsage: await getFeatureUsage(),
-      );
     }
 
     return state;
@@ -257,17 +258,5 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     return rawMoney.map((key, value) {
       return MapEntry(Currency.values[key], value);
     });
-  }
-
-  Future<Map<Feature, int>?> getFeatureUsage() async {
-    final language = await settingsRepository.getLanguage();
-    final featureUsage = await characterRepository.getFeatureUsage(character);
-
-    final result = <Feature, int>{};
-    featureUsage.entries.forEach((entry) async =>
-        result[await featuresRepository.findByIndex(language, entry.key)] =
-            entry.value);
-
-    return result;
   }
 }

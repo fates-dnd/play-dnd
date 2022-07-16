@@ -1,31 +1,66 @@
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/user_feature.dart';
+import 'package:hive/hive.dart';
 
+part 'character_outline.g.dart';
+
+@HiveType(typeId: 1)
 class CharacterOutline {
-  final String name;
-  final int level;
-  final int maxHp;
-  final int hp;
-  final int baseStrength;
-  final int baseDexterity;
-  final int baseConstitution;
-  final int baseIntelligence;
-  final int baseWisdom;
-  final int baseCharisma;
+  @HiveField(0)
+  String name;
 
+  @HiveField(1)
+  int level;
+
+  @HiveField(2)
+  int maxHp;
+
+  @HiveField(3)
+  int hp;
+
+  @HiveField(4)
+  int baseStrength;
+
+  @HiveField(5)
+  int baseDexterity;
+
+  @HiveField(6)
+  int baseConstitution;
+
+  @HiveField(7)
+  int baseIntelligence;
+
+  @HiveField(8)
+  int baseWisdom;
+
+  @HiveField(9)
+  int baseCharisma;
+
+  @HiveField(10)
   final String raceIndex;
+
+  @HiveField(11)
   final String classIndex;
+
+  @HiveField(12)
   final List<String> proficiencyIndexes;
 
+  @HiveField(13)
   final List<EquipmentIndexQuantity> allEquipment;
 
+  @HiveField(14)
   final List<String> preparedSpells;
+
+  @HiveField(15)
   final List<String> learnedSpells;
 
+  @HiveField(16)
   final Map<int, int> usedSpellSlots;
-  final Map<int, int> money;
-  final Map<String, int> featureUsage;
 
+  @HiveField(17)
+  final Map<int, int> money;
+
+  @HiveField(18)
   final List<UserFeature> userFeatures;
 
   CharacterOutline(
@@ -47,7 +82,6 @@ class CharacterOutline {
     this.learnedSpells,
     this.usedSpellSlots,
     this.money,
-    this.featureUsage,
     this.userFeatures,
   );
 
@@ -81,7 +115,6 @@ class CharacterOutline {
       learnedSpells,
       usedSpellSlots,
       money,
-      featureUsage,
       userFeatures,
     );
   }
@@ -127,16 +160,21 @@ class CharacterOutline {
       learnedSpells ?? this.learnedSpells,
       usedSpellSlots ?? this.usedSpellSlots,
       money ?? this.money,
-      featureUsage ?? this.featureUsage,
       userFeatures ?? this.userFeatures,
     );
   }
 }
 
+@HiveType(typeId: 2)
 class EquipmentIndexQuantity {
-  final String index;
-  final int quantity;
-  final bool isEquipped;
+  @HiveField(0)
+  String index;
+
+  @HiveField(1)
+  int quantity;
+
+  @HiveField(2)
+  bool isEquipped;
 
   EquipmentIndexQuantity(this.index, this.quantity, this.isEquipped);
 }

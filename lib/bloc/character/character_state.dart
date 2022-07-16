@@ -27,8 +27,7 @@ class CharacterState {
   final Map<int, SpellSlots>? levelSpellSlots;
   final Map<Currency, int>? money;
 
-  final Map<Feature, int>? featureUsage;
-
+  final List<Trait>? traits;
   final List<UserFeature>? userFeatures;
 
   CharacterState({
@@ -51,7 +50,7 @@ class CharacterState {
     this.learnedSpells,
     this.levelSpellSlots,
     this.money,
-    this.featureUsage,
+    this.traits,
     this.userFeatures,
   });
 
@@ -95,7 +94,6 @@ class CharacterState {
       preparedSpells: preparedSpells ?? this.preparedSpells,
       levelSpellSlots: levelSpellSlots ?? this.levelSpellSlots,
       money: money ?? this.money,
-      featureUsage: featureUsage ?? this.featureUsage,
       userFeatures: userFeatures ?? this.userFeatures,
     );
   }

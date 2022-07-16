@@ -398,11 +398,7 @@ class Pages extends StatelessWidget {
           if (state.clazz?.spellcastingAbility != null)
             localizations.spells: SpellsPage(),
           if (state.clazz != null && state.race != null)
-            localizations.traits_and_features: TraitsAndFeaturesPage(
-              race: state.race!,
-              clazz: state.clazz!,
-              level: state.level,
-            ),
+            localizations.traits_and_features: TraitsAndFeaturesPage(),
         });
       },
     );

@@ -7,6 +7,7 @@ import 'package:dnd_player_flutter/repository/features_repository.dart';
 import 'package:dnd_player_flutter/repository/settings_repository.dart';
 import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
+import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:dnd_player_flutter/ui/character_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -48,6 +49,7 @@ class DndApp extends StatelessWidget {
             getIt<SkillsRepository>(),
             getIt<EquipmentRepository>(),
             getIt<SpellsRepository>(),
+            getIt<TraitsRepository>(),
             getIt<FeaturesRepository>(),
           ),
         )

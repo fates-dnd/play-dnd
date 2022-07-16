@@ -83,15 +83,3 @@ class AddUserFeature extends CharacterEvent {
 
   AddUserFeature(this.userFeature);
 }
-
-class IncrementFeature extends CharacterEvent {
-  final Feature feature;
-
-  IncrementFeature(this.feature);
-}
-
-class DecrementFeature extends CharacterEvent {
-  final Feature feature;
-
-  DecrementFeature(this.feature);
-}

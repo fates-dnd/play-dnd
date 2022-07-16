@@ -1,61 +1,37 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
-import 'package:dnd_player_flutter/bloc/traits_and_features/traits_and_features_bloc.dart';
-import 'package:dnd_player_flutter/dependencies.dart';
-import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/feature.dart';
-import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
-import 'package:dnd_player_flutter/repository/features_repository.dart';
-import 'package:dnd_player_flutter/repository/settings_repository.dart';
-import 'package:dnd_player_flutter/repository/traits_repository.dart';
+import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/ui/traits_and_features/manage_feature_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TraitsAndFeaturesPage extends StatelessWidget {
-  final Race race;
-  final Class clazz;
-  final int level;
-
   const TraitsAndFeaturesPage({
     Key? key,
-    required this.race,
-    required this.clazz,
-    required this.level,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    return BlocProvider(
-      create: (context) => TraitsAndFeaturesBloc(
-        getIt<SettingsRepository>(),
-        getIt<TraitsRepository>(),
-        getIt<FeaturesRepository>(),
-      )..add(LoadTraitsAndFeatures(
-          race,
-          clazz,
-          level,
-        )),
-      child: BlocBuilder<TraitsAndFeaturesBloc, TraitsAndFeaturesState>(
-        builder: (context, state) {
-          return ListView(
-            children: []
-              ..add(SectionTitle(title: localizations.racial_traits))
-              ..add(ManageButton())
-              ..addAll(state.traits.map((trait) => FeatureAndTraitItem(
-                    trait: trait,
-                    level: level,
-                  )))
-              ..add(SectionTitle(title: localizations.class_features))
-              ..addAll(state.features.map((feature) => FeatureAndTraitItem(
-                    feature: feature,
-                    level: level,
-                  ))),
-          );
-        },
-      ),
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      builder: (context, state) {
+        return ListView(
+          children: []
+            ..add(SectionTitle(title: localizations.class_features))
+            ..add(ManageButton())
+            ..addAll(state.userFeatures?.map((feature) => FeatureAndTraitItem(
+                      feature: feature,
+                    )) ??
+                [])
+            ..add(SectionTitle(title: localizations.racial_traits))
+            ..addAll(state.traits?.map((trait) => FeatureAndTraitItem(
+                      trait: trait,
+                    )) ??
+                []),
+        );
+      },
     );
   }
 }
@@ -93,15 +69,13 @@ class ManageButton extends StatelessWidget {
 }
 
 class FeatureAndTraitItem extends StatelessWidget {
-  final Feature? feature;
+  final UserFeature? feature;
   final Trait? trait;
-  final int level;
 
   const FeatureAndTraitItem({
     Key? key,
     this.feature,
     this.trait,
-    required this.level,
   }) : super(key: key);
 
   @override
@@ -124,7 +98,6 @@ class FeatureAndTraitItem extends StatelessWidget {
     if (feature != null) {
       return FeatureItem(
         feature: feature!,
-        level: level,
       );
     }
     if (trait != null) {
@@ -160,13 +133,11 @@ class TraitItem extends StatelessWidget {
 }
 
 class FeatureItem extends StatelessWidget {
-  final Feature feature;
-  final int level;
+  final UserFeature feature;
 
   const FeatureItem({
     Key? key,
     required this.feature,
-    required this.level,
   }) : super(key: key);
 
   @override
@@ -181,23 +152,23 @@ class FeatureItem extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(width: 8),
-            if (feature.levels != null && feature.expandable == false)
-              Text(
-                "(${feature.getNonExpandableNameForLevel(level)})",
-                style: TextStyle(fontSize: 18),
-              )
+            // if (feature.levels != null && feature.expandable == false)
+            //   Text(
+            //     "(${feature.getNonExpandableNameForLevel(level)})",
+            //     style: TextStyle(fontSize: 18),
+            //   )
           ],
         ),
         SizedBox(height: 8),
         Text(
-          feature.description.join("\n"),
+          feature.description,
           style: TextStyle(fontSize: 14),
         ),
         SizedBox(height: 16),
-        SelectionRows(
-          feature: feature,
-          count: feature.getExpandableCountForLevel(level) ?? 0,
-        ),
+        // SelectionRows(
+        //   feature: feature,
+        //   count: feature.getExpandableCountForLevel(level) ?? 0,
+        // ),
       ],
     );
   }
@@ -214,7 +185,7 @@ class SelectionRows extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
         builder: (context, state) {
-      final usedSlots = state.featureUsage?[feature.index] ?? 0;
+      final usedSlots = 0;
       return Row(
         children: List.generate(
             count,
@@ -252,10 +223,7 @@ class SelectionItem extends StatelessWidget {
         ),
       ),
       child: InkWell(
-        onTap: () {
-          BlocProvider.of<CharacterBloc>(context).add(
-              isUsed ? DecrementFeature(feature) : IncrementFeature(feature));
-        },
+        onTap: () {},
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: isUsed
