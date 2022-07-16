@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/manage_traits_and_features/manage_traits_and_features_bloc.dart';
+import 'package:dnd_player_flutter/dto/rest.dart';
 import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,6 +113,9 @@ class _UsagesSectionState extends State<_UsagesSection> {
                 child: TextField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(hintText: localizations.usages),
+                  onChanged: (value) =>
+                      BlocProvider.of<ManageTraitsAndFeaturesBloc>(context)
+                          .add(OnUsagesChanged(int.parse(value))),
                 ),
               )
             ],
@@ -131,7 +135,7 @@ class _ShortLongRestSwitch extends StatefulWidget {
 }
 
 class _ShortLongRestSwitchState extends State<_ShortLongRestSwitch> {
-  String? _groupValue;
+  Rest? _groupValue;
 
   @override
   Widget build(BuildContext context) {
@@ -151,8 +155,8 @@ class _ShortLongRestSwitchState extends State<_ShortLongRestSwitch> {
           children: [
             Row(
               children: [
-                Radio<String>(
-                  value: "short",
+                Radio<Rest>(
+                  value: Rest.SHORT,
                   fillColor:
                       MaterialStateColor.resolveWith((states) => Colors.red),
                   groupValue: _groupValue,
@@ -168,14 +172,19 @@ class _ShortLongRestSwitchState extends State<_ShortLongRestSwitch> {
             ),
             Row(
               children: [
-                Radio<String>(
-                  value: "long",
+                Radio<Rest>(
+                  value: Rest.LONG,
                   fillColor:
                       MaterialStateColor.resolveWith((states) => Colors.red),
                   groupValue: _groupValue,
-                  onChanged: (value) => setState(
-                    () => _groupValue = value,
-                  ),
+                  onChanged: (value) {
+                    setState(
+                      () => _groupValue = value,
+                    );
+
+                    BlocProvider.of<ManageTraitsAndFeaturesBloc>(context)
+                        .add(OnResetsOnChanged(value));
+                  },
                 ),
                 Text(
                   localizations.long_rest,
@@ -207,6 +216,7 @@ class _Button extends StatelessWidget {
                           usage: state.usages != null
                               ? Usage(
                                   state.usages ?? 0,
+                                  0,
                                   state.resetsOn,
                                 )
                               : null)));

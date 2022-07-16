@@ -1,5 +1,4 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
-import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/ui/traits_and_features/manage_feature_screen.dart';
@@ -165,17 +164,18 @@ class FeatureItem extends StatelessWidget {
           style: TextStyle(fontSize: 14),
         ),
         SizedBox(height: 16),
-        // SelectionRows(
-        //   feature: feature,
-        //   count: feature.getExpandableCountForLevel(level) ?? 0,
-        // ),
+        if ((feature.usage?.maxUsages ?? 0) > 0)
+          SelectionRows(
+            feature: feature,
+            count: feature.usage?.maxUsages ?? 0,
+          ),
       ],
     );
   }
 }
 
 class SelectionRows extends StatelessWidget {
-  final Feature feature;
+  final UserFeature feature;
   final int count;
 
   const SelectionRows({Key? key, required this.feature, required this.count})
@@ -185,24 +185,35 @@ class SelectionRows extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
         builder: (context, state) {
-      final usedSlots = 0;
-      return Row(
+      final itemsPerRow = 8;
+      final usedSlots = feature.usage?.usages ?? 0;
+
+      var rows = count ~/ itemsPerRow;
+      final lastRowItems = count - (rows * itemsPerRow);
+      if (count > (rows * itemsPerRow)) {
+        rows += 1;
+      }
+
+      return Column(
         children: List.generate(
-            count,
-            (index) => Padding(
-                  padding: const EdgeInsets.only(right: 8.0),
-                  child: SelectionItem(
-                    feature: feature,
-                    isUsed: index < usedSlots,
-                  ),
-                )),
+            rows,
+            (row) => Row(
+                children: List.generate(
+                    row == rows - 1 ? lastRowItems : itemsPerRow,
+                    (index) => Padding(
+                          padding: const EdgeInsets.only(right: 8, bottom: 8),
+                          child: SelectionItem(
+                            feature: feature,
+                            isUsed: index < usedSlots,
+                          ),
+                        )))),
       );
     });
   }
 }
 
 class SelectionItem extends StatelessWidget {
-  final Feature feature;
+  final UserFeature feature;
   final bool isUsed;
 
   const SelectionItem({

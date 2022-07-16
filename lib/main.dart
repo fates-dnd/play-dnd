@@ -21,8 +21,14 @@ import 'hive_utils.dart';
 void main() async {
   setupTypeAdapters();
   await Hive.initFlutter();
-  await Hive.openBox("characters");
+  final box = await Hive.openLazyBox("characters");
+  final clearBox = await shouldClearBox();
+  if (clearBox) {
+    await box.clear();
+  }
+  await box.close();
 
+  await Hive.openBox("characters");
   registerDependencies();
 
   runApp(DndApp());

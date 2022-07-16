@@ -2,7 +2,6 @@ import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
 import 'package:dnd_player_flutter/dto/equipment.dart';
-import 'package:dnd_player_flutter/dto/feature.dart';
 import 'package:dnd_player_flutter/dto/spell.dart';
 import 'package:dnd_player_flutter/dto/user_feature.dart';
 import 'package:dnd_player_flutter/repository/classes_repository.dart';

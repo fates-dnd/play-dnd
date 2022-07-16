@@ -58,17 +58,20 @@ class UsageAdapter extends TypeAdapter<Usage> {
     };
     return Usage(
       fields[0] as int,
-      fields[1] as Rest?,
+      fields[1] as int,
+      fields[2] as Rest?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Usage obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.usages)
+      ..write(obj.maxUsages)
       ..writeByte(1)
+      ..write(obj.usages)
+      ..writeByte(2)
       ..write(obj.resetsOn);
   }
 

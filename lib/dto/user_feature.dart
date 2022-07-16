@@ -24,10 +24,13 @@ class UserFeature {
 @HiveType(typeId: 4)
 class Usage {
   @HiveField(0)
-  int usages;
+  int maxUsages;
 
   @HiveField(1)
+  int usages;
+
+  @HiveField(2)
   Rest? resetsOn;
 
-  Usage(this.usages, this.resetsOn);
+  Usage(this.maxUsages, this.usages, this.resetsOn);
 }
