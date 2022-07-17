@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/ability_score_improvements.dart';
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/level_up_dialog/level_up_dialog_bloc.dart';
+import 'package:dnd_player_flutter/ui/characters/ability_score_improvement_dialog.dart';
 import 'package:dnd_player_flutter/ui/common/slider_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,7 +137,16 @@ class _AbilityScoreImprovementButton extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return OutlinedButton(
       style: OutlinedButton.styleFrom(minimumSize: Size.fromHeight(40)),
-      onPressed: () {},
+      onPressed: () {
+        final newHp = BlocProvider.of<LevelUpDialogBloc>(context).state.newHp;
+        BlocProvider.of<CharacterBloc>(context).add(LevelUpWithHp(newHp + 1));
+
+        Navigator.of(context).pop();
+
+        showDialog(
+            context: context,
+            builder: (context) => AbilityScoreImprovementDialog());
+      },
       child: Text(localizations.ability_score_improvement),
     );
   }
