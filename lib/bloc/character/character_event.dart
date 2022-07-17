@@ -95,3 +95,10 @@ class RecoverUserFeature extends CharacterEvent {
 
   RecoverUserFeature(this.userFeature);
 }
+
+class UpdateUserFeature extends CharacterEvent {
+  final UserFeature oldFeature;
+  final UserFeature newFeature;
+
+  UpdateUserFeature(this.oldFeature, this.newFeature);
+}

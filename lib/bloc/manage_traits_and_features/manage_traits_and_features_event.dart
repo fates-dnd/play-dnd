@@ -2,6 +2,12 @@ part of 'manage_traits_and_features_bloc.dart';
 
 abstract class ManageTraitsAndFeaturesEvent {}
 
+class PopulateState extends ManageTraitsAndFeaturesEvent {
+  final UserFeature? userFeature;
+
+  PopulateState(this.userFeature);
+}
+
 class OnNameChanged extends ManageTraitsAndFeaturesEvent {
   final String name;
 

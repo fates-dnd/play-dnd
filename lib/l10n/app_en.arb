@@ -109,10 +109,12 @@
   "class_features": "Class Features",
 
   "add": "Add",
+  "update": "Update",
 
   "language": "Language",
 
   "add_feature": "Add feature",
+  "update_feature": "Update feature",
   "description": "Description",
   "usages": "Usages",
   "resets_on": "Resets on",

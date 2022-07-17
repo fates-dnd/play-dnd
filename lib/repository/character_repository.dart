@@ -401,6 +401,25 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void updateUserFeature(
+    Character character,
+    UserFeature oldUserFeature,
+    UserFeature newUserFeature,
+  ) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      final userFeatures = currentList![targetIndex].userFeatures;
+      final featureIndex = userFeatures.indexOf(oldUserFeature);
+      userFeatures[featureIndex] = newUserFeature;
+      currentList[targetIndex] =
+          currentList[targetIndex].copyWith(userFeatures: userFeatures);
+    }
+    box.put('character_list', currentList);
+  }
+
   List<UserFeature> getUserFeatures(Character character) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {

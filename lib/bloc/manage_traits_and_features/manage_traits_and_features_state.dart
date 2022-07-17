@@ -15,6 +15,17 @@ class ManageTraitsAndFeaturesState {
     this.resetsOn,
   });
 
+  ManageTraitsAndFeaturesState populateFromUserFeature(
+    UserFeature userFeature,
+  ) {
+    return ManageTraitsAndFeaturesState(
+      name: userFeature.name,
+      description: userFeature.description,
+      usages: userFeature.usage?.maxUsages,
+      resetsOn: userFeature.usage?.resetsOn,
+    );
+  }
+
   ManageTraitsAndFeaturesState updateNameOrDescription({
     String? name,
     String? description,

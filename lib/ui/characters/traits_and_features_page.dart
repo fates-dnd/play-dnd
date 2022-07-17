@@ -141,35 +141,44 @@ class FeatureItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            Text(
-              feature.name,
-              style: TextStyle(fontSize: 18),
-            ),
-            SizedBox(width: 8),
-            // if (feature.levels != null && feature.expandable == false)
-            //   Text(
-            //     "(${feature.getNonExpandableNameForLevel(level)})",
-            //     style: TextStyle(fontSize: 18),
-            //   )
-          ],
-        ),
-        SizedBox(height: 8),
-        Text(
-          feature.description,
-          style: TextStyle(fontSize: 14),
-        ),
-        SizedBox(height: 16),
-        if ((feature.usage?.maxUsages ?? 0) > 0)
-          SelectionRows(
-            feature: feature,
-            count: feature.usage?.maxUsages ?? 0,
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return ManageFeatureScreen(
+            userFeature: feature,
+          );
+        }));
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text(
+                feature.name,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(width: 8),
+              // if (feature.levels != null && feature.expandable == false)
+              //   Text(
+              //     "(${feature.getNonExpandableNameForLevel(level)})",
+              //     style: TextStyle(fontSize: 18),
+              //   )
+            ],
           ),
-      ],
+          SizedBox(height: 8),
+          Text(
+            feature.description,
+            style: TextStyle(fontSize: 14),
+          ),
+          SizedBox(height: 16),
+          if ((feature.usage?.maxUsages ?? 0) > 0)
+            SelectionRows(
+              feature: feature,
+              count: feature.usage?.maxUsages ?? 0,
+            ),
+        ],
+      ),
     );
   }
 }

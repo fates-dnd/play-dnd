@@ -196,6 +196,15 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       return state.copyWith(
         userFeatures: characterRepository.getUserFeatures(character),
       );
+    } else if (event is UpdateUserFeature) {
+      characterRepository.updateUserFeature(
+        character,
+        event.oldFeature,
+        event.newFeature,
+      );
+      return state.copyWith(
+        userFeatures: characterRepository.getUserFeatures(character),
+      );
     }
 
     return state;
