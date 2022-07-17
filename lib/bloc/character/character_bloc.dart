@@ -205,6 +205,13 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
       return state.copyWith(
         userFeatures: characterRepository.getUserFeatures(character),
       );
+    } else if (event is LevelUpWithHp) {
+      characterRepository.levelUp(character, event.newHp);
+      return state.copyWith(
+        level: state.level + 1,
+        maxHp: state.maxHp + event.newHp,
+        hp: state.maxHp + event.newHp,
+      );
     }
 
     return state;

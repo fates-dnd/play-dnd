@@ -160,7 +160,12 @@ class _DoneButton extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(40)),
-      onPressed: () {},
+      onPressed: () {
+        final newHp = BlocProvider.of<LevelUpDialogBloc>(context).state.newHp;
+        BlocProvider.of<CharacterBloc>(context).add(LevelUpWithHp(newHp + 1));
+
+        Navigator.of(context).pop();
+      },
       child: Text(localizations.done),
     );
   }

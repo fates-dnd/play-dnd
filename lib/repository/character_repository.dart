@@ -420,6 +420,21 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void levelUp(Character character, int extraHp) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      currentList![targetIndex] = currentList[targetIndex].copyWith(
+        maxHp: character.maxHp + extraHp,
+        hp: character.maxHp + extraHp,
+        level: character.level + 1,
+      );
+    }
+    box.put('character_list', currentList);
+  }
+
   List<UserFeature> getUserFeatures(Character character) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {

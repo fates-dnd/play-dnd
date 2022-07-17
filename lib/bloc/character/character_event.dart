@@ -102,3 +102,9 @@ class UpdateUserFeature extends CharacterEvent {
 
   UpdateUserFeature(this.oldFeature, this.newFeature);
 }
+
+class LevelUpWithHp extends CharacterEvent {
+  final int newHp;
+
+  LevelUpWithHp(this.newHp);
+}
