@@ -3,6 +3,7 @@ import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/level_up_dialog/level_up_dialog_bloc.dart';
 import 'package:dnd_player_flutter/ui/characters/ability_score_improvement_dialog.dart';
 import 'package:dnd_player_flutter/ui/common/slider_selector.dart';
+import 'package:dnd_player_flutter/ui/traits_and_features/manage_feature_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -158,7 +159,16 @@ class _NewFeatButton extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     return OutlinedButton(
       style: OutlinedButton.styleFrom(minimumSize: Size.fromHeight(40)),
-      onPressed: () {},
+      onPressed: () {
+        final newHp = BlocProvider.of<LevelUpDialogBloc>(context).state.newHp;
+        BlocProvider.of<CharacterBloc>(context).add(LevelUpWithHp(newHp + 1));
+
+        final navigator = Navigator.of(context);
+
+        navigator.pop();
+        navigator.push(
+            MaterialPageRoute(builder: (context) => ManageFeatureScreen()));
+      },
       child: Text(localizations.feat),
     );
   }
