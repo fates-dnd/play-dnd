@@ -93,6 +93,7 @@ class _Form extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: localizations.name,
               ),
+              style: TextStyle(color: Colors.white),
               onChanged: (value) =>
                   BlocProvider.of<ManageTraitsAndFeaturesBloc>(context)
                       .add(OnNameChanged(value)),
@@ -105,6 +106,7 @@ class _Form extends StatelessWidget {
               decoration: InputDecoration(
                 hintText: localizations.description,
               ),
+              style: TextStyle(color: Colors.white),
               onChanged: (value) =>
                   BlocProvider.of<ManageTraitsAndFeaturesBloc>(context)
                       .add(OnDescriptionChanged(value)),
@@ -177,12 +179,12 @@ class _UsagesSectionState extends State<_UsagesSection> {
                 width: 80,
                 child: TextFormField(
                   initialValue: widget.userFeature?.usage?.maxUsages.toString(),
+                  style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(hintText: localizations.usages),
                   onChanged: (value) =>
-                      BlocProvider.of<ManageTraitsAndFeaturesBloc>(context).add(
-                          OnUsagesChanged(
-                              value.isNotEmpty ? int.parse(value) : null)),
+                      BlocProvider.of<ManageTraitsAndFeaturesBloc>(context)
+                          .add(OnUsagesChanged(int.tryParse(value))),
                 ),
               )
             ],

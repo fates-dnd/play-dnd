@@ -4,6 +4,7 @@ import 'package:dnd_player_flutter/ui/characters/abilities_page.dart';
 import 'package:dnd_player_flutter/ui/characters/base_characteristics_page.dart';
 import 'package:dnd_player_flutter/ui/characters/equipment_page.dart';
 import 'package:dnd_player_flutter/ui/characters/hp_dialog.dart';
+import 'package:dnd_player_flutter/ui/characters/level_up_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/money_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/money_info_item.dart';
 import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
@@ -327,7 +328,9 @@ class _LevelUpButtonIcon extends StatelessWidget {
       imageAsset: "assets/drawable/stats/xp.png",
       text: AppLocalizations.of(context)!.level_up,
       textColor: Color(0xFF05FF96),
-      onTap: () {},
+      onTap: () {
+        showDialog(context: context, builder: (context) => LevelUpDialog());
+      },
     );
   }
 }

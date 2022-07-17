@@ -118,5 +118,17 @@
   "description": "Description",
   "usages": "Usages",
   "resets_on": "Resets on",
-  "has_limited_usage": "Has limited usage"
+  "has_limited_usage": "Has limited usage",
+
+  "congrats_for_leveling_up": "Congratulations on leveling up to level {level}!",
+  "@congrats_for_leveling_up": {
+    "placeholders": {
+      "level": {}
+    }
+  },
+  "improved_hp": "Hp increase",
+  "hit_die": "Hit Die",
+  "ability_score_improvement": "Ability Score Improvement",
+  "feat": "Feat",
+  "done": "Done"
 }
