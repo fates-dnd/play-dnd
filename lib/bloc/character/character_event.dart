@@ -108,3 +108,10 @@ class LevelUpWithHp extends CharacterEvent {
 
   LevelUpWithHp(this.newHp);
 }
+
+class ImproveAbilityScores extends CharacterEvent {
+  final Characteristic option1;
+  final Characteristic option2;
+
+  ImproveAbilityScores(this.option1, this.option2);
+}

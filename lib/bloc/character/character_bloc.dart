@@ -212,9 +212,32 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
         maxHp: state.maxHp + event.newHp,
         hp: state.maxHp + event.newHp,
       );
+    } else if (event is ImproveAbilityScores) {
+      final step1State = improveAbilityScore(state, event.option1);
+      return improveAbilityScore(step1State, event.option2);
     }
 
     return state;
+  }
+
+  CharacterState improveAbilityScore(
+      CharacterState state, Characteristic characteristic) {
+    characterRepository.improveAbilityScore(character, characteristic);
+
+    switch (characteristic) {
+      case Characteristic.STRENGTH:
+        return state.copyWith(strength: state.strength + 1);
+      case Characteristic.DEXTERITY:
+        return state.copyWith(dexterity: state.dexterity + 1);
+      case Characteristic.CONSTITUTION:
+        return state.copyWith(constitution: state.constitution + 1);
+      case Characteristic.INTELLIGENCE:
+        return state.copyWith(intelligence: state.intelligence + 1);
+      case Characteristic.WISDOM:
+        return state.copyWith(wisdom: state.wisdom + 1);
+      case Characteristic.CHARISMA:
+        return state.copyWith(charisma: state.charisma + 1);
+    }
   }
 
   Future<List<Skill>> _getProficientSkills() async {

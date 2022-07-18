@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
 import 'package:dnd_player_flutter/dto/class.dart';
 import 'package:dnd_player_flutter/dto/currency.dart';
@@ -427,10 +428,52 @@ class CharacterRepository {
         currentList?.indexWhere((element) => element.name == character.name);
     if (targetIndex != null) {
       currentList![targetIndex] = currentList[targetIndex].copyWith(
-        maxHp: character.maxHp + extraHp,
-        hp: character.maxHp + extraHp,
-        level: character.level + 1,
+        maxHp: currentList[targetIndex].maxHp + extraHp,
+        hp: currentList[targetIndex].maxHp + extraHp,
+        level: currentList[targetIndex].level + 1,
       );
+    }
+    box.put('character_list', currentList);
+  }
+
+  void improveAbilityScore(Character character, Characteristic characteristic) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+    if (targetIndex != null) {
+      switch (characteristic) {
+        case Characteristic.STRENGTH:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseStrength: currentList[targetIndex].baseStrength + 1,
+          );
+          break;
+        case Characteristic.DEXTERITY:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseDexterity: currentList[targetIndex].baseDexterity + 1,
+          );
+          break;
+        case Characteristic.CONSTITUTION:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseConstitution: currentList[targetIndex].baseConstitution + 1,
+          );
+          break;
+        case Characteristic.INTELLIGENCE:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseIntelligence: currentList[targetIndex].baseIntelligence + 1,
+          );
+          break;
+        case Characteristic.WISDOM:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseWisdom: currentList[targetIndex].baseWisdom + 1,
+          );
+          break;
+        case Characteristic.CHARISMA:
+          currentList![targetIndex] = currentList[targetIndex].copyWith(
+            baseCharisma: currentList[targetIndex].baseCharisma + 1,
+          );
+          break;
+      }
     }
     box.put('character_list', currentList);
   }

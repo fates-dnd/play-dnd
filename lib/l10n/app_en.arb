@@ -131,5 +131,7 @@
   "ability_score_improvement": "Ability Score Improvement",
   "feat": "Feat",
   "done": "Done",
-  "add_new_features_on_traits_and_features_page": "You can add your new features on the \"Traits and Features\" page"
+  "add_new_features_on_traits_and_features_page": "You can add your new features on the \"Traits and Features\" page",
+  "improvement_option_1": "Improvement Option 1",
+  "improvement_option_2": "Improvement Option 2"
 }
