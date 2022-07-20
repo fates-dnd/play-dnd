@@ -1,3 +1,5 @@
+import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dnd_player_flutter/available_from_phone_screen.dart';
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
@@ -31,11 +33,23 @@ void main() async {
   await Hive.openBox("characters");
   registerDependencies();
 
-  runApp(DndApp());
+  var nonMobileBrowser = false;
+  try {
+    final deviceInfo = DeviceInfoPlugin();
+    final browserInfo = await deviceInfo.webBrowserInfo;
+    nonMobileBrowser = (browserInfo.userAgent?.contains("android") == false) &&
+        (browserInfo.userAgent?.contains("iphone") == false) &&
+        (browserInfo.userAgent?.contains("ipad") == false);
+  } catch (e) {}
+
+  runApp(DndApp(initialRoute: nonMobileBrowser ? "web" : "/"));
 }
 
 class DndApp extends StatelessWidget {
-  // This widget is the root of your application.
+  final String initialRoute;
+
+  const DndApp({Key? key, required this.initialRoute}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
@@ -142,8 +156,9 @@ class DndApp extends StatelessWidget {
                 backgroundColor: Color(0xFF272E32),
                 titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)),
           ),
-          initialRoute: '/',
+          initialRoute: initialRoute,
           routes: {
+            'web': (context) => AvailableFromPhoneScreen(),
             '/': (context) => CharacterList(),
           },
         ),

@@ -39,6 +39,7 @@ dependencies:
 
   # ui
   dotted_border: ^2.0.0
+  device_info_plus: ^4.0.1
 
   
 dev_dependencies:
