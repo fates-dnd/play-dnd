@@ -11,6 +11,7 @@ import 'package:dnd_player_flutter/repository/skills_repository.dart';
 import 'package:dnd_player_flutter/repository/spells_repository.dart';
 import 'package:dnd_player_flutter/repository/traits_repository.dart';
 import 'package:dnd_player_flutter/ui/character_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -33,34 +34,19 @@ void main() async {
   await Hive.openBox("characters");
   registerDependencies();
 
-  var nonMobileBrowser = false;
-  try {
-    final deviceInfo = DeviceInfoPlugin();
-    final browserInfo = await deviceInfo.webBrowserInfo;
-    final userAgent = browserInfo.userAgent?.toLowerCase();
-    print("UserAgent: $userAgent");
-    if (userAgent?.contains("android") == true) {
-      nonMobileBrowser = false;
-    } else if (userAgent?.contains("iphone") == true) {
-      nonMobileBrowser = false;
-    } else if (userAgent?.contains("ipad") == true) {
-      nonMobileBrowser = false;
-    } else {
-      nonMobileBrowser = true;
-    }
-  } catch (e) {}
-
-  runApp(DndApp(initialRoute: nonMobileBrowser ? "web" : "/"));
+  runApp(DndApp());
 }
 
 class DndApp extends StatelessWidget {
-  final String initialRoute;
-
-  const DndApp({Key? key, required this.initialRoute}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = ThemeData();
+
+    final native = !kIsWeb;
+    final mobileBrowser =
+        kIsWeb && defaultTargetPlatform == TargetPlatform.android ||
+            defaultTargetPlatform == TargetPlatform.iOS;
+
     return MultiBlocProvider(
       providers: [
         BlocProvider(
@@ -164,10 +150,11 @@ class DndApp extends StatelessWidget {
                 backgroundColor: Color(0xFF272E32),
                 titleTextStyle: TextStyle(color: Colors.white, fontSize: 18)),
           ),
-          initialRoute: initialRoute,
+          initialRoute: '/',
           routes: {
-            'web': (context) => AvailableFromPhoneScreen(),
-            '/': (context) => CharacterList(),
+            '/': (context) => native || mobileBrowser
+                ? CharacterList()
+                : AvailableFromPhoneScreen(),
           },
         ),
       ),
