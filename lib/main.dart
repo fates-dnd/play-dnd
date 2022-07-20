@@ -37,9 +37,17 @@ void main() async {
   try {
     final deviceInfo = DeviceInfoPlugin();
     final browserInfo = await deviceInfo.webBrowserInfo;
-    nonMobileBrowser = (browserInfo.userAgent?.contains("android") == false) &&
-        (browserInfo.userAgent?.contains("iphone") == false) &&
-        (browserInfo.userAgent?.contains("ipad") == false);
+    final userAgent = browserInfo.userAgent?.toLowerCase();
+    print("UserAgent: $userAgent");
+    if (userAgent?.contains("android") == true) {
+      nonMobileBrowser = false;
+    } else if (userAgent?.contains("iphone") == true) {
+      nonMobileBrowser = false;
+    } else if (userAgent?.contains("ipad") == true) {
+      nonMobileBrowser = false;
+    } else {
+      nonMobileBrowser = true;
+    }
   } catch (e) {}
 
   runApp(DndApp(initialRoute: nonMobileBrowser ? "web" : "/"));
