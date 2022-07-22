@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/dto/trait.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RaceDetails extends StatelessWidget {
   final Race race;
@@ -23,6 +24,7 @@ class RaceDetails extends StatelessWidget {
   }
 
   List<Widget> _getItems(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     final items = [
       Text(
         race.description,
@@ -31,28 +33,30 @@ class RaceDetails extends StatelessWidget {
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, 'Увеличение характеристик. ', race.description),
+      _rowItem(context, localizations.details_ability_score_increase,
+          race.description),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, 'Возраст. ', race.age),
+      _rowItem(context, localizations.details_age, race.age),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, "Мировозрение. ", race.alignment),
+      _rowItem(context, localizations.details_alignment, race.alignment),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, "Размер. ", race.sizeDescription),
+      _rowItem(context, localizations.details_size, race.sizeDescription),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, "Скорость. ",
-          "Ваша базовая скорость - ${race.baseSpeed} футов."),
+      _rowItem(context, "${localizations.details_speed} ",
+          localizations.your_basic_speed_is(race.baseSpeed)),
       SizedBox(
         height: 25,
       ),
-      _rowItem(context, "Языки. ", race.languagesDescription),
+      _rowItem(
+          context, localizations.details_languages, race.languagesDescription),
     ];
 
     traits.forEach((trait) {

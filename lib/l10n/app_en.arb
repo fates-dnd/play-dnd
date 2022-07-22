@@ -13,6 +13,19 @@
   "level": "Level",
   "save": "Save",
 
+  "details_ability_score_increase": "Ability score increase.",
+  "details_age": "Age.",
+  "details_alignment": "Alignment.",
+  "details_speed": "Speed.",
+  "details_size": "Size.",
+  "your_basic_speed_is": "Your basic speed is {speed} feet.",
+  "@your_basic_speed_is": {
+    "placeholders": {
+      "speed": {}
+    }
+  },
+  "details_languages": "Languages.",
+
   "strength": "Strength",
   "dexterity": "Dexterity",
   "constitution": "Constitution",
