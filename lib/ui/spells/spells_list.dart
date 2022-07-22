@@ -94,12 +94,12 @@ class _SpellListItem extends StatelessWidget {
       );
     } else if (spellDisplayItem is PreparedSeparatorItem) {
       return Text(
-        "Подготовленные заклинания",
+        localizations.prepared_spells,
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     } else if (spellDisplayItem is LearnedSeparatorItem) {
       return Text(
-        "Изученные заклинания",
+        localizations.learned_spells,
         style: TextStyle(color: Color(0xFFDCDAD9), fontSize: 24),
       );
     } else if (spellDisplayItem is LevelSeparatorItem) {

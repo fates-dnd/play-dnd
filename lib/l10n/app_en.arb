@@ -51,6 +51,9 @@
   
   "equipment": "Equipment",
   "spells": "Spells",
+  "learned_spells": "Learned Spells",
+  "prepared_spells": "Prepared Spells",
+  "remove": "Remove",
 
   "unarmed_strike": "Unarmed Strike",
 

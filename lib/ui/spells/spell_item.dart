@@ -105,8 +105,9 @@ class _UnprepareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     return _SpellActionButton(
-      title: "Убрать",
+      title: localizations.remove,
       onPressed: onPressed,
     );
   }
