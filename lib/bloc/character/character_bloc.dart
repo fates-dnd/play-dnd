@@ -215,6 +215,9 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
     } else if (event is ImproveAbilityScores) {
       final step1State = improveAbilityScore(state, event.option1);
       return improveAbilityScore(step1State, event.option2);
+    } else if (event is DeleteCharacter) {
+      characterRepository.deleteCharacter(character);
+      return CharacterState();
     }
 
     return state;

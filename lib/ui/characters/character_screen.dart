@@ -11,6 +11,7 @@ import 'package:dnd_player_flutter/ui/characters/pager_with_indicators.dart';
 import 'package:dnd_player_flutter/ui/characters/rest_dialog.dart';
 import 'package:dnd_player_flutter/ui/characters/spells_page.dart';
 import 'package:dnd_player_flutter/ui/characters/traits_and_features_page.dart';
+import 'package:dnd_player_flutter/ui/manage_character/manage_character_screen.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,19 +54,37 @@ class _CharacterScreenHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              state.name,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "${state.race?.name} ${state.clazz?.name}, ${state.level}",
-              style: TextStyle(
-                  color: Colors.black.withOpacity(0.7),
-                  fontSize: 18,
-                  fontStyle: FontStyle.italic),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        state.name,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        "${state.race?.name} ${state.clazz?.name}, ${state.level}",
+                        style: TextStyle(
+                            color: Colors.black.withOpacity(0.7),
+                            fontSize: 18,
+                            fontStyle: FontStyle.italic),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ManageCharacterScreen()));
+                    },
+                    icon: Icon(Icons.edit))
+              ],
             ),
             SizedBox(
               height: 16,

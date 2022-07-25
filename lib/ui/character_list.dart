@@ -40,8 +40,8 @@ class _CharacterListDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CharacterListBloc(getIt.get<CharacterRepository>())
-        ..add(LoadCharacterList()),
+      create: (context) =>
+          BlocProvider.of<CharacterListBloc>(context)..add(LoadCharacterList()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(AppLocalizations.of(context)!.characters),

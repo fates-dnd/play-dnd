@@ -151,5 +151,8 @@
   "improvement_option_1": "Improvement Option 1",
   "improvement_option_2": "Improvement Option 2",
 
-  "use_your_phone": "Please, use your phone to access the application"
+  "use_your_phone": "Please, use your phone to access the application",
+
+  "manage_character": "Manage character",
+  "delete_character": "Delete character"
 }

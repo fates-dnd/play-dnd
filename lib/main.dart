@@ -1,5 +1,6 @@
 import 'package:dnd_player_flutter/available_from_phone_screen.dart';
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
+import 'package:dnd_player_flutter/bloc/character_list/character_list_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
 import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/repository/character_repository.dart';
@@ -55,6 +56,9 @@ class DndApp extends StatelessWidget {
         BlocProvider(
             create: (context) =>
                 CharacterCreatorBloc(getIt.get<CharacterRepository>())),
+        BlocProvider(
+            create: (context) =>
+                CharacterListBloc(getIt.get<CharacterRepository>())),
         BlocProvider(
           create: (context) => CharacterBloc(
             getIt<SettingsRepository>(),

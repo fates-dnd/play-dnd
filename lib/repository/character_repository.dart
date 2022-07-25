@@ -478,6 +478,18 @@ class CharacterRepository {
     box.put('character_list', currentList);
   }
 
+  void deleteCharacter(Character character) {
+    final currentList = _readCharacterOutlines();
+
+    final targetIndex =
+        currentList?.indexWhere((element) => element.name == character.name);
+
+    if (targetIndex != null) {
+      currentList?.removeAt(targetIndex);
+    }
+    box.put('character_list', currentList);
+  }
+
   List<UserFeature> getUserFeatures(Character character) {
     final currentList = _readCharacterOutlines();
     if (currentList == null) {

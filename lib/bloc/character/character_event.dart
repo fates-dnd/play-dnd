@@ -115,3 +115,5 @@ class ImproveAbilityScores extends CharacterEvent {
 
   ImproveAbilityScores(this.option1, this.option2);
 }
+
+class DeleteCharacter extends CharacterEvent {}
