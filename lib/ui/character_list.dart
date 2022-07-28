@@ -1,9 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character/character_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character_list/character_list_bloc.dart';
 import 'package:dnd_player_flutter/bloc/settings/settings_bloc.dart';
-import 'package:dnd_player_flutter/dependencies.dart';
 import 'package:dnd_player_flutter/dto/character.dart';
-import 'package:dnd_player_flutter/repository/character_repository.dart';
 import 'package:dnd_player_flutter/ui/character_creator/new_char_race.dart';
 import 'package:dnd_player_flutter/ui/characters/character_screen.dart';
 import 'package:dnd_player_flutter/ui/settings/settings_screen.dart';
@@ -23,6 +21,12 @@ class _CharacterListState extends State<CharacterList> {
   Key key = UniqueKey();
 
   @override
+  void initState() {
+    BlocProvider.of<CharacterListBloc>(context)..add(LoadCharacterList());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocListener<SettingsBloc, SettingsState>(
       listener: (context, state) {
@@ -39,35 +43,31 @@ class _CharacterListState extends State<CharacterList> {
 class _CharacterListDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          BlocProvider.of<CharacterListBloc>(context)..add(LoadCharacterList()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context)!.characters),
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => SettingsScreen()),
-                  );
-                },
-                icon: Icon(Icons.settings)),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(AppLocalizations.of(context)!.characters),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
+              },
+              icon: Icon(Icons.settings)),
+        ],
+      ),
+      body: _CharacterListBody(),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text(
+          AppLocalizations.of(context)!.new_character,
+          style: TextStyle(
+              fontSize: 24, color: Theme.of(context).primaryColorLight),
         ),
-        body: _CharacterListBody(),
-        floatingActionButton: FloatingActionButton.extended(
-          label: Text(
-            AppLocalizations.of(context)!.new_character,
-            style: TextStyle(
-                fontSize: 24, color: Theme.of(context).primaryColorLight),
-          ),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => NewCharRace()));
-          },
-        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NewCharRace()));
+        },
       ),
     );
   }
