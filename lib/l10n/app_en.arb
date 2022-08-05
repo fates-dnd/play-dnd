@@ -154,5 +154,7 @@
   "use_your_phone": "Please, use your phone to access the application",
 
   "manage_character": "Manage character",
+  "manage_ability_scores": "Manage ability scores",
+  "manage_proficiencies": "Manage proficiencies",
   "delete_character": "Delete character"
 }
