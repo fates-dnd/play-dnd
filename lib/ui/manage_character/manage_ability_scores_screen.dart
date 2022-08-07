@@ -62,7 +62,7 @@ class _CharacteristicRow extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(vertical: 16),
         child: Row(
           children: [
             Expanded(

@@ -1,6 +1,7 @@
 import 'package:dnd_player_flutter/bloc/character_creator/character_creator/character_creator_bloc.dart';
 import 'package:dnd_player_flutter/bloc/character_creator/set_characteristics/set_characteristics_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/ui/character_creator/selected_proficiencies.dart';
 import 'package:dnd_player_flutter/ui/stat_calculator/stat_calculator_screen.dart';
 import 'package:flutter/material.dart';
@@ -94,16 +95,13 @@ class SetCharacteristicsScreen extends StatelessWidget {
         Characteristic.WISDOM,
         Characteristic.CHARISMA
       ].map((characteristic) {
-        final raceBonus = raceBonuses?.firstWhereOrNull((element) =>
-            fromIndex(element.abilityScore.index) == characteristic);
-        final selectedBonus = characterState.bonusCharacteristic
-            ?.firstWhereOrNull(
-                (element) => element.characteristic == characteristic);
+        final raceBonus = raceBonuses?.firstWhereOrNull(
+            (element) => element.characteristic == characteristic);
+        final selectedBonus = characterState.abilityBonuses?.firstWhereOrNull(
+            (element) => element.characteristic == characteristic);
 
         final bonusPoints = (raceBonus?.bonus ?? selectedBonus?.bonus) ?? 0;
-        return _CharacteristicsRow(
-            characteristicBonus:
-                CharacteristicBonus(characteristic, bonusPoints));
+        return _CharacteristicsRow(abilityBonus: raceBonus!);
       }).toList(),
     );
   }
@@ -142,9 +140,9 @@ class SetCharacteristicsScreen extends StatelessWidget {
 }
 
 class _CharacteristicsRow extends StatelessWidget {
-  final CharacteristicBonus characteristicBonus;
+  final AbilityBonus abilityBonus;
 
-  const _CharacteristicsRow({Key? key, required this.characteristicBonus})
+  const _CharacteristicsRow({Key? key, required this.abilityBonus})
       : super(key: key);
 
   @override
@@ -162,11 +160,11 @@ class _CharacteristicsRow extends StatelessWidget {
             FocusScope.of(rootContext).unfocus();
             Navigator.of(rootContext).push(MaterialPageRoute(
               builder: (context) => StatCalculatorScreen(
-                characteristicBonus: characteristicBonus,
+                abilityBonus: abilityBonus,
                 onSubmit: (value) => {
                   BlocProvider.of<SetCharacteristicsBloc>(rootContext).add(
                       SubmitCharacteristicsScore(
-                          characteristicBonus.characteristic, value))
+                          abilityBonus.characteristic, value))
                 },
               ),
             ));
@@ -180,12 +178,12 @@ class _CharacteristicsRow extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        characteristicBonus.characteristic.getName(rootContext),
+                        abilityBonus.characteristic.getName(rootContext),
                         style: theme.textTheme.headline5,
                       ),
                       SizedBox(width: 4),
-                      if (characteristicBonus.bonus != 0)
-                        Text("(${characteristicBonus.bonus.toBonusString()})",
+                      if (abilityBonus.bonus != 0)
+                        Text("(${abilityBonus.bonus.toBonusString()})",
                             style: theme.textTheme.subtitle1),
                     ],
                   ),
@@ -194,13 +192,13 @@ class _CharacteristicsRow extends StatelessWidget {
                   builder: (context, state) {
                     return Text(
                       ((state.getScoreForCharacteristic(
-                                      characteristicBonus.characteristic) ??
+                                      abilityBonus.characteristic) ??
                                   0) +
-                              characteristicBonus.bonus)
+                              abilityBonus.bonus)
                           .toString(),
                       style: TextStyle(
                           fontSize: 32,
-                          color: characteristicBonus.characteristic.getColor()),
+                          color: abilityBonus.characteristic.getColor()),
                     );
                   },
                 )

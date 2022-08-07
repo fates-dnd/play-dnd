@@ -1,17 +1,18 @@
 import 'package:dnd_player_flutter/bloc/stat_calulator/stat_calculator_bloc.dart';
 import 'package:dnd_player_flutter/data/characteristics.dart';
+import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class StatCalculatorScreen extends StatelessWidget {
-  final CharacteristicBonus characteristicBonus;
+  final AbilityBonus abilityBonus;
   final Function(int) onSubmit;
 
   const StatCalculatorScreen({
     Key? key,
-    required this.characteristicBonus,
+    required this.abilityBonus,
     required this.onSubmit,
   }) : super(key: key);
 
@@ -21,14 +22,14 @@ class StatCalculatorScreen extends StatelessWidget {
       create: (context) => StatCalculatorBloc(
         StatCalculatorState(
           0,
-          characteristicBonus.bonus,
-          characteristicBonus.bonus,
+          abilityBonus.bonus,
+          abilityBonus.bonus,
           StatCalculatorError.NONE,
         ),
       ),
       child: Scaffold(
           appBar: AppBar(
-            title: Text(characteristicBonus.characteristic.getName(context)),
+            title: Text(abilityBonus.characteristic.getName(context)),
           ),
           body: Container(
             padding: const EdgeInsets.symmetric(horizontal: 32),

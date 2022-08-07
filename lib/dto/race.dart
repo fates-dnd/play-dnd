@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:equatable/equatable.dart';
 
 class Race extends Equatable {
@@ -33,17 +34,10 @@ class Race extends Equatable {
 }
 
 class AbilityBonus {
-  final AbilityScore abilityScore;
+  final Characteristic characteristic;
   final int bonus;
 
-  AbilityBonus(this.abilityScore, this.bonus);
-}
-
-class AbilityScore {
-  final String index;
-  final String name;
-
-  AbilityScore(this.index, this.name);
+  AbilityBonus(this.characteristic, this.bonus);
 }
 
 class AbilityBonusOptions {

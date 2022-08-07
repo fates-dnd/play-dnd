@@ -5,7 +5,7 @@ class CharacterCreatorState {
   final Race? race;
   final List<Trait>? traits;
   final Class? clazz;
-  final List<CharacteristicBonus>? bonusCharacteristic;
+  final List<AbilityBonus>? abilityBonuses;
   final String? name;
   final int? maxHp;
   final int? hp;
@@ -22,7 +22,7 @@ class CharacterCreatorState {
     this.race,
     this.traits,
     this.clazz,
-    this.bonusCharacteristic,
+    this.abilityBonuses,
     this.name,
     this.maxHp,
     this.hp,
@@ -40,7 +40,7 @@ class CharacterCreatorState {
     Race? race,
     List<Trait>? traits,
     Class? clazz,
-    List<CharacteristicBonus>? bonusCharacteristic,
+    List<AbilityBonus>? bonusCharacteristic,
     String? name,
     int? level,
     int? maxHp,
@@ -58,7 +58,7 @@ class CharacterCreatorState {
       race: race ?? this.race,
       traits: traits ?? this.traits,
       clazz: clazz ?? this.clazz,
-      bonusCharacteristic: bonusCharacteristic ?? this.bonusCharacteristic,
+      abilityBonuses: bonusCharacteristic ?? this.abilityBonuses,
       name: name ?? this.name,
       maxHp: maxHp ?? this.maxHp,
       hp: hp ?? this.hp,

@@ -40,7 +40,7 @@ class CharacteristicsBonus extends StatelessWidget {
                   child: TextButton(
                       onPressed: _areOptionsSelected(state)
                           ? () {
-                              final selectedOptions = <CharacteristicBonus>[];
+                              final selectedOptions = <AbilityBonus>[];
                               state.characteristicBonuses.values
                                   .toList()
                                   .forEach((element) {
@@ -76,7 +76,7 @@ class CharacteristicsBonus extends StatelessWidget {
   }
 
   List<Widget> createCharacteristicsOptions(
-      BuildContext context, Map<int, CharacteristicBonus?> characteristics) {
+      BuildContext context, Map<int, AbilityBonus?> characteristics) {
     final options = <Widget>[];
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {
       options.add(_createCharacteristicsSelect(
@@ -95,13 +95,12 @@ class CharacteristicsBonus extends StatelessWidget {
   DropdownButton _createCharacteristicsSelect(
       BuildContext context,
       String hint,
-      CharacteristicBonus? characteristicBonus,
-      List<CharacteristicBonus?> selectedCharacteristics,
-      ValueChanged<CharacteristicBonus> onChanged) {
+      AbilityBonus? characteristicBonus,
+      List<AbilityBonus?> selectedCharacteristics,
+      ValueChanged<AbilityBonus> onChanged) {
     final theme = Theme.of(context);
     final providedOptions = race.abilityBonusOptions?.abilityBonuses
-        .map((e) => CharacteristicBonus(
-            requireFromIndex(e.abilityScore.index), e.bonus))
+        .map((e) => AbilityBonus(e.characteristic, e.bonus))
         .toList();
     providedOptions?.removeWhere((provided) =>
         selectedCharacteristics.any((selected) =>

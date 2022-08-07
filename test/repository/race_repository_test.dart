@@ -1,3 +1,4 @@
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:dnd_player_flutter/repository/races_repository.dart';
 import 'package:test/test.dart';
@@ -23,7 +24,8 @@ void main() {
     expect(races[0].abilityBonusDescription,
         "Значение вашей Выносливости увеличивается на 2.");
     expect(races[0].abilityBonuses.length, 1);
-    expect(races[0].abilityBonuses[0].abilityScore.index, "con");
+    expect(
+        races[0].abilityBonuses[0].characteristic, Characteristic.CONSTITUTION);
     expect(races[0].abilityBonuses[0].bonus, 2);
     expect(races[0].abilityBonusOptions, null);
   });

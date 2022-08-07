@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 
 class RacesRepository {
@@ -62,13 +63,32 @@ class RacesRepository {
 
   AbilityBonus _mapAbilityBonus(dynamic json) {
     final abilityScore = json["ability_score"] as Map<String, dynamic>;
+
     final bonus = json["bonus"];
 
     return AbilityBonus(
-      AbilityScore(
-          abilityScore["index"] as String, abilityScore["name"] as String),
+      _mapCharacteristic(abilityScore["index"] as String),
       bonus,
     );
+  }
+
+  Characteristic _mapCharacteristic(String abilityBonusIndex) {
+    switch (abilityBonusIndex.toLowerCase()) {
+      case "str":
+        return Characteristic.STRENGTH;
+      case "dex":
+        return Characteristic.DEXTERITY;
+      case "con":
+        return Characteristic.CONSTITUTION;
+      case "int":
+        return Characteristic.INTELLIGENCE;
+      case "wis":
+        return Characteristic.WISDOM;
+      case "cha":
+        return Characteristic.CHARISMA;
+    }
+
+    throw ArgumentError("No such characteristic $abilityBonusIndex");
   }
 
   Size _parseSize(String json) {

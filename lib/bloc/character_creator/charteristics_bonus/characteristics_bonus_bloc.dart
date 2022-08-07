@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dnd_player_flutter/data/characteristics.dart';
 import 'package:dnd_player_flutter/dto/race.dart';
 import 'package:meta/meta.dart';
 
@@ -12,7 +11,7 @@ class CharacteristicsBonusBloc
     extends Bloc<CharacteristicsBonusEvent, CharacteristicsBonusState> {
   final Race race;
 
-  Map<int, CharacteristicBonus?> selectedCharacteristics = {};
+  Map<int, AbilityBonus?> selectedCharacteristics = {};
 
   CharacteristicsBonusBloc(this.race) : super(CharacteristicsBonusState({})) {
     for (var i = 1; i <= (race.abilityBonusOptions?.choose ?? 0); ++i) {

@@ -100,12 +100,24 @@ class CharacterState {
     );
   }
 
-  int get strengthBonus => strength.toModifier();
-  int get dexterityBonus => dexterity.toModifier();
-  int get constitutionBonus => constitution.toModifier();
-  int get intelligenceBonus => intelligence.toModifier();
-  int get wisdomBonus => wisdom.toModifier();
-  int get charismaBonus => charisma.toModifier();
+  int get totalStrength =>
+      strength + _getRaceAbilityBonus(Characteristic.STRENGTH);
+  int get totalDexterity =>
+      dexterity + _getRaceAbilityBonus(Characteristic.DEXTERITY);
+  int get totalConstitution =>
+      constitution + _getRaceAbilityBonus(Characteristic.CONSTITUTION);
+  int get totalIntelligence =>
+      intelligence + _getRaceAbilityBonus(Characteristic.INTELLIGENCE);
+  int get totalWisdom => wisdom + _getRaceAbilityBonus(Characteristic.WISDOM);
+  int get totalCharisma =>
+      charisma + _getRaceAbilityBonus(Characteristic.CHARISMA);
+
+  int get strengthBonus => totalStrength.toModifier();
+  int get dexterityBonus => totalDexterity.toModifier();
+  int get constitutionBonus => totalConstitution.toModifier();
+  int get intelligenceBonus => totalIntelligence.toModifier();
+  int get wisdomBonus => totalWisdom.toModifier();
+  int get charismaBonus => totalCharisma.toModifier();
 
   int get strengthSavingThrow =>
       strengthBonus +
@@ -249,5 +261,13 @@ class CharacterState {
     return equipment.weaponRange == WeaponRange.RANGED ||
         (equipment.properties ?? []).any((element) =>
             element == Property.FINESSE || element == Property.THROWN);
+  }
+
+  int _getRaceAbilityBonus(Characteristic characteristic) {
+    return race?.abilityBonuses
+            .firstWhereOrNull(
+                (element) => element.characteristic == characteristic)
+            ?.bonus ??
+        0;
   }
 }
