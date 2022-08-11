@@ -101,16 +101,16 @@ class CharacterState {
   }
 
   int get totalStrength =>
-      strength + _getRaceAbilityBonus(Characteristic.STRENGTH);
+      strength + getRaceAbilityBonus(Characteristic.STRENGTH);
   int get totalDexterity =>
-      dexterity + _getRaceAbilityBonus(Characteristic.DEXTERITY);
+      dexterity + getRaceAbilityBonus(Characteristic.DEXTERITY);
   int get totalConstitution =>
-      constitution + _getRaceAbilityBonus(Characteristic.CONSTITUTION);
+      constitution + getRaceAbilityBonus(Characteristic.CONSTITUTION);
   int get totalIntelligence =>
-      intelligence + _getRaceAbilityBonus(Characteristic.INTELLIGENCE);
-  int get totalWisdom => wisdom + _getRaceAbilityBonus(Characteristic.WISDOM);
+      intelligence + getRaceAbilityBonus(Characteristic.INTELLIGENCE);
+  int get totalWisdom => wisdom + getRaceAbilityBonus(Characteristic.WISDOM);
   int get totalCharisma =>
-      charisma + _getRaceAbilityBonus(Characteristic.CHARISMA);
+      charisma + getRaceAbilityBonus(Characteristic.CHARISMA);
 
   int get strengthBonus => totalStrength.toModifier();
   int get dexterityBonus => totalDexterity.toModifier();
@@ -257,17 +257,17 @@ class CharacterState {
     return _isDexBased(equipment) ? dexterityBonus : strengthBonus;
   }
 
-  bool _isDexBased(Equipment equipment) {
-    return equipment.weaponRange == WeaponRange.RANGED ||
-        (equipment.properties ?? []).any((element) =>
-            element == Property.FINESSE || element == Property.THROWN);
-  }
-
-  int _getRaceAbilityBonus(Characteristic characteristic) {
+  int getRaceAbilityBonus(Characteristic characteristic) {
     return race?.abilityBonuses
             .firstWhereOrNull(
                 (element) => element.characteristic == characteristic)
             ?.bonus ??
         0;
+  }
+
+  bool _isDexBased(Equipment equipment) {
+    return equipment.weaponRange == WeaponRange.RANGED ||
+        (equipment.properties ?? []).any((element) =>
+            element == Property.FINESSE || element == Property.THROWN);
   }
 }
